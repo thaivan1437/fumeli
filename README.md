@@ -1,16 +1,26 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Require
+- nodejs : v18.14.2
 ## Getting Started
 
 First, run the development server:
 
 ```bash
+npm install
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
+
+## Default Next.js folder structure
+Here is some information about the default Next.js folder structure:
+
+- /pages: This is the directory that contains the pages in your application. Each file in this directory corresponds to a page rendered in the browser.
+- /public: This directory contains static resources such as images, videos, CSS and JavaScript files that your application needs to access from the outside.
+- /styles: This directory contains the CSS or SCSS files used in your application.
+- /components: This directory contains React components that are used on various pages of your application.
+- /lib: This directory contains libraries or modules created by programmers during the application building process.
+- /utils: This directory contains utility or helper files used to handle logic inside the application.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
