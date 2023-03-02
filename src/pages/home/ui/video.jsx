@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import React from 'react';
+import { Typography } from '@mui/material';
 import { Container } from '@mui/system';
-import { getVideoThunkAction} from '../logic/reducer';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export const Videos = () => {
-	const {video} = useSelector((state) => state.home);
+const Videos = () => {
+	const {video} = useSelector((state) => state?.home);
   const settings = {
     dots: false,
     infinite: true,
@@ -46,3 +45,5 @@ export const Videos = () => {
     </React.Fragment>
   );
 }
+
+export default Videos;

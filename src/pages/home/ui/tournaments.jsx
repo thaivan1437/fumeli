@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
-import { Box, Button, Typography, Divider, Stack } from '@mui/material';
+import React from 'react';
+import { Box, Typography, Divider, Stack } from '@mui/material';
 import { Container } from '@mui/system';
-import { getMatchThunkAction} from '../logic/reducer';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Link from 'next/link';
 
-export const Tournaments = () => {
-	const { match, matchCategory } = useSelector((state) => state.home);
+const Tournaments = () => {
+	const { match, matchCategory } = useSelector((state) => state?.home);
 	// console.log('match', match, matchCategory);
 
   return (
@@ -72,4 +71,4 @@ export const Tournaments = () => {
   );
 }
 
-
+export default Tournaments;

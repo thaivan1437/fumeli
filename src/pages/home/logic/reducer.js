@@ -49,7 +49,7 @@ export const home = (state = initialState, action) => {
 }
 
 // http://api-demowebsite.cdktcnqn.edu.vn/api/Match/getallclient
-export const getAllDataThunkAction = (signal = {}) => async (dispatch, getState) => {
+export const getAllDataThunkAction = () => async (dispatch, getState) => {
   try {
     const urls = [
       'http://api-demowebsite.cdktcnqn.edu.vn/api/Match/getallclient',
@@ -61,7 +61,7 @@ export const getAllDataThunkAction = (signal = {}) => async (dispatch, getState)
     ];
 
     const [matchRes, videoRes, miniGameRes, mission, matchCategory, slider] = await Promise.all(
-      urls.map(url => axiosGet(url, signal))
+      urls.map(url => axiosGet(url))
     );
 
     await dispatch(getMatch(matchRes));

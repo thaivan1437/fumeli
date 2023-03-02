@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Button, Typography, Skeleton } from '@mui/material';
-import { Container } from '@mui/system';
-import { getVideoThunkAction} from '../logic/reducer';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { Skeleton } from '@mui/material';
+import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export const SliderBanner = () => {
-  const { slider } = useSelector((state) => state.home);
-  const newSlider = slider && slider.filter(item => item.IsMainBanner)
+const SliderBanner = () => {
+  const { slider } = useSelector((state) => state?.home);
+  const newSlider = slider && slider.filter(item => item?.IsMainBanner)
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
 
@@ -80,4 +78,4 @@ export const SliderBanner = () => {
   );
 }
 
-
+export default SliderBanner

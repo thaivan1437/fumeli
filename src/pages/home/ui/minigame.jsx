@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Box, Button, Typography, ButtonGroup } from '@mui/material';
 import { Container } from '@mui/system';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-export const MiniGame = () => {
-  const {miniGame} = useSelector((state) => state.home);
+const MiniGame = () => {
+  const {miniGame} = useSelector((state) => state?.home);
 
   return (
     <Box py={3} className="minigame">
@@ -41,4 +41,4 @@ export const MiniGame = () => {
   );
 }
 
-
+export default MiniGame;

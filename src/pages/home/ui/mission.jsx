@@ -18,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 	boxShadow: 'unset'
 }));
 
-export const Mission  = () => {
+const Mission  = () => {
 	return (
 		<Container>
 			<Box my={4} sx={{ flexGrow: 1 }}>
@@ -75,3 +75,4 @@ export const Mission  = () => {
 		</Container>
 	)
 }
+export default Mission;

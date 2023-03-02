@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "node server",
-    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build": "rimraf -r out .next && NODE_ENV=production next build && next export"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",

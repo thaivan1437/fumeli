@@ -3,7 +3,7 @@ import { increment, decrement } from './logic/action';
 import { Container } from '@mui/material'
 
 export default function Home() {
-  const counter = useSelector(state => state.reducerExample)
+  const counter = useSelector(state => state?.reducerExample)
   const dispatch = useDispatch()
 
   const handleIncrement = () => {
