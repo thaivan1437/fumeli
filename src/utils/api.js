@@ -5,9 +5,7 @@ export const axiosGet = async (url) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    mode: 'no-cors',
-    withCredentials: false,
-		credentials: 'same-origin',
+    timeout: 30000 // đơn vị là milliseconds
   });
   return response.data;
 }

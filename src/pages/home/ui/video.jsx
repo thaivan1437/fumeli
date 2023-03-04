@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import AutoSizeImage from '@/components/image';
 
 const Videos = () => {
 	const {video} = useSelector((state) => state?.home);
@@ -16,11 +17,32 @@ const Videos = () => {
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 2000,
-    lazyLoad:'ondemand',
     centerMode: true,
     variableWidth: true,
     centerPadding: '20px',
-    arrows: true
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: true,
+          centerMode: false,
+          centerPadding: '0',
+          slidesToShow: 1,
+          variableWidth: false,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: true,
+          centerMode: false,
+          centerPadding: '0',
+          slidesToShow: 1,
+          variableWidth: false,
+        }
+      }
+    ]
   };
 
   return (
@@ -29,7 +51,7 @@ const Videos = () => {
         <Typography variant="h4" component="h2" color={'#fff'}>
           VIDEO HOT
         </Typography>
-        <Typography variant="p" my={2} color="initial" sx={{width: '432px', fontSize: '14px', display: 'block'}}>
+        <Typography variant="p" my={2} color="initial" className="mw-440" sx={{ fontSize: '14px', display: 'block'}}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Typography>
       </Container>
@@ -37,7 +59,7 @@ const Videos = () => {
         { video && (
           video.map((item, index) => {
             return <div className='video__slider--item' key={item.CreateDate}>
-              <img src={item.ThumbnailPath} alt={item.Title} />
+              <AutoSizeImage isResize={false} src={item.ThumbnailPath} alt={item.Title} width={777} height={440}/>
             </div>
           })
         )}

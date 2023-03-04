@@ -1,5 +1,5 @@
 
-import {axiosGet} from '../../../utils/api';
+import {axiosGet} from '@/utils/api';
 import { getMatch, getVideo, getMiniGame, getMission, getMatchCategory, getSlider } from './action';
 
 const initialState = {

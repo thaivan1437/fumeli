@@ -1,10 +1,42 @@
 img {
     max-width: 100%;
 }
+.mw-440 {
+    max-width: 440px;
+}
+
+.mission {
+
+    @media (max-width: 768px) {
+        .order1 {
+            order: 1;
+        }
+        .order2 {
+            order: 2;
+        }
+        .order3 {
+            order: 3;
+        }
+    }
+}
+
 .tournament__item {
     background: #120000;
-    img {
-        max-width: 110px;
+    &--logo {
+        width: 157px;
+        height: 214px;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        flex-wrap: wrap;
+        img {
+            max-width: 110px;
+        }
+    }
+    &--center {
+        img {
+            max-width: 60px;
+        }
     }
     &--info {
         max-width: 400px;
@@ -18,15 +50,44 @@ img {
             background: #000;
         }
         a {
-            color: #000;
+            color: #fff;
+        }
+    }
+
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
+        justify-content: center;
+        &--logo {
+            width: 150px;
+            padding: 8px;
+            height: auto;
+            min-height: 230px;
+            img {
+                margin: auto;
+            }
+        }
+        &--center {
+            max-width: 60px;
+            padding: 0;
+        }
+        &--info {
+            text-align: center;
+            margin-bottom: 25px;
         }
     }
     
 }
+
 .minigame {
     background: url(/images/home/bg-minigame.svg) no-repeat center;
     background-size: cover;
+    .minigame__item {
+        &--logo {
+            min-height: 260px;
+        }
+    }
 }
+
 .css__btn {
     button {
         border: solid 1px #FF2423 !important;
@@ -69,18 +130,59 @@ img {
         }
         img {
             max-height: 435px;
-            width: calc(100% - 20px);
+            width: calc(100% - 0px);
             object-fit: contain;
             mix-blend-mode: color-burn;
             border: solid 1px #ccc;
             box-sizing: border-box;
         }
     }
+    .slick-slide {
+        padding: 0 10px
+    }
+    @media (max-width: 768px) {
+        padding: 0 15px;
+        .slick-slide {
+            padding: 0;
+        }
+        &--item {
+            margin: 0;
+            &::after {
+                width: 43px;
+                height: 43px;
+                background: url(/images/play.svg) no-repeat center;
+            }
+            img {
+                max-height: 210px;
+                width: auto;
+                height: auto;
+            }
+        }
+
+        .slick-prev, .slick-next {
+            width: 20px;
+            height: 28px;
+            &::before {
+                display: none;
+            }
+            top: calc(50% - 7px);
+            background-size: contain;
+            z-index: 2;
+        }
+        .slick-prev {
+            background: url(/images/prev-xs.svg) no-repeat center !important;
+            left: 16px;
+        }
+        .slick-next {
+            background: url(/images/next-xs.svg) no-repeat center !important;
+            right: 16px;
+        }
+    }
 }
 
 .banner__slider {
     padding: 0 10px;
-    max-width: 90%;
+    // max-width: 90%;
     margin: 0 auto;
     margin-top: -100px;
     &--main {
@@ -105,10 +207,6 @@ img {
         display: flex !important;
         align-items: center;
         img {
-            max-height: 330px;
-            max-width: 460px;
-            // width: calc(100% - 20px);
-            // width: 100%;
             padding: 0;
             margin: 0 auto;
             aspect-ratio: 3/2;
@@ -130,14 +228,43 @@ img {
         }
         top: 30%;
         background-size: contain;
+        z-index: 2;
     }
     .slick-prev {
         background: url(/images/prev.svg) no-repeat center !important;
         left: unset;
-        right: 0;
+        right: -200px;
     }
     .slick-next {
         background: url(/images/next.svg) no-repeat center !important;
-        right: -50px;
+        right: -250px;
+    }
+    .slick-slide {
+        padding: 0 12px;
+    }
+
+    @media (max-width: 1368px) {
+        .slick-prev {
+            right: 0;
+        }
+        .slick-next {
+            right: -50px;
+        }
+    }
+    @media (max-width: 768px) {
+        margin-top: -30px;
+        padding: 0;
+        .slick-slide {
+            padding: 0;
+        }
+        .slick-prev, .slick-next {
+            display: none;
+        }
+        &--item {
+            min-height: unset;
+            img {
+                padding: 0;
+            }
+        }
     }
 }
