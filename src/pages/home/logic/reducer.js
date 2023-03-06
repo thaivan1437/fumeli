@@ -49,7 +49,7 @@ export const home = (state = initialState, action) => {
 }
 
 // http://api-demowebsite.cdktcnqn.edu.vn/api/Match/getallclient
-export const getAllDataThunkAction = () => async (dispatch, getState) => {
+export const getAllDataThunkAction = () => async (dispatch) => {
   try {
     const urls = [
       'http://api-demowebsite.cdktcnqn.edu.vn/api/Match/getallclient',
