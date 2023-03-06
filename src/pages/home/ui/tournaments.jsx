@@ -21,7 +21,7 @@ const Tournaments = () => {
 					spacing={2}
 				>
 					{
-						matchCategory && matchCategory.map((item, _) => {
+						matchCategory && matchCategory.map((item) => {
 							return (
 								<span key={item.CreateDate}>{item.Title}</span>
 							)
@@ -30,7 +30,7 @@ const Tournaments = () => {
 				</Stack>
 			</Box>
 			{
-				match && match.map((item, _) => {
+				match && match.map((item) => {
 					return (
 						<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item" p={2} my={4} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 							<Box className="tournament__item--images" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>

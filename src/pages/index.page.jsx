@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { Container } from '@mui/system';
 import  Tournaments  from './home/ui/tournaments';
 import  Mission  from './home/ui/mission';

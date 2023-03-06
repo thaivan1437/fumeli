@@ -49,7 +49,7 @@ const SliderBanner = () => {
               {...setting2}
             >
               { newSlider && (
-                newSlider.map((item, index) => {
+                newSlider.map((item) => {
                   return <div className='banner__slider--main' key={item.CreateDate}>
                     <img src={item.UrlImage} alt={item.link} />
                   </div>
@@ -63,7 +63,7 @@ const SliderBanner = () => {
               className="banner__slider center"
             >
               { newSlider && (
-                newSlider.map((item, index) => {
+                newSlider.map((item) => {
                   return <div className='banner__slider--item' key={item.CreateDate}>
                     <img src={item.UrlSmallImage} alt={item.link} />
                   </div>
