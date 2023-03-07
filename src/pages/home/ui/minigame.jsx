@@ -30,7 +30,7 @@ const MiniGame = () => {
           {
             displayData && displayData.map((item, index) => {
               return (
-                <Grid item key={item.CreateDate} className="minigame__item--logo" xs={12} sm={4} md={4}  spacing={{ xs: 0, md: 4 }}>
+                <Grid item key={item.CreateDate} className="minigame__item--logo" xs={12} sm={4} md={4} >
                   <AutoSizeImage isResize={false} src={item.Image} alt={item.Title} width={430} height={430}/>
                   <Typography variant="h6" color="initial" sx={{ textAlign: 'center'}}>
                     {item.Title}

@@ -10,7 +10,7 @@ const Tournaments = () => {
 	const [isActive, setIsActive] = useState();
 	const { match, matchCategory } = useSelector((state) => state?.home);
 	useEffect(() => {
-		console.log('count loop');
+		// console.log('count loop');
 		if(matchs?.length == 0 && match?.length) {
 			setMatchs(match);
 		}
@@ -22,7 +22,7 @@ const Tournaments = () => {
 		newMatch && newMatch[0].Matchs && setMatchs(newMatch[0].Matchs);
 		setIsActive(id);
 	}
-	console.log('Matchs	', match, matchCategory, matchs);
+	// console.log('Matchs	', match, matchCategory, matchs);
 
   return (
     <React.Fragment>
@@ -56,7 +56,7 @@ const Tournaments = () => {
 									</Typography>
 								</Box>
 								<Box px={2} sx={{}} className="tournament__item--center">
-									<img src="./images/home/vs.png" alt="nvm" />
+									<img src="/images/home/vs.png" alt="nvm" />
 								</Box>
 								<Box p={2} className="tournament__item--logo">
 									<AutoSizeImage src={item.LogoTeamTwoPath} alt="nvm" />

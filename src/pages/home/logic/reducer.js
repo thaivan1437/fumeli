@@ -49,29 +49,57 @@ export const home = (state = initialState, action) => {
 }
 
 // http://api-demowebsite.cdktcnqn.edu.vn/api/Match/getallclient
-export const getAllDataThunkAction = () => async (dispatch, getState) => {
+export const getSlideAndMissionData = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/Match/getallclient',
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/Media/getallclient',
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/MiniGame/getallclient',
       'http://api-demowebsite.cdktcnqn.edu.vn/api/Campaign/getallclient',
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/CategoriesMatch/getallclient',
       'http://api-demowebsite.cdktcnqn.edu.vn/api/Slider/getallclient'
     ];
 
-    const [matchRes, videoRes, miniGameRes, mission, matchCategory, slider] = await Promise.all(
+    const [mission, slider] = await Promise.all(
       urls.map(url => axiosGet(url))
     );
 
-    await dispatch(getMatch(matchRes));
-    await dispatch(getVideo(videoRes));
-    await dispatch(getMiniGame(miniGameRes));
     await dispatch(getMission(mission));
-    await dispatch(getMatchCategory(matchCategory));
     await dispatch(getSlider(slider));
   } catch (error) {
     console.log(error);
   }
 };
 
+export const getVideoAndMiniGameData = () => async (dispatch, getState) => {
+  try {
+    const urls = [
+      'http://api-demowebsite.cdktcnqn.edu.vn/api/Media/getallclient',
+      'http://api-demowebsite.cdktcnqn.edu.vn/api/MiniGame/getallclient',
+    ];
+
+    const [videoRes, miniGameRes ] = await Promise.all(
+      urls.map(url => axiosGet(url))
+    );
+
+    await dispatch(getVideo(videoRes));
+    await dispatch(getMiniGame(miniGameRes));
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getMatchDataThunkAction = () => async (dispatch, getState) => {
+  try {
+    const urls = [
+      'http://api-demowebsite.cdktcnqn.edu.vn/api/Match/getallclient',
+      'http://api-demowebsite.cdktcnqn.edu.vn/api/CategoriesMatch/getallclient',
+    ];
+
+    const [ matchRes, matchCategory ] = await Promise.all(
+      urls.map(url => axiosGet(url))
+    );
+
+    await dispatch(getMatch(matchRes));
+    await dispatch(getMatchCategory(matchCategory));
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -22,3 +22,105 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.topRank {
+    width: 0;
+    height: 600px;
+    overflow-y: scroll;
+    background-color: #000;
+    position: relative;
+    position: fixed;
+    z-index: 9999;
+    right: -580px;
+    top: calc(30% + 65px);
+    -webkit-transition: width .5s ease-in-out;
+    transition: width .5s ease-in-out;
+    .topRank__item {
+        display: flex;
+        justify-content:space-between;
+        align-items:center;
+        background-color: #252525;
+        &:nth-child(2n + 1) {
+            background-color: #000;
+        }
+        &--info {
+            display: flex;
+            align-items: center;
+        }
+        &--st {
+            max-width: 45px;
+        }
+    }
+    &.active {
+        width: 480px;
+        right: 0;
+    }
+    @media (max-width: 768px) {
+        top: calc(20% + 65px);
+        .topRank__item--st {
+            img {
+                max-width: 45px;
+            }
+        }
+        &.active {
+            width: 320px;
+            right: 0;
+        }
+    }
+}
+.btn__topbxh {
+    width: 60px;
+    height: 60px;
+    padding: 1px;
+    color: #fff;
+    -webkit-transition: width .5s ease-in-out, opacity .6s ease-in-out;
+    transition: width .5s ease-in-out, opacity .6s ease-in-out;
+    transition-delay: 0s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #FF2423;
+    position: fixed;
+    top: 30%;
+    right: 0;
+    z-index: 9999;
+    cursor: pointer;
+    .topbxh__mask {
+        background: linear-gradient(90deg, #FF2423 50%, rgba(255, 36, 35, 0) 146.49%);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: calc(100% - 2px);
+        padding: 5px 3px;
+    }
+    span {
+        display: none;
+        font-size: 25px;
+        opacity: 0;
+    }
+    &:hover, &.active {
+        width: 170px;
+        span {
+            display: block;
+            opacity: 1;
+        }
+    }
+    @media (max-width: 768px) {
+        -webkit-transition: width 1s ease-in-out, opacity .6s ease-in-out;
+        transition: width 1s ease-in-out, opacity .6s ease-in-out;
+        transition-delay: 0s;
+        top: 20%;
+        &:hover{
+            width: unset;
+            span {
+                display: none;
+            }
+        }
+        &.active {
+            width: 170px;
+            span {
+                display: block;
+            }
+        }
+    }
+}

@@ -12,7 +12,7 @@ const SliderBanner = () => {
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
 
-  console.log('slider', slider, newSlider)
+  // console.log('slider', slider, newSlider)
 
   const settings = {
     dots: false,

@@ -13,6 +13,7 @@ const AutoSizeImage = ({ src, alt, isResize = true, width, height }) => {
         height={height}
         width={width}
         layout='responsive'
+        objectFit="unset"
       />
     )
   }

@@ -1,25 +1,9 @@
 import React from 'react';
-import { experimentalStyled as styled } from '@mui/material/styles';
 import {Box, Button, Typography} from '@mui/material';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { Container } from '@mui/system';
 import { useSelector } from 'react-redux';
 import AutoSizeImage from '@/components/image';
 import Link from 'next/link'
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'transparent',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'left',
-  color: "#fff",
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  flexWrap: 'wrap',
-	boxShadow: 'unset'
-}));
 
 const Mission  = () => {
 	const { mission } = useSelector((state) => state?.home);
@@ -39,7 +23,7 @@ const Mission  = () => {
 
 	return (
 		<Box my={4} sx={{ flexGrow: 1, padding: 0 }} className="mission">
-			<Grid container spacing={{ xs: 0, md: 4 }} rowSpacing={{ xs: 2, sm: 2, md: 4 }} columns={{ xs: 12, sm: 8, md: 12 }} >
+			<Grid container spacing={{ xs: 2, md: 4 }} my={4} rowSpacing={{ xs: 2 }} columns={{ xs: 12, sm: 8, md: 12 }} >
 				<Grid item xs={12} sm={4} md={4} >
 					<Box sx={{ color: 'white'}}>
 						<Typography variant="h4" component="h2">
@@ -64,7 +48,7 @@ const Mission  = () => {
 				}
 				
 			</Grid>
-			<Grid container spacing={{ xs: 0, md: 4 }} rowSpacing={{ xs: 2, sm: 2, md: 4 }}>
+			<Grid container spacing={{ xs: 2, md: 4 }} my={4} rowSpacing={{ xs: 2 }}>
 				{
 					filteredItems.map((item, index) => (
 						itemList(item, index + 2)

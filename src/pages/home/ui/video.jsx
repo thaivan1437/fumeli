@@ -18,8 +18,8 @@ const Videos = () => {
     autoplay: false,
     autoplaySpeed: 2000,
     centerMode: true,
-    variableWidth: true,
-    centerPadding: '20px',
+    variableWidth: false,
+    centerPadding: '400px',
     arrows: true,
     responsive: [
       {
