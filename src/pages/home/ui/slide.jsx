@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const SliderBanner = () => {
-  const { slider } = useSelector((state) => state?.home);
+  const { slider } = useSelector((state) => state?.home) || [];
   const newSlider = slider && slider.filter(item => item?.IsMainBanner)
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();

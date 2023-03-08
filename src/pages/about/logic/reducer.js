@@ -22,7 +22,7 @@ export const getAllDataThunkAction = () => async (dispatch, getState) => {
     const [about] = await Promise.all([
       axiosGet('http://api-demowebsite.cdktcnqn.edu.vn/api/About/getabouts'),
     ])
-    dispatch(getAbout(about))
+    dispatch(getAbout(about));
   } catch (error) {
     console.log(error)
   }

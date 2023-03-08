@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 import { Grid, Link, Container } from '@mui/material'
-import MenuItem from '@mui/material/MenuItem'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import YouTubeIcon from '@mui/icons-material/YouTube'
@@ -11,11 +10,11 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 import EmailIcon from '@mui/icons-material/Email'
 
 const footerLinks = [
-  { label: 'GIỚI THIỆU', href: '#' },
-  { label: 'NHIỆM VỤ', href: '#' },
+  { label: 'GIỚI THIỆU', href: '/about' },
+  { label: 'NHIỆM VỤ', href: '/misson' },
   { label: 'GIẢI ĐẤU', href: '#' },
   { label: 'ĐỔI QUÀ', href: '#' },
-  { label: 'LIÊN HỆ', href: '#' },
+  { label: 'LIÊN HỆ', href: '/contact' },
   { label: 'HỘI VIÊN', href: '#' },
 ]
 
@@ -32,7 +31,7 @@ function Footer() {
     >
       <Container>
         <Image
-          src="/image/logoFU.png"
+          src="/images/logoFU.png"
           alt="LogoFU"
           width={258}
           height={91}
@@ -74,20 +73,30 @@ function Footer() {
               />
             </Box>
           </Grid>
-          <Grid container sx={{ m: 0, marginTop: '2%' }}>
-            <Grid item xs={12} md={6} sx={{ m: 0 }}>
-              <Typography>
-                <LocationOnIcon sx={{ marginRight: '1%' }} /> Địa chỉ: Số 52
-                Đường 10, Khu dân cư Nam Long, <br />
-                Phường Tân Nhuận Đông, Quận 7, TP.HCM, VN9
+          <Grid container spacing={2} sx={{ textAlign: 'center' }} mt={3}>
+            <Grid item xs={12} md={1}></Grid>
+            <Grid item xs={12} md={5} sx={{ m: 0 }}>
+              <Typography
+                sx={{
+                  display: 'flex',
+                  alignItems: 'left',
+                  justifyContent: { xs: 'left', sm: 'left' },
+                }}
+              >
+                <LocationOnIcon />
+                Địa chỉ: Số 52 Đường 10, Khu dân cư Nam Long, Phường Tân Nhuận
+                Đông, Quận 7, TP.HCM, VN9
               </Typography>
             </Grid>
             <Grid item xs={12} md={6} sx={{ m: 0 }} textAlign="left">
-              <Typography gutterBottom>
+              <Typography
+                gutterBottom
+                sx={{ display: 'flex', alignItems: 'center' }}
+              >
                 <LocalPhoneIcon sx={{ marginRight: '1%' }} />
                 Phone: 0968236915 - 0988666415
               </Typography>
-              <Typography>
+              <Typography sx={{ display: 'flex', alignItems: 'center' }}>
                 <EmailIcon sx={{ marginRight: '1%' }} />
                 Email: info@fusoft.vn
               </Typography>

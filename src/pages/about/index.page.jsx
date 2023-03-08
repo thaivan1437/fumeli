@@ -1,23 +1,22 @@
-import React, { useEffect } from 'react'
-import { getAllDataThunkAction } from './logic/reducer'
-import { useDispatch } from 'react-redux'
-import { Content } from './ui/content'
-import '../about/index.module.scss'
+import React, { useEffect } from 'react';
+import { getAllDataThunkAction } from './logic/reducer';
+import { useDispatch } from 'react-redux';
+import AboutChild from './ui/about'
 
-const About = () => {
-  const dispatch = useDispatch()
+export default function About() {
+  const dispatch = useDispatch();
   useEffect(() => {
     async function fetchAllData() {
-      await dispatch(getAllDataThunkAction())
+      await dispatch(getAllDataThunkAction());
     }
-    void fetchAllData()
-  })
+    void fetchAllData();
+  }, [dispatch]);
 
   return (
-    <React.Fragment>
-      <Content />
-    </React.Fragment>
+    <React.StrictMode>
+      abc
+      <AboutChild />
+    </React.StrictMode>
   )
 }
 
-export default About()

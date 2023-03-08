@@ -1,8 +1,10 @@
 $primary-color: #000;
-@import '../pages/redux-example/index'; // import như này thì toàn web đều nhận. 
-@import '../pages/about/index'; // như này là xong
-@import '../styles/contactPage.scss';
-@import '../styles/footer.scss';
+@import '../pages/redux-example/index'; 
+@import '../pages/about/index';
+@import '../pages/contact/index';
+@import './footer.scss';
+@import './header.scss';
+
 
 * {
     box-sizing: border-box;

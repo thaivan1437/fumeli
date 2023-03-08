@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react'
-import { Box, Typography, Container, Grid, Toolbar } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAllDataThunkAction } from '../logic/reducer'
-import { getAbout } from '../logic/action'
-import Image from 'next/image'
+import React from 'react';
+import { Box, Typography, Container, Grid, Toolbar } from '@mui/material';
+import { useSelector } from 'react-redux';
+import Image from 'next/image';
 
-const Content = () => {
-  const dispatch = useDispatch()
-  const { aboutData } = useSelector((state) => state.about)
+const AboutChild = () => {
+  const aboutData = [];
+  console.log('aboutData', aboutData)
+  // return 'a'
   const styledText = {
     color: 'white',
     fontSize: '48px',
     fontWeight: 700,
     lineHeight: '56px',
     letterSpacing: '-0.01em',
-    textAlign: 'center',
+    textAlign: 'center'
   }
   const partnerLogos = [
     {
@@ -139,4 +138,4 @@ const Content = () => {
     </Box>
   )
 }
-export default Content()
+export default AboutChild;

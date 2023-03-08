@@ -7,14 +7,11 @@ import {
   Grid,
   Link,
   TextField,
-  TextareaAutosize,
   Typography,
 } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import PhoneIcon from '@mui/icons-material/Phone'
-import styled, { css } from 'styled-components'
-import { spacing } from '@mui/system'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import YouTubeIcon from '@mui/icons-material/YouTube'
 import InstagramIcon from '@mui/icons-material/Instagram'
