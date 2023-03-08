@@ -4,7 +4,7 @@ export const axiosGet = async (url) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    timeout: 60000 // đơn vị là milliseconds 
+    timeout: 60000 // đơn vị là milliseconds
   });
   return response.data;
 }
