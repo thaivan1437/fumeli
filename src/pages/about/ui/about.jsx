@@ -5,8 +5,7 @@ import Image from 'next/image';
 
 const AboutChild = () => {
   const {aboutData} = useSelector((state) => state?.about) || [];
-  console.log('aboutData', aboutData)
-  // return 'a'
+
   const styledText = {
     color: 'white',
     fontSize: '48px',

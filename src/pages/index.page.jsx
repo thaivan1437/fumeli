@@ -25,7 +25,6 @@ export default function Home() {
     void fetchData2();
     void fetchData3();
   }, []);
-  // console.log('a')
 
   return (
     <React.StrictMode>
