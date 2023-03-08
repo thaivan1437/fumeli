@@ -7,7 +7,7 @@ export const axiosGet = async (url) => {
     timeout: 60000 // đơn vị là milliseconds
   });
   return response.data;
-}
+};
 
 const axiosInstance = axios.create({
   baseURL: 'http://api-demowebsite.cdktcnqn.edu.vn/',
@@ -15,6 +15,6 @@ const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-})
+});
 
 export default axiosInstance
