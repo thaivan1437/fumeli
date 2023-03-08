@@ -4,9 +4,8 @@ import { useSelector } from 'react-redux';
 import Image from 'next/image';
 
 const AboutChild = () => {
-  const aboutData = [];
-  console.log('aboutData', aboutData)
-  // return 'a'
+  const {aboutData} = useSelector((state) => state?.about) || [];
+
   const styledText = {
     color: 'white',
     fontSize: '48px',

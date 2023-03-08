@@ -15,9 +15,16 @@ import YouTubeIcon from '@mui/icons-material/YouTube'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import LanguageIcon from '@mui/icons-material/Language'
 import Image from 'next/image'
+import Link from 'next/link'
 
-const Navbar = () => {
-  const [anchorEl, setAnchorEl] = useState(null)
+const Header = ({ setHeaderHeight }) => {
+  const headerRef = React.useRef(null);
+  React.useEffect(() => {
+    const height = headerRef.current.offsetHeight
+    setHeaderHeight(height)
+  }, []);
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
@@ -26,7 +33,7 @@ const Navbar = () => {
   }
 
   return (
-    <AppBar position="fixed" sx={{ background: '#000000!important' }}>
+    <AppBar ref={headerRef} position="fixed" sx={{ background: '#000000!important' }}>
       <Toolbar className="first-block">
         {/* Khối 1 */}
         <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
@@ -101,13 +108,17 @@ const Navbar = () => {
           sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}
           mr={2}
         >
-          <Button mr={2} color="inherit">
-            Giới thiệu
-          </Button>
+          <Link href="/about" >
+            <Button mr={2} color="inherit">
+              Giới thiệu
+            </Button>
+          </Link>
           <Button mr={2} color="inherit">
             Nhiệm vụ
           </Button>
-          <Button color="inherit">Vòng quay may mắn</Button>
+          <Button color="inherit">
+            Vòng quay may mắn
+          </Button>
         </Box>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'left' }} ml={2}>
@@ -117,9 +128,11 @@ const Navbar = () => {
           <Button mr={2} color="inherit">
             Đổi quà
           </Button>
-          <Button mr={2} color="inherit">
-            Liên hệ
-          </Button>
+          <Link href="/contact">
+            <Button mr={2} color="inherit">
+              Liên hệ
+            </Button>
+          </Link>
           <Button color="inherit">Hội viên</Button>
         </Box>
       </Toolbar>
@@ -127,4 +140,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default Header

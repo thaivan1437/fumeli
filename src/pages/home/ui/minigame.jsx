@@ -1,10 +1,24 @@
-import React from 'react';
-import { Box, Button, Typography, ButtonGroup } from '@mui/material';
+import React, {useState} from 'react';
+import { Box, Button, Typography, ButtonGroup, Grid } from '@mui/material';
 import { Container } from '@mui/system';
 import { useSelector } from 'react-redux';
+import AutoSizeImage from '@/components/image';
 
 const MiniGame = () => {
+  const ITEMS_PER_PAGE = 3;
   const {miniGame} = useSelector((state) => state?.home);
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const maxPage = Math.ceil(miniGame.length / ITEMS_PER_PAGE);
+
+  const handleClick = (page) => {
+    setCurrentPage(page);
+  };
+
+  const displayData = miniGame.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   return (
     <Box py={3} className="minigame">
@@ -12,28 +26,29 @@ const MiniGame = () => {
         <Typography variant="h4" component="h2" color={'#fff'}>
           MINI GAMES
         </Typography>
-        <Box className="minigame__item" my={2} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Grid py={2} className="minigame__item" container spacing={{ xs: 0, md: 4 }} rowSpacing={{ xs: 2 }}>
           {
-            miniGame && miniGame.map((item, index) => {
-              if (index > 2) {
-                return
-              }
+            displayData && displayData.map((item, index) => {
               return (
-                <Box key={item.CreateDate} p={2} className="minigame__item--logo">
-                  <img src={item.Image} alt={item.Title} />
+                <Grid item key={item.CreateDate} className="minigame__item--logo" xs={12} sm={4} md={4} >
+                  <AutoSizeImage isResize={false} src={item.Image} alt={item.Title} width={430} height={430}/>
                   <Typography variant="h6" color="initial" sx={{ textAlign: 'center'}}>
                     {item.Title}
                   </Typography>
-                </Box>
+                </Grid>
               )
             })
           }
-        </Box>
+        </Grid>
         <Box className="minigame__item" sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <ButtonGroup className="css__btn" variant="contained" aria-label="button group">
-            <Button>1</Button>
-            <Button>2</Button>
-            <Button>3</Button>
+            {
+              [...Array(maxPage)].map((_, index) => (
+                <Button key={index} onClick={() => handleClick(index + 1)}>
+                  {index + 1}
+                </Button>
+              ))
+            }
           </ButtonGroup>
         </Box>
       </Container>

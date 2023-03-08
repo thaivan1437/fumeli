@@ -14,7 +14,6 @@ export default function About() {
 
   return (
     <React.StrictMode>
-      abc
       <AboutChild />
     </React.StrictMode>
   )
