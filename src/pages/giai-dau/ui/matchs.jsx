@@ -7,7 +7,7 @@ import AutoSizeImage from '@/components/image';
 const Tournaments = () => {
 	const [matchs, setMatchs] = useState([]);
 	const [isActive, setIsActive] = useState();
-	const { match, matchCategory } = useSelector((state) => state?.home);
+	const { match, matchCategory } = useSelector((state) => state?.match);
 	useEffect(() => {
 		// console.log('count loop');
 		if(matchs?.length == 0 && match?.length) {
@@ -21,12 +21,12 @@ const Tournaments = () => {
 		newMatch && newMatch[0].Matchs && setMatchs(newMatch[0].Matchs);
 		setIsActive(id);
 	}
-	// console.log('Matchs	', match, matchCategory, matchs);
+	console.log('Matchs	', match);
 
   return (
     <React.Fragment>
 			<Typography variant="h4" component="h2" color={'#fff'}>
-				GIẢI ĐẤU
+				TRẬN ĐẤU
 			</Typography>
 			<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff'}}>
 				<Stack
