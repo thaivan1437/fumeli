@@ -1,0 +1,64 @@
+label.Mui-focused {
+    color: #fff!important;
+  }
+  
+  .MuiInput-underline:after {
+    border-bottom-color: #fff!important;
+  }
+  
+  .MuiOutlinedInput-root {
+    & fieldset {
+      border-color: #fff!important;
+    }
+  
+    &:hover fieldset {
+      border-color: #fff!important;
+    }
+  
+    &.Mui-focused fieldset {
+      border-color: #fff!important;
+    }
+  }
+  
+  .MuiFormLabel-root {
+    color: #fff!important;
+  }
+
+  .MuiInputBase-root  {
+    background-color: #0F0F0F!important;
+  }
+
+  .MuiInputBase-input {
+    color: #fff!important;
+    background-color: #0F0F0F!important;
+  }
+
+  .headerContact {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 47px;
+    letter-spacing: -0.01em;
+    color: #fff!important;
+    }
+
+   .colorWhite{
+    color: #fff!important;
+    }
+
+    .iconItem{
+        font-size: 19px;
+    }
+
+    .iconContact{
+        font-size: 31px;
+    }
+
+    .btnSend {
+        background: #FF2423;
+        width: 200px;
+        height: 40px;
+        border-radius: 0!important;
+        border: 3px double #d9908f!important;
+      }
+      

@@ -16,7 +16,7 @@ export default function Home() {
       await dispatch(getAllDataThunkAction());
     }
     void fetchAllData();
-  }, []);
+  }, [dispatch]);
   // console.log('a')
 
   return (
