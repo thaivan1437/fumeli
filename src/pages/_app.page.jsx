@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
 import '../styles/styles.scss'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 import { Provider } from 'react-redux'
 import store from '../redux/store'
 
