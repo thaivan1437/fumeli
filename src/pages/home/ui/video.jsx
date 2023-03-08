@@ -57,7 +57,7 @@ const Videos = () => {
       </Container>
       <Slider className="video__slider center" {...settings}>
         { video && (
-          video.map((item, index) => {
+          video.map((item) => {
             return <div className='video__slider--item' key={item.CreateDate}>
               <AutoSizeImage isResize={false} src={item.ThumbnailPath} alt={item.Title} width={777} height={440}/>
             </div>

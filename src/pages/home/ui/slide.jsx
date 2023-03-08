@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import AutoSizeImage from '@/components/image';
 
 const SliderBanner = () => {
-  const { slider } = useSelector((state) => state?.home);
+  const { slider } = useSelector((state) => state?.home) || [];
   const newSlider = slider && slider.filter(item => item?.IsMainBanner)
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
@@ -70,7 +70,7 @@ const SliderBanner = () => {
               {...setting2}
             >
               { newSlider && (
-                newSlider.map((item, index) => {
+                newSlider.map((item) => {
                   return <div className='banner__slider--main' key={item.CreateDate}>
                     <AutoSizeImage src={item.UrlImage} alt={item.link} />
                   </div>

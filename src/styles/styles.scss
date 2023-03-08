@@ -1,6 +1,11 @@
 $primary-color: #000;
-@import '../pages/redux-example/index';
-@import '../pages/home/index';
+@import '../pages/home/index'; 
+@import '../pages/about/index';
+@import '../pages/contact/index';
+@import './footer.scss';
+@import './header.scss';
+
+
 * {
     box-sizing: border-box;
 }
@@ -15,7 +20,7 @@ body {
 }
 
 a {
-    color: $primary-color;
+    color: #fff;
     text-decoration: none;
 }
 

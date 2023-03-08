@@ -29,7 +29,7 @@ const Mission  = () => {
 						<Typography variant="h4" component="h2">
 							NHIỆM VỤ MỚI
 						</Typography>
-						<Typography variant="p" component="p">
+						<Typography variant="p" component="p" sx={{margin: '15px 0'}}>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum eleifend pellentesque. Fusce sed nisl lectus. Vestibulum suscipit mollis fermentum. 
 						</Typography>
 						<div className="wrap__btn--more css__btn">

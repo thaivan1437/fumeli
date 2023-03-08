@@ -23,7 +23,6 @@ export default function TopRank() {
   },[]);
 
   const newTopRank =  topRank && topRank.length > 0 && topRank.sort((a, b) => b.FpointValue - a.FpointValue);
-  console.log('topRank', topRank, newTopRank);
 
   const handleShowTopRank = (e) => {
     setIsShowRank(isShowRank => !isShowRank)

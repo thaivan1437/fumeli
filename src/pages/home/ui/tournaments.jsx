@@ -36,7 +36,7 @@ const Tournaments = () => {
 					spacing={2}
 				>
 					{
-						matchCategory && matchCategory.map((item, _) => {
+						matchCategory && matchCategory.map((item) => {
 							return (
 								<span className={isActive == item.Id ? 'active' : ''} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</span>
 							)
