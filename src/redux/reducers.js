@@ -1,8 +1,9 @@
 import { reducerExample } from '../pages/redux-example/logic/reducer';
 import { home } from '../pages/home/logic/reducer';
-import { topRank } from '@/components/topRank/logic/reducer';
 import { about } from '../pages/gioi-thieu/logic/reducer';
 import { match } from '../pages/giai-dau/logic/reducer';
+import { topRank } from '@/components/topRank/logic/reducer';
+import { authReducer } from '@/components/auth/logic/reducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   topRank,
   about,
   match,
+  authReducer,
 });
 
 export default rootReducer;

@@ -28,7 +28,7 @@ const Tournaments = () => {
 			<Typography variant="h4" component="h2" color={'#fff'}>
 				TRẬN ĐẤU
 			</Typography>
-			<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff'}}>
+			<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff'}} className='category__match'>
 				<Stack
 					direction="row"
 					divider={<Divider orientation="vertical" flexItem />}
@@ -37,7 +37,7 @@ const Tournaments = () => {
 					{
 						matchCategory && matchCategory.map((item) => {
 							return (
-								<span className={isActive == item.Id ? 'active' : ''} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</span>
+								<Typography component="span" sx={{ cursor: 'pointer'}} className={isActive == item.Id ? 'active' : ''} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</Typography>
 							)
 						})
 					}

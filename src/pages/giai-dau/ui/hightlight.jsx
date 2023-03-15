@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import AutoSizeImage from '@/components/image';
-import VideoModal from '@/components/modal/video';
+import YoutubeModal from '@/components/modal/video';
 
 
 const HightLight = () => {
@@ -84,7 +84,7 @@ const HightLight = () => {
       </Slider>
 
       {showVideoModal ? (
-        <VideoModal videoId={videoId} onClose={closeVideoModal} />
+        <YoutubeModal videoId={videoId} onClose={closeVideoModal} />
       ) : null}
     </React.Fragment>
   );

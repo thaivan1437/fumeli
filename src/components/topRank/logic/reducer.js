@@ -18,11 +18,11 @@ export const topRank = (state = initialState, action) => {
   }
 }
 
-// http://api-demowebsite.cdktcnqn.edu.vn/api/Match/getallclient
+
 export const getTopRankDataThunkAction = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/UserFPoint/getallclient'
+      'UserFPoint/getallclient'
     ];
 
     const [topRank] = await Promise.all(
