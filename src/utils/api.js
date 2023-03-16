@@ -1,5 +1,5 @@
 import axios from 'axios'
-const api_host = 'http://api-demowebsite.cdktcnqn.edu.vn/api/';
+const api_host = 'https://api-demowebsite.cdktcnqn.edu.vn/api/';
 export const axiosGet = async (url) => {
   const response = await axios.get(api_host + url, {
     headers: {
@@ -21,7 +21,7 @@ export const axiosPost = async (url, data) => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: 'http://api-demowebsite.cdktcnqn.edu.vn/',
+  baseURL: 'https://api-demowebsite.cdktcnqn.edu.vn/',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
