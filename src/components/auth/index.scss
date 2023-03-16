@@ -1,0 +1,33 @@
+.modal__register {
+  display: 'flex';
+  align-items: center;
+  justify-content: 'center',
+}
+// over write button
+.MuiButton-root {
+  padding: 15px;
+}
+// over write css input
+.common__input {
+  .MuiInputLabel-asterisk {
+    color: red;
+  }
+  .MuiInputLabel-shrink {
+    background-color: #fff;
+    color: #8b8b8b !important;
+    display: inline-block;
+  }
+  .MuiFormLabel-root {
+    color: #8b8b8b !important;
+  }
+
+  .MuiInputBase-root {
+    background-color: transparent !important;
+    border: solid 1px #8b8b8b;
+    box-sizing: border-box;
+    .MuiInputBase-input {
+      background: transparent !important;
+      color: #8b8b8b !important;
+    }
+  }
+}

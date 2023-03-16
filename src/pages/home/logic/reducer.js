@@ -52,8 +52,8 @@ export const home = (state = initialState, action) => {
 export const getSlideAndMissionData = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/Campaign/getallclient',
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/Slider/getallclient'
+      'Campaign/getallclient',
+      'Slider/getallclient'
     ];
 
     const [mission, slider] = await Promise.all(
@@ -70,8 +70,8 @@ export const getSlideAndMissionData = () => async (dispatch, getState) => {
 export const getVideoAndMiniGameData = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/Media/getallclient',
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/MiniGame/getallclient',
+      'Media/getallclient',
+      'MiniGame/getallclient',
     ];
 
     const [videoRes, miniGameRes ] = await Promise.all(
@@ -89,8 +89,8 @@ export const getVideoAndMiniGameData = () => async (dispatch, getState) => {
 export const getMatchDataThunkAction = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/Match/getallclient',
-      'http://api-demowebsite.cdktcnqn.edu.vn/api/CategoriesMatch/getallclient',
+      'Match/getallclient',
+      'CategoriesMatch/getallclient',
     ];
 
     const [ matchRes, matchCategory ] = await Promise.all(
