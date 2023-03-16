@@ -4,6 +4,7 @@ import { about } from '../pages/gioi-thieu/logic/reducer';
 import { match } from '../pages/giai-dau/logic/reducer';
 import { topRank } from '@/components/topRank/logic/reducer';
 import { authReducer } from '@/components/auth/logic/reducer';
+import { gift } from '../pages/doi-qua/logic/reducer'
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   about,
   match,
   authReducer,
+  gift,
 });
 
 export default rootReducer;

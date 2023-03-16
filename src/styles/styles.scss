@@ -6,6 +6,8 @@ $primary-color: #000;
 @import './header.scss';
 @import '@/components/modal/index';
 @import '@/components/auth/index';
+@import '../pages/doi-qua/index.scss';
+
 * {
     box-sizing: border-box;
 }
@@ -34,7 +36,7 @@ a:hover {
     overflow-y: scroll;
     background-color: #000;
     position: relative;
-    position: fixed;
+    position: fixed !important;
     z-index: 9999;
     right: -580px;
     top: calc(30% + 65px);

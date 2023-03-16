@@ -143,10 +143,11 @@ const Header = ({ setHeaderHeight }) => {
                 Giải đấu
               </Button>
             </Link>
-            
-            <Button mr={2} color="inherit">
-              Đổi quà
-            </Button>
+            <Link href="/doi-qua">
+              <Button mr={2} color="inherit">
+                Đổi quà
+              </Button>
+            </Link>
             <Link href="/lien-he">
               <Button mr={2} color="inherit">
                 Liên hệ
