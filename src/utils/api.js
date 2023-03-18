@@ -1,22 +1,46 @@
 import axios from 'axios'
-const api_host = 'https://api-demowebsite.cdktcnqn.edu.vn/api/';
+export const api_host = 'https://api-demowebsite.cdktcnqn.edu.vn/api/';
+
 export const axiosGet = async (url) => {
+  let user;
+  if (typeof localStorage !== 'undefined') {
+    user = JSON.parse(localStorage.getItem("user"));
+  }
+  const token = user && user.access_token; // lấy token từ local storage
+  let headers = {
+    'Content-Type': 'application/json',
+  };
+  
+  if (token) {
+    headers.Authorization = `Bearer ${token}`; // thêm header Authorization nếu có token
+  }
+
   const response = await axios.get(api_host + url, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     timeout: 60000 // đơn vị là milliseconds
   });
   return response.data;
 };
 
 export const axiosPost = async (url, data) => {
-  const response = await axios.post(api_host + url,data, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  let user;
+  if (typeof localStorage !== 'undefined') {
+    user = JSON.parse(localStorage.getItem("user"));
+  }
+  const token = user && user.access_token; // lấy token từ local storage
+  let headers = {
+    'Content-Type': 'application/json',
+  };
+  
+  if (token) {
+    headers.Authorization = `Bearer ${token}`; // thêm header Authorization nếu có token
+  }
+
+  const response = await axios.post(api_host + url, data, {
+    headers,
     timeout: 60000 // đơn vị là milliseconds
   });
+
   return response;
 };
 

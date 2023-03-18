@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { useState } from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {
   AppBar,
   Box,
@@ -25,18 +24,26 @@ import {
 } from "@/components/auth/logic/action";
 
 const Header = ({ setHeaderHeight }) => {
-  const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen } = useSelector((state) => state.authReducer);
+  const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } = useSelector((state) => state.authReducer);
+  const [ userName, setUserName ] = useState('');
   const dispatch = useDispatch();
   const handleOpenModalLogin = () => {
-    console.log('in func login')
     dispatch(openLoginModal());
   };
 
-  const headerRef = React.useRef(null);
-  React.useEffect(() => {
-    const height = headerRef.current.offsetHeight
-    setHeaderHeight(height)
+  const headerRef = useRef(null);
+  useEffect(() => {
+    const height = headerRef.current.offsetHeight;
+    setHeaderHeight(height);
   }, []);
+
+  useEffect(() => {
+    // check login has data in localStore
+    const userData = JSON.parse(localStorage.getItem("user"));
+    if (userData && userData.username) {
+      setUserName(userData.username);
+    }
+  }, [user]);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -88,35 +95,41 @@ const Header = ({ setHeaderHeight }) => {
               <MenuItem onClick={handleClose}>VI</MenuItem>
               <MenuItem onClick={handleClose}>EN</MenuItem>
             </Menu>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: '#FF2423',
-                borderRadius: '40px',
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#d6221d',
-                },
-              }}
-              onClick={handleOpenModalLogin}
-            >
-              Login
-            </Button>
+            {
+              // show user when logged
+              userName ? userName : <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: '#FF2423',
+                  borderRadius: '40px',
+                  color: 'white',
+                  '&:hover': {
+                    backgroundColor: '#d6221d',
+                  },
+                }}
+                onClick={handleOpenModalLogin}
+              >
+                Login
+              </Button>
+            }
+            
           </Box>
-          <Image
-            src="/images/bgCenterNavbar.png"
-            alt="LogoCenter"
-            width={290}
-            height={224}
-            className="bgCenterNavbar"
-          />
-          <Image
-            src="/images/logoFU.png"
-            alt="LogoCenter"
-            width={165}
-            height={60}
-            className="logoFU"
-          />
+          <Link href="/" >
+            <Image
+              src="/images/bgCenterNavbar.png"
+              alt="LogoCenter"
+              width={290}
+              height={224}
+              className="bgCenterNavbar"
+            />
+            <Image
+              src="/images/logoFU.png"
+              alt="LogoCenter"
+              width={165}
+              height={60}
+              className="logoFU"
+            />
+          </Link>
           {/* Khối 2 */}
         </Toolbar>
         <Toolbar>
