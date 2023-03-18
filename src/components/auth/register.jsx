@@ -12,8 +12,6 @@ const SignUpModal = () => {
   const dispatch = useDispatch();
   const { registerModalOpen, signUpData } = useSelector((state) => state.authReducer);
 
-  console.log('signUpData', signUpData)
-
   const handleClose = () => {
     dispatch(closeRegisterModal());
   };

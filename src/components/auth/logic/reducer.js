@@ -9,6 +9,7 @@ import {
   FORGET_DATA,
   forgetDataAction,
   SIGNUP_DATA,
+  LOGIN_ACTION,
   // signDataAction
 } from "./action";
 
@@ -28,7 +29,8 @@ const initialState = {
     Password: '',
     InviteCode: '',
     ConfirmPassword: ''
-  }
+  },
+  user: {}
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -55,6 +57,12 @@ export const authReducer = (state = initialState, action) => {
           ...action.payload.signUpData
         }
       };
+    case LOGIN_ACTION:
+      return { 
+        ...state,
+        user: action.payload
+      };
+      
     default:
       return state;
   }

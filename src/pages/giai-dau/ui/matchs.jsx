@@ -21,7 +21,6 @@ const Tournaments = () => {
 		newMatch && newMatch[0].Matchs && setMatchs(newMatch[0].Matchs);
 		setIsActive(id);
 	}
-	console.log('Matchs	', match);
 
   return (
     <React.Fragment>
