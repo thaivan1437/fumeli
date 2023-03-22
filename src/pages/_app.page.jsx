@@ -28,6 +28,7 @@ export default function App({ Component, pageProps }) {
   }, [Router])
 
   if (typeof localStorage !== 'undefined') {
+    // init user data in local storage
     const user = localStorage.getItem("user");
     const userCheck = localStorage.getItem("user_check");
     if (!user) {

@@ -20,7 +20,8 @@ import ForgotPasswordModal from '@/components/auth/forgetPassword'
 import SignUpModal from '@/components/auth/register'
 import { useDispatch, useSelector } from "react-redux";
 import {
-  openLoginModal
+  openLoginModal,
+  loginAction
 } from "@/components/auth/logic/action";
 
 const Header = ({ setHeaderHeight }) => {
@@ -36,6 +37,14 @@ const Header = ({ setHeaderHeight }) => {
     const height = headerRef.current.offsetHeight;
     setHeaderHeight(height);
   }, []);
+
+  useEffect(() => {
+    // dispatch data in store
+    const userData = JSON.parse(localStorage.getItem("user"));
+    if (userData && userData.username) {
+      dispatch(loginAction(userData));
+    }
+  }, [userName]);
 
   useEffect(() => {
     // check login has data in localStore
@@ -142,9 +151,11 @@ const Header = ({ setHeaderHeight }) => {
                 Giới thiệu
               </Button>
             </Link>
-            <Button mr={2} color="inherit">
-              Nhiệm vụ
-            </Button>
+            <Link href="/nhiem-vu" >
+              <Button mr={2} color="inherit">
+                Nhiệm vụ
+              </Button>
+            </Link>
             <Button color="inherit">
               Vòng quay may mắn
             </Button>
