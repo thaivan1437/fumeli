@@ -1,6 +1,7 @@
 
 import {axiosGet} from '@/utils/api';
 import { getMatch, getVideo, getMiniGame, getMission, getMatchCategory, getSlider } from './action';
+import { startLoading, stopLoading  } from '../../action';
 
 const initialState = {
   match: [],
@@ -51,6 +52,7 @@ export const home = (state = initialState, action) => {
 // http://api-demowebsite.cdktcnqn.edu.vn/api/Match/getallclient
 export const getSlideAndMissionData = () => async (dispatch, getState) => {
   try {
+    dispatch(startLoading());
     const urls = [
       'Campaign/getallclient',
       'Slider/getallclient'
@@ -64,6 +66,8 @@ export const getSlideAndMissionData = () => async (dispatch, getState) => {
     await dispatch(getSlider(slider));
   } catch (error) {
     console.log(error);
+  } finally {
+    dispatch(stopLoading());
   }
 };
 
