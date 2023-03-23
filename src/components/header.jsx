@@ -23,6 +23,7 @@ import {
   openLoginModal,
   loginAction
 } from "@/components/auth/logic/action";
+import HeaderMobile from './headerMobile'
 
 const Header = ({ setHeaderHeight }) => {
   const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } = useSelector((state) => state.authReducer);
@@ -62,8 +63,25 @@ const Header = ({ setHeaderHeight }) => {
     setAnchorEl(null)
   }
 
+  const [mobileView, setMobileView] = useState(false);
+
+  useEffect(() => {
+    const setResponsiveness = () => {
+      console.log('setResponsiveness', window.innerWidth);
+      return window.innerWidth < 900
+        ? setMobileView(true)
+        : setMobileView(false);
+    };
+    setResponsiveness();
+    window.addEventListener("resize", () => setResponsiveness());
+    return () => {
+      window.removeEventListener("resize", () => setResponsiveness());
+    };
+  }, []);
+
   return (
     <React.StrictMode>
+      { !mobileView ? 
       <AppBar ref={headerRef} position="fixed" sx={{ background: '#000000!important' }}>
         <Toolbar className="first-block">
           {/* Khối 1 */}
@@ -180,7 +198,8 @@ const Header = ({ setHeaderHeight }) => {
             <Button color="inherit">Hội viên</Button>
           </Box>
         </Toolbar>
-      </AppBar>
+      </AppBar> :
+      <HeaderMobile reff={headerRef} /> }
       {
         registerModalOpen && <SignUpModal></SignUpModal>
       }
