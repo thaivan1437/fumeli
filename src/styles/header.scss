@@ -33,29 +33,29 @@
 }
 @media (max-width: 1343px) {
   .navbar--mobile {
-    display: inline;
+    display: inline !important;
   }
   .navbar--desktop {
-    display: none;
+    display: none !important;
   }
   .MuiDrawer-paper {
-    display: inline;
+    display: inline !important;;
   }
   .css-1o5pq7n {
-    display: none;
+    display: none !important;;
   }
 }
 @media (min-width: 1343px) {
   .navbar--mobile {
-    display: none;
+    display: none !important;
   }
   .navbar--desktop {
-    display: inline;
+    display: inline !important;;
   }
   .MuiDrawer-paper {
-    display: none;
+    display: none !important;;
   }
   .css-1o5pq7n {
-    display: none;
+    display: none !important;;
   }
 }

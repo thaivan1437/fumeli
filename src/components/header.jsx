@@ -54,7 +54,7 @@ const Header = ({ setHeaderHeight }) => {
 
   return (
     <React.StrictMode>
-      <ResponsiveDrawer className="navbar--mobile" />
+      <ResponsiveDrawer reff={headerRef} className="navbar--mobile" />
       <AppBar
         ref={headerRef}
         position="fixed"

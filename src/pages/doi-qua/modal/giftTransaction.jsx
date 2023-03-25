@@ -27,7 +27,6 @@ const GiftTransactionModal = ({ gift, onClose }) => {
     boxShadow: 24,
     p: 4,
     borderRadius: '10px',
-    pt: 6,
   }
   const [open, setOpen] = useState(true)
 
@@ -93,7 +92,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
         timeout: 500,
       }}
     >
-      <Box sx={style}>
+      <Box className='modal__gift' sx={style}>
         <Image
           src="/images/close.svg"
           alt="btn close"
@@ -111,10 +110,6 @@ const GiftTransactionModal = ({ gift, onClose }) => {
             width: '86px',
             height: '82px',
             color: '#FF2423',
-            position: 'absolute',
-            left: '50%',
-            top: '12%',
-            transform: 'translate(-50%, -50%)',
           }}
         />
         <Typography mb={3} className="modal__giftTransaction--title">
@@ -129,7 +124,6 @@ const GiftTransactionModal = ({ gift, onClose }) => {
           height={150}
           style={{
             objectFit: 'contain',
-            transform: 'translate(85%, -7%)',
           }}
         />
         <Typography

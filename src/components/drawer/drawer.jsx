@@ -44,7 +44,8 @@ function ResponsiveDrawer(props) {
     setAnchorEl(null)
   }
 
-  const { window } = props
+  const { window, reff } = props
+  console.log('reff', reff)
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
@@ -113,7 +114,7 @@ function ResponsiveDrawer(props) {
     window !== undefined ? () => window().document.body : undefined
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box ref={reff} sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -207,7 +208,7 @@ function ResponsiveDrawer(props) {
           {drawer}
         </Drawer>
       </Box>
-      <Box
+      {/* <Box
         component="main"
         sx={{
           flexGrow: 1,
@@ -216,7 +217,7 @@ function ResponsiveDrawer(props) {
         }}
       >
         <Toolbar />
-      </Box>
+      </Box> */}
       {registerModalOpen && <SignUpModal></SignUpModal>}
       {loginModalOpen && <LoginModal></LoginModal>}
       {forgetPasswordModalOpen && <ForgotPasswordModal></ForgotPasswordModal>}
