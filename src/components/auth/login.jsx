@@ -100,19 +100,9 @@ const LoginModal = () => {
   return (
     <React.StrictMode>
       {showToast()}
-      <Modal open={loginModalOpen} onClose={handleClose}>
+      <Modal open={loginModalOpen} onClose={handleClose} className='modal__common'>
         <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            bgcolor: '#fff',
-            border: '2px solid #000',
-            boxShadow: 24,
-            p: 4,
-            minWidth: '500px',
-          }}
+          className='modal__common--box'
         >
           <Typography variant="h6" component="h2" sx={{textAlign: 'center'}}>
             Đăng nhập <Typography variant="span">Fumeli</Typography>
