@@ -58,21 +58,10 @@ const SignUpModal = () => {
         onClose={handleClose}
         aria-labelledby="signup-modal-title"
         aria-describedby="signup-modal-description"
-        className="modal__register"
+        className="modal__register modal__common"
       >
         <Box
-          className="modal__register--paper"
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            bgcolor: "background.paper",
-            border: "2px solid #000",
-            boxShadow: 24,
-            p: 4,
-            minWidth: "500px",
-          }}
+          className="modal__register--paper modal__common--box"
         >
           <Typography variant="h4" component="h2" id="signup-modal-title" sx={{textAlign: 'center'}}>
             Đăng ký

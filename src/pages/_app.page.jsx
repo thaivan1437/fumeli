@@ -1,13 +1,13 @@
-import * as React from 'react'
-import '@/styles/globals.css'
-import '../styles/styles.scss'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
-import { Provider } from 'react-redux'
-import store from '../redux/store'
-import Router from 'next/router'
+import * as React from 'react';
+import Header from '@/components/header';
+import Footer from '@/components/footer';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
+import Router from 'next/router';
 import { useState, useEffect } from 'react';
-import Loader from '@/components/loading'
+import Loader from '@/components/loading';
+import '@/styles/globals.css';
+import '@/styles/styles.scss';
 
 export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,11 +39,12 @@ export default function App({ Component, pageProps }) {
     }
   }
   const [headerHeight, setHeaderHeight] = React.useState(0);
+  console.log('headerHeight', headerHeight);
 
   return (
     <Provider store={store}>
       <Header setHeaderHeight={setHeaderHeight}/>
-      <div className="main" style={{ background: '#19181c!important', marginTop: `${headerHeight + 20}px` }}>
+      <div className="main" style={{ background: '#19181c!important', marginTop: `${headerHeight ? headerHeight + 20 : 60}px` }}>
         {
           isLoading ? <Loader/> : <Component {...pageProps} />
         }

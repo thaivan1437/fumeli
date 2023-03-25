@@ -34,9 +34,14 @@ import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import Collapse from '@mui/material/Collapse'
 import StarBorder from '@mui/icons-material/StarBorder'
+import NativeSelect from '@mui/material/NativeSelect'
+import Modal from '@mui/material/Modal'
+
+import GiftTransactionModal from '../modal/giftTransaction'
+import { closeGiftTransactionModal } from '../logic/action'
 
 export const Store = () => {
-  const [open, setOpen] = React.useState(true)
+  const [open, setOpen] = React.useState(false)
 
   const distributeClick = () => {
     setOpen(!open)
@@ -59,7 +64,21 @@ export const Store = () => {
     currentPage * ITEMS_PER_PAGE
   )
 
-  const options = ['Tất cả', 'Voucher', 'Card', 'Vật phẩm']
+  // const options = ['Tất cả', 'Voucher', 'Card', 'Vật phẩm']
+
+  const [showGiftTranscationModal, setGiftModal] = useState(false)
+  const [gift, setGift] = useState('')
+
+  const openGiftTransactionModal = (e) => {
+    const giftFilterById = giftData.filter((item) => item.Id == e)
+    setGift(giftFilterById)
+    setGiftModal(true)
+  }
+
+  const closeGiftTransactionModal = () => {
+    setGiftModal(false)
+    setGift('')
+  }
 
   return (
     <Container>
@@ -70,20 +89,7 @@ export const Store = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           {/* phâm loại */}
-          {/* <Box>
-            <ListItemButton onClick={distributeClick}>
-              <ListItemText primary="PHÂN LOẠI" />
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon></ListItemIcon>
-                  <ListItemText primary="Starred" />
-                </ListItemButton>
-              </List>
-            </Collapse>
-          </Box> */}
+
           <Grid container spacing={2} mt={{ md: 4, xs: 2 }}>
             {displayData &&
               displayData.map((item, index) => {
@@ -118,6 +124,10 @@ export const Store = () => {
                         <Button
                           variant="contained"
                           className="btn__transaction"
+                          value={item.Id}
+                          onClick={(e) =>
+                            openGiftTransactionModal(e.target.value)
+                          }
                         >
                           ĐỔI QUÀ
                         </Button>
@@ -188,6 +198,10 @@ export const Store = () => {
           </Box>
         </Grid>
       </Grid>
+
+      {showGiftTranscationModal ? (
+        <GiftTransactionModal gift={gift} onClose={closeGiftTransactionModal} />
+      ) : null}
     </Container>
   )
 }
