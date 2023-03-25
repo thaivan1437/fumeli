@@ -1,7 +1,8 @@
 import axios from 'axios'
 export const api_host = 'https://api-demowebsite.cdktcnqn.edu.vn/api/';
+import { loginAction } from '@/components/auth/logic/action'
 
-export const axiosGet = async (url) => {
+export const axiosGet = async (url, dispatch) => {
   let user;
   if (typeof localStorage !== 'undefined') {
     user = JSON.parse(localStorage.getItem("user"));
@@ -15,14 +16,23 @@ export const axiosGet = async (url) => {
     headers.Authorization = `Bearer ${token}`; // thêm header Authorization nếu có token
   }
 
-  const response = await axios.get(api_host + url, {
-    headers,
-    timeout: 60000 // đơn vị là milliseconds
-  });
-  return response.data;
+  try {
+    const response = await axios.get(api_host + url, {
+      headers,
+      timeout: 60000 // đơn vị là milliseconds
+    });
+    return response.data;
+  } catch (error) {
+    if (error.response.status == 401) {
+      // need show modal token expired
+      await dispatch(loginAction());
+      localStorage.setItem("user", JSON.stringify(''));
+    }
+  }
 };
 
-export const axiosPost = async (url, data) => {
+export const axiosPost = async (url, data, dispatch) => {
+  
   let user;
   if (typeof localStorage !== 'undefined') {
     user = JSON.parse(localStorage.getItem("user"));
@@ -36,12 +46,19 @@ export const axiosPost = async (url, data) => {
     headers.Authorization = `Bearer ${token}`; // thêm header Authorization nếu có token
   }
 
-  const response = await axios.post(api_host + url, data, {
-    headers,
-    timeout: 60000 // đơn vị là milliseconds
-  });
-
-  return response;
+  try {
+    const response = await axios.post(api_host + url, data, {
+      headers,
+      timeout: 60000 // đơn vị là milliseconds
+    });
+    return response.data;
+  } catch (error) {
+    if (error.response.status == 401) {
+      // need show modal token expired
+      await dispatch(loginAction());
+      localStorage.setItem("user", JSON.stringify(''));
+    }
+  }
 };
 
 const axiosInstance = axios.create({

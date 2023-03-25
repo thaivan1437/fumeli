@@ -22,10 +22,47 @@
     border-radius: 5px;
     margin-bottom: 10px;
     margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+    &:hover{
+      background: linear-gradient(360deg, #FF2423 0%, rgba(0, 0, 0, 0) 99.2%);
+    }
     img {
       border-radius: 5px;
       max-width: 100%;
       margin: auto;
+    }
+    .checked {
+      display: none;
+    }
+    &.active {
+      .checked {
+        position: absolute;
+        max-width: 120px;
+        height: 100px;
+        left: 50%;
+        bottom: 75px;
+        transform: translateX(-50%);
+        display: block;
+        border: 0;
+        border-radius: 0;
+      }
+      img.image {
+        filter: grayscale(1)
+      }
+    }
+    .upCheckIn {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+      background: rgba(255, 36, 35, 0.4);
+      backdrop-filter: blur(15px);
+      color: #fff;
+      opacity: 0;
+      &.isShow {
+        opacity: 1;
+      }
     }
   }
 
@@ -46,7 +83,7 @@
     &.active {
       .checked {
         position: absolute;
-        width: 120px;
+        max-width: 120px;
         height: 100px;
         left: 50%;
         bottom: 75px;
@@ -87,8 +124,8 @@
       width: 33%;
       &.active {
         .checked {
-          width: 55px;
-          height: 45px;
+          max-width: 55px;
+          height: 45px !important;
           left: 50%;
           bottom: 40px;
         }

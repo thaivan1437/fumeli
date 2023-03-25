@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
+import AutoSizeImage from '@/components/image';
 
 const CountCheckInMonth = ({
   checkInMonth
@@ -12,8 +13,8 @@ const CountCheckInMonth = ({
         <Typography py={2} component="p" color={'#fff'} sx={{textAlign: 'center'}}>
           {`${item} Ngày`}
         </Typography>
-        <img src="/images/mission/check-in-month.png" alt="điểm danh trong tháng" className='image'/>
-        <img src="/images/mission/check.png" alt="checked" className='checked'/>
+        <AutoSizeImage isResize={false} width={200} height={200} src="/images/mission/check-in-month.png" alt="điểm danh trong tháng" className='image'/>
+        <AutoSizeImage isResize={false} width={120} height={95} src="/images/mission/check.png" alt="checked" className='checked'/>
       </Box>
     )
   }

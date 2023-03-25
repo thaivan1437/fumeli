@@ -21,9 +21,16 @@ export const mission = (state = initialState, action) => {
         missionCategory: action.payload,
       };
     case 'GET_USER_MISSION':
+      const userMissionList = [...state.userMission];
+      userMissionList.push(...action.payload);
+      const uniqueValues = [...new Set(userMissionList.map(item => item))];
+      const uniqueObjects = userMissionList.filter((item, index, self) =>
+        index === self.findIndex(t => t.Id === item.Id)
+      );
+      console.log(userMissionList, uniqueValues, uniqueObjects)
       return {
         ...state,
-        userMission: action.payload,
+        userMission: uniqueValues,
       };
     default:
       return state
@@ -32,6 +39,7 @@ export const mission = (state = initialState, action) => {
 
 export const getMissionDataThunkAction = () => async (dispatch, getState) => {
   try {
+    dispatch(startLoading());
     const urls = [
       'Campaign/getallclient',
     ];
@@ -43,6 +51,8 @@ export const getMissionDataThunkAction = () => async (dispatch, getState) => {
     await dispatch(getMission(missionRes));
   } catch (error) {
     console.log(error);
+  } finally {
+    dispatch(stopLoading());
   }
 };
 
@@ -67,17 +77,45 @@ export const getMissionComplete = (idCamp) => async (dispatch, getState) => {
     dispatch(startLoading());
     const url = 'UserCampaign/getusercampaignbyuserid';
     const { authReducer } = getState();
+    const now = new Date();
+    const startOfWeek = new Date(now);
+    const diff = now.getDay() - 1;
+    startOfWeek.setDate(now.getDate() - diff);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
     const data ={
       "UserId": authReducer && authReducer.user && authReducer.user.userid,
       "CampaignId": idCamp,
-      "FromDate": "2023-03-17 12:00:00 AM",
-      "ToDate": "2023-03-22 12:00:00 AM"
+      "FromDate": startOfWeek,
+      "ToDate": endOfWeek
     }
+    const response = await axiosPost(url, data, dispatch);
+    response ? await dispatch(getUserMission(response)) : null;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(stopLoading());
+  }
+};
 
-    const response = await axiosPost(url, data);
-    console.log('response', response, authReducer , idCamp);
-
-    await dispatch(getUserMission(response.data));
+export const createMissionComplete = ({idCamp, createDate}) => async (dispatch, getState) => {
+  try {
+    dispatch(startLoading());
+    const url = 'UserCampaign/create';
+    const { authReducer } = getState();
+    const userID = authReducer && authReducer.user && authReducer.user.userid;
+    const userName = authReducer && authReducer.user && authReducer.user.username;
+    const now = new Date(createDate);
+    const data ={
+      "UserId": userID,
+      "CampaignId": idCamp,
+      "CreateDate": now,
+      "CreateUser": userName,
+      "Active": true,
+    }
+    const response = await axiosPost(url, data, dispatch);
+    console.log('response create',response);
+    response ? await dispatch(getUserMission([response])) : null;
   } catch (error) {
     console.log(error);
   } finally {

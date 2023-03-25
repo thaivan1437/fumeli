@@ -22,7 +22,7 @@ const Video = () => {
 	// }, [missionCategory && missionCategory.length]);
 
 	const { missionCategory } = useSelector((state) => state?.mission);
-  let video = missionCategory && missionCategory.filter(item => item.TitleLink === 'video');
+  let video = missionCategory && missionCategory.filter(item => item.IsVideo);
   console.log(video)
   video = video && video.length && video[0].Campaigns
 

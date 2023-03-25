@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 
-const AutoSizeImage = ({ src, alt, isResize = true, width, height }) => {
+const AutoSizeImage = ({ src, alt, isResize = true, width, height, className = '' }) => {
   const [imageRatio, setImageRatio] = useState(null);
   const imageRef = useRef();
 
@@ -14,6 +14,7 @@ const AutoSizeImage = ({ src, alt, isResize = true, width, height }) => {
         width={width}
         layout='responsive'
         objectFit="unset"
+        className={className}
       />
     )
   }
@@ -35,6 +36,7 @@ const AutoSizeImage = ({ src, alt, isResize = true, width, height }) => {
         objectFit="contain"
         onLoad={handleLoad}
         ref={imageRef}
+        className={className}
         sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 100vw,
               100vw"

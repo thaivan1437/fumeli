@@ -80,6 +80,7 @@ const LoginModal = () => {
         setTimeout(() => {
           // wait toast end
           handleClose();
+          location.reload();
         }, 5500)
       })
       .catch(error => {

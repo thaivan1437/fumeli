@@ -11,7 +11,7 @@ const Daily = () => {
 
 	useEffect(() => {
 		if(daily?.length == 0 && missionCategory?.length) {
-			const dailyList = missionCategory && missionCategory.filter(item => item.TitleLink === 'daily');
+			const dailyList = missionCategory && missionCategory.filter(item => item.IsDaily);
 			dailyList && dailyList[0].Campaigns && setDaily(dailyList[0].Campaigns);
 		}
 	}, [missionCategory && missionCategory.length]);
@@ -31,7 +31,7 @@ const Daily = () => {
 
 	const itemList = (item, isOrder = 0)=> {
 		return <Grid key={item.CreateDate} item xs={12} sm={4} md={4} className={''}>
-			<Link href={`nhiem-vu/${item.Id}`}>
+			<Link href={`nhiem-vu/${item.Id}?type=daily`}>
 				<AutoSizeImage
 					src={item.ImagePath}
 					alt={item.Title}

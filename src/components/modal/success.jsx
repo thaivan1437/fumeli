@@ -1,9 +1,8 @@
 import React from 'react';
 import {Modal, Typography, Box} from '@mui/material';
-import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 
-
-export default function ModalSuccess({ open, handleClose, message }) {
+export default function ModalSuccess({ open, handleClose, message, title, icon }) {
   return (
     <Modal
       open={open}
@@ -17,16 +16,17 @@ export default function ModalSuccess({ open, handleClose, message }) {
           transform: 'translate(-50%, -50%)',
           bgcolor: '#fff',
           border: '2px solid #fff',
-          borderRadius: '5px',
-          boxShadow: 24,
+          borderRadius: '10px',
           p: 4,
-          minWidth: '300px',
+          minWidth: '450px',
+          minHeight: '350px',
           textAlign: 'center'
         }}
       >
-        <CheckCircleOutlinedIcon className='' color='error' fontSize='large'/>
+        <CloseIcon onClick={handleClose} className='btn__modal--close'/>
+        {icon}
         <Typography my={3} variant="h4" component="h2" color='error' sx={{textAlign: 'center'}}>
-          THÀNH CÔNG
+          {title}
         </Typography>
         <Typography variant="p" component="p" sx={{textAlign: 'center'}}>
           {message}
