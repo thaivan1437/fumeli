@@ -253,7 +253,7 @@
 }
 
 .MuiButtonBase-root {
-  .button--confirm {
+  &.button--confirm {
     background: #ff2423;
     width: 156px;
     height: 50px;
@@ -261,7 +261,7 @@
     border: 3px double #d9908f !important;
   }
 
-  .button--back {
+  &.button--back {
     background: #8b8b8b;
     width: 156px;
     height: 50px;
@@ -272,7 +272,7 @@
     }
   }
 
-  .button--back:hover {
+  &.button--back:hover {
     background: #363535 !important;
   }
 }
