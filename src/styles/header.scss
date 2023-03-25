@@ -1,17 +1,61 @@
 .first-block {
-    border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #fff;
 }
-
 .bgCenterNavbar {
-    position: absolute;
-    top: 50%;
-    left: 52%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
 }
-
 .logoFU {
-    position: absolute;
-    top: 101%;
-    left: 52%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 101%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+}
+.css-1isr6pn-MuiModal-root-MuiDrawer-root {
+  .MuiDrawer-paper {
+    background-color: #000;
+    color: #fff;
+  }
+}
+.navbar__listNav--title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: -0.01em;
+  text-align: left;
+}
+.navbar__listNav {
+  padding: 5%;
+  margin: 0 5%;
+  border-bottom: 0.6px solid #8b8b8b;
+}
+@media (max-width: 1343px) {
+  .navbar--mobile {
+    display: inline;
+  }
+  .navbar--desktop {
+    display: none;
+  }
+  .MuiDrawer-paper {
+    display: inline;
+  }
+  .css-1o5pq7n {
+    display: none;
+  }
+}
+@media (min-width: 1343px) {
+  .navbar--mobile {
+    display: none;
+  }
+  .navbar--desktop {
+    display: inline;
+  }
+  .MuiDrawer-paper {
+    display: none;
+  }
+  .css-1o5pq7n {
+    display: none;
+  }
 }

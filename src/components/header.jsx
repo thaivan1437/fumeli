@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   AppBar,
   Box,
@@ -18,10 +18,9 @@ import Link from 'next/link'
 import LoginModal from '@/components/auth/login'
 import ForgotPasswordModal from '@/components/auth/forgetPassword'
 import SignUpModal from '@/components/auth/register'
-import { useDispatch, useSelector } from "react-redux";
-import {
-  openLoginModal
-} from "@/components/auth/logic/action";
+import { useDispatch, useSelector } from 'react-redux';
+import { openLoginModal } from '@/components/auth/logic/action';
+import ResponsiveDrawer from '@/components/drawer/drawer';
 
 const Header = ({ setHeaderHeight }) => {
   const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } = useSelector((state) => state.authReducer);
@@ -39,7 +38,7 @@ const Header = ({ setHeaderHeight }) => {
 
   useEffect(() => {
     // check login has data in localStore
-    const userData = JSON.parse(localStorage.getItem("user"));
+    const userData = JSON.parse(localStorage.getItem('user'));
     if (userData && userData.username) {
       setUserName(userData.username);
     }
@@ -55,10 +54,18 @@ const Header = ({ setHeaderHeight }) => {
 
   return (
     <React.StrictMode>
-      <AppBar ref={headerRef} position="fixed" sx={{ background: '#000000!important' }}>
+      <ResponsiveDrawer className="navbar--mobile" />
+      <AppBar
+        ref={headerRef}
+        position="fixed"
+        sx={{ background: '#000000!important' }}
+        className="navbar--desktop"
+      >
         <Toolbar className="first-block">
           {/* Khối 1 */}
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <Box
+            sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}
+          >
             <IconButton size="large" color="inherit" sx={{ mr: 2 }}>
               <FacebookIcon />
             </IconButton>
@@ -97,24 +104,28 @@ const Header = ({ setHeaderHeight }) => {
             </Menu>
             {
               // show user when logged
-              userName ? userName : <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: '#FF2423',
-                  borderRadius: '40px',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: '#d6221d',
-                  },
-                }}
-                onClick={handleOpenModalLogin}
-              >
-                Login
-              </Button>
+              userName ? (
+                userName
+              ) : (
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: '#FF2423',
+                    borderRadius: '40px',
+                    color: 'white',
+                    '&:hover': {
+                      backgroundColor: '#d6221d',
+                    },
+                  }}
+                  onClick={handleOpenModalLogin}
+                >
+                  Login
+                </Button>
+              )
             }
             
           </Box>
-          <Link href="/" >
+          <Link href="/">
             <Image
               src="/images/bgCenterNavbar.png"
               alt="LogoCenter"
@@ -137,7 +148,7 @@ const Header = ({ setHeaderHeight }) => {
             sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}
             mr={2}
           >
-            <Link href="/gioi-thieu" >
+            <Link href="/gioi-thieu">
               <Button mr={2} color="inherit">
                 Giới thiệu
               </Button>
@@ -145,9 +156,7 @@ const Header = ({ setHeaderHeight }) => {
             <Button mr={2} color="inherit">
               Nhiệm vụ
             </Button>
-            <Button color="inherit">
-              Vòng quay may mắn
-            </Button>
+            <Button color="inherit">Vòng quay may mắn</Button>
           </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'left' }} ml={2}>
@@ -170,15 +179,9 @@ const Header = ({ setHeaderHeight }) => {
           </Box>
         </Toolbar>
       </AppBar>
-      {
-        registerModalOpen && <SignUpModal></SignUpModal>
-      }
-      {
-        loginModalOpen && <LoginModal></LoginModal>
-      }
-      {
-        forgetPasswordModalOpen &&  <ForgotPasswordModal></ForgotPasswordModal>
-      }
+      {registerModalOpen && <SignUpModal></SignUpModal>}
+      {loginModalOpen && <LoginModal></LoginModal>}
+      {forgetPasswordModalOpen && <ForgotPasswordModal></ForgotPasswordModal>}
     </React.StrictMode>
   )
 }
