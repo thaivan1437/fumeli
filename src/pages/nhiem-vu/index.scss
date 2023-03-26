@@ -133,3 +133,33 @@
     }
   }
 }
+.mission__invite {
+  padding: 40px 30px;
+  &--wrap {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 30px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    margin-bottom: 50px;
+  }
+  &--box {
+    display: flex;
+    justify-content: space-between;
+  }
+  &--input {
+    background-color: #fff;
+    width: 80%;
+    padding: 0 15px;
+    color: #000;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    &::placeholder {
+      color: #000
+    }
+  }
+  &--btn {
+    width: 15%;
+  }
+}

@@ -23,14 +23,12 @@ export const mission = (state = initialState, action) => {
     case 'GET_USER_MISSION':
       const userMissionList = [...state.userMission];
       userMissionList.push(...action.payload);
-      const uniqueValues = [...new Set(userMissionList.map(item => item))];
       const uniqueObjects = userMissionList.filter((item, index, self) =>
         index === self.findIndex(t => t.Id === item.Id)
       );
-      console.log(userMissionList, uniqueValues, uniqueObjects)
       return {
         ...state,
-        userMission: uniqueValues,
+        userMission: uniqueObjects,
       };
     default:
       return state

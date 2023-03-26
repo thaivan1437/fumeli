@@ -3,11 +3,12 @@ import { Typography, Box } from '@mui/material';
 import AutoSizeImage from '@/components/image';
 
 const CountCheckInMonth = ({
-  checkInMonth
+  checkInMonth,
+  user
 }) => {
   const countCheckIn = [1,5,10,20,30];
   const itemCheckInMonth = (item, checkInMonth) => {
-    const active = checkInMonth >= item ? 'active' : '';
+    const active = checkInMonth >= item && user ? 'active' : '';
     return (
       <Box p={2} key={`${item}-ngay`} className={`${active} check__in--monthItem`}>
         <Typography py={2} component="p" color={'#fff'} sx={{textAlign: 'center'}}>

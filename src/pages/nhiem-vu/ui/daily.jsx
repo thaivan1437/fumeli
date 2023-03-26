@@ -7,7 +7,6 @@ import AutoSizeImage from '@/components/image';
 const Daily = () => {
 	const [daily, setDaily] = useState([]);
 	const {missionCategory} = useSelector((state) => state?.mission);
-	console.log('mission', missionCategory, daily);
 
 	useEffect(() => {
 		if(daily?.length == 0 && missionCategory?.length) {

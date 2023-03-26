@@ -8,12 +8,11 @@ import DailyDetail from './ui/dailyDetail';
 
 export default function PostPage() {
   const router = useRouter()
-  const {id, type} = router.query;
+  const {pid, type} = router.query;
   const dispatch = useDispatch();
   const { mission } = useSelector((state) => state?.mission);
-  let missionDetail = mission && mission?.filter(item => item.Id == id);
+  let missionDetail = mission && mission?.filter(item => item.Id == pid);
   missionDetail = missionDetail && missionDetail?.length && missionDetail[0];
-  // console.log('mission detail', router, type);
 
   useEffect(() => {
     if(mission && mission.length === 0) {
@@ -29,7 +28,7 @@ export default function PostPage() {
       <Container>
         {
           type && type == 'daily' &&
-          <DailyDetail id={id} />
+          <DailyDetail id={pid} />
         }
         <Box sx={{ backgroundColor: 'white', padding: '20px 30px'}}>
           <div dangerouslySetInnerHTML={{ __html: missionDetail.Content }} />

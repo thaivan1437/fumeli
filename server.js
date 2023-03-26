@@ -19,6 +19,14 @@ app.prepare().then(() => {
     })
   );
 
+  server.get('/nhiem-vu/:pid', (req, res) => {
+    return app.render(req, res, '/nhiem-vu/[pid]', { pid: req.params.pid });
+  });
+
+  server.get('/nhiem-vu/invite', (req, res) => {
+    return app.render(req, res, '/nhiem-vu/invite');
+  });
+
   server.get("*", (req, res) => {
     return handle(req, res);
   });

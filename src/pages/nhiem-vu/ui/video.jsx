@@ -10,20 +10,8 @@ import YoutubeModal from '@/components/modal/video';
 
 
 const Video = () => {
-  // const [daily, setDaily] = useState([]);
-	// const {missionCategory} = useSelector((state) => state?.mission);
-	// console.log('video', missionCategory, daily);
-
-	// useEffect(() => {
-	// 	if(daily?.length == 0 && missionCategory?.length) {
-	// 		const dailyList = missionCategory && missionCategory.filter(item => item.TitleLink === 'video');
-	// 		dailyList && dailyList[0].Campaigns && setDaily(dailyList[0].Campaigns);
-	// 	}
-	// }, [missionCategory && missionCategory.length]);
-
 	const { missionCategory } = useSelector((state) => state?.mission);
   let video = missionCategory && missionCategory.filter(item => item.IsVideo);
-  console.log(video)
   video = video && video.length && video[0].Campaigns
 
   const [showVideoModal, setShowVideoModal] = useState(false);

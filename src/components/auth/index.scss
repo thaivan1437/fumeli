@@ -41,11 +41,33 @@
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    width: 475px;
+    min-height: 420px;
     background-color: #fff;
     border: 2px solid #000;
     box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2), 0px 24px 38px 3px rgba(0,0,0,0.14), 0px 9px 46px 8px rgba(0,0,0,0.12);
     padding: 32px;
-    min-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  &--title {
+    margin: 30px 0;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: #ff2423;
+    @media (max-width: 768px) {
+      font-size: 30px;
+    }
+  }
+  &--message {
+    margin: 0 0 30px !important;
+    @media (max-width: 768px) {
+      margin: 0 0 15px !important;
+    }
   }
   .modal__register--paper {
 
@@ -53,7 +75,7 @@
 
   @media (max-width: 768px) {
     &--box {
-      min-width: 375px;
+      max-width: 375px;
       padding: 30px 15px;
     }
     .modal__register--paper {
@@ -63,7 +85,7 @@
   }
   @media (max-width: 375px) {
     &--box {
-      min-width: 350px;
+      max-width: 350px;
     }
   }
 }
