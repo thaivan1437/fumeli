@@ -3,8 +3,8 @@ import { Box } from '@mui/material';
 import { Container } from '@mui/system';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { getMissionDataThunkAction } from './logic/reducer';
-import DailyDetail from './ui/dailyDetail';
+import { getMissionDataThunkAction } from '../logic/reducer';
+import DailyDetail from '../ui/dailyDetail';
 
 export default function PostPage() {
   const router = useRouter()

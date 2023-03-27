@@ -30,25 +30,6 @@ const nextConfig = {
     }
     return config;
   },
-  async redirects() {
-    return [
-      {
-        source: '/nhiem-vu',
-        destination: '/nhiem-vu/index',
-        permanent: true,
-      },
-      {
-        source: '/nhiem-vu/:pid*',
-        destination: '/nhiem-vu/[pid]',
-        permanent: true,
-      },
-      {
-        source: '/nhiem-vu/invite',
-        destination: '/nhiem-vu/invite',
-        permanent: true,
-      },
-    ]
-  },
 }
 
 module.exports = nextConfig
