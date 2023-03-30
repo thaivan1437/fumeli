@@ -18,7 +18,15 @@ $modal-bgcolor: #fff;
   }
 
 }
-
+.btn__modal--close {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: -25px;
+  top: -15px;
+  cursor: pointer;
+  color: white
+}
 .backdrop {
   background-color: rgba(0, 0, 0, 0.5);
 }

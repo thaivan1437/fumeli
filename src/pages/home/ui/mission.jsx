@@ -12,7 +12,7 @@ const Mission  = () => {
 
 	const itemList = (item, isOrder = 0)=> {
 		return <Grid key={item.CreateDate} item xs={12} sm={4} md={4} className={isOrder ? `order${isOrder}` : ''}>
-			<Link href={`mission/${item.Id}`}>
+			<Link href={`nhiem-vu/${item.Id}`}>
 				<AutoSizeImage
 					src={item.ImagePath}
 					alt={item.Title}
@@ -33,7 +33,7 @@ const Mission  = () => {
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum eleifend pellentesque. Fusce sed nisl lectus. Vestibulum suscipit mollis fermentum. 
 						</Typography>
 						<div className="wrap__btn--more css__btn">
-							<Link href="/mission" color='white'>
+							<Link href="/nhiem-vu" color='white'>
 								<Button variant="contained" className="w206">
 									Xem thêm
 								</Button>
@@ -62,13 +62,13 @@ const Mission  = () => {
 						<Typography variant="p" component="p">
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum eleifend pellentesque. Fusce sed nisl lectus. Vestibulum suscipit mollis fermentum. 
 						</Typography>
-						<div className="wrap__btn--more css__btn">
-							<Link href="/mission?noibat=true" color='white'>
+						<Box className="wrap__btn--more css__btn">
+							<Link href="/nhiem-vu?noibat=true" color='white'>
 								<Button variant="contained" className="w206">
 									Xem thêm
 								</Button>
 							</Link>
-						</div>
+						</Box>
 					</Box>
 				</Grid>
 			</Grid>

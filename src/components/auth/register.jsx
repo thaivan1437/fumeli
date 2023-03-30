@@ -77,6 +77,7 @@ const SignUpModal = () => {
                   required={field.required}
                   variant="outlined"
                   onChange={handleDataChange}
+                  value={signUpData[field.name]}
                 />
               </Box>
             ))}

@@ -19,7 +19,6 @@ import {validateEmail} from '@/utils/help';
 const ForgotPasswordModal = () => {
   const dispatch = useDispatch();
   const { forgetPasswordModalOpen, forgetData } = useSelector((state) => state.authReducer);
-  console.log('forgetData', forgetData);
   const handleClose = () => {
     dispatch(closeForgetPasswordModal());
   };
@@ -66,6 +65,15 @@ const ForgotPasswordModal = () => {
           >
             Quên mật khẩu
           </Typography>
+
+          <Typography
+            variant="h6"
+            component="p"
+            sx={{margin: '20px 0', textAlign: 'left', color: '#aaa', fontSize: '14px'}}
+          >
+            Để lấy lại mật khẩu bạn vui lòng cung cấp Email đăng ký/Liên kết tài khoản:
+          </Typography>
+          
           <form>
             <InputField
               margin="normal"
@@ -85,7 +93,7 @@ const ForgotPasswordModal = () => {
                 {forgetData.message}
               </Typography>
             }
-            <Button color="error" fullWidth variant="contained" onClick={handleSubmit}>
+            <Button color="error" fullWidth variant="contained" onClick={handleSubmit} sx={{ marginTop: '30px'}}>
               GỬI EMAIL XÁC NHẬN
             </Button>
           </form>

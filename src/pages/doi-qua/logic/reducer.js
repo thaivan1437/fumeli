@@ -52,7 +52,6 @@ export const giftTransaction = () => async (dispatch, getState) => {
       UserId: giftTransaction.UserId,
     }
     const createGift = await axiosPost('api/UserGift/create', data)
-    console.log('createGift', createGift)
     // await dispatch(getMatch(matchRes));
   } catch (error) {
     console.log(error)

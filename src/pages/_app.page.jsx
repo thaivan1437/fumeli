@@ -28,6 +28,7 @@ export default function App({ Component, pageProps }) {
   }, [Router])
 
   if (typeof localStorage !== 'undefined') {
+    // init user data in local storage
     const user = localStorage.getItem("user");
     const userCheck = localStorage.getItem("user_check");
     if (!user) {
@@ -43,7 +44,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Header setHeaderHeight={setHeaderHeight}/>
-      <div className="main" style={{ background: '#19181c!important', marginTop: `${headerHeight ? headerHeight + 20 : 60}px` }}>
+      <div className="main" style={{ background: '#19181c!important', marginTop: `${headerHeight ? headerHeight + 10 : 60}px` }}>
         {
           isLoading ? <Loader/> : <Component {...pageProps} />
         }
