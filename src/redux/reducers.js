@@ -7,6 +7,7 @@ import { authReducer } from '@/components/auth/logic/reducer';
 import { gift } from '../pages/doi-qua/logic/reducer';
 import { loading } from '../pages/reducer'
 import { mission } from '../pages/nhiem-vu/logic/reducer';
+import { userDetail } from '../pages/hoi-vien/logic/reducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   gift,
   loading,
   mission,
+  userDetail
 });
 
 export default rootReducer;
