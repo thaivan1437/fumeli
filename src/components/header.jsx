@@ -53,14 +53,6 @@ const Header = ({ setHeaderHeight }) => {
   }, [setResponsiveness]);
 
   useEffect(() => {
-    // check login has data in localStore
-    const userData = JSON.parse(localStorage.getItem('user'));
-    if (userData && userData.username) {
-      setUserName(userData.username);
-    }
-  }, []);
-
-  useEffect(() => {
     // dispatch data in store
     const userData = JSON.parse(localStorage.getItem("user"));
     if (userData && userData.username && userName) {
@@ -69,12 +61,20 @@ const Header = ({ setHeaderHeight }) => {
   }, [userName, dispatch]);
 
   useEffect(() => {
-    console.log('user', user)
-    if (!user || !user?.username) {
+    // check login has data in localStore
+    const userData = JSON.parse(localStorage.getItem('user'));
+    if (userData && userData.username) {
+      setUserName(userData.username);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('user', user, userName)
+    if (!user && userName) {
       setUserName();
       handleOpenModalLogin();
     }
-  }, [user, handleOpenModalLogin]);
+  }, [user]);
 
   useEffect(() => {
     if (code) {
@@ -180,7 +180,9 @@ const Header = ({ setHeaderHeight }) => {
                 </ul>
               </Button>
               <Button color="inherit">
-                Vòng quay may mắn
+                <Link href="/vong-quay-may-man">
+                 Vòng quay may mắn
+                </Link>
               </Button>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
@@ -200,7 +202,11 @@ const Header = ({ setHeaderHeight }) => {
                   Liên hệ
                 </Link>
               </Button>
-              <Button color="inherit">Hội viên</Button>
+              <Button color="inherit">
+                <Link href="/hoi-vien">
+                  Hội viên
+                </Link>
+              </Button>
             </Box>
           </Toolbar>
         </AppBar>
