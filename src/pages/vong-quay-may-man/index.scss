@@ -1,0 +1,134 @@
+.spingame__item--img-active {
+  background: linear-gradient(360deg, #ff2423 0%, rgba(0, 0, 0, 0) 99.2%);
+}
+
+.btn___spingame--group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.css__btn__spingame {
+  border: solid 1px #ff2423 !important;
+  background-color: transparent !important;
+  color: #fff;
+  position: relative;
+  margin: 0 10px;
+  width: 206px !important;
+  height: 46px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  @media (max-width: 768px) {
+    height: 92px !important;
+    width: 110px !important;
+  }
+}
+.spingame__item {
+  box-sizing: border-box;
+  background: #0f0f0f !important;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+}
+
+.spingame__item--img {
+  object-fit: contain;
+  width: 172.93px !important;
+  height: 176.72px !important;
+  border-radius: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.spingame__item--title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px !important;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  height: 40px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.mb-150 {
+  margin-bottom: 150px !important;
+}
+
+.css-sghohy-MuiButtonBase-root-MuiButton-root.Mui-disabled {
+  color: #fff !important;
+}
+
+.modal__gift .Toastify__toast-container--top-right {
+  top: 32em;
+  right: 43em;
+}
+
+.rules__block--image {
+  object-fit: contain;
+  width: 100% !important;
+  height: auto;
+}
+
+.btn___spingame__rules--group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.css__btn__rules {
+  border: solid 1px #ff2423 !important;
+  background-color: transparent !important;
+  color: #fff;
+  position: relative;
+  margin: 0 10px;
+  width: 206px !important;
+  height: 46px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  @media (max-width: 768px) {
+    height: 92px !important;
+    width: 110px !important;
+  }
+}
+
+.modal__rules__titleBox {
+  background: #ff2423 !important;
+}
+
+.modal__rules__titleBox--title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  padding: 10px 0;
+}
+
+.modal__rules__spingame {
+  text-align: center;
+  @media (max-width: 768px) {
+    max-width: 375px;
+    .modal__youtube--btn-close {
+      display: none;
+    }
+  }
+  @media (max-width: 375px) {
+    max-width: 350px;
+  }
+}
