@@ -1,44 +1,16 @@
 import * as React from 'react'
-import Divider from '@mui/material/Divider'
 import {
   Box,
   Typography,
   Grid,
   Container,
   Button,
-  ButtonGroup,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
+  ButtonGroup
 } from '@mui/material'
 import Image from 'next/image'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemButton from '@mui/material/ListItemButton'
-import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import { styled, alpha } from '@mui/material/styles'
-import Menu, { MenuProps } from '@mui/material/Menu'
-import EditIcon from '@mui/icons-material/Edit'
-import FileCopyIcon from '@mui/icons-material/FileCopy'
-import ArchiveIcon from '@mui/icons-material/Archive'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import ExpandLess from '@mui/icons-material/ExpandLess'
-import ExpandMore from '@mui/icons-material/ExpandMore'
-import Collapse from '@mui/material/Collapse'
-import StarBorder from '@mui/icons-material/StarBorder'
-import NativeSelect from '@mui/material/NativeSelect'
-import Modal from '@mui/material/Modal'
-
 import GiftTransactionModal from '../modal/giftTransaction'
-import { closeGiftTransactionModal } from '../logic/action'
 
 export const Store = () => {
   const [open, setOpen] = React.useState(false)

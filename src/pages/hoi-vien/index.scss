@@ -1,0 +1,56 @@
+.friend__list {
+  display: grid;
+  grid-template-columns: repeat(3, calc(100% / 3 - 11px));
+  align-items: center;
+  gap: 15px;
+  .friend__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0F0F0F;
+    padding: 20px 30px;
+
+    &--btnClose {
+      cursor: pointer;
+      width: 40px;
+      text-align: right;
+    }
+    
+    &--gift {
+      position: absolute;
+      top: -35px;
+      right: 15%;
+    }
+    
+    &--avatar {
+      position: relative;
+      text-align: left;
+      width: 75px;
+      display: flex;
+      align-items: center;
+      img {
+        max-width: 100%;
+      }
+    }
+
+    &--info {
+      position: relative;
+      text-align: left;
+      width: 100%;
+      padding-left: 30px;
+      p {
+        line-height: 18px !important;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: calc(100%);
+    .friend__box {
+      padding: 20px;
+    }
+  }
+}
+
+
+

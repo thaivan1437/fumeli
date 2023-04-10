@@ -28,7 +28,7 @@ const Tournaments = () => {
 			<Typography variant="h4" component="h2" color={'#fff'}>
 				GIẢI ĐẤU
 			</Typography>
-			<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff'}}>
+			<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff', marginBottom: '15px'}}>
 				<Stack
 					direction="row"
 					divider={<Divider orientation="vertical" flexItem />}
@@ -46,7 +46,7 @@ const Tournaments = () => {
 			{
 				matchs && matchs.map((item, _) => {
 					return (
-						<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item" p={2} my={4} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+						<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item" p={2} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 							<Box className="tournament__item--images" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
 								<Box p={2} className="tournament__item--logo">
 									<AutoSizeImage src={item.LogoTeamOnePath} alt="tournament" />

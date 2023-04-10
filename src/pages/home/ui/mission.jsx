@@ -50,9 +50,12 @@ const Mission  = () => {
 			</Grid>
 			<Grid container spacing={{ xs: 2, md: 4 }} my={4} rowSpacing={{ xs: 2 }}>
 				{
-					filteredItems.map((item, index) => (
-						itemList(item, index + 2)
-					))
+					filteredItems.map((item, index) => {
+						if (index > 1) {
+							return
+						}
+						return itemList(item, index + 2)
+					})
 				}
 				<Grid item xs={12} sm={4} md={4}  className="order1">
 					<Box sx={{ color: 'white'}}>
