@@ -30,7 +30,7 @@ const LoginModal = () => {
     if (statusCode && statusCode.isShow) {
       setTimeout(() => {
         setStatusCode({ isShow: false, status: '' })
-      }, 5200)
+      }, 2000)
     }
   },[statusCode.isShow]);
 
@@ -81,7 +81,7 @@ const LoginModal = () => {
           // wait toast end
           handleClose();
           location.reload();
-        }, 5500)
+        }, 2500)
       })
       .catch(error => {
         setStatusCode({ isShow: true, status: 'error' })

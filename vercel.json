@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/nhiem-vu/:pid*",
+      "destination": "/nhiem-vu/[pid]"
+    }
+  ]
+}

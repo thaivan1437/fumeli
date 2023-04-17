@@ -25,62 +25,64 @@ const Tournaments = () => {
 
   return (
     <React.Fragment>
-			<Typography variant="h4" component="h2" color={'#fff'}>
-				GIẢI ĐẤU
-			</Typography>
-			<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff', marginBottom: '15px'}}>
-				<Stack
-					direction="row"
-					divider={<Divider orientation="vertical" flexItem />}
-					spacing={2}
-				>
-					{
-						matchCategory && matchCategory.map((item) => {
-							return (
-								<span className={isActive == item.Id ? 'active' : ''} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</span>
-							)
-						})
-					}
-				</Stack>
+			<Box>
+				<Typography variant="h4" component="h2" color={'#fff'} className='fw-b'>
+					GIẢI ĐẤU
+				</Typography>
+				<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff', marginBottom: '20px'}}>
+					<Stack
+						direction="row"
+						divider={<Divider orientation="vertical" flexItem />}
+						spacing={2}
+					>
+						{
+							matchCategory && matchCategory.map((item) => {
+								return (
+									<span className={isActive == item.Id ? 'active' : ''} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</span>
+								)
+							})
+						}
+					</Stack>
+				</Box>
+				{
+					matchs && matchs.map((item, _) => {
+						return (
+							<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item" p={2} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+								<Box className="tournament__item--images" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+									<Box p={2} className="tournament__item--logo">
+										<AutoSizeImage src={item.LogoTeamOnePath} alt="tournament" />
+										<Typography variant="h6" color="white" sx={{ textAlign: 'center', display: 'flex', alignItems: 'end'}}>
+											G2
+										</Typography>
+									</Box>
+									<Box px={2} sx={{}} className="tournament__item--center">
+										<img src="/images/home/vs.png" alt="nvm" />
+									</Box>
+									<Box p={2} className="tournament__item--logo">
+										<AutoSizeImage src={item.LogoTeamTwoPath} alt="nvm" />
+										<Typography variant="h6" color="white" sx={{ textAlign: 'center', display: 'flex', alignItems: 'end'}}>
+											Navi
+										</Typography>
+									</Box>
+								</Box>
+								<Box className="tournament__item--info">
+									<Typography variant="h6" color="white">
+										{item.Title}
+									</Typography>
+									<Typography variant="p" color="white" className='tournament__item--desc' sx={{fontSize: '12px'}}>
+										{item.Description}
+									</Typography>
+								</Box>
+								<Box className="tournament__item--view">
+									<Link href={item.TitleLink} variant="contained" color="white">
+										Xem trận đấu
+									</Link>
+								</Box>
+							</Box>
+						)
+					})
+				}
 			</Box>
-			{
-				matchs && matchs.map((item, _) => {
-					return (
-						<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item" p={2} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-							<Box className="tournament__item--images" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-								<Box p={2} className="tournament__item--logo">
-									<AutoSizeImage src={item.LogoTeamOnePath} alt="tournament" />
-									<Typography variant="h6" color="white" sx={{ textAlign: 'center', display: 'flex', alignItems: 'end'}}>
-										G2
-									</Typography>
-								</Box>
-								<Box px={2} sx={{}} className="tournament__item--center">
-									<img src="/images/home/vs.png" alt="nvm" />
-								</Box>
-								<Box p={2} className="tournament__item--logo">
-									<AutoSizeImage src={item.LogoTeamTwoPath} alt="nvm" />
-									<Typography variant="h6" color="white" sx={{ textAlign: 'center', display: 'flex', alignItems: 'end'}}>
-										Navi
-									</Typography>
-								</Box>
-							</Box>
-							<Box className="tournament__item--info">
-								<Typography variant="h6" color="white">
-									{item.Title}
-								</Typography>
-								<Typography variant="p" color="white" className='tournament__item--desc' sx={{fontSize: '12px'}}>
-									{item.Description}
-								</Typography>
-							</Box>
-							<Box className="tournament__item--view">
-								<Link href={item.TitleLink} variant="contained" color="white">
-									Xem trận đấu
-								</Link>
-							</Box>
-						</Box>
-					)
-				})
-			}
 		</React.Fragment>
   );
 }

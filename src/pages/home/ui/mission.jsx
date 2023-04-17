@@ -22,11 +22,11 @@ const Mission  = () => {
 	}
 
 	return (
-		<Box my={4} sx={{ flexGrow: 1, padding: 0 }} className="mission">
+		<Box sx={{ flexGrow: 1, padding: 0 }} className="mission">
 			<Grid container spacing={{ xs: 2, md: 4 }} my={4} rowSpacing={{ xs: 2 }} columns={{ xs: 12, sm: 8, md: 12 }} >
 				<Grid item xs={12} sm={4} md={4} >
 					<Box sx={{ color: 'white'}}>
-						<Typography variant="h4" component="h2">
+						<Typography variant="h4" component="h2" className='fw-b'>
 							NHIỆM VỤ MỚI
 						</Typography>
 						<Typography variant="p" component="p" sx={{margin: '15px 0'}}>
@@ -34,7 +34,7 @@ const Mission  = () => {
 						</Typography>
 						<div className="wrap__btn--more css__btn">
 							<Link href="/nhiem-vu" color='white'>
-								<Button variant="contained" className="w206">
+								<Button variant="contained" className="w206 fw-b">
 									Xem thêm
 								</Button>
 							</Link>

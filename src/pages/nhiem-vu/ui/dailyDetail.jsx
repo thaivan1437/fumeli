@@ -70,6 +70,8 @@ const DailyDetail = ({
   
     const dateItem = new Date(newItem);
     const isActive = active === 'active';
+
+    console.log('dateItem', dateItem)
   
     if (today < dateItem || isActive) {
       const message = today < dateItem ? 'Ngày mai quay lại sau.' : 'Hôm nay bạn đã điểm danh! Ngày mai quay lại sau.';
@@ -127,7 +129,7 @@ const DailyDetail = ({
         </Typography>
         <AutoSizeImage isResize={false} src="/images/mission/check-in.png" alt="điểm danh hằng ngày" className='image' width={225} height={225}/>
         <AutoSizeImage isResize={false} src="/images/mission/check.png" alt="checked" className='checked' width={172} height={141}/>
-        <Button className={`${previousDay > newItem && !active && user ? 'isShow': 'hide'} upCheckIn`}>Điểm danh bù</Button> 
+        <Button className={`${today > newItem && !active && user ? 'isShow': 'hide'} upCheckIn`}>Điểm danh bù</Button> 
       </Box>
     )
   }

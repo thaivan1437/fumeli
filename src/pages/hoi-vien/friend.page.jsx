@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material'
 import Invite from './ui/invite';
-import FriendList from './ui/friendlist';
+import FriendList from './ui/friendList';
 
 export default function UserDetail() {
 

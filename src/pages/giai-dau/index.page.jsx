@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container } from '@mui/system';
+import { Container, Box } from '@mui/material';
 import { getMatchDataThunkAction } from './logic/reducer';
 import { useDispatch } from 'react-redux';
 import Tournaments from './ui/matchs';
@@ -17,10 +17,12 @@ export default function Home() {
 
   return (
     <React.StrictMode>
-      <HightLight></HightLight>
-      <Container>
-        <Tournaments></Tournaments>
-      </Container>
+      <Box className='tournament'>
+        <HightLight></HightLight>
+        <Container>
+          <Tournaments></Tournaments>
+        </Container>
+      </Box>
     </React.StrictMode>
   );
 }

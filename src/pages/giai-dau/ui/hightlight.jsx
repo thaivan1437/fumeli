@@ -16,7 +16,21 @@ const HightLight = () => {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [videoId, setVideoId] = useState("");
 
+  const [dragging, setDragging] = useState(false);
+
+  const handleMouseDown = () => {
+    setDragging(true);
+  };
+
+  const handleMouseUp = () => {
+    setDragging(false);
+  };
+
   const openVideoModal = (id) => {
+    if (dragging) {
+      e.stopPropagation();
+    }
+    event.stopPropagation();
     setShowVideoModal(true);
     setVideoId(id);
   };
@@ -65,10 +79,10 @@ const HightLight = () => {
   return (
     <React.Fragment>
       <Container>
-        <Typography variant="h4" component="h2" color={'#fff'}>
-          VIDEO HOT
+        <Typography variant="h4" component="h2" color={'#fff'} className='fw-b tournament__title1'>
+          GIẢI ĐẤU NỔI BẬT
         </Typography>
-        <Typography variant="p" my={2} color="initial" className="mw-440" sx={{ fontSize: '14px', display: 'block'}}>
+        <Typography variant="p" my={2} color={'white'} className="mw-440" sx={{ fontSize: '14px', display: 'block'}}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Typography>
       </Container>
@@ -76,7 +90,7 @@ const HightLight = () => {
       <Slider className="video__slider center" {...settings}>
         { video && (
           video.map((item) => {
-            return <div className='video__slider--item' key={item.CreateDate} onClick={() => openVideoModal(item.VideoPath)}>
+            return <div className='video__slider--item' key={item.CreateDate} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onClick={() => openVideoModal(item.VideoPath)}>
               <AutoSizeImage isResize={false} src={item.ThumbnailPath} alt={item.Title} width={777} height={440}/>
             </div>
           })
