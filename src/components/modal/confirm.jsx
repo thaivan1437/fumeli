@@ -40,17 +40,7 @@ export default function ConfirmModal({ open, handleClose, message, title, icon, 
         <Typography variant="p" component="p" sx={{textAlign: 'center'}} className='modal__common--message'>
           {message}
         </Typography>
-        {
-          isInput &&
-          <InputField
-            name='fpoint'
-            type='number'
-            value={fPoint}
-            onChange={(e) => setFpoint(e.target.value)}
-            fullWidth
-            required
-          />
-        }
+        
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             variant="contained"

@@ -5,6 +5,7 @@ import { axiosPost } from '@/utils/api'
 import AlertModal from '@/components/modal/alert';
 import ConfirmModal from '@/components/modal/confirm';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
+import RemoveFriendModal from '../modal/modalRemoveFriend';
 
 export default function FriendList() {
   const { user } = useSelector((state) => state?.authReducer);
@@ -13,7 +14,10 @@ export default function FriendList() {
   const [open, setOpen] = useState([false, false]); // 0 modal alert, 1 modal confirm
   const [dataModal, setDataModal] = useState({ title: '', message: '', icon: '' });
   const [confirm, setConfirm] = useState(false); // value when modal confirmation return
-  const [fpoint, setFpoint] = useState(0); // value when]
+  const [fpoint, setFpoint] = useState(0); // value fpoint
+
+  const [isRemoveFriend, setIsRemoveFriend] = useState(false);
+  const [friend, setFriend] = useState();
 
   const handleClose = (index) => {
     const newModals = [...open];
@@ -38,6 +42,11 @@ export default function FriendList() {
       icon: <NotificationsActiveOutlinedIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>,
       index: 1
     })
+  }
+
+  const removeFriendModal = (e) => {
+    setFriend(e.target.getAttribute('data-id'));
+    setIsRemoveFriend(true);
   }
 
   console.log('friends', friends, open, confirm);
@@ -73,7 +82,7 @@ export default function FriendList() {
     }
   },[user])
 
-  const friend = (item) => {
+  const frienditem = (item) => {
     return ( 
     <Box className='friend__box' key={item + 'anc'}>
       <Box className='friend__box--avatar'>
@@ -91,7 +100,7 @@ export default function FriendList() {
         </Button>
       </Box>
       <Box className='friend__box--btnClose'>
-        <img src="/images/closeRed.svg" alt="btn close" data-id={item} onClick={(e) => deleteFriend(e)}/>
+        <img src="/images/closeRed.svg" alt="btn close" data-id={item} onClick={(e) => removeFriendModal(e)}/>
       </Box>
     </Box>)
   }
@@ -101,12 +110,10 @@ export default function FriendList() {
   return (
     <React.StrictMode>
       {
-        open && open[0] && <AlertModal
-          open={open[0]}
-          handleClose={() => handleClose(0)}
-          message={dataModal.message}
-          title={dataModal.title}
-          icon={dataModal.icon}
+        isRemoveFriend &&
+        <RemoveFriendModal
+          friend={friend}
+          onClose={setIsRemoveFriend}
         />
       }
       {
@@ -125,7 +132,7 @@ export default function FriendList() {
       <Box className='friend__list'>
         {
           dataExample.map((item) => {
-            return friend(item)
+            return frienditem(item)
           })
         }
       </Box>

@@ -51,6 +51,30 @@
     }
   }
 }
+.bag__history {
+  border: solid 1px #fff;
+  padding: 0 !important;
+  background-color: #000;
+  .titleHotItem {
+    color: #FF2423;
+    padding: 20px 0 20px 20px;
+  }
 
+  ul.hot_item__ul {
+    border: 0;
+    height: 400px;
+    overflow-y: auto;
+  }
+
+  li.hot_item__li {
+    padding: 15px;
+    &:nth-child(2n+1) {
+      background-color: #252525;
+    }
+    &:nth-child(even) {
+      background: transparent;
+    }
+  }
+}
 
 

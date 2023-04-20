@@ -68,7 +68,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
         $('.modal__giftTransaction--title').text('THÀNH CÔNG')
         $('.modal__giftTransaction--description')
           .empty()
-          .text('Bạn đã đổi quà thành công ' + gift[0].Title)
+          .text('Bạn đã đổi quà thành công ' + gift[0].GiftTitle)
         $('.button--confirm').remove()
         $('.button--back').css({ marginTop: '4%' })
       })
@@ -131,21 +131,13 @@ const GiftTransactionModal = ({ gift, onClose }) => {
           variant="h6"
           component="p"
         >
-          Bạn có chắn chắn đổi{' '}
+          Bạn có chắn chắn muốn đổi lấy{' '}
           <span
             style={{
               color: '#FF2423',
             }}
           >
-            {gift[0].FpointValue} Fpoint
-          </span>{' '}
-          để lấy{' '}
-          <span
-            style={{
-              color: '#FF2423',
-            }}
-          >
-            {gift[0].Title}
+            {gift[0].GiftTitle}
           </span>{' '}
           này không?
         </Typography>
@@ -164,7 +156,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
             className="button--confirm"
             onClick={() => giftTransactionAction()}
           >
-            ĐỒNG Ý ĐỔI
+            ĐỒNG Ý
           </Button>
         </Box>
       </Box>

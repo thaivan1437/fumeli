@@ -50,13 +50,15 @@ const Bag = () => {
     setGift('')
   }
 
+  const hotItems = userGift.filter(item => item.Active === false)
+
   return (
     <Container>
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           {/* phâm loại */}
 
-          <Grid container spacing={2} mt={{ md: 4, xs: 2 }}>
+          <Grid container spacing={2}>
             {displayData &&
               displayData.map((item, index) => {
                 return (
@@ -64,7 +66,7 @@ const Bag = () => {
                     <Box>
                       <Image
                         src={item.ImagePath}
-                        alt={item.Title}
+                        alt={item.GiftTitle}
                         width={446}
                         height={251}
                         className="gift__item-image"
@@ -77,7 +79,7 @@ const Bag = () => {
                         color="white"
                         className="gift__item-title"
                       >
-                        {item.Title}
+                        {item.GiftTitle}
                       </Typography>
                       <Typography
                         variant="body2"
@@ -95,7 +97,7 @@ const Bag = () => {
                             openGiftTransactionModal(e.target.value)
                           }
                         >
-                          ĐỔI QUÀ
+                          NHẬN
                         </Button>
                       </div>
                     </Box>
@@ -126,12 +128,11 @@ const Bag = () => {
             </ButtonGroup>
           </Box>
         </Grid>
-        <Grid item xs={12} md={4} mb={4} mt={{ xs: 2 }}>
-          <hr style={{ marginBottom: '4%' }} className="hr" />
+        <Grid item xs={12} md={4} mb={4} mt={{ xs: 2 }} className='bag__history'>
           <Typography variant="h5" className="titleHotItem">
             LỊCH SỬ NHẬN QUÀ
           </Typography>
-          <Box mt={{ md: 4, xs: 2 }}>
+          <Box>
             <ul className="hot_item__ul">
               {hotItems &&
                 hotItems.map((item, index) => {
