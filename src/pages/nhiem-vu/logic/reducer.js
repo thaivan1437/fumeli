@@ -1,11 +1,12 @@
 import { axiosGet, axiosPost } from '@/utils/api'
-import { getMission, getMissionCategory, getUserMission } from './action'
+import { getMission, getMissionCategory, getUserMission, getConfigMission } from './action'
 import { startLoading, stopLoading  } from '../../action';
 
 const initialState = {
   mission: [],
   missionCategory: [],
-  userMission: []
+  userMission: [],
+  configMission: []
 }
 
 export const mission = (state = initialState, action) => {
@@ -29,6 +30,11 @@ export const mission = (state = initialState, action) => {
       return {
         ...state,
         userMission: uniqueObjects,
+      };
+    case 'GET_CONFIG_MISSION':
+      return {
+        ...state,
+        configMission: action.payload,
       };
     default:
       return state
@@ -57,14 +63,16 @@ export const getMissionDataThunkAction = () => async (dispatch, getState) => {
 export const getMissionCategoryDataThunkAction = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'CategoriesCampaign/getallclient'
+      'CategoriesCampaign/getallclient',
+      'config/getsinglebyid?key=AttendanceMonth',
     ];
 
-    const [ missionCategories ] = await Promise.all(
+    const [ missionCategories,configMission  ] = await Promise.all(
       urls.map(url => axiosGet(url))
     );
 
     await dispatch(getMissionCategory(missionCategories));
+    await dispatch(getConfigMission(configMission));
   } catch (error) {
     console.log(error);
   }

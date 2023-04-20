@@ -17,6 +17,7 @@ export default function UserDetail() {
   const { user } = useSelector((state) => state?.authReducer);
 
   useEffect(() => {
+    if (!user) { return}
     async function fetchAllData() {
       await dispatch(getUserGiftData({userId: user?.userid}))
       await dispatch(getUserGiftHistoryData({userId: user?.userid}))

@@ -11,6 +11,7 @@ import AutoSizeImage from '@/components/image';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import RuleModal from './rule';
 
 const DailyDetail = ({
   id
@@ -32,11 +33,21 @@ const DailyDetail = ({
   const [date, setDate] = useState('');
   const { mission, userMission } = useSelector((state) => state?.mission);
   const { user } = useSelector((state) => state?.authReducer);
+  const { configMission } = useSelector((state) => state?.mission);
+  const [rule, setOpenRule] = useState(false);
+  const openModalRule = () => {
+    setOpenRule(true);
+  }
+  const closeModalRule = () => {
+    setOpenRule(false);
+  }
+ 
 
   let missionDetail = mission && mission?.filter(item => item.Id == id);
   missionDetail = missionDetail && missionDetail?.length && missionDetail[0];
   const newUserMission = userMission && userMission?.filter(item => item.CampaignId == id);
   const checkInMonth = newUserMission && newUserMission?.length;
+  console.log(configMission, missionDetail)
 
   // config date
   const daysOfWeeks = dateOfWeek();
@@ -137,6 +148,9 @@ const DailyDetail = ({
   return (
     <React.StrictMode>
       <Container>
+        { rule &&
+          <RuleModal open={rule} message={missionDetail.Content} title='Thể lệ' handleClose={closeModalRule}/>
+        }
         {
           open && open[0] && <AlertModal
             open={open[0]}
@@ -163,7 +177,7 @@ const DailyDetail = ({
           <AutoSizeImage src="/images/mission/diem-danh.png" alt="Thể lệ điểm danh"  width={1410} height={710} isResize={false}/>
 
           <Typography py={2} my={0} variant="p" component="p" color={'#fff'} sx={{textAlign: 'right'}}>
-            <Button variant="contained" color='error' onClick={() => console.log('open modal rule')}>Thể lệ</Button>
+            <Button variant="contained" color='error' onClick={() => openModalRule()}>Thể lệ</Button>
           </Typography>
         </Box>
         <Box my={2} sx={{position: 'relative'}}>

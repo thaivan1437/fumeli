@@ -52,10 +52,6 @@ const Bag = () => {
 
   return (
     <Container>
-      <Typography variant="h4" className="titleGiftTransaction" mt={4}>
-        CỬA HÀNG ĐỔI QUÀ
-      </Typography>
-
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           {/* phâm loại */}
@@ -133,23 +129,14 @@ const Bag = () => {
         <Grid item xs={12} md={4} mb={4} mt={{ xs: 2 }}>
           <hr style={{ marginBottom: '4%' }} className="hr" />
           <Typography variant="h5" className="titleHotItem">
-            SẢN PHẨM HOT
+            LỊCH SỬ NHẬN QUÀ
           </Typography>
-          {/* <Box mt={{ md: 4, xs: 2 }}>
+          <Box mt={{ md: 4, xs: 2 }}>
             <ul className="hot_item__ul">
               {hotItems &&
                 hotItems.map((item, index) => {
                   return (
                     <li key={item.Id} className="hot_item__li">
-                      <div className="hot_item__image_container">
-                        <Image
-                          src={item.ImagePath}
-                          alt={item.Title}
-                          width={68}
-                          height={68}
-                          className="hot_item__image"
-                        />
-                      </div>
                       <div
                         className="hot_item__text_container"
                         style={{ color: '#fff' }}
@@ -165,7 +152,7 @@ const Bag = () => {
                   )
                 })}
             </ul>
-          </Box> */}
+          </Box>
         </Grid>
       </Grid>
 

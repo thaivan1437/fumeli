@@ -1,4 +1,4 @@
-import React, {} from 'react';
+import React, {useEffect} from 'react';
 import {
   Box,
   Button,
@@ -10,8 +10,20 @@ import {
 } from '@mui/material'
 import Invite from './ui/invite';
 import FriendList from './ui/friendList';
+import { getFriendsData } from './logic/reducer'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function UserDetail() {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state?.authReducer);
+
+  useEffect(() => {
+    if (!user) { return}
+    async function fetchAllData() {
+      await dispatch(getFriendsData({userId: user?.userid}))
+    }
+    void fetchAllData()
+  }, [user])
 
   return (
     <React.StrictMode>
