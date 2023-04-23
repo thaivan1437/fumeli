@@ -3,15 +3,29 @@ import { Button, Modal, Box, TextField, Typography, FormControlLabel, Checkbox }
 import InputField from '@/components/input';
 import {
   closeRegisterModal,
-  signDataAction
+  signDataAction,
 } from "./logic/action";
 import { useDispatch, useSelector } from "react-redux";
+import { axiosPost } from '@/utils/api';
+import Loader from '@/components/loading';
 
 const SignUpModal = () => {
-  const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
-  const { registerModalOpen, signUpData } = useSelector((state) => state.authReducer);
+  const [rememberMe, setRememberMe] = useState(false);
+  const { registerModalOpen } = useSelector((state) => state.authReducer);
+  const [statusCode, setStatusCode] = useState({ isShow: false, status: '', msg: '' });
+  const [formData, setFormData] = useState({
+    FullName: '',
+    UserName: '',
+    Email: '',
+    PhoneNumber: '',
+    Password: '',
+    InviteCode: '',
+    ConfirmPassword: ''
+  });
+  const [isLoading, setIsLoading] = useState(false)
 
+  console.log('authReducer', formData)
   const handleClose = () => {
     dispatch(closeRegisterModal());
   };
@@ -21,14 +35,43 @@ const SignUpModal = () => {
   };
 
   const handleDataChange = (event) => {
-    dispatch(signDataAction({ signUpData: {[event.target.name]: event.target.value}}));
+    setFormData({...formData, [event.target.name]: event.target.value });
     // setEmail(event.target.value);
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // handle submit logic here
+    setIsLoading(true);
+    const signUp = formData;
+    const data = {
+      FullName: signUp.FullName,
+      UserName: signUp.UserName,
+      Email: signUp.Email,
+      PhoneNumber: signUp.PhoneNumber,
+      Password: signUp.Password,
+      InviteCode: signUp.InviteCode,
+    };
+
+    await axiosPost('appUser/add', data)
+      .then((response) => {
+        console.log('Submit response', response)
+        if (response.status === 200) {
+          setStatusCode({ isShow: true, status: 'success', msg: 'Đăng ký thành công!' })
+        } else {
+          setStatusCode({ isShow: true, status: 'error', msg: response?.data?.Message })
+        }
+        
+        // setTimeout(() => {
+        //   // wait toast end
+        //   handleClose();
+        // }, 2500)
+      })
+      .catch((error) => {
+        setStatusCode({ isShow: true, status: 'error' })
+      });
+    
+    setIsLoading(false);
   };
 
   const fields = [
@@ -53,6 +96,9 @@ const SignUpModal = () => {
 
   return (
     <React.StrictMode>
+      {
+        isLoading && <Loader/>
+      }
       <Modal
         open={registerModalOpen}
         onClose={handleClose}
@@ -77,7 +123,7 @@ const SignUpModal = () => {
                   required={field.required}
                   variant="outlined"
                   onChange={handleDataChange}
-                  value={signUpData[field.name]}
+                  value={formData[field.name]}
                 />
               </Box>
             ))}
@@ -99,6 +145,11 @@ const SignUpModal = () => {
                 }
               />
             </Box>
+            {statusCode.isShow &&
+              <Typography variant="h6" component="p" color='error' sx={{textAlign: 'center'}}>
+                {statusCode.msg}
+              </Typography>
+            }
             <Box my={2}>
               <Button color="error" type="submit" fullWidth variant="contained">
                 ĐĂNG KÝ NGAY

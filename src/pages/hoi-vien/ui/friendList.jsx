@@ -44,8 +44,8 @@ export default function FriendList() {
     })
   }
 
-  const removeFriendModal = (e) => {
-    setFriend(e.target.getAttribute('data-id'));
+  const removeFriendModal = (friend) => {
+    setFriend(friend);
     setIsRemoveFriend(true);
   }
 
@@ -83,24 +83,25 @@ export default function FriendList() {
   },[user])
 
   const frienditem = (item) => {
+    const lastActive = new Date(item.LastActive).toLocaleString();
     return ( 
-    <Box className='friend__box' key={item + 'anc'}>
+    <Box className='friend__box' key={`${item.UserId}-${item.FriendUserName}`}>
       <Box className='friend__box--avatar'>
-        <img src="/images/avatar.png" alt="avatar" />
+        <img src={item.Avatar} alt="avatar" />
       </Box>
       <Box className='friend__box--info'>
         <Typography variant="h6" component="p" color='error'>
-          anhngan174
+          {item.FriendUserName}
         </Typography>
         <Typography variant="h6" component="p" color={'#fff'}>
-          date
+          {lastActive}
         </Typography>
         <Button className='friend__box--gift'>
           <img src="/images/gift.svg" alt="send gift" onClick={() => sendPointModal()}/>
         </Button>
       </Box>
       <Box className='friend__box--btnClose'>
-        <img src="/images/closeRed.svg" alt="btn close" data-id={item} onClick={(e) => removeFriendModal(e)}/>
+        <img src="/images/closeRed.svg" alt="btn close" onClick={() => removeFriendModal(item)}/>
       </Box>
     </Box>)
   }
@@ -131,7 +132,7 @@ export default function FriendList() {
       }
       <Box className='friend__list'>
         {
-          dataExample.map((item) => {
+          friends.map((item) => {
             return frienditem(item)
           })
         }

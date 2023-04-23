@@ -13,6 +13,7 @@ import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import axiosInstance from '@/utils/api'
 import $ from 'jquery'
+import InputField from '@/components/input';
 
 const RemoveFriendModal = ({ friend, onClose }) => {
   const style = {
@@ -107,14 +108,14 @@ const RemoveFriendModal = ({ friend, onClose }) => {
         </Typography>
 
 
-        {/* <InputField
+        <InputField
           name='fpoint'
           type='number'
           value={fpoint}
           onChange={(e) => setFpoint(e.target.value)}
           fullWidth
           required
-        /> */}
+        />
       
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>

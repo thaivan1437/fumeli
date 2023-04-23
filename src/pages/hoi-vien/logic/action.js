@@ -11,9 +11,17 @@ export const getUserGiftHistory = (res) => {
     payload: res,
   }
 }
+
 export const getFriends = (res) => {
   return {
     type: 'GET_FRIENDS',
+    payload: res,
+  }
+}
+
+export const getUserDetail = (res) => {
+  return {
+    type: 'GET_USER_DETAIL',
     payload: res,
   }
 }

@@ -9,12 +9,13 @@ import {
 } from '@mui/material'
 import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
-import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import axiosInstance from '@/utils/api'
 import $ from 'jquery'
+import InputField from '@/components/input';
 
-const RemoveFriendModal = ({ friend, onClose }) => {
+const ActiveMailModal = ({userDetail,  onClose }) => {
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -28,27 +29,53 @@ const RemoveFriendModal = ({ friend, onClose }) => {
     p: 4,
     borderRadius: '10px',
   }
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(true);
+  const [codeConfirm, setCodeConfirm] = useState('');
+
   // init user data in local storage
   let user = localStorage.getItem("user");
   user = JSON.parse(user);
-
-  console.log("user",friend, user)
 
   const handleClose = () => {
     setOpen(false)
     onClose()
   }
-
-  const currentTime = new Date().toLocaleTimeString()
-  const giftTransactionAction = () => {
+  
+  useEffect(() => {
     axiosInstance
       .post(
-        `UserFriend/update/${friend.UserId}ahahahahah`,
+        `/api/UserGift/update/`,
         {
-          UpdateUser: user.userid,
-          UpdateDate: currentTime,
-          Active: false,
+          Active: true,
+          UpdateDate: userDetail?.userid,
+          UpdateUser: userDetail?.userid,
+          UserId: userDetail?.userid,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userDetail?.access_token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
+  const currentTime = new Date().toLocaleTimeString()
+  const ActiveEmail = () => {
+    axiosInstance
+      .post(
+        '/api/UserGiftSpin/create',
+        {
+          Active: true,
+          CreateDate: currentTime,
+          CreateUser: user.username,
+          UserId: user.userid,
+          GiftId: gift[0].Id,
         },
         {
           headers: {
@@ -58,9 +85,16 @@ const RemoveFriendModal = ({ friend, onClose }) => {
       )
       .then((response) => {
         console.log(response.data)
+        $('.modal__giftTransaction--title').text('THÀNH CÔNG')
+        $('.modal__giftTransaction--description')
+          .empty()
+          .text('Bạn đã đổi quà thành công ' + gift[0].GiftTitle)
       })
       .catch((error) => {
         console.log(error)
+        $('.modal__giftTransaction--title').text('THẤT BẠI')
+        $('.modal__giftTransaction--img').remove()
+        $('.modal__giftTransaction--description').empty().text(error.message)
       })
   }
 
@@ -99,19 +133,24 @@ const RemoveFriendModal = ({ friend, onClose }) => {
         </Typography>
 
         <Typography
-          className="modal__giftTransaction--description remove-friend"
+          className="modal__giftTransaction--description"
           variant="h6"
           component="p"
         >
-          Xác nhận xóa bạn{' '}
-          <span
-            style={{
-              color: '#FF2423',
-            }}
-          >
-            {friend.FriendUserName}
-          </span>{' '}
+          Bạn cần xác nhận email trước khi có thể đổi quà. Một email có mã code đã được gửi về email của bạn vui lòng kiểm tra và nhập code ở đây.
         </Typography>
+
+        <Box mb={4}>
+          <InputField
+            name='codeConfirm'
+            type='text'
+            value={codeConfirm}
+            onChange={(e) => setCodeConfirm(e.target.value)}
+            fullWidth
+            required
+          />
+        </Box>
+      
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
@@ -125,7 +164,7 @@ const RemoveFriendModal = ({ friend, onClose }) => {
           <Button
             variant="contained"
             className="button--confirm"
-            onClick={() => giftTransactionAction()}
+            onClick={() => ActiveEmail()}
           >
             XÁC NHẬN
           </Button>
@@ -135,4 +174,4 @@ const RemoveFriendModal = ({ friend, onClose }) => {
   )
 }
 
-export default RemoveFriendModal
+export default ActiveMailModal

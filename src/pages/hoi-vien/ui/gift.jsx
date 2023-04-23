@@ -11,17 +11,20 @@ import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import GiftTransactionModal from '../modal/giftTransaction'
+import ActiveMailModal from '../modal/activeMail';
 
 const Bag = () => {
   const [open, setOpen] = React.useState(false)
   const [showGiftTranscationModal, setGiftModal] = useState(false)
   const [gift, setGift] = useState('')
-
+  const [activeEmail, setActiveEmail] = useState(false)
+  const { user } = useSelector((state) => state?.authReducer);
 
   
   const ITEMS_PER_PAGE = 4
-  const { userGift, userGiftHistory } = useSelector((state) => state?.userDetail)
-  console.log('userGift', userGift, userGiftHistory)
+  const { userGift, userGiftHistory, userDetail } = useSelector((state) => state?.userDetail)
+  const EmailConfirmed = userDetail && userDetail?.EmailConfirmed;
+  console.log('userGift', userGift, userDetail, EmailConfirmed)
   userGift.sort((a, b) => b.Id - a.Id)
   const [currentPage, setCurrentPage] = useState(1)
   const maxPage = Math.ceil(userGift.length / ITEMS_PER_PAGE)
@@ -41,6 +44,11 @@ const Bag = () => {
     setOpen(!open)
   }
   const openGiftTransactionModal = (e) => {
+    if (!EmailConfirmed) {
+      // open modal active email confirmation
+      setActiveEmail(true);
+      return
+    }
     const giftFilterById = userGift.filter((item) => item.Id == e)
     setGift(giftFilterById)
     setGiftModal(true)
@@ -48,6 +56,10 @@ const Bag = () => {
   const closeGiftTransactionModal = () => {
     setGiftModal(false)
     setGift('')
+  }
+
+  const closeActiveMailModal = () => {
+    setActiveEmail(false)
   }
 
   const hotItems = userGift.filter(item => item.Active === false)
@@ -159,6 +171,9 @@ const Bag = () => {
 
       {showGiftTranscationModal ? (
         <GiftTransactionModal gift={gift} onClose={closeGiftTransactionModal} />
+      ) : null}
+      {activeEmail ? (
+        <ActiveMailModal userDetail={user}  onClose={closeActiveMailModal} />
       ) : null}
     </Container>
   )

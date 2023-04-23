@@ -1,10 +1,11 @@
 import { axiosGet } from '@/utils/api'
-import { getUserGift, getUserGiftHistory, getFriends } from './action'
+import { getUserGift, getUserGiftHistory, getFriends, getUserDetail } from './action'
 
 const initialState = {
   userGift: [],
   userGiftHistory: [],
   friends: [],
+  userDetail: [],
 }
 
 export const userDetail = (state = initialState, action) => {
@@ -24,6 +25,11 @@ export const userDetail = (state = initialState, action) => {
         ...state,
         friends: action.payload,
       }
+    case 'GET_USER_DETAIL':
+      return {
+        ...state,
+        userDetail: action.payload,
+      }
     default:
       return state
   }
@@ -33,9 +39,11 @@ export const getUserGiftData = (props) => async (dispatch, getState) => {
   console.log('props', props)
   const {userId} = props;
   const gift = await axiosGet(`UserGift/getallclientbyuserid/${userId}`, dispatch);
+  const userDetail = await axiosGet(`appUser/detail/${userId}`, dispatch);
   console.log(gift)
   if (typeof(gift) !== 'undefined') {
     dispatch(getUserGift(gift));
+    dispatch(getUserDetail(userDetail));
   } else {
     console.log('cc')
   }
@@ -53,22 +61,12 @@ export const getUserGiftHistoryData = (props) => async (dispatch, getState) => {
   }
 }
 
-export const sendPoint = (idCamp) => async (dispatch, getState) => {
+export const sendPoint = (id) => async (dispatch, getState) => {
   try {
     dispatch(startLoading());
-    const url = 'UserCampaign/getusercampaignbyuserid';
-    const { authReducer } = getState();
-    const now = new Date();
-    const startOfWeek = new Date(now);
-    const diff = now.getDay() - 1;
-    startOfWeek.setDate(now.getDate() - diff);
-    const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    const url = 'appUser/sendactiveemail';
     const data ={
-      "UserId": authReducer && authReducer.user && authReducer.user.userid,
-      "CampaignId": idCamp,
-      "FromDate": startOfWeek,
-      "ToDate": endOfWeek
+      "Id": id,
     }
     const response = await axiosPost(url, data, dispatch);
     response ? await dispatch(getUserMission(response)) : null;

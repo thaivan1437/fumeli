@@ -15,6 +15,7 @@ const Daily = () => {
 		}
 	}, [missionCategory && missionCategory.length]);
 
+	console.log('missionCategory', missionCategory)
 	// handle pagination
 	const ITEMS_PER_PAGE = 6;
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,7 +31,7 @@ const Daily = () => {
 
 	const itemList = (item, isOrder = 0)=> {
 		return <Grid key={item.CreateDate} item xs={12} sm={4} md={4} className={''}>
-			<Link href={`nhiem-vu/${item.Id}?type=daily`}>
+			<Link href={item.TitleLink}>
 				<AutoSizeImage
 					src={item.ImagePath}
 					alt={item.Title}
