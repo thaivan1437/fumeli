@@ -79,3 +79,52 @@
 }
 
 
+.activity__grid {
+	display: grid;
+	grid-template-columns: 25% 75%;
+	column-gap: 20px;
+	background: #18181B;
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+  
+  .activity__grid--left {
+    border-right: solid 1px #fff;
+    ul {
+      color: #fff;
+      li {
+        cursor: pointer;
+        padding: 5px 0 5px 30px;
+        border-top: solid 1px #fff;
+        margin-right: 10px;
+        &:hover {
+          color: red;
+        }
+        &:last-child {
+          border-bottom: solid 1px #fff;
+        }
+        &:first-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .activity__diary--list {
+    li {
+      display: grid;
+      background: #000;
+      margin-bottom: 10px;
+      grid-template-columns: 50px calc(100% - 50px);
+      align-items: center;
+      justify-content: center;
+      svg {
+        margin: auto;
+      }
+    }
+  }
+}
+
+
