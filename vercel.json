@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
+      "source": "/tham-gia/daily/:name/:pid*",
+      "destination": "/nhiem-vu/[pid]"
+    },
+    {
       "source": "/nhiem-vu/:pid*",
-      "destination": "tham-gia/daily/[name]/[pid]"
+      "destination": "/nhiem-vu/[pid]"
     }
   ]
 }

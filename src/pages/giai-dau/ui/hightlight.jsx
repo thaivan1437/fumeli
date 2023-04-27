@@ -94,7 +94,7 @@ const HightLight = () => {
               <Link
                 className='video__slider--item'
                 key={item.CreateDate}
-                href={`tran-dau/${item.Id}`}
+                href={`giai-dau/chi-tiet-giai-dau/${item.Id}`}
               >
                 <AutoSizeImage isResize={false} src={`/images/match.png`} alt={item.Title} width={777} height={440}/>
                 <Box className='video__slider--info'>
