@@ -31,7 +31,7 @@ const Daily = () => {
 
 	const itemList = (item, isOrder = 0)=> {
 		return <Grid key={item.CreateDate} item xs={12} sm={4} md={4} className={''}>
-			<Link href={item.TitleLink}>
+			<Link href={`tham-gia/daily/${item.TitleLink}/${item.Id}`}>
 				<AutoSizeImage
 					src={item.ImagePath}
 					alt={item.Title}

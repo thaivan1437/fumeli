@@ -64,7 +64,7 @@ export const getMissionCategoryDataThunkAction = () => async (dispatch, getState
   try {
     const urls = [
       'CategoriesCampaign/getallclient',
-      'config/getsinglebyid?key=AttendanceMonth',
+      'config',
     ];
 
     const [ missionCategories,configMission  ] = await Promise.all(

@@ -30,6 +30,14 @@ const nextConfig = {
     }
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/tham-gia/daily/:name/:pid',
+        destination: '/nhiem-vu/:pid',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

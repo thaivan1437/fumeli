@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import { Container } from '@mui/system';
 import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
@@ -7,10 +7,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import AutoSizeImage from '@/components/image';
 import YoutubeModal from '@/components/modal/video';
-
+import Link from 'next/link'
 
 const HightLight = () => {
-	const {match} = useSelector((state) => state?.match);
+	const {match, matchCategory} = useSelector((state) => state?.match);
   const video = match && match.filter(item => item.IsHightlightVideo);
 
   const [showVideoModal, setShowVideoModal] = useState(false);
@@ -88,11 +88,31 @@ const HightLight = () => {
       </Container>
 
       <Slider className="video__slider center" {...settings}>
-        { video && (
-          video.map((item) => {
-            return <div className='video__slider--item' key={item.CreateDate} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onClick={() => openVideoModal(item.VideoPath)}>
-              <AutoSizeImage isResize={false} src={item.ThumbnailPath} alt={item.Title} width={777} height={440}/>
-            </div>
+        { matchCategory && (
+          matchCategory.map((item) => {
+            return(
+              <Link
+                className='video__slider--item'
+                key={item.CreateDate}
+                href={`tran-dau/${item.Id}`}
+              >
+                <AutoSizeImage isResize={false} src={`/images/match.png`} alt={item.Title} width={777} height={440}/>
+                <Box className='video__slider--info'>
+                  <Typography
+                    component="div"
+                    className={`video__slider--title`}
+                  >
+                    {item.Title}
+                  </Typography>
+                  <Typography
+                    component="div"
+                    className={`video__slider--desc`}
+                  >
+                    Giải thưởng $1.6M
+                  </Typography>
+                </Box>
+              </Link>
+            )
           })
         )}
       </Slider>

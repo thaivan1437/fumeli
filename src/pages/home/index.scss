@@ -108,6 +108,18 @@ img {
         }
         
     }
+    .tabCategory {
+        padding: 2px 15px;
+        display: inline-block;
+        &:hover {
+            background: url('/images/bg-tab.svg') no-repeat center;
+            background-size: contain;
+        }
+    }
+    .divider {
+        border: solid 1px #fff !important;
+        rotate: 25deg;
+    }
 }
 
 
@@ -156,6 +168,9 @@ img {
     &--item {
         position: relative;
         margin: 0 10px;
+        &:hover {
+            text-decoration: unset;
+        }
         &::after {
             position: absolute;
             content: "";
@@ -177,6 +192,17 @@ img {
     }
     .slick-slide {
         padding: 0 10px
+    }
+    &--info {
+        position: absolute;
+        bottom: 0;
+        width: 60%;
+        padding: 15px;
+        background: rgba(0,0,0,0.6);
+    }
+    
+    &--title {
+        font-weight: bold;
     }
     @media (max-width: 768px) {
         padding: 0 15px;
