@@ -180,7 +180,9 @@ const Header = ({ setHeaderHeight }) => {
                 </ul>
               </Button>
               <Button color="inherit">
-                Vòng quay may mắn
+                <Link href="/vong-quay-may-man">
+                 Vòng quay may mắn
+                </Link>
               </Button>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
