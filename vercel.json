@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/nhiem-vu/:pid*",
-      "destination": "/nhiem-vu/[pid]"
+      "destination": "tham-gia/daily/[name]/[pid]"
     }
   ]
 }
