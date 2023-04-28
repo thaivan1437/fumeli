@@ -14,8 +14,9 @@ import Toolbar from '@mui/material/Toolbar'
 import Image from 'next/image'
 import Typography from '@mui/material/Typography'
 import { Button } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { openLoginModal } from '@/components/auth/logic/action'
+import Link from 'next/link'
 
 const drawerWidth = 240
 
@@ -40,49 +41,49 @@ function ResponsiveDrawer(props) {
         <ListItem disablePadding>
           <ListItemButton className="navbar__listNav">
             <Typography variant="body1" className="navbar__listNav--title">
-              GIỚI THIỆU
+              <Link href="/gioi-thieu">GIỚI THIỆU</Link>
             </Typography>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton className="navbar__listNav">
             <Typography variant="body1" className="navbar__listNav--title">
-              NHIỆM VỤ
+              <Link href="/nhiem-vu"> NHIỆM VỤ</Link>
             </Typography>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton className="navbar__listNav">
             <Typography variant="body1" className="navbar__listNav--title">
-              VÒNG QUAY MAY MẮN
+              <Link href="/vong-quay-may-man"> VÒNG QUAY MAY MẮN</Link>
             </Typography>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton className="navbar__listNav">
             <Typography variant="body1" className="navbar__listNav--title">
-              GIẢI ĐẤU
+              <Link href="/giai-dau"> GIẢI ĐẤU</Link>
             </Typography>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton className="navbar__listNav">
             <Typography variant="body1" className="navbar__listNav--title">
-              ĐỔI QUÀ
+              <Link href="/doi-qua"> ĐỔI QUÀ</Link>
             </Typography>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton className="navbar__listNav">
             <Typography variant="body1" className="navbar__listNav--title">
-              LIÊN HỆ
+              <Link href="/lien-he"> LIÊN HỆ</Link>
             </Typography>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton className="navbar__listNav">
             <Typography variant="body1" className="navbar__listNav--title">
-              HỘI VIÊN
+              <Link href="/hoi-vien"> HỘI VIÊN</Link>
             </Typography>
           </ListItemButton>
         </ListItem>
@@ -96,14 +97,7 @@ function ResponsiveDrawer(props) {
   return (
     <Box ref={reff} sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          background: '#000',
-          // width: { sm: `calc(100% - ${drawerWidth}px)` },
-          // ml: { sm: `${drawerWidth}px` },
-        }}
-      >
+      <AppBar position="fixed" sx={{ background: '#000' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -115,14 +109,16 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <Image
-              src="/images/logoFU.png"
-              alt="LogoCenter"
-              width={112}
-              height={39}
-              className="logoFU"
-              style={{ top: '50%' }}
-            />
+            <Link href="/">
+              <Image
+                src="/images/logoFU.png"
+                alt="LogoCenter"
+                width={112}
+                height={39}
+                className="logoFU"
+                style={{ top: '50%' }}
+              />
+            </Link>
           </Typography>
           {
             // show user when logged
@@ -155,17 +151,15 @@ function ResponsiveDrawer(props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
-            // display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,
@@ -193,10 +187,6 @@ function ResponsiveDrawer(props) {
 }
 
 ResponsiveDrawer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 }
 

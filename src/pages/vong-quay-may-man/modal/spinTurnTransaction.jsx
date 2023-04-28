@@ -5,8 +5,11 @@ import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsAc
 import axiosInstance from '@/utils/api'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import Toast from '@/components/toast'
+import { getAllDataThunkAction } from '../logic/reducer'
+import { useDispatch } from 'react-redux'
 
 const SpinTurnTransactionModal = ({ onClose }) => {
+  const dispatch = useDispatch()
   const style = {
     position: 'absolute',
     top: '50%',
@@ -62,13 +65,13 @@ const SpinTurnTransactionModal = ({ onClose }) => {
       .catch((error) => {
         setStatusCode({ isShow: true, status: 'error' })
       })
+    dispatch(getAllDataThunkAction())
   }
 
   const showToast = () => {
     if (statusCode.isShow && statusCode.status === 'error') {
       return <Toast message="Đổi lượt quay thất bại" type="error" />
-    }
-    if (statusCode.isShow && statusCode.status === 'success') {
+    } else if (statusCode.isShow && statusCode.status === 'success') {
       return <Toast message="Đổi lượt quay thành công" type="success" />
     }
     setTimeout(() => {

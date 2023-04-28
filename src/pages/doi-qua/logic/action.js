@@ -22,6 +22,13 @@ export const getGift = (res) => {
   }
 }
 
+export const getGiftCategory = (res) => {
+  return {
+    type: 'GET_GIFTCATEGORY',
+    payload: res,
+  }
+}
+
 export const getCategoryGift = (res) => {
   return {
     type: 'GET_CATEGORYGIFT',

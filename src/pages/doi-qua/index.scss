@@ -228,7 +228,7 @@
       font-size: 30px;
     }
   }
-  
+
   .modal__giftTransaction--description {
     font-style: normal;
     font-weight: 500;
@@ -275,4 +275,44 @@
   &.button--back:hover {
     background: #363535 !important;
   }
+}
+.f-right {
+  float: right;
+}
+
+.custom__filter__gift {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: right;
+  letter-spacing: -0.01em;
+  color: #ff2423;
+}
+
+.custom__filter__gift--list {
+  background-color: #ffffff !important;
+  border-radius: 3px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+
+  letter-spacing: -0.01em;
+
+  color: #000000;
+}
+
+.custom__filter__gift--li {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+
+  letter-spacing: -0.01em;
+
+  color: #000000 !important;
+  border-bottom: solid 1px #ccc;
 }
