@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Divider from '@mui/material/Divider'
 import {
   Box,
   Typography,
@@ -7,38 +6,12 @@ import {
   Container,
   Button,
   ButtonGroup,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
 } from '@mui/material'
 import Image from 'next/image'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemButton from '@mui/material/ListItemButton'
-import Link from 'next/link'
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
-import { styled, alpha } from '@mui/material/styles'
-import Menu, { MenuProps } from '@mui/material/Menu'
-import EditIcon from '@mui/icons-material/Edit'
-import FileCopyIcon from '@mui/icons-material/FileCopy'
-import ArchiveIcon from '@mui/icons-material/Archive'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import ExpandLess from '@mui/icons-material/ExpandLess'
-import ExpandMore from '@mui/icons-material/ExpandMore'
-import Collapse from '@mui/material/Collapse'
-import StarBorder from '@mui/icons-material/StarBorder'
-import NativeSelect from '@mui/material/NativeSelect'
-import Modal from '@mui/material/Modal'
-
+import { useState, useEffect } from 'react'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import GiftTransactionModal from '../modal/giftTransaction'
-import { closeGiftTransactionModal } from '../logic/action'
 
 export const Store = () => {
   const [open, setOpen] = React.useState(false)
@@ -46,6 +19,7 @@ export const Store = () => {
   const distributeClick = () => {
     setOpen(!open)
   }
+
   const ITEMS_PER_PAGE = 4
   const { giftData } = useSelector((state) => state?.gift) || []
   giftData.sort((a, b) => b.Id - a.Id)
@@ -53,13 +27,19 @@ export const Store = () => {
   const hotItems = giftData.filter((item) => item.isHot === true)
 
   const [currentPage, setCurrentPage] = useState(1)
-  const maxPage = Math.ceil(giftData.length / ITEMS_PER_PAGE)
+  const [dataGift, setDataGift] = useState(giftData)
+
+  useEffect(() => {
+    setDataGift(giftData)
+  }, [giftData])
+
+  const maxPage = Math.ceil(dataGift.length / ITEMS_PER_PAGE)
 
   const handleClick = (page) => {
     setCurrentPage(page)
   }
 
-  const displayData = giftData.slice(
+  const displayData = dataGift.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   )
@@ -73,6 +53,15 @@ export const Store = () => {
     const giftFilterById = giftData.filter((item) => item.Id == e)
     setGift(giftFilterById)
     setGiftModal(true)
+  }
+
+  const { categoryGiftData } = useSelector((state) => state?.gift) || []
+  const test = (e) => {
+    if (e === 0) {
+      setDataGift(giftData)
+    } else {
+      setDataGift(giftData.filter((item) => item.CategoryGiftId == e))
+    }
   }
 
   const closeGiftTransactionModal = () => {
@@ -89,7 +78,33 @@ export const Store = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           {/* phâm loại */}
-
+          <Button mr={2} color="inherit" className="submenu f-right">
+            <p className="submenu__parent custom__filter__gift">
+              PHÂN LOẠI <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
+            </p>
+            <ul className="submenu__list custom__filter__gift--list">
+              <li
+                className="custom__filter__gift--li cl-red"
+                value={0}
+                onClick={(e) => test(e.target.value)}
+              >
+                Tất cả
+              </li>
+              {categoryGiftData &&
+                categoryGiftData.map((item, index) => {
+                  return (
+                    <li
+                      key={item.Id}
+                      value={item.Id}
+                      className="custom__filter__gift--li"
+                      onClick={(e) => test(e.target.value)}
+                    >
+                      {item.Title}
+                    </li>
+                  )
+                })}
+            </ul>
+          </Button>
           <Grid container spacing={2} mt={{ md: 4, xs: 2 }}>
             {displayData &&
               displayData.map((item, index) => {
@@ -170,7 +185,12 @@ export const Store = () => {
               {hotItems &&
                 hotItems.map((item, index) => {
                   return (
-                    <li key={item.Id} className="hot_item__li">
+                    <li
+                      key={item.Id}
+                      className="hot_item__li"
+                      value={item.Id}
+                      onClick={(e) => openGiftTransactionModal(e.target.value)}
+                    >
                       <div className="hot_item__image_container">
                         <Image
                           src={item.ImagePath}

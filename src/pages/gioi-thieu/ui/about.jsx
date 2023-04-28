@@ -1,18 +1,55 @@
-import React from 'react';
-import { Box, Typography, Container, Grid, Toolbar } from '@mui/material';
-import { useSelector } from 'react-redux';
-import Image from 'next/image';
+import React from 'react'
+import { Box, Typography, Container, Grid, Toolbar } from '@mui/material'
+import { useSelector } from 'react-redux'
+import Image from 'next/image'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 const AboutChild = () => {
-  const {aboutData} = useSelector((state) => state?.about) || [];
-
+  const { aboutData } = useSelector((state) => state?.about) || []
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    centerMode: true,
+    variableWidth: false,
+    centerPadding: '400px',
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: true,
+          centerMode: false,
+          centerPadding: '0',
+          slidesToShow: 1,
+          variableWidth: false,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: true,
+          centerMode: false,
+          centerPadding: '0',
+          slidesToShow: 1,
+          variableWidth: false,
+        },
+      },
+    ],
+  }
   const styledText = {
     color: 'white',
     fontSize: '48px',
     fontWeight: 700,
     lineHeight: '56px',
     letterSpacing: '-0.01em',
-    textAlign: 'center'
+    textAlign: 'center',
   }
   const partnerLogos = [
     {
@@ -60,7 +97,7 @@ const AboutChild = () => {
               )
             })}
         </Box>
-        <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
+        {/* <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
           <Box
             xs={12}
             md={12}
@@ -97,7 +134,7 @@ const AboutChild = () => {
               </Grid>
             </Grid>
           </Box>
-        </Box>
+        </Box> */}
         <Box mt={8} mb={6}>
           <Typography
             variant="h4"
@@ -118,23 +155,30 @@ const AboutChild = () => {
             borderColor="#fff"
             bgcolor="#0F0F0F"
           >
-            <Toolbar>
-              {partnerLogos.map((logo) => (
-                <div key={logo.alt} style={{ marginRight: '0.6%' }}>
-                  <Image
-                    key={logo.alt}
-                    src={logo.src}
-                    alt={logo.alt}
-                    width={logo.width / 1.5}
-                    height={logo.height / 1.5}
-                  />
-                </div>
-              ))}
-            </Toolbar>
+            <Slider className="hot__item center" {...settings}>
+              {partnerLogos &&
+                partnerLogos.map((logo) => {
+                  return (
+                    <div
+                      key={logo.alt}
+                      style={{ marginRight: '0.6%' }}
+                      data-id={logo.alt}
+                    >
+                      <Image
+                        key={logo.alt}
+                        src={logo.src}
+                        alt={logo.alt}
+                        width={logo.width / 1.5}
+                        height={logo.height / 1.5}
+                      />
+                    </div>
+                  )
+                })}
+            </Slider>
           </Box>
         </Box>
       </Container>
     </Box>
   )
 }
-export default AboutChild;
+export default AboutChild
