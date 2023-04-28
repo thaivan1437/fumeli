@@ -38,3 +38,8 @@ export function getFirstDayOfWeek(d) {
   const diff = date.getDate() - day + (day === 0 ? -6 : 1);
   return new Date(date.setDate(diff));
 }
+
+export function formatNumber(number) {
+  if (!number) return
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
