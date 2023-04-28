@@ -1,5 +1,5 @@
 import { axiosGet } from '../../../utils/api'
-import { getGift } from './action'
+import { getGift, getGiftCategory } from './action'
 import {
   OPEN_GIFTTRANSACTION_MODAL,
   CLOSE_GIFTTRANSACTION_MODAL,
@@ -8,6 +8,7 @@ import {
 
 const initialState = {
   giftData: [],
+  categoryGiftData: [],
   loginModalOpen: false,
   giftTransactionData: {
     Active: '',
@@ -36,6 +37,11 @@ export const gift = (state = initialState, action) => {
         ...state,
         giftData: action.payload,
       }
+    case 'GET_GIFTCATEGORY':
+      return {
+        ...state,
+        categoryGiftData: action.payload,
+      }
     default:
       return state
   }
@@ -60,8 +66,12 @@ export const giftTransaction = () => async (dispatch, getState) => {
 
 export const getAllDataThunkAction = () => async (dispatch, getState) => {
   try {
-    const [gift] = await Promise.all([axiosGet('Gift/getallclient')])
-    dispatch(getGift(gift))
+    const [giftData, categoryGiftData] = await Promise.all([
+      axiosGet('Gift/getallclient'),
+      axiosGet('CategoriesGift/getallclient'),
+    ])
+    await dispatch(getGift(giftData))
+    await dispatch(getGiftCategory(categoryGiftData))
   } catch (error) {
     console.log(error)
   }

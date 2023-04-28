@@ -1,6 +1,9 @@
-.mainBG{
-    background-image: url('/images/bgFumeli.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.mainBG {
+  background-image: url('/images/bgFumeli.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.slick-slide {
+  width: 2%important;
 }
