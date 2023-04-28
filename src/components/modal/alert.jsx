@@ -3,7 +3,7 @@ import { Modal, Typography, Box, Button } from '@mui/material';
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import Image from 'next/image'
 
-export default function AlertModal({ open, handleClose, message, title, icon }) {
+export default function AlertModal({ open, handleClose, message, title, icon, isShowCloseButton = true }) {
   if (!open) {
     return null;
   }
@@ -32,15 +32,19 @@ export default function AlertModal({ open, handleClose, message, title, icon }) 
         <Typography variant="p" component="p" sx={{textAlign: 'center'}} className='modal__common--message'>
           {message}
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button
-            variant="contained"
-            className="button--confirm"
-            onClick={() => handleClose()}
-          >
-            <ArrowCircleLeftRoundedIcon sx={{ marginRight: '10px' }}/> OK
-          </Button>
-        </Box>
+        {
+          isShowCloseButton && (
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Button
+              variant="contained"
+              className="button--confirm"
+              onClick={() => handleClose()}
+            >
+              <ArrowCircleLeftRoundedIcon sx={{ marginRight: '10px' }}/> OK
+            </Button>
+          </Box>
+          )
+        }
       </Box>
       
     </Modal>

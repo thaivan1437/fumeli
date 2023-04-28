@@ -23,7 +23,7 @@ export const axiosGet = async (url, dispatch) => {
     });
     return response.data;
   } catch (error) {
-    if (error.response.status == 401) {
+    if (error?.response?.status == 401) {
       // need show modal token expired
       await dispatch(loginAction());
       localStorage.setItem("user", JSON.stringify(''));
@@ -53,11 +53,12 @@ export const axiosPost = async (url, data, dispatch) => {
     });
     return response.data;
   } catch (error) {
-    if (error.response.status == 401) {
+    if (error?.response?.status == 401) {
       // need show modal token expired
       await dispatch(loginAction());
       localStorage.setItem("user", JSON.stringify(''));
     }
+    return error?.response;
   }
 };
 

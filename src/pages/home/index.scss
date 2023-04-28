@@ -6,10 +6,16 @@ img {
 }
 
 .mission {
+    padding: 40px 0 10px !important;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #707070;
+    border-top: 1px solid #707070;
     a {
         display: block;
     }
     @media (max-width: 768px) {
+        padding: 20px 0;
+        border-top: 0;
         .order1 {
             order: 1;
         }
@@ -22,64 +28,88 @@ img {
     }
 }
 
-.tournament__item {
-    background: #120000;
-    &--logo {
-        width: 157px;
-        height: 214px;
-        display: flex;
-        align-items: stretch;
-        justify-content: center;
-        flex-wrap: wrap;
-        img {
-            max-width: 110px;
-            margin: auto;
+.tournament {
+    background: url('/images/bg-top-gd.svg') no-repeat top center;
+    background-size: cover;
+    &__title {
+        margin: 30px 0 0;
+    }
+    &__title1 {
+        padding: 50px 0 0;
+    }
+    &__box {
+        margin-bottom: 50px;
+        @media (max-width: 768px) {
+            margin-bottom: 30px;
         }
     }
-    &--center {
-        img {
-            max-width: 60px;
-        }
-    }
-    &--info {
-        max-width: 400px;
-    }
-    a {
-        color: #fff;
-    }
-    &:hover {
-        background: linear-gradient(270deg, #B10100 0%, rgba(124, 1, 0, 0.516757) 50%, rgba(66, 0, 0, 0.2) 100%);
-        .tournament__item--logo {
-            background: #000;
-        }
-        a {
-            color: #fff;
-        }
-    }
-
-    @media (max-width: 768px) {
-        flex-wrap: wrap;
-        justify-content: center;
+    &__item {
+        cursor: pointer;
+        background: #120000;
+        border-bottom: 2px solid #707070;
         &--logo {
-            width: 150px;
-            padding: 8px;
-            height: auto;
-            min-height: 230px;
+            width: 157px;
+            height: 214px;
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            flex-wrap: wrap;
             img {
+                max-width: 110px;
                 margin: auto;
             }
         }
         &--center {
-            max-width: 60px;
-            padding: 0;
+            img {
+                max-width: 60px;
+            }
         }
         &--info {
-            text-align: center;
-            margin-bottom: 25px;
+            max-width: 400px;
         }
-    }
+        &--view {
+            padding-right: 30px;
+            background: url('/images/arow_right.svg') no-repeat right center;
+            color: #fff;
+        }
+        a {
+            color: #fff;
+        }
+        &:hover {
+            background: linear-gradient(270deg, #B10100 0%, rgba(124, 1, 0, 0.516757) 50%, rgba(66, 0, 0, 0.2) 100%);
+            .tournament__item--logo {
+                background: #000;
+            }
+            a {
+                color: #fff;
+            }
+        }
     
+        @media (max-width: 768px) {
+            flex-wrap: wrap;
+            justify-content: center;
+            &--logo {
+                width: 150px;
+                padding: 8px;
+                height: auto;
+                min-height: 230px;
+                img {
+                    margin: auto;
+                }
+            }
+            &--center {
+                max-width: 60px;
+                padding: 0;
+            }
+            &--info {
+                text-align: center;
+                margin-bottom: 25px;
+            }
+        }
+        
+    }
 }
+
 
 .minigame {
     background: url(/images/home/bg-minigame.svg) no-repeat center;
@@ -118,9 +148,11 @@ img {
         }
     }
 }
-
+.video__title {
+    margin-top: 50px !important;
+}
 .video__slider {
-    padding: 10px 0;
+    padding: 10px 0 !important;
     &--item {
         position: relative;
         margin: 0 10px;
@@ -269,8 +301,11 @@ img {
         &--item {
             min-height: unset;
             img {
-                padding: 0;
+                padding: 10px 0;
             }
         }
     }
+}
+.category__match {
+    margin: 10px 0 20px;
 }

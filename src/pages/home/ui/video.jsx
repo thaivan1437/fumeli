@@ -48,10 +48,10 @@ const Videos = () => {
   return (
     <React.Fragment>
       <Container>
-        <Typography variant="h4" component="h2" color={'#fff'}>
+        <Typography variant="h4" component="h2" color={'#fff'} className='video__title fw-b'>
           VIDEO HOT
         </Typography>
-        <Typography variant="p" my={2} color="initial" className="mw-440" sx={{ fontSize: '14px', display: 'block'}}>
+        <Typography variant="p" my={2} color={'white'} className="mw-440" sx={{ fontSize: '14px', display: 'block'}}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Typography>
       </Container>

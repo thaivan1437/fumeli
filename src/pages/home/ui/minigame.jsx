@@ -23,7 +23,7 @@ const MiniGame = () => {
   return (
     <Box py={3} className="minigame">
       <Container>
-        <Typography variant="h4" component="h2" color={'#fff'}>
+        <Typography variant="h4" component="h2" color={'#fff'} className='fw-b'>
           MINI GAMES
         </Typography>
         <Grid py={2} className="minigame__item" container spacing={{ xs: 0, md: 4 }} rowSpacing={{ xs: 2 }}>
@@ -32,7 +32,7 @@ const MiniGame = () => {
               return (
                 <Grid item key={item.CreateDate} className="minigame__item--logo" xs={12} sm={4} md={4} >
                   <AutoSizeImage isResize={false} src={item.Image} alt={item.Title} width={430} height={430}/>
-                  <Typography variant="h6" color="initial" sx={{ textAlign: 'center'}}>
+                  <Typography variant="h6" color={'white'} sx={{ textAlign: 'center'}}>
                     {item.Title}
                   </Typography>
                 </Grid>

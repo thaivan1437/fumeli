@@ -1,33 +1,33 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { AppBar, Box, IconButton, Toolbar, Button } from "@mui/material";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import Image from "next/image";
+import Link from "next/link";
+import LoginModal from "@/components/auth/login";
+import ForgotPasswordModal from "@/components/auth/forgetPassword";
+import SignUpModal from "@/components/auth/register";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  AppBar,
-  Box,
-  IconButton,
-  Toolbar,
-  Button,
-} from '@mui/material'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import InstagramIcon from '@mui/icons-material/Instagram'
-import YouTubeIcon from '@mui/icons-material/YouTube'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import Image from 'next/image'
-import Link from 'next/link'
-import LoginModal from '@/components/auth/login'
-import ForgotPasswordModal from '@/components/auth/forgetPassword'
-import SignUpModal from '@/components/auth/register'
-import { useDispatch, useSelector } from 'react-redux';
-import { openLoginModal, loginAction, openRegisterModal, signDataAction } from '@/components/auth/logic/action';
-import ResponsiveDrawer from '@/components/drawer/drawer';
-import { useRouter } from 'next/router';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+  openLoginModal,
+  loginAction,
+  openRegisterModal,
+  signDataAction,
+} from "@/components/auth/logic/action";
+import ResponsiveDrawer from "@/components/drawer/drawer";
+import { useRouter } from "next/router";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Header = ({ setHeaderHeight }) => {
   const router = useRouter();
   const { code } = router.query;
-  const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } = useSelector((state) => state.authReducer);
+  const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } =
+    useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const headerRef = useRef(null);
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState("");
   const [mobileView, setMobileView] = useState(true);
 
   const handleOpenModalLogin = useCallback(() => {
@@ -62,14 +62,14 @@ const Header = ({ setHeaderHeight }) => {
 
   useEffect(() => {
     // check login has data in localStore
-    const userData = JSON.parse(localStorage.getItem('user'));
+    const userData = JSON.parse(localStorage.getItem("user"));
     if (userData && userData.username) {
       setUserName(userData.username);
     }
   }, []);
 
   useEffect(() => {
-    console.log('user', user, userName)
+    console.log("user", user, userName);
     if (!user && userName) {
       setUserName();
       handleOpenModalLogin();
@@ -78,22 +78,29 @@ const Header = ({ setHeaderHeight }) => {
 
   useEffect(() => {
     if (code) {
-      dispatch(signDataAction({ signUpData: {['InviteCode']: code}}));
+      dispatch(signDataAction({ signUpData: { ["InviteCode"]: code } }));
       dispatch(openRegisterModal());
     }
   }, [code, dispatch]);
 
-
   return (
     <React.StrictMode>
-      { 
-        mobileView ? 
-        <ResponsiveDrawer userName={userName} reff={headerRef} className="navbar--mobile" /> :
-        <AppBar ref={headerRef} position="fixed" sx={{ background: '#000000!important' }}>
+      {mobileView ? (
+        <ResponsiveDrawer
+          userName={userName}
+          reff={headerRef}
+          className="navbar--mobile"
+        />
+      ) : (
+        <AppBar
+          ref={headerRef}
+          position="fixed"
+          sx={{ background: "#000000!important" }}
+        >
           <Toolbar className="first-block">
             {/* Khối 1 */}
             <Box
-              sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}
+              sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
             >
               <IconButton size="large" color="inherit" sx={{ mr: 2 }}>
                 <FacebookIcon />
@@ -110,7 +117,6 @@ const Header = ({ setHeaderHeight }) => {
             </Box>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ flexGrow: 1 }}>
-
               {
                 // show user when logged
                 userName ? (
@@ -119,11 +125,11 @@ const Header = ({ setHeaderHeight }) => {
                   <Button
                     variant="contained"
                     sx={{
-                      backgroundColor: '#FF2423',
-                      borderRadius: '40px',
-                      color: 'white',
-                      '&:hover': {
-                        backgroundColor: '#d6221d',
+                      backgroundColor: "#FF2423",
+                      borderRadius: "40px",
+                      color: "white",
+                      "&:hover": {
+                        backgroundColor: "#d6221d",
                       },
                     }}
                     onClick={handleOpenModalLogin}
@@ -132,7 +138,6 @@ const Header = ({ setHeaderHeight }) => {
                   </Button>
                 )
               }
-              
             </Box>
             <Link href="/">
               <Image
@@ -154,68 +159,55 @@ const Header = ({ setHeaderHeight }) => {
           </Toolbar>
           <Toolbar>
             <Box
-              sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}
+              sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
               mr={2}
             >
               <Button mr={2} color="inherit">
-                <Link href="/gioi-thieu">
-                  Giới thiệu
-                  </Link>
+                <Link href="/gioi-thieu">Giới thiệu</Link>
               </Button>
-              <Button mr={2} color="inherit" className='submenu'>
-                <Link href="/nhiem-vu" className='submenu__parent'>
-                  Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: '5px'}}/>
+              <Button mr={2} color="inherit" className="submenu">
+                <Link href="/nhiem-vu" className="submenu__parent">
+                  Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: "5px" }} />
                 </Link>
-                <ul className='submenu__list'>
+                <ul className="submenu__list">
                   <li>
-                    <Link href='/nhiem-vu'>
-                      Nhiệm vụ hằng ngày
-                    </Link>
+                    <Link href="/nhiem-vu">Nhiệm vụ hằng ngày</Link>
                   </li>
                   <li>
-                    <Link href='/nhiem-vu/invite'>
-                      Mời bạn nhận quà
-                    </Link>
+                    <Link href="/nhiem-vu/invite">Mời bạn nhận quà</Link>
                   </li>
                 </ul>
               </Button>
               <Button color="inherit">
-                <Link href="/vong-quay-may-man">
-                 Vòng quay may mắn
-                </Link>
+                <Link href="/vong-quay-may-man">Vòng quay may mắn</Link>
               </Button>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'left' }} ml={2}>
+            <Box
+              sx={{ flexGrow: 1, display: "flex", alignItems: "left" }}
+              ml={2}
+            >
               <Button mr={2} color="inherit">
-                <Link href="/giai-dau">
-                  Giải đấu
-                </Link>
+                <Link href="/giai-dau">Giải đấu</Link>
               </Button>
               <Button mr={2} color="inherit">
-                <Link href="/doi-qua">
-                  Đổi quà
-                </Link>
+                <Link href="/doi-qua">Đổi quà</Link>
               </Button>
               <Button mr={2} color="inherit">
-                <Link href="/lien-he">
-                  Liên hệ
-                </Link>
+                <Link href="/lien-he">Liên hệ</Link>
               </Button>
               <Button color="inherit">
-                <Link href="/hoi-vien">
-                  Hội viên
-                </Link>
+                <Link href="/hoi-vien/bag">Hội viên</Link>
               </Button>
             </Box>
           </Toolbar>
         </AppBar>
-      }
+      )}
       {registerModalOpen && <SignUpModal></SignUpModal>}
       {loginModalOpen && <LoginModal></LoginModal>}
       {forgetPasswordModalOpen && <ForgotPasswordModal></ForgotPasswordModal>}
     </React.StrictMode>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -9,8 +9,7 @@ import AutoSizeImage from '@/components/image';
 const SliderBanner = () => {
   const { slider } = useSelector((state) => state?.home) || [];
   const newSlider = slider && slider.filter(item => item?.IsMainBanner)
-  const [nav1, setNav1] = useState();
-  const [nav2, setNav2] = useState();
+  const sliderAds = slider && slider.filter(item => item?.IsCenterAdsBanner)
 
   const settings = {
     dots: false,
@@ -33,16 +32,9 @@ const SliderBanner = () => {
           arrows: false,
           centerMode: true,
           centerPadding: '0',
-          slidesToShow: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '0',
-          slidesToShow: 1
+          slidesToShow: 3,
+          vertical: true,
+          verticalSwiping: true
         }
       }
     ]
@@ -63,8 +55,6 @@ const SliderBanner = () => {
           <>
             <Slider
               className="banner__sliderM"
-              asNavFor={nav2} 
-              ref={c => setNav1(c)}
               {...setting2}
             >
               { newSlider && (
@@ -77,13 +67,11 @@ const SliderBanner = () => {
             </Slider>
             <Container maxWidth="lg">
               <Slider
-                asNavFor={nav1}
-                ref={c => setNav2(c)}
                 {...settings}
                 className="banner__slider center"
               >
-                { newSlider && (
-                  newSlider.map((item, index) => {
+                { sliderAds && (
+                  sliderAds.map((item, index) => {
                     return <div className='banner__slider--item' key={item.CreateDate}>
                       <AutoSizeImage isResize={false} width={380} height={270}src={item.UrlSmallImage} alt={item.Link ? item.Link : 'slide image'} />
                     </div>
