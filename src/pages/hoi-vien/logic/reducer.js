@@ -5,6 +5,7 @@ import {
   getFriends,
   getUserDetail,
   getActivitiesHistory,
+  getGivePointsHistory,
   getSpinsHistory,
 } from "./action";
 
@@ -14,6 +15,7 @@ const initialState = {
   friends: [],
   userDetail: [],
   activitiesHistory: [],
+  givePointsHistory: [],
   spinsHistory: [],
 };
 
@@ -44,7 +46,12 @@ export const userDetail = (state = initialState, action) => {
         ...state,
         activitiesHistory: action.payload,
       };
-    case "GET_SPIN_HISTORY":
+    case "GET_GIVE_POINTS_HISTORY":
+      return {
+        ...state,
+        givePointsHistory: action.payload,
+      };
+    case "GET_SPINS_HISTORY":
       return {
         ...state,
         spinsHistory: action.payload,
@@ -133,14 +140,29 @@ export const getActivitiesHistoryData =
     }
   };
 
+export const getGivePointsHistorysData =
+  (props) => async (dispatch, getState) => {
+    // console.log("props", props);
+    const { userId } = props;
+    const givePoints = await axiosGet(
+      `UserSendFPoint/getallclientbyuserid/${userId}`,
+      dispatch
+    );
+    if (typeof givePoints !== "undefined") {
+      dispatch(getGivePointsHistory(givePoints));
+    } else {
+      console.log("cc");
+    }
+  };
+
 export const getSpinsHistorysData = (props) => async (dispatch, getState) => {
-  // console.log("props", props);
+  console.log("props", props);
   const { userId } = props;
   const gift = await axiosGet(
     `UserGiftSpin/getallclientbyuserid/${userId}`,
     dispatch
   );
-  // console.log(gift);
+  console.log(gift);
   if (typeof gift !== "undefined") {
     dispatch(getSpinsHistory(gift));
   } else {

@@ -14,6 +14,7 @@ import {
   getActivitiesHistoryData,
   getUserGiftData,
   getSpinsHistorysData,
+  getGivePointsHistorysData,
 } from "./logic/reducer";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -27,6 +28,7 @@ export default function Activity() {
     async function fetchAllData() {
       await dispatch(getFriendsData({ userId: user?.userid }));
       await dispatch(getActivitiesHistoryData({ userId: user?.userid }));
+      await dispatch(getGivePointsHistorysData({ userId: user?.userid }));
       await dispatch(getUserGiftData({ userId: user?.userid }));
       await dispatch(getSpinsHistorysData({ userId: user?.userid }));
     }

@@ -20,9 +20,7 @@ export default function ActivityHistory() {
     { id: 5, title: "Lịch sử đổi quà" },
   ];
   const [controlType, setControlType] = useState(1);
-  const [hidden, setHidden] = useState(
-    useMediaQuery(theme.breakpoints.down("md"))
-  );
+  const [hidden, setHidden] = useState(true);
   const handleChangeType = (type) => {
     setControlType(type);
   };

@@ -32,10 +32,16 @@ export const getActivitiesHistory = (res) => {
     payload: res,
   };
 };
+export const getGivePointsHistory = (res) => {
+  return {
+    type: "GET_GIVE_POINTS_HISTORY",
+    payload: res,
+  };
+};
 
 export const getSpinsHistory = (res) => {
   return {
-    type: "GET_SPIN_HISTORY",
+    type: "GET_SPINS_HISTORY",
     payload: res,
   };
 };
