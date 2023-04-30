@@ -359,4 +359,7 @@ img {
     display: grid;
     grid-template-columns: calc(70% - 10px) calc(30% - 10px);
     column-gap: 25px;
+    .tournament__grid {
+        grid-template-columns: 100%;
+    }
 }

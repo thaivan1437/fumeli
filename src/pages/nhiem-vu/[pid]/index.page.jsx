@@ -11,7 +11,6 @@ export default function PostPage() {
   const {pid} = router.query;
   const dispatch = useDispatch();
   const { mission, configMission } = useSelector((state) => {
-    console.log(state);
     return state?.mission;
   });
   let missionDetail = mission && mission?.filter(item => item.Id == pid);

@@ -30,8 +30,14 @@ const Daily = () => {
 
 
 	const itemList = (item, isOrder = 0)=> {
+		let url = ''
+		if (item.Id == 4) {
+			url = 'vong-quay-may-man'
+		} else {
+			url = `tham-gia/daily/${item.TitleLink}/${item.Id}`
+		}
 		return <Grid key={item.CreateDate} item xs={12} sm={4} md={4} className={''}>
-			<Link href={`tham-gia/daily/${item.TitleLink}/${item.Id}`}>
+			<Link href={url}>
 				<AutoSizeImage
 					src={item.ImagePath}
 					alt={item.Title}
