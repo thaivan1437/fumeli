@@ -160,44 +160,44 @@
   padding-left: 0 !important;
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: -0.01em;
-  color: #ffffff;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
 }
 .table__userDetail--text__right {
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 14px !important;
+  line-height: 16px !important;
   letter-spacing: -0.01em;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .userDetail__description--title {
   font-style: normal;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 16px !important;
   line-height: 19px;
   letter-spacing: -0.01em;
   text-align: center;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .userDetail__description--description {
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 14px !important;
   line-height: 16px;
   text-align: justify;
   letter-spacing: -0.01em;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .userDetail__page--title {
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 24px !important;
   line-height: 28px;
   letter-spacing: -0.01em;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .input__userDetail {
   width: 100%;
@@ -234,14 +234,14 @@
 //   // color: #ff2423;
 // }
 .btn_outline {
-  margin: 5% 0 5% 0;
-  border: solid 1px #ff2423 !important;
-  background-color: transparent !important;
-  color: #fff;
-  font-size: 20px;
+  margin: 5% 0 !important;
+  border: 1px solid #ff2423!important;
+  background-color: transparent!important;
+  color: #fff !important;
+  font-size: 20px !important;
   font-weight: 700;
   line-height: 23px;
-  letter-spacing: -0.01em;
+  letter-spacing: -.01em;
   text-align: center;
 
   &:after {
@@ -272,18 +272,18 @@
 .list_user_FU--info--box--username {
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 20px !important;
   line-height: 23px;
   letter-spacing: -0.01em;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .list_user_FU--info--box--lastactive {
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 12px !important;
   line-height: 14px;
   letter-spacing: -0.01em;
-  color: #d9d9d9;
+  color: #d9d9d9 !important;
 }
 .ml-6 {
   margin-left: 6%;
@@ -291,10 +291,10 @@
 .userFU-title {
   font-style: normal;
   font-weight: 700;
-  font-size: 48px;
+  font-size: 48px !important;
   line-height: 56px;
   letter-spacing: -0.01em;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 @media (max-width: 768px) {
   .userFU-title {
@@ -440,7 +440,7 @@
   bottom: 2%;
   right: 3%;
   z-index: 9999;
-  width: 15%;
+  width: 15% !important;
 
   @media (max-width: 768px) {
     bottom: 55%;

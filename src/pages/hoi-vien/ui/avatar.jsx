@@ -201,17 +201,21 @@ export default function LayoutUserPage() {
             </Button>
             <Button variant="contained" className="btn_fill ml-6">
               <BoltIcon />
-              <Link href="/hoi-vien">
+              <Link href="/hoi-vien/activity">
                 <Typography className="btn_fill--text">HOẠT ĐỘNG</Typography>
               </Link>
             </Button>
             <Button variant="contained" className="btn_fill ml-6">
               <CardGiftcardIcon />
+              <Link href="/hoi-vien/bag">
               <Typography className="btn_fill--text">TÚI ĐỒ</Typography>
+              </Link>
             </Button>
             <Button variant="contained" className="btn_fill ml-6">
               <GroupIcon />
-              <Typography className="btn_fill--text">BẠN BÈ</Typography>
+              <Link href="/hoi-vien/friend">
+                <Typography className="btn_fill--text">BẠN BÈ</Typography>
+              </Link>
             </Button>
           </Box>
         </Box>
