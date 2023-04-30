@@ -11,3 +11,10 @@ export const getImgSpinGame = (res) => {
     payload: res,
   }
 }
+
+export const getSpinTurn = (res) => {
+  return {
+    type: 'GET_SPINTURN',
+    payload: res,
+  }
+}

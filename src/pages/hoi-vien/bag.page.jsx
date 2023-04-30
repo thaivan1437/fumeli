@@ -11,6 +11,7 @@ import {
 import Bag from './ui/gift';
 import { getUserGiftData, getUserGiftHistoryData } from './logic/reducer'
 import { useDispatch, useSelector } from 'react-redux'
+import LayoutUserPage from './ui/avatar'
 
 export default function UserDetail() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export default function UserDetail() {
 
   return (
     <React.StrictMode>
+      <LayoutUserPage />
       <Container>
         <Typography variant="h4" component="h2" color={'#fff'} sx={{padding: '30px 0'}}>
           Túi Đồ

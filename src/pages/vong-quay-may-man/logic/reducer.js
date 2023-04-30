@@ -1,10 +1,10 @@
 import { axiosGet } from '../../../utils/api'
-import { getSpinGameItem } from './action'
-import { getImgSpinGame } from './action'
+import { getSpinGameItem, getImgSpinGame, getSpinTurn } from './action'
 
 const initialState = {
   spinGiftItem: [],
   imgSpinGame: [],
+  spinturn: [],
 }
 
 export const spinGiftItem = (state = initialState, action) => {
@@ -19,32 +19,37 @@ export const spinGiftItem = (state = initialState, action) => {
         ...state,
         imgSpinGame: action.payload,
       }
+    case 'GET_SPINTURN':
+      return {
+        ...state,
+        spinturn: action.payload,
+      }
     default:
       return state
   }
 }
 
+let data = []
+if (typeof window !== 'undefined') {
+  const userData = localStorage.getItem('user')
+  if (userData) {
+    data = JSON.parse(userData)
+  }
+}
 export const getAllDataThunkAction = () => async (dispatch, getState) => {
-  // try {
-  //   const [spinGiftItem] = await Promise.all([axiosGet('/SpinGame/detail/getallclientbyspingameid/2')])
-
-  //   await dispatch(getSpinGameItem(spinGiftItem))
-  // } catch (error) {
-  //   console.log(error)
-  // }
-
   try {
     const urls = [
       '/SpinGame/detail/getallclientbyspingameid/2',
       '/Campaign/getsinglebyid?ID=4',
+      `UserSpinGame/getallclientbyuserid/${data.userid}`,
     ]
 
-    const [spinGiftItem, imgSpinGame] = await Promise.all(
+    const [spinGiftItem, imgSpinGame, spinturn] = await Promise.all(
       urls.map((url) => axiosGet(url, dispatch))
     )
-
     await dispatch(getSpinGameItem(spinGiftItem))
     await dispatch(getImgSpinGame(imgSpinGame))
+    await dispatch(getSpinTurn(spinturn))
   } catch (error) {
     console.log(error)
   }

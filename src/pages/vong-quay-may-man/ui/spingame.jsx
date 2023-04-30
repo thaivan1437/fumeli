@@ -13,10 +13,12 @@ import axiosInstance from '@/utils/api'
 import NotiModal from '../modal/notiModal'
 import SpinTurnTransactionModal from '../modal/spinTurnTransaction'
 import axios from 'axios'
+import { getAllDataThunkAction } from '../logic/reducer'
+import { useDispatch } from 'react-redux'
 
 const SpinGame = () => {
+  const dispatch = useDispatch()
   const spinGiftItemData = useSelector((state) => state.spinGiftItem)
-
   const spinGiftItem = spinGiftItemData.spinGiftItem.sort(
     (a, b) => a.Percentage - b.Percentage
   )
@@ -62,40 +64,40 @@ const SpinGame = () => {
     }
   }, [])
 
-  const [spinTurn, setSpinTurn] = useState(0)
-  if (user.userid != null && user.userid != undefined) {
-    axios
-      .get(
-        `https://api-demowebsite.cdktcnqn.edu.vn/api/UserSpinGame/getallclientbyuserid/${user.userid}`,
-        {
-          headers: {
-            Authorization: `Bearer ${user.access_token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-      .then((response) => {
-        setSpinTurn(response.data.length)
-      })
-      .catch((error) => {
-        console.log(error)
-      }, 1000)
-  }
+  const userSpinTurnData = useSelector(
+    (state) => state.spinGiftItem.spinturn || []
+  )
+
+  const userSpinTurn = userSpinTurnData.length || 0
+
+  const [spinTurn, setSpinTurn] = useState(userSpinTurn)
+
+  useEffect(() => {
+    setSpinTurn(userSpinTurn)
+  }, [userSpinTurn])
 
   const currentTime = new Date().toLocaleTimeString()
-
-  const [labelText, setLabelText] = useState(`LƯỢT QUAY:  ${spinTurn}`)
 
   const playSpinGame = () => {
     if (spinTurn == 0) {
       openOutOfTurnModal()
     } else {
-      
       const images = document.querySelectorAll('.spingame__item--img')
-      setIsDisabled(true)
 
+      axiosInstance.put(
+        `api/UserSpinGame/update/${user.userid}`,
+        {
+          Id: user.userid,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+          },
+        }
+      )
+
+      setIsDisabled(true)
       setSpinTurn(spinTurn - 1)
-      setLabelText(`LƯỢT QUAY:  ${spinTurn - 1}`)
 
       const spin = setInterval(() => {
         const indexitem = Math.floor(Math.random() * images.length)
@@ -150,11 +152,10 @@ const SpinGame = () => {
               }
             )
             .then((response) => {
-              console.log(response.data)
               openGiftTransactionModal(response.data)
+              dispatch(getAllDataThunkAction())
             })
             .catch((error) => {
-              console.log(error)
               openGiftTransactionModal(error)
             })
         }
@@ -177,7 +178,7 @@ const SpinGame = () => {
           </div>
           <div className="wrap__btn--more css__btn">
             <Button variant="contained" className="css__btn__spingame">
-              {labelText}
+              LƯỢT QUAY: {spinTurn}
             </Button>
           </div>
           <div className="wrap__btn--more css__btn">

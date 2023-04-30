@@ -47,13 +47,13 @@ const Tournaments = () => {
 				<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff'}} className='category__match'>
 					<Stack
 						direction="row"
-						divider={<Divider orientation="vertical" flexItem />}
-						spacing={2}
+						divider={<Divider orientation="vertical" flexItem  className='divider'/>}
+						spacing={1}
 					>
 						{
 							matchCategory && matchCategory.map((item) => {
 								return (
-									<Typography component="span" sx={{ cursor: 'pointer'}} className={isActive == item.Id ? 'active' : ''} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</Typography>
+									<Typography component="span" sx={{ cursor: 'pointer'}} className={`tabCategory ${isActive == item.Id ? 'active' : ''}`} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</Typography>
 								)
 							})
 						}

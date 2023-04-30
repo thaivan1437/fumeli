@@ -6,6 +6,7 @@ import AlertModal from '@/components/modal/alert';
 import ConfirmModal from '@/components/modal/confirm';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import RemoveFriendModal from '../modal/modalRemoveFriend';
+import SendFpointModal from '../modal/sendGiftPoint';
 
 export default function FriendList() {
   const { user } = useSelector((state) => state?.authReducer);
@@ -18,6 +19,8 @@ export default function FriendList() {
 
   const [isRemoveFriend, setIsRemoveFriend] = useState(false);
   const [friend, setFriend] = useState();
+
+  const [isSendFpointModal, setIsSendFpointModal] = useState(false);
 
   const handleClose = (index) => {
     const newModals = [...open];
@@ -35,13 +38,9 @@ export default function FriendList() {
     });
   };
 
-  const sendPointModal = () => {
-    handleModal({ 
-      title: '',
-      message: 'Send fpoint',
-      icon: <NotificationsActiveOutlinedIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>,
-      index: 1
-    })
+  const sendPointModal = (friend) => {
+    setFriend(friend);
+    setIsSendFpointModal(true);
   }
 
   const removeFriendModal = (friend) => {
@@ -85,28 +84,27 @@ export default function FriendList() {
   const frienditem = (item) => {
     const lastActive = new Date(item.LastActive).toLocaleString();
     return ( 
-    <Box className='friend__box' key={`${item.UserId}-${item.FriendUserName}`}>
+    <Box className='friend__box' key={`${item.UserId}-${item.Id}`}>
       <Box className='friend__box--avatar'>
         <img src={item.Avatar} alt="avatar" />
       </Box>
       <Box className='friend__box--info'>
-        <Typography variant="h6" component="p" color='error'>
+        <Typography variant="h6" component="p" color='error' className='friend__box--gift'>
           {item.FriendUserName}
+          <img src="/images/gift.svg" alt="send gift" onClick={() => sendPointModal(item)}/>
         </Typography>
         <Typography variant="h6" component="p" color={'#fff'}>
           {lastActive}
         </Typography>
-        <Button className='friend__box--gift'>
-          <img src="/images/gift.svg" alt="send gift" onClick={() => sendPointModal()}/>
-        </Button>
+        {/* <Button className='friend__box--gift'>
+          
+        </Button> */}
       </Box>
       <Box className='friend__box--btnClose'>
         <img src="/images/closeRed.svg" alt="btn close" onClick={() => removeFriendModal(item)}/>
       </Box>
     </Box>)
   }
-
-  const dataExample = [1,2,3,4,5,6,7,8,9];
 
   return (
     <React.StrictMode>
@@ -115,6 +113,13 @@ export default function FriendList() {
         <RemoveFriendModal
           friend={friend}
           onClose={setIsRemoveFriend}
+        />
+      }
+      {
+        isSendFpointModal &&
+        <SendFpointModal
+          friend={friend}
+          onClose={setIsSendFpointModal}
         />
       }
       {

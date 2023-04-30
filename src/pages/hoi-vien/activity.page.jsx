@@ -7,16 +7,11 @@ import {
   Link,
   TextField,
   Typography,
-} from "@mui/material";
-import ActivityHistory from "./ui/activity";
-import {
-  getFriendsData,
-  getActivitiesHistoryData,
-  getUserGiftData,
-  getSpinsHistorysData,
-  getGivePointsHistorysData,
-} from "./logic/reducer";
-import { useDispatch, useSelector } from "react-redux";
+} from '@mui/material'
+import ActivityHistory from './ui/activity';
+import { getFriendsData } from './logic/reducer'
+import { useDispatch, useSelector } from 'react-redux'
+import LayoutUserPage from './ui/avatar'
 
 export default function Activity() {
   const dispatch = useDispatch();
@@ -37,6 +32,7 @@ export default function Activity() {
 
   return (
     <React.StrictMode>
+      <LayoutUserPage />
       <Container>
         <Typography
           variant="h4"

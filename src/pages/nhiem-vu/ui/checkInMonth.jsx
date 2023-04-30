@@ -4,15 +4,16 @@ import AutoSizeImage from '@/components/image';
 
 const CountCheckInMonth = ({
   checkInMonth,
-  user
+  user,
+  AttendanceMonth
 }) => {
-  const countCheckIn = [1,5,10,20,30];
   const itemCheckInMonth = (item, checkInMonth) => {
-    const active = checkInMonth >= item && user ? 'active' : '';
+    const countCheckIn = parseInt(item.Key.split(' ')[0]);
+    const active = checkInMonth >= countCheckIn && user ? 'active' : '';
     return (
-      <Box p={2} key={`${item}-ngay`} className={`${active} check__in--monthItem`}>
+      <Box p={2} key={item.Key} className={`${active} check__in--monthItem`}>
         <Typography py={2} component="p" color={'#fff'} sx={{textAlign: 'center'}}>
-          {`${item} Ngày`}
+          {`${item.Key}`}
         </Typography>
         <AutoSizeImage isResize={false} width={200} height={200} src="/images/mission/check-in-month.png" alt="điểm danh trong tháng" className='image'/>
         <AutoSizeImage isResize={false} width={120} height={95} src="/images/mission/check.png" alt="checked" className='checked'/>
@@ -31,7 +32,7 @@ const CountCheckInMonth = ({
         </Typography>
         <Box className='check__in--month'>
           {
-            countCheckIn.map((item) => {
+            AttendanceMonth && AttendanceMonth.map((item) => {
               return itemCheckInMonth(item, checkInMonth)
             })
           }

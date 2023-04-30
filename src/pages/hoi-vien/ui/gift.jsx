@@ -66,11 +66,11 @@ const Bag = () => {
 
   return (
     <Container>
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
           {/* phâm loại */}
 
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             {displayData &&
               displayData.map((item, index) => {
                 return (
@@ -141,30 +141,32 @@ const Bag = () => {
           </Box>
         </Grid>
         <Grid item xs={12} md={4} mb={4} mt={{ xs: 2 }} className='bag__history'>
-          <Typography variant="h5" className="titleHotItem">
-            LỊCH SỬ NHẬN QUÀ
-          </Typography>
-          <Box>
-            <ul className="hot_item__ul">
-              {hotItems &&
-                hotItems.map((item, index) => {
-                  return (
-                    <li key={item.Id} className="hot_item__li">
-                      <div
-                        className="hot_item__text_container"
-                        style={{ color: '#fff' }}
-                      >
-                        <Typography variant="body1" className="hot_item__title">
-                          {item.Title}
-                        </Typography>
-                        <Typography variant="body2" className="hot_item__value">
-                          {item.FpointValue} Fponit
-                        </Typography>
-                      </div>
-                    </li>
-                  )
-                })}
-            </ul>
+          <Box className='bag__history--item'>
+            <Typography variant="h5" className="titleHotItem">
+              LỊCH SỬ NHẬN QUÀ
+            </Typography>
+            <Box>
+              <ul className="hot_item__ul">
+                {hotItems &&
+                  hotItems.map((item, index) => {
+                    return (
+                      <li key={item.Id} className="hot_item__li">
+                        <div
+                          className="hot_item__text_container"
+                          style={{ color: '#fff' }}
+                        >
+                          <Typography variant="body1" className="hot_item__title">
+                            {item.Title}
+                          </Typography>
+                          <Typography variant="body2" className="hot_item__value">
+                            {item.FpointValue} Fponit
+                          </Typography>
+                        </div>
+                      </li>
+                    )
+                  })}
+              </ul>
+            </Box>
           </Box>
         </Grid>
       </Grid>

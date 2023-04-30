@@ -47,7 +47,10 @@ const DailyDetail = ({
   missionDetail = missionDetail && missionDetail?.length && missionDetail[0];
   const newUserMission = userMission && userMission?.filter(item => item.CampaignId == id);
   const checkInMonth = newUserMission && newUserMission?.length;
-  console.log(configMission, missionDetail)
+
+  let AttendanceMonth = configMission.filter((item) => item.Type == 'AttendanceMonth')
+  AttendanceMonth = AttendanceMonth.sort((a,b) => a.OrderOfNumber - b.OrderOfNumber)
+  console.log('daily detail',configMission, missionDetail, AttendanceMonth)
 
   // config date
   const daysOfWeeks = dateOfWeek();
@@ -198,6 +201,7 @@ const DailyDetail = ({
         <CountCheckInMonth 
           checkInMonth={checkInMonth}
           user={user}
+          AttendanceMonth={AttendanceMonth}
         />
       </Container>
     </React.StrictMode>

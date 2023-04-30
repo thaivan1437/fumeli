@@ -21,9 +21,14 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
-    "@mui/material": "^5.11.10",
+    "@mui/lab": "^5.0.0-alpha.125",
+    "@mui/material": "^5.11.16",
+    "@mui/styled-engine-sc": "^5.11.11",
+    "@mui/x-date-pickers": "^6.2.1",
     "@next/font": "13.1.6",
     "axios": "^1.3.4",
+    "date-fns": "^2.29.3",
+    "dayjs": "^1.11.7",
     "jquery": "^3.6.4",
     "moment": "^2.29.4",
     "next": "13.1.6",
@@ -36,7 +41,8 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "slick-carousel": "^1.8.1",
-    "slick-slider": "^1.8.2"
+    "slick-slider": "^1.8.2",
+    "styled-components": "^5.3.9"
   },
   "devDependencies": {
     "eslint": "8.34.0",

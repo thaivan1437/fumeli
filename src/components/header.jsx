@@ -1,87 +1,91 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { AppBar, Box, IconButton, Toolbar, Button } from "@mui/material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import Image from "next/image";
-import Link from "next/link";
-import LoginModal from "@/components/auth/login";
-import ForgotPasswordModal from "@/components/auth/forgetPassword";
-import SignUpModal from "@/components/auth/register";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { AppBar, Box, IconButton, Toolbar, Button } from '@mui/material'
+import FacebookIcon from '@mui/icons-material/Facebook'
+import InstagramIcon from '@mui/icons-material/Instagram'
+import YouTubeIcon from '@mui/icons-material/YouTube'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import Image from 'next/image'
+import Link from 'next/link'
+import LoginModal from '@/components/auth/login'
+import ForgotPasswordModal from '@/components/auth/forgetPassword'
+import SignUpModal from '@/components/auth/register'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   openLoginModal,
   loginAction,
   openRegisterModal,
   signDataAction,
-} from "@/components/auth/logic/action";
-import ResponsiveDrawer from "@/components/drawer/drawer";
-import { useRouter } from "next/router";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+} from '@/components/auth/logic/action'
+import ResponsiveDrawer from '@/components/drawer/drawer'
+import { useRouter } from 'next/router'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 const Header = ({ setHeaderHeight }) => {
-  const router = useRouter();
-  const { code } = router.query;
+  const router = useRouter()
+  const { code } = router.query
   const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } =
-    useSelector((state) => state.authReducer);
-  const dispatch = useDispatch();
-  const headerRef = useRef(null);
-  const [userName, setUserName] = useState("");
-  const [mobileView, setMobileView] = useState(true);
+    useSelector((state) => state.authReducer)
+  const dispatch = useDispatch()
+  const headerRef = useRef(null)
+  const [userName, setUserName] = useState('')
+  const [mobileView, setMobileView] = useState(true)
 
   const handleOpenModalLogin = useCallback(() => {
-    dispatch(openLoginModal());
-  }, [dispatch]);
+    dispatch(openLoginModal())
+  }, [dispatch])
 
   useEffect(() => {
     // set margin top
-    const height = headerRef.current.offsetHeight;
-    setHeaderHeight(height);
-  }, [mobileView]);
+    const height = headerRef.current.offsetHeight
+    setHeaderHeight(height)
+  }, [mobileView])
 
   const setResponsiveness = useCallback(() => {
-    setMobileView(window.innerWidth < 900);
-  }, []);
+    setMobileView(window.innerWidth < 900)
+  }, [])
 
   useEffect(() => {
-    setResponsiveness();
-    window.addEventListener("resize", setResponsiveness);
+    setResponsiveness()
+    window.addEventListener('resize', setResponsiveness)
     return () => {
-      window.removeEventListener("resize", setResponsiveness);
-    };
-  }, [setResponsiveness]);
+      window.removeEventListener('resize', setResponsiveness)
+    }
+  }, [setResponsiveness])
 
   useEffect(() => {
     // dispatch data in store
-    const userData = JSON.parse(localStorage.getItem("user"));
+    const userData = JSON.parse(localStorage.getItem('user'))
     if (userData && userData.username && userName) {
-      dispatch(loginAction(userData));
+      dispatch(loginAction(userData))
     }
-  }, [userName, dispatch]);
+  }, [userName, dispatch])
 
   useEffect(() => {
     // check login has data in localStore
-    const userData = JSON.parse(localStorage.getItem("user"));
+    const userData = JSON.parse(localStorage.getItem('user'))
     if (userData && userData.username) {
-      setUserName(userData.username);
+      setUserName(userData.username)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     console.log("user", user, userName);
     if (!user && userName) {
-      setUserName();
-      handleOpenModalLogin();
+      setUserName()
+      handleOpenModalLogin()
     }
-  }, [user]);
+  }, [user])
 
   useEffect(() => {
     if (code) {
-      dispatch(signDataAction({ signUpData: { ["InviteCode"]: code } }));
-      dispatch(openRegisterModal());
+      dispatch(signDataAction({ signUpData: { ['InviteCode']: code } }))
+      dispatch(openRegisterModal())
     }
-  }, [code, dispatch]);
+  }, [code, dispatch])
+
+  const goHome = () => {
+    window.location.href = '/'
+  }
 
   return (
     <React.StrictMode>
@@ -95,7 +99,7 @@ const Header = ({ setHeaderHeight }) => {
         <AppBar
           ref={headerRef}
           position="fixed"
-          sx={{ background: "#000000!important" }}
+          sx={{ background: '#000000!important' }}
         >
           <Toolbar className="first-block">
             {/* Khối 1 */}
@@ -146,13 +150,17 @@ const Header = ({ setHeaderHeight }) => {
                 width={290}
                 height={224}
                 className="bgCenterNavbar"
+                onClick={goHome}
               />
+            </Link>
+            <Link href="/">
               <Image
                 src="/images/logoFU.png"
                 alt="LogoCenter"
                 width={165}
                 height={60}
                 className="logoFU"
+                onClick={goHome}
               />
             </Link>
             {/* Khối 2 */}
@@ -167,7 +175,7 @@ const Header = ({ setHeaderHeight }) => {
               </Button>
               <Button mr={2} color="inherit" className="submenu">
                 <Link href="/nhiem-vu" className="submenu__parent">
-                  Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: "5px" }} />
+                  Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
                 </Link>
                 <ul className="submenu__list">
                   <li>
@@ -182,9 +190,9 @@ const Header = ({ setHeaderHeight }) => {
                 <Link href="/vong-quay-may-man">Vòng quay may mắn</Link>
               </Button>
             </Box>
-            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ flexGrow: 2 }} />
             <Box
-              sx={{ flexGrow: 1, display: "flex", alignItems: "left" }}
+              sx={{ flexGrow: 1, display: 'flex', alignItems: 'left' }}
               ml={2}
             >
               <Button mr={2} color="inherit">
@@ -197,7 +205,7 @@ const Header = ({ setHeaderHeight }) => {
                 <Link href="/lien-he">Liên hệ</Link>
               </Button>
               <Button color="inherit">
-                <Link href="/hoi-vien/bag">Hội viên</Link>
+                <Link href="/hoi-vien">Hội viên</Link>
               </Button>
             </Box>
           </Toolbar>

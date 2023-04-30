@@ -14,8 +14,9 @@ import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRound
 import axiosInstance from '@/utils/api'
 import $ from 'jquery'
 import InputField from '@/components/input';
+import {formatNumber} from '@/utils/help'
 
-const RemoveFriendModal = ({ friend, onClose }) => {
+const SendFpointModal = ({ friend, onClose }) => {
   const style = {
     position: 'absolute',
     top: '50%',
@@ -30,6 +31,10 @@ const RemoveFriendModal = ({ friend, onClose }) => {
     borderRadius: '10px',
   }
   const [open, setOpen] = useState(true)
+  const [fpoint, setFpoint] = useState('');
+  // init user data in local storage
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
 
   const handleClose = () => {
     setOpen(false)
@@ -37,16 +42,17 @@ const RemoveFriendModal = ({ friend, onClose }) => {
   }
 
   const currentTime = new Date().toLocaleTimeString()
-  const giftTransactionAction = () => {
+  const sendFpoint = () => {
     axiosInstance
       .post(
-        '/api/UserGiftSpin/create',
+        '/api/UserSendFPoint/create',
         {
           Active: true,
           CreateDate: currentTime,
           CreateUser: user.username,
           UserId: user.userid,
-          GiftId: gift[0].Id,
+          UserReceiveId: friend.UserId,
+          FpointValue: fpoint
         },
         {
           headers: {
@@ -59,9 +65,8 @@ const RemoveFriendModal = ({ friend, onClose }) => {
         $('.modal__giftTransaction--title').text('THÀNH CÔNG')
         $('.modal__giftTransaction--description')
           .empty()
-          .text('Bạn đã đổi quà thành công ' + gift[0].GiftTitle)
+          .text('Bạn đã tặng fpoint thành công ' + fpoint)
         $('.button--confirm').remove()
-        $('.button--back').css({ marginTop: '4%' })
       })
       .catch((error) => {
         console.log(error)
@@ -69,7 +74,6 @@ const RemoveFriendModal = ({ friend, onClose }) => {
         $('.modal__giftTransaction--img').remove()
         $('.modal__giftTransaction--description').empty().text(error.message)
         $('.button--confirm').remove()
-        $('.button--back').css({ marginTop: '41%' })
       })
   }
 
@@ -107,15 +111,18 @@ const RemoveFriendModal = ({ friend, onClose }) => {
           THÔNG BÁO
         </Typography>
 
+        <Typography mb={3} className="modal__giftTransaction--description"></Typography>
 
-        <InputField
-          name='fpoint'
-          type='number'
-          value={fpoint}
-          onChange={(e) => setFpoint(e.target.value)}
-          fullWidth
-          required
-        />
+        <Box mb={4}>
+          <InputField
+            name='fpoint'
+            type='text'
+            value={fpoint}
+            onChange={(e) => setFpoint(e.target.value)}
+            fullWidth
+            required
+          />
+        </Box>
       
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -130,7 +137,7 @@ const RemoveFriendModal = ({ friend, onClose }) => {
           <Button
             variant="contained"
             className="button--confirm"
-            onClick={() => giftTransactionAction()}
+            onClick={() => sendFpoint()}
           >
             XÁC NHẬN
           </Button>
@@ -140,4 +147,4 @@ const RemoveFriendModal = ({ friend, onClose }) => {
   )
 }
 
-export default RemoveFriendModal
+export default SendFpointModal

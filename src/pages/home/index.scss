@@ -47,6 +47,7 @@ img {
         cursor: pointer;
         background: #120000;
         border-bottom: 2px solid #707070;
+        
         &--logo {
             width: 157px;
             height: 214px;
@@ -84,6 +85,15 @@ img {
                 color: #fff;
             }
         }
+
+        &.custom {
+            .tournament__item--images {
+                max-width: 300px;
+            }
+            .tournament__item--info {
+                max-width: 300px;
+            }
+        }
     
         @media (max-width: 768px) {
             flex-wrap: wrap;
@@ -107,6 +117,18 @@ img {
             }
         }
         
+    }
+    .tabCategory {
+        padding: 2px 15px;
+        display: inline-block;
+        &:hover {
+            background: url('/images/bg-tab.svg') no-repeat center;
+            background-size: contain;
+        }
+    }
+    .divider {
+        border: solid 1px #fff !important;
+        rotate: 25deg;
     }
 }
 
@@ -156,6 +178,9 @@ img {
     &--item {
         position: relative;
         margin: 0 10px;
+        &:hover {
+            text-decoration: unset;
+        }
         &::after {
             position: absolute;
             content: "";
@@ -170,13 +195,33 @@ img {
             max-height: 320px;
             width: calc(100% - 0px);
             object-fit: contain;
-            mix-blend-mode: color-burn;
+            // mix-blend-mode: color-burn;
             border: solid 1px #ccc;
             box-sizing: border-box;
+        }
+        &.custom {
+            margin: 0 0 25px;
+            &::after{
+                display: none;
+            }
+            .video__slider--info {
+                bottom: 5px;
+            }
         }
     }
     .slick-slide {
         padding: 0 10px
+    }
+    &--info {
+        position: absolute;
+        bottom: 0;
+        width: 60%;
+        padding: 15px;
+        background: rgba(0,0,0,0.6);
+    }
+    
+    &--title {
+        font-weight: bold;
     }
     @media (max-width: 768px) {
         padding: 0 15px;
@@ -308,4 +353,10 @@ img {
 }
 .category__match {
     margin: 10px 0 20px;
+}
+
+.tournament__grid {
+    display: grid;
+    grid-template-columns: calc(70% - 10px) calc(30% - 10px);
+    column-gap: 25px;
 }
