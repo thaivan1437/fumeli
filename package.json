@@ -30,6 +30,7 @@
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "jquery": "^3.6.4",
+    "moment": "^2.29.4",
     "next": "13.1.6",
     "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",

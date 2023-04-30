@@ -1,73 +1,97 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import { useSelector } from 'react-redux';
-import DehazeIcon from '@mui/icons-material/Dehaze';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Box, Typography } from "@mui/material";
+import DehazeIcon from "@mui/icons-material/Dehaze";
+import ActivityDiary from "./activityDiary";
+import ExchangeGiftHistory from "./exchangeGiftHistory";
+import RotationHistory from "./rotationHistory";
+import { useMediaQuery, useTheme } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 export default function ActivityHistory() {
-  const { user } = useSelector((state) => state?.authReducer);
-  const [code, setCode] = useState({code: '', link:''})
-
-  const handleCopy = (id) => {
-    const input = document.getElementById(id);
-    input.select();
-    document.execCommand('copy');
+  const theme = useTheme();
+  const isMatchMD = useMediaQuery(theme.breakpoints.down("md"));
+  const ActivityController = [
+    { id: 1, title: "Nhật ký hoạt động" },
+    { id: 2, title: "Lịch sử mời bạn" },
+    { id: 3, title: "Lịch sử giao dịch" },
+    { id: 4, title: "Lịch sử quay số" },
+    { id: 5, title: "Lịch sử đổi quà" },
+  ];
+  const [controlType, setControlType] = useState(1);
+  const [hidden, setHidden] = useState(true);
+  const handleChangeType = (type) => {
+    setControlType(type);
   };
-  
+  // const { user } = useSelector((state) => state?.authReducer);
+  // const [code, setCode] = useState({ code: "", link: "" });
 
-  useEffect(() => {
-    if (user) {
-      setCode({code: user.userid, link: window.location.origin + '/?code=' + user.userid })
-    }
-  },[user])
+  // const handleCopy = (id) => {
+  //   const input = document.getElementById(id);
+  //   input.select();
+  //   document.execCommand("copy");
+  // };
 
+  // useEffect(() => {
+  //   if (user) {
+  //     setCode({
+  //       code: user.userid,
+  //       link: window.location.origin + "/?code=" + user.userid,
+  //     });
+  //   }
+  // }, [user]);
+  const handleOpen = () => {
+    setHidden(!hidden);
+  };
   return (
     <React.StrictMode>
-      <Box className='activity'>
-        <Box className='activity__grid'>
-					<Box className="activity__grid--left">
-						<Typography variant="p" component="p" color={'#FF2423'}>
-							<DehazeIcon color={'#FF2423'} />HOẠT ĐỘNG
-						</Typography>
-						<ul className='activity__list'>
-							<li>
-								Nhật ký hoạt động
-							</li>
-							<li>
-								Lịch sử mời bạn
-							</li>
-							<li>
-								Lịch sử giao dịch
-							</li>
-							<li>
-								Lịch sử quay số
-							</li>
-							<li>
-								Lịch sử đổi quà
-							</li>
-						</ul>
-					</Box>
-					<Box className="activity__grid--right">
-						<Box className="activity__diary">
-							<Typography py={4} variant="h6" component="p" color={'#FF2423'}>
-								NHẬT KÝ HOẠT ĐỘNG
-							</Typography>
-							<ul className='activity__diary--list'>
-								<li>
-									<NotificationsNoneIcon color={'#FF2423'}/>
-									<Box>
-										<Typography variant="h6" component="p" color={'#ffffff'} className=''>
-											Bạn đã tham gia 1 hoạt động vòng quay may mắn.
-										</Typography>
-										<Typography variant="h6" component="p" color={'#D9D9D9'} className=''>
-											Khoảng 1 giờ trước
-										</Typography>
-									</Box>
-								</li>
-							</ul>
-							
-						</Box>
-					</Box>
+      <Box className="activity">
+        <Box className="activity__grid">
+          <Box className="activity__grid--left">
+            <Typography
+              variant="p"
+              component="p"
+              color={"#FF2423"}
+              className={`${!hidden ? "active" : ""}`}
+              onClick={isMatchMD ? handleOpen : null}
+            >
+              <span>
+                <DehazeIcon color={"#FF2423"} className="icon" />
+                HOẠT ĐỘNG
+              </span>
+              {isMatchMD && hidden ? (
+                <ArrowForwardIosIcon className="icon show__arrow hidden__arrow" />
+              ) : (
+                isMatchMD && (
+                  <KeyboardArrowDownIcon
+                    color={"#FF2423"}
+                    className="icon show__arrow"
+                  />
+                )
+              )}
+            </Typography>
+            <ul className={`activity__list ${hidden ? "hidden" : ""}`}>
+              {ActivityController &&
+                ActivityController.map((control) => (
+                  <li
+                    key={control.id}
+                    onClick={() => handleChangeType(control.id)}
+                    className={`${
+                      controlType === control.id ? "active" : null
+                    }`}
+                  >
+                    {control.title}
+                  </li>
+                ))}
+            </ul>
+          </Box>
+          <Box className="activity__grid--right">
+            {controlType && controlType === 1 ? <ActivityDiary /> : null}
+            {controlType && controlType === 4 ? <RotationHistory /> : null}
+            {controlType && controlType === 5 ? <ExchangeGiftHistory /> : null}
+          </Box>
+
           {/* <Typography py={4} variant="h6" component="p" color={'#fff'} sx={{textAlign: 'center'}}>
             Gửi bạn bè mã mời hoặc liên kết đăng ký cùng tham gia nhận thêm điểm FPOINT !!!
           </Typography>
@@ -106,5 +130,5 @@ export default function ActivityHistory() {
         </Box>
       </Box>
     </React.StrictMode>
-  )
+  );
 }

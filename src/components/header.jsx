@@ -69,7 +69,7 @@ const Header = ({ setHeaderHeight }) => {
   }, [])
 
   useEffect(() => {
-    console.log('user', user, userName)
+    console.log("user", user, userName);
     if (!user && userName) {
       setUserName()
       handleOpenModalLogin()
@@ -104,7 +104,7 @@ const Header = ({ setHeaderHeight }) => {
           <Toolbar className="first-block">
             {/* Khối 1 */}
             <Box
-              sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}
+              sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
             >
               <IconButton size="large" color="inherit" sx={{ mr: 2 }}>
                 <FacebookIcon />
@@ -129,11 +129,11 @@ const Header = ({ setHeaderHeight }) => {
                   <Button
                     variant="contained"
                     sx={{
-                      backgroundColor: '#FF2423',
-                      borderRadius: '40px',
-                      color: 'white',
-                      '&:hover': {
-                        backgroundColor: '#d6221d',
+                      backgroundColor: "#FF2423",
+                      borderRadius: "40px",
+                      color: "white",
+                      "&:hover": {
+                        backgroundColor: "#d6221d",
                       },
                     }}
                     onClick={handleOpenModalLogin}
@@ -167,7 +167,7 @@ const Header = ({ setHeaderHeight }) => {
           </Toolbar>
           <Toolbar>
             <Box
-              sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}
+              sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
               mr={2}
             >
               <Button mr={2} color="inherit">
@@ -215,7 +215,7 @@ const Header = ({ setHeaderHeight }) => {
       {loginModalOpen && <LoginModal></LoginModal>}
       {forgetPasswordModalOpen && <ForgotPasswordModal></ForgotPasswordModal>}
     </React.StrictMode>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
