@@ -7,20 +7,6 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const router = express.Router();
-
-// Định nghĩa các route tương ứng với các trang của bạn tại đây
-router.get('/nhiem-vu/:pid', (req, res) => {
-  return app.render(req, res, '/nhiem-vu/[pid]', { pid: req.params.pid });
-});
-
-router.get('/nhiem-vu', (req, res) => {
-  return app.render(req, res, '/nhiem-vu/index', {});
-});
-
-router.get('/nhiem-vu/invite', (req, res) => {
-  return app.render(req, res, '/nhiem-vu/invite', {});
-});
 
 app.prepare().then(() => {
   const server = express();

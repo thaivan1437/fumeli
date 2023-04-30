@@ -10,7 +10,6 @@ import {
 } from '@mui/material'
 import Image from 'next/image'
 import { format } from 'date-fns'
-import LayoutUserPage from './avatar'
 import axiosInstance from '@/utils/api'
 import { useDispatch } from 'react-redux'
 import { getAllDataThunkAction } from '../logic/reducer'
@@ -68,7 +67,6 @@ export default function UserFU() {
 
   return (
     <>
-      <LayoutUserPage />
       <Container>
         <Typography gutterBottom className="userFU-title">
           DANH SÁCH HỘI VIÊN<span className="cl-red"> FUMELI</span>

@@ -71,7 +71,6 @@ export default function PostPage() {
               />
               <Button className='mission__invite--btn' variant="contained" color='error' onClick={() => handleCopy('link')}>COPY</Button>
             </Box>
-            Is show page invite
           </Box>
         </Box>
       </Container>

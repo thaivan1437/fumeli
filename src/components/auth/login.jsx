@@ -10,6 +10,7 @@ import {
 } from "./logic/action";
 import axios from 'axios';
 import Toast from '@/components/toast';
+import Image from 'next/image'
 
 const LoginModal = () => {
   const [rememberMe, setRememberMe] = useState(false);
@@ -30,7 +31,7 @@ const LoginModal = () => {
     if (statusCode && statusCode.isShow) {
       setTimeout(() => {
         setStatusCode({ isShow: false, status: '' })
-      }, 5200)
+      }, 2000)
     }
   },[statusCode.isShow]);
 
@@ -81,7 +82,7 @@ const LoginModal = () => {
           // wait toast end
           handleClose();
           location.reload();
-        }, 5500)
+        }, 2500)
       })
       .catch(error => {
         setStatusCode({ isShow: true, status: 'error' })
@@ -105,6 +106,14 @@ const LoginModal = () => {
         <Box
           className='modal__common--box'
         >
+          <Image
+            src="/images/close.svg"
+            alt="btn close"
+            onClick={() => handleClose()}
+            width={27}
+            height={27}
+            className="btn__modal--close"
+          />
           <Typography variant="h6" component="h2" sx={{textAlign: 'center'}}>
             Đăng nhập <Typography variant="span">Fumeli</Typography>
           </Typography>
@@ -129,29 +138,27 @@ const LoginModal = () => {
                   />
                 </Box>
               ))}
-              <Grid container>
-                <Grid item xs>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={rememberMe}
-                        onChange={handleRememberMe}
-                        name="rememberMe"
-                      />
-                    }
-                    label="Ghi nhớ tài khoản"
-                  />
-                </Grid>
-                <Grid item>
-                  <Button variant='text' color='error' onClick={handleForgetPassword}>Quên mật khẩu</Button>
-                </Grid>
-              </Grid>
+              <Box className='forget--btn'>
+                <Button variant='text' color='error' onClick={handleForgetPassword}>Quên mật khẩu</Button>
+              </Box>
+              <Box className='text-left'>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={rememberMe}
+                      onChange={handleRememberMe}
+                      name="rememberMe"
+                    />
+                  }
+                  label="Ghi nhớ tài khoản"
+                />
+              </Box>
             </Box>
-            <Box my={2}>
+            <Box mt={5} mb={2}>
               <Button type="submit" variant="contained" color="error" onClick={handleLogin} sx={{ width: '100%' , margin: 'auto'}}>Đăng nhập</Button>
             </Box>
             <Box my={2}>
-              <Button variant="contained" color="info" onClick={handleOpenRegister} sx={{ width: '100%', margin: 'auto' }}>ĐĂNG KÝ TÀI KHOẢN</Button>
+              <Button variant="contained" onClick={handleOpenRegister} sx={{ width: '100%', margin: 'auto', background: '#F0F0F0', color: '#000' }}>ĐĂNG KÝ TÀI KHOẢN</Button>
             </Box>
           </form>
         </Box>

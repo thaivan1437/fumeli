@@ -81,6 +81,19 @@
   display: flex;
   align-items: center;
   background-color: #000;
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  &.custom {
+    justify-content: space-between;
+  }
+  .d-flex {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .hot_item__li:nth-child(even) {
@@ -106,6 +119,9 @@
   line-height: 19px;
   letter-spacing: -0.01em;
   text-align: left;
+  &.custom {
+    margin-left: 20px;
+  }
 }
 
 .hot_item__value {
@@ -236,6 +252,9 @@
     line-height: 23px;
     text-align: center;
     margin: 10px 0 20px;
+    &.remove-friend {
+      margin: 40px 0 30px !important;
+    }
   }
   .modal__gift {
     text-align: center;

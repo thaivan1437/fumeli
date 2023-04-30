@@ -15,6 +15,7 @@ const Daily = () => {
 		}
 	}, [missionCategory && missionCategory.length]);
 
+	console.log('missionCategory', missionCategory)
 	// handle pagination
 	const ITEMS_PER_PAGE = 6;
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,8 +30,14 @@ const Daily = () => {
 
 
 	const itemList = (item, isOrder = 0)=> {
+		let url = ''
+		if (item.Id == 4) {
+			url = 'vong-quay-may-man'
+		} else {
+			url = `tham-gia/daily/${item.TitleLink}/${item.Id}`
+		}
 		return <Grid key={item.CreateDate} item xs={12} sm={4} md={4} className={''}>
-			<Link href={`nhiem-vu/${item.Id}?type=daily`}>
+			<Link href={url}>
 				<AutoSizeImage
 					src={item.ImagePath}
 					alt={item.Title}

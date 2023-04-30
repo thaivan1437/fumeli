@@ -3,6 +3,7 @@ import InfoUser from './ui/userFu'
 import { getAllDataThunkAction } from './logic/reducer'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/material'
+import LayoutUserPage from './ui/avatar'
 
 export default function UserDetail() {
   const dispatch = useDispatch()
@@ -15,6 +16,7 @@ export default function UserDetail() {
 
   return (
     <Box className="bgPage">
+      <LayoutUserPage />
       <InfoUser />
     </Box>
   )
