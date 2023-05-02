@@ -13,7 +13,7 @@ const ActivityDiary = () => {
   const newActivityHistory = activitiesHistory?.sort((a, b) => b.Id - a.Id);
   const newGivePointsHistory = givePointsHistory?.sort((a, b) => b.Id - a.Id);
   const newFriendsHistory = friends?.sort((a, b) => b.Id - a.Id);
-
+  console.log("=>>> newFriendsHistory", newFriendsHistory);
   return (
     <div>
       <Box className="activity__diary">
