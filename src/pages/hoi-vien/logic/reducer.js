@@ -9,9 +9,8 @@ import {
   getSpinsHistory,
   getDataUser,
   getAllUser,
-  getAllFriendByUserId
+  getAllFriendByUserId,
 } from "./action";
-
 
 const initialState = {
   userGift: [],
@@ -24,9 +23,9 @@ const initialState = {
   userData: [],
   allUser: [],
   userFriend: [],
-}
+};
 
-console.log(initialState.allUser)
+console.log(initialState.allUser);
 
 export const userDetail = (state = initialState, action) => {
   switch (action.type) {
@@ -66,22 +65,21 @@ export const userDetail = (state = initialState, action) => {
         spinsHistory: action.payload,
       };
 
-      
-    case 'GET_DATAUSER':
+    case "GET_DATAUSER":
       return {
         ...state,
         userData: action.payload,
-      }
-    case 'GET_ALLUSER':
+      };
+    case "GET_ALLUSER":
       return {
         ...state,
         allUser: action.payload,
-      }
-    case 'GET_ALLUSERFRIEND':
+      };
+    case "GET_ALLUSERFRIEND":
       return {
         ...state,
         userFriend: action.payload,
-      }
+      };
     default:
       return state;
   }
@@ -195,13 +193,13 @@ export const getSpinsHistorysData = (props) => async (dispatch, getState) => {
   }
 };
 
-const USER_DETAIL_API_ENDPOINT = 'appUser/detail/'
+const USER_DETAIL_API_ENDPOINT = "appUser/detail/";
 
-let data = []
-if (typeof window !== 'undefined') {
-  const userData = localStorage.getItem('user')
+let data = [];
+if (typeof window !== "undefined") {
+  const userData = localStorage.getItem("user");
   if (userData) {
-    data = JSON.parse(userData)
+    data = JSON.parse(userData);
   }
 }
 
@@ -210,14 +208,14 @@ export const getAllDataThunkAction = () => async (dispatch, getState) => {
     const [userDataResponse, allUserResponse, userFriendResponse] =
       await Promise.all([
         axiosGet(`${USER_DETAIL_API_ENDPOINT}${data.userid}`),
-        axiosGet('appUser/getallclientbyuserrole?role=user'),
+        axiosGet("appUser/getallclientbyuserrole?role=user"),
         axiosGet(`UserFriend/getallclientbyuserid/${data.userid}`),
-      ])
+      ]);
 
-    await dispatch(getDataUser(userDataResponse))
-    await dispatch(getAllUser(allUserResponse))
-    await dispatch(getAllFriendByUserId(userFriendResponse))
+    await dispatch(getDataUser(userDataResponse));
+    await dispatch(getAllUser(allUserResponse));
+    await dispatch(getAllFriendByUserId(userFriendResponse));
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};

@@ -424,6 +424,13 @@
   }
 }
 
+.text-capitalize {
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 16px;
+  margin-right: 4px;
+}
+
 @media (max-width: 768px) {
   .activity__grid {
     grid-template-columns: 100%;
@@ -586,17 +593,17 @@
 // }
 .btn_outline {
   margin: 5% 0 !important;
-  border: 1px solid #ff2423!important;
-  background-color: transparent!important;
+  border: 1px solid #ff2423 !important;
+  background-color: transparent !important;
   color: #fff !important;
   font-size: 20px !important;
   font-weight: 700;
   line-height: 23px;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
   text-align: center;
 
   &:after {
-    content: '';
+    content: "";
     background-color: #ff2423;
     bottom: 1px;
     left: 1px;

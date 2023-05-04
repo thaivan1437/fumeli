@@ -13,7 +13,7 @@ const ActivityDiary = () => {
   const newActivityHistory = activitiesHistory?.sort((a, b) => b.Id - a.Id);
   const newGivePointsHistory = givePointsHistory?.sort((a, b) => b.Id - a.Id);
   const newFriendsHistory = friends?.sort((a, b) => b.Id - a.Id);
-
+  console.log("=>>> newFriendsHistory", newFriendsHistory);
   return (
     <div>
       <Box className="activity__diary">
@@ -69,8 +69,10 @@ const ActivityDiary = () => {
                       color={"#ffffff"}
                       className=""
                     >
-                      Bạn đã mời người chơi {friend.FriendUserName} tham gia
-                      thành công.
+                      <small className="text-capitalize">
+                        {friend.FriendUserName}
+                      </small>
+                      đã trở thành bạn bè với bạn.
                     </Typography>
                     <Typography
                       variant="small"
