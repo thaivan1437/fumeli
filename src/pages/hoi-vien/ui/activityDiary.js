@@ -69,8 +69,10 @@ const ActivityDiary = () => {
                       color={"#ffffff"}
                       className=""
                     >
-                      Bạn đã mời người chơi {friend.FriendUserName} tham gia
-                      thành công.
+                      <small className="text-capitalize">
+                        {friend.FriendUserName}
+                      </small>
+                      đã trở thành bạn bè với bạn.
                     </Typography>
                     <Typography
                       variant="small"
