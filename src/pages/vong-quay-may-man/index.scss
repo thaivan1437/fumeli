@@ -70,8 +70,12 @@
 }
 
 .modal__gift .Toastify__toast-container--top-right {
-  top: 32em;
-  right: 43em;
+  top: 28em;
+  right: 30em;
+  @media (max-width: 768px) {
+    top: 32em;
+    right: 43em;
+  }
 }
 
 .rules__block--image {

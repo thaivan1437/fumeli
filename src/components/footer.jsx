@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
-import { Grid, Link, Container } from '@mui/material'
+import { Grid, Container } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import YouTubeIcon from '@mui/icons-material/YouTube'
@@ -8,14 +8,15 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 import EmailIcon from '@mui/icons-material/Email'
+import Link from 'next/link'
 
 const footerLinks = [
-  { label: 'GIỚI THIỆU', href: '/about' },
-  { label: 'NHIỆM VỤ', href: '/misson' },
-  { label: 'GIẢI ĐẤU', href: '#' },
-  { label: 'ĐỔI QUÀ', href: '#' },
-  { label: 'LIÊN HỆ', href: '/contact' },
-  { label: 'HỘI VIÊN', href: '#' },
+  { label: 'GIỚI THIỆU', href: '/gioi-thieu' },
+  { label: 'NHIỆM VỤ', href: '/nhiem-vu' },
+  { label: 'GIẢI ĐẤU', href: '/giai-dau' },
+  { label: 'ĐỔI QUÀ', href: '/doi-qua' },
+  { label: 'LIÊN HỆ', href: '/lien-he' },
+  { label: 'HỘI VIÊN', href: '/hoi-vien' },
 ]
 
 const linkColor = '#fff'

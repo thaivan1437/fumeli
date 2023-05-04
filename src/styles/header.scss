@@ -9,7 +9,7 @@
 }
 .logoFU {
   position: absolute;
-  top: 101%;
+  margin-top: 2%;
   left: 52%;
   transform: translate(-50%, -50%);
 }
@@ -39,10 +39,10 @@
     display: none !important;
   }
   .MuiDrawer-paper {
-    display: inline !important;;
+    display: inline !important;
   }
   .css-1o5pq7n {
-    display: none !important;;
+    display: none !important;
   }
 }
 @media (min-width: 1343px) {
@@ -50,12 +50,12 @@
     display: none !important;
   }
   .navbar--desktop {
-    display: inline !important;;
+    display: inline !important;
   }
   .MuiDrawer-paper {
-    display: none !important;;
+    display: none !important;
   }
   .css-1o5pq7n {
-    display: none !important;;
+    display: none !important;
   }
 }

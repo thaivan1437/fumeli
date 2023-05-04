@@ -97,44 +97,6 @@ const AboutChild = () => {
               )
             })}
         </Box>
-        {/* <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
-          <Box
-            xs={12}
-            md={12}
-            borderRadius={2}
-            border={1}
-            borderColor="#fff"
-            bgcolor="#0F0F0F"
-          >
-            <Grid
-              container
-              spacing={8}
-              style={{
-                height: '100%',
-                textAlign: 'center',
-                justifyContent: 'center',
-                padding: '15px 50px',
-              }}
-            >
-              <Grid item xs={6} md={3} sx={styledText}>
-                <Typography variant="h4">70%</Typography>
-                <Typography variant="h6">ACCURACY</Typography>
-              </Grid>
-              <Grid item xs={6} md={3} sx={styledText}>
-                <Typography variant="h4">68%</Typography>
-                <Typography variant="h6">GAMES</Typography>
-              </Grid>
-              <Grid item xs={6} md={3} sx={styledText}>
-                <Typography variant="h4">91%</Typography>
-                <Typography variant="h6">CLIENT</Typography>
-              </Grid>
-              <Grid item xs={6} md={3} sx={styledText}>
-                <Typography variant="h4">59%</Typography>
-                <Typography variant="h6">AWARD</Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box> */}
         <Box mt={8} mb={6}>
           <Typography
             variant="h4"
@@ -181,4 +143,5 @@ const AboutChild = () => {
     </Box>
   )
 }
+
 export default AboutChild

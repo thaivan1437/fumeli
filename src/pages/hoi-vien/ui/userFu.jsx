@@ -67,7 +67,7 @@ export default function UserFU() {
 
   return (
     <>
-      <Container>
+      <Container className="mt-2">
         <Typography gutterBottom className="userFU-title">
           DANH SÁCH HỘI VIÊN<span className="cl-red"> FUMELI</span>
         </Typography>
