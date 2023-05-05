@@ -125,6 +125,7 @@ const AboutChild = () => {
                       key={logo.alt}
                       style={{ marginRight: '0.6%' }}
                       data-id={logo.alt}
+                      className="custom__slide"
                     >
                       <Image
                         key={logo.alt}

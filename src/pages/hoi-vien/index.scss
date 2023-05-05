@@ -656,7 +656,7 @@
 }
 @media (max-width: 768px) {
   .userFU-title {
-    font-size: 22px;
+    font-size: 22px !important;
     line-height: 28px;
     font-style: normal;
     font-weight: 700;
@@ -1010,7 +1010,7 @@
 }
 @media (max-width: 768px) {
   .userFU-title {
-    font-size: 22px;
+    font-size: 22px !important;
     line-height: 28px;
   }
 }
