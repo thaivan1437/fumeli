@@ -7,6 +7,10 @@
     {
       "source": "/nhiem-vu/:pid*",
       "destination": "/nhiem-vu/[pid]"
+    },
+    {
+      "source": "/giai-dau/chi-tiet-giai-dau/:pid*",
+      "destination": "/giai-dau/chi-tiet-giai-dau/[pid]"
     }
   ]
 }

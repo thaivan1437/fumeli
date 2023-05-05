@@ -10,8 +10,10 @@ export default function Mission() {
   const dispatch = useDispatch();
   useEffect(() => {
     async function fetchData3() {
-      await dispatch(getMissionCategoryDataThunkAction());
-      await dispatch(getMissionDataThunkAction());
+      await Promise.all([
+        dispatch(getMissionCategoryDataThunkAction()),
+        dispatch(getMissionDataThunkAction())
+      ]);
     }
     void fetchData3();
   }, []);
@@ -20,8 +22,8 @@ export default function Mission() {
     <React.StrictMode>
       <Container>
         <TopRank></TopRank>
-        <Daily></Daily>
       </Container>
+      <Daily></Daily>
       <Video></Video>
     </React.StrictMode>
   );
