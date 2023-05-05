@@ -20,8 +20,10 @@ export default function UserDetail() {
   useEffect(() => {
     if (!user) { return}
     async function fetchAllData() {
-      await dispatch(getUserGiftData({userId: user?.userid}))
-      await dispatch(getUserGiftHistoryData({userId: user?.userid}))
+      await Promise.all([
+        dispatch(getUserGiftData({userId: user?.userid})),
+        dispatch(getUserGiftHistoryData({userId: user?.userid}))
+      ]);
     }
     void fetchAllData()
   }, [user])

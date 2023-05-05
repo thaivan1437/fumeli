@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { AppBar, Box, IconButton, Toolbar, Button } from '@mui/material'
+import { AppBar, Box, IconButton, Toolbar, Button, Menu, MenuItem  } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import YouTubeIcon from '@mui/icons-material/YouTube'
@@ -84,7 +84,24 @@ const Header = ({ setHeaderHeight }) => {
   }, [code, dispatch])
 
   const goHome = () => {
-    window.location.href = '/'
+    router.push('/')
+  }
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const openPageUser = () => {
+    handleClose();
+    router.push('/hoi-vien')
+  }
+  const openbag = () => {
+    handleClose();
+    router.push('/hoi-vien/bag')
   }
 
   return (
@@ -124,7 +141,59 @@ const Header = ({ setHeaderHeight }) => {
               {
                 // show user when logged
                 userName ? (
-                  userName
+                  <>
+                    <span onClick={handleClick}>
+                      {userName}
+                    </span>
+                    
+                    <Menu
+                      anchorEl={anchorEl}
+                      id="account-menu"
+                      open={open}
+                      onClose={handleClose}
+                      onClick={handleClose}
+                      PaperProps={{
+                        elevation: 0,
+                        sx: {
+                          overflow: 'visible',
+                          filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                          mt: 1.5,
+                          '& .MuiAvatar-root': {
+                            width: 32,
+                            height: 32,
+                            ml: -0.5,
+                            mr: 1,
+                          },
+                          '&:before': {
+                            content: '""',
+                            display: 'block',
+                            position: 'absolute',
+                            top: 0,
+                            right: 14,
+                            width: 10,
+                            height: 10,
+                            bgcolor: 'background.paper',
+                            transform: 'translateY(-50%) rotate(45deg)',
+                            zIndex: 0,
+                          },
+                        },
+                      }}
+                      transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                      anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                      className='menu--header'
+                    >
+                      <MenuItem className='menu--item' onClick={openPageUser}>
+                        Trang cá nhân
+                      </MenuItem>
+                      <MenuItem className='menu--item' onClick={openbag}>
+                        Túi đồ
+                      </MenuItem>
+                      <MenuItem className='menu--item' onClick={handleClose}>
+                        Đăng xuất
+                      </MenuItem>
+                    </Menu>
+                  </>
+                  
                 ) : (
                   <Button
                     variant="contained"

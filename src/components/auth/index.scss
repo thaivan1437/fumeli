@@ -107,11 +107,11 @@
 }
 
 .modal__rule--title {
-  margin: 0;
-  background: #FF2423;
-  color: #fff;
+  margin: 0 !important;
+  background: #ff2423;
+  color: #fff !important;
   padding: 15px 0;
-  font-size: 24px;
+  font-size: 24px !important;
   text-transform: uppercase;
 }
 

@@ -13,14 +13,11 @@ const DetailTournament = () => {
   const {pid} = router.query;
 	const { match, matchCategory } = useSelector((state) => state?.match);
 	const detail = matchCategory.filter(item => item.Id == pid);
-
 	const matchOther = matchCategory.filter(item => item.Id != pid);
 
 	const dispatch = useDispatch();
   useEffect(() => {
-		console.log('count loop completed', match)
     if( match && match.length == 0) {
-			console.log('in', match)
 			async function fetchData3() {
 				await dispatch(getMatchDataThunkAction());
 			}
@@ -42,8 +39,6 @@ const DetailTournament = () => {
     setVideoId("");
   };
 	
-	const hotItems = [1,2,3];
-
   return (
     <React.Fragment>
 			<Box className='tournament'>
