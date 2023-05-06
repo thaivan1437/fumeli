@@ -43,6 +43,7 @@ const NotiModal = ({  onClose }) => {
       BackdropProps={{
         timeout: 500,
       }}
+      disableScrollLock={true}
     >
       <Box
         sx={{

@@ -26,7 +26,7 @@ const Tournaments = () => {
   return (
     <React.Fragment>
 			<Box>
-				<Typography variant="h4" component="h2" color={'#fff'} className='fw-b'>
+				<Typography variant="h4" component="h2" color={'#fff'} className='fw-b fs-48'>
 					GIẢI ĐẤU
 				</Typography>
 				<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff', marginBottom: '20px'}}>
@@ -38,7 +38,7 @@ const Tournaments = () => {
 						{
 							matchCategory && matchCategory.map((item) => {
 								return (
-									<span className={isActive == item.Id ? 'active' : ''} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</span>
+									<span className={`fw-b fs-20 ${isActive == item.Id ? 'active' : ''}`} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</span>
 								)
 							})
 						}

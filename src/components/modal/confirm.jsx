@@ -21,6 +21,7 @@ export default function ConfirmModal({ open, handleClose, message, title, icon, 
       open={open}
       onClose={handleClose}
       className='modal__common'
+      disableScrollLock={true}
     >
       <Box
         className='modal__common--box'

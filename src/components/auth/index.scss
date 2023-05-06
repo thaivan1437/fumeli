@@ -72,11 +72,34 @@
   .modal__register--paper {
 
   }
+  .note-term {
+    text-align: left;
+    color: #8B8B8B;
+    font-size: 12px;
+  }
+  .btn-register {
+    width: 100%;
+    margin: auto;
+    background: #F0F0F0;
+    color: #000;
+    &:hover {
+      background: #F0F0F0;
+      font-weight: bold;
+      box-shadow: none;
+    }
+  }
+  .btn-login {
+    &:hover {
+      font-weight: bold;
+      box-shadow: none;
+    }
+  }
   .forget--btn {
     text-align: right;
     margin: 0;
     .MuiButton-root {
       padding: 0 15px !important;
+      text-transform: unset;
     }
   }
   .text-left {

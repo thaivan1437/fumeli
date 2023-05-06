@@ -70,33 +70,35 @@ const Daily = () => {
   return (
     <React.Fragment>
 			<SliderMission />
-
-			<Container>
-				<Typography mt={4} variant="h4" component="h2" color={'#fff'}>
-					NHIỆM VỤ HẰNG NGÀY
-				</Typography>
-				<Box my={4} sx={{ flexGrow: 1, padding: 0 }} className="mission custom">
-					<Grid container spacing={{ xs: 2, md: 4 }} my={4} rowSpacing={{ xs: 2 }} columns={{ xs: 12, sm: 8, md: 12 }} >
-						{
-							displayData.map((item) => (
-								itemList(item)
-							))
-						}
-						
-					</Grid>
-				</Box>
-				<Box my={2} className="minigame__item" sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-					<ButtonGroup className="css__btn" variant="contained" aria-label="button group">
-						{
-							[...Array(maxPage)].map((_, index) => (
-								<Button key={index} onClick={() => handleClick(index + 1)}>
-									{index + 1}
-								</Button>
-							))
-						}
-					</ButtonGroup>
-				</Box>
-			</Container>
+			<Box className="bg-common">
+				<Container>
+					<Typography mt={4} variant="h4" component="h2" color={'#fff'}>
+						NHIỆM VỤ HẰNG NGÀY
+					</Typography>
+					<Box my={4} sx={{ flexGrow: 1, padding: 0 }} className="mission custom">
+						<Grid container spacing={{ xs: 2, md: 4 }} my={4} rowSpacing={{ xs: 2 }} columns={{ xs: 12, sm: 8, md: 12 }} >
+							{
+								displayData.map((item) => (
+									itemList(item)
+								))
+							}
+							
+						</Grid>
+					</Box>
+					<Box my={2} className="minigame__item" sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+						<ButtonGroup className="css__btn" variant="contained" aria-label="button group">
+							{
+								[...Array(maxPage)].map((_, index) => (
+									<Button key={index} onClick={() => handleClick(index + 1)}>
+										{index + 1}
+									</Button>
+								))
+							}
+						</ButtonGroup>
+					</Box>
+				</Container>
+			</Box>
+			
 		</React.Fragment>
   );
 }

@@ -75,6 +75,7 @@ export default function SpringModal({ videoId, onClose }) {
             TransitionComponent: Fade,
           },
         }}
+        disableScrollLock={true}
       >
         <Fade in={open}>
           <Box sx={style}>

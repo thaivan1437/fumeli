@@ -13,6 +13,7 @@ export default function AlertModal({ open, handleClose, message, title, icon, is
       open={open}
       onClose={() => handleClose()}
       className='modal__common'
+      disableScrollLock={true}
     >
       <Box
         className='modal__common--box'

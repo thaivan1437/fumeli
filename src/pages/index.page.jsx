@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container } from '@mui/system';
+import { Container, Box } from '@mui/system';
 import  Tournaments  from './home/ui/tournaments';
 import  Mission  from './home/ui/mission';
 import  MiniGame  from './home/ui/minigame';
@@ -27,12 +27,14 @@ export default function Home() {
   return (
     <React.StrictMode>
       {loading && <Loader />}
-      <SliderBanner></SliderBanner>
-      <Container>
-        <TopRank></TopRank>
-        <Mission></Mission>
-        <Tournaments></Tournaments>
-      </Container>
+      <Box className="bg-main">
+        <SliderBanner></SliderBanner>
+        <Container>
+          <TopRank></TopRank>
+          <Mission></Mission>
+          <Tournaments></Tournaments>
+        </Container>
+      </Box>
       <Videos></Videos>
       <MiniGame></MiniGame>
     </React.StrictMode>
