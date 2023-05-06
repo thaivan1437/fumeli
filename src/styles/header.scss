@@ -19,7 +19,7 @@
 }
 .logoFU {
   position: absolute;
-  margin-top: 2%;
+  margin-top: 3%;
   left: 52%;
   transform: translate(-50%, -50%);
 }
@@ -68,4 +68,11 @@
   .css-1o5pq7n {
     display: none !important;
   }
+}
+.second-block .p-7 {
+  padding: 12px !important;
+}
+
+.first-block .p-7 {
+  padding: 8px !important;
 }

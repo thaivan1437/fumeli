@@ -58,19 +58,19 @@ function Footer() {
             <Box textAlign="center">
               <FacebookIcon
                 className="socialIcon"
-                sx={{ marginRight: '1%', fontSize: '36px' }}
-              />
-              <InstagramIcon
-                className="socialIcon"
-                sx={{ marginRight: '1%', fontSize: '36px' }}
+                sx={{ marginRight: '2%', fontSize: '36px' }}
               />
               <YouTubeIcon
                 className="socialIcon"
-                sx={{ marginRight: '1%', fontSize: '36px' }}
+                sx={{ marginRight: '2%', fontSize: '36px' }}
+              />
+              <InstagramIcon
+                className="socialIcon"
+                sx={{ marginRight: '2%', fontSize: '36px' }}
               />
               <TwitterIcon
                 className="socialIcon"
-                sx={{ marginRight: '1%', fontSize: '36px' }}
+                sx={{ marginRight: '2%', fontSize: '36px' }}
               />
             </Box>
           </Grid>
@@ -81,6 +81,7 @@ function Footer() {
                 sx={{
                   display: 'flex',
                   alignItems: 'left',
+                  textAlign: 'left',
                   justifyContent: { xs: 'left', sm: 'left' },
                 }}
               >
@@ -89,7 +90,8 @@ function Footer() {
                 Đông, Quận 7, TP.HCM, VN9
               </Typography>
             </Grid>
-            <Grid item xs={12} md={6} sx={{ m: 0 }} textAlign="left">
+            <Grid item xs={12} md={1} sx={{ m: 0 }} textAlign="left"></Grid>
+            <Grid item xs={12} md={4} sx={{ m: 0 }} textAlign="left">
               <Typography
                 gutterBottom
                 sx={{ display: 'flex', alignItems: 'center' }}

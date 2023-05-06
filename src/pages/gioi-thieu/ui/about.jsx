@@ -86,11 +86,7 @@ const AboutChild = () => {
             aboutData.map((item, index) => {
               return (
                 <Box key={item.CreateDate} p={2}>
-                  <Typography
-                    variant="h6"
-                    color="initial"
-                    sx={{ textAlign: 'center' }}
-                  >
+                  <Typography variant="h6" color="initial">
                     <div dangerouslySetInnerHTML={{ __html: item.Content }} />
                   </Typography>
                 </Box>
@@ -126,7 +122,6 @@ const AboutChild = () => {
                         key={logo.alt}
                         style={{ marginRight: '0.6%', display: 'flex' }}
                         data-id={logo.alt}
-                        className="custom__slide"
                       >
                         <Image
                           key={logo.alt}
@@ -134,6 +129,7 @@ const AboutChild = () => {
                           alt={logo.alt}
                           width={logo.width / 1.5}
                           height={logo.height / 1.5}
+                          className="custom__slide--img"
                         />
                       </div>
                     )

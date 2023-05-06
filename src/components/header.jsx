@@ -134,6 +134,7 @@ const Header = ({ setHeaderHeight }) => {
                         backgroundColor: '#d6221d',
                       },
                     }}
+                    className="p-7"
                     onClick={handleOpenModalLogin}
                   >
                     Login
@@ -145,13 +146,11 @@ const Header = ({ setHeaderHeight }) => {
               <Image
                 src="/images/bgCenterNavbar.png"
                 alt="LogoCenter"
-                width={290}
-                height={224}
+                width={310}
+                height={270}
                 className="bgCenterNavbar"
                 onClick={goHome}
               />
-            </Link>
-            <Link href="/">
               <Image
                 src="/images/logoFU.png"
                 alt="LogoCenter"
@@ -163,15 +162,12 @@ const Header = ({ setHeaderHeight }) => {
             </Link>
             {/* Khối 2 */}
           </Toolbar>
-          <Toolbar  className="second-block">
-            <Box
-              sx={{ display: 'flex', justifyContent: 'flex-end' }}
-              mr={2}
-            >
-              <Button mr={2} color="inherit">
+          <Toolbar className="second-block">
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }} mr={2}>
+              <Button mr={2} color="inherit" className="p-7">
                 <Link href="/gioi-thieu">Giới thiệu</Link>
               </Button>
-              <Button mr={2} color="inherit" className="submenu">
+              <Button mr={2} color="inherit" className="submenu p-7">
                 <Link href="/nhiem-vu" className="submenu__parent">
                   Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
                 </Link>
@@ -184,24 +180,21 @@ const Header = ({ setHeaderHeight }) => {
                   </li>
                 </ul>
               </Button>
-              <Button color="inherit">
+              <Button color="inherit" className="p-7">
                 <Link href="/vong-quay-may-man">Vòng quay may mắn</Link>
               </Button>
             </Box>
-            <Box
-              sx={{ display: 'flex', alignItems: 'left' }}
-              ml={2}
-            >
-              <Button mr={2} color="inherit">
+            <Box sx={{ display: 'flex', alignItems: 'left' }} ml={2}>
+              <Button mr={2} color="inherit" className="p-7">
                 <Link href="/giai-dau">Giải đấu</Link>
               </Button>
-              <Button mr={2} color="inherit">
+              <Button mr={2} color="inherit" className="p-7">
                 <Link href="/doi-qua">Đổi quà</Link>
               </Button>
-              <Button mr={2} color="inherit">
+              <Button mr={2} color="inherit" className="p-7">
                 <Link href="/lien-he">Liên hệ</Link>
               </Button>
-              <Button color="inherit">
+              <Button color="inherit" className="p-7">
                 <Link href="/hoi-vien">Hội viên</Link>
               </Button>
             </Box>
