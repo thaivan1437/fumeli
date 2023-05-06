@@ -1,6 +1,16 @@
 .first-block {
+  padding: 0 10% !important;
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid #fff;
 }
+
+.second-block {
+  padding: 0 10% !important;
+  display: flex;
+  justify-content: space-between;
+}
+
 .bgCenterNavbar {
   position: absolute;
   top: 50%;

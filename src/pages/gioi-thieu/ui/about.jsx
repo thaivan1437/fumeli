@@ -12,13 +12,13 @@ const AboutChild = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 2000,
     centerMode: true,
     variableWidth: false,
-    centerPadding: '400px',
+    centerPadding: '200px',
     arrows: true,
     responsive: [
       {
@@ -117,27 +117,29 @@ const AboutChild = () => {
             borderColor="#fff"
             bgcolor="#0F0F0F"
           >
-            <Slider className="hot__item center" {...settings}>
-              {partnerLogos &&
-                partnerLogos.map((logo) => {
-                  return (
-                    <div
-                      key={logo.alt}
-                      style={{ marginRight: '0.6%' }}
-                      data-id={logo.alt}
-                      className="custom__slide"
-                    >
-                      <Image
+            <div className="custom__slider">
+              <Slider className="hot__item center" {...settings}>
+                {partnerLogos &&
+                  partnerLogos.map((logo) => {
+                    return (
+                      <div
                         key={logo.alt}
-                        src={logo.src}
-                        alt={logo.alt}
-                        width={logo.width / 1.5}
-                        height={logo.height / 1.5}
-                      />
-                    </div>
-                  )
-                })}
-            </Slider>
+                        style={{ marginRight: '0.6%', display: 'flex' }}
+                        data-id={logo.alt}
+                        className="custom__slide"
+                      >
+                        <Image
+                          key={logo.alt}
+                          src={logo.src}
+                          alt={logo.alt}
+                          width={logo.width / 1.5}
+                          height={logo.height / 1.5}
+                        />
+                      </div>
+                    )
+                  })}
+              </Slider>
+            </div>
           </Box>
         </Box>
       </Container>
