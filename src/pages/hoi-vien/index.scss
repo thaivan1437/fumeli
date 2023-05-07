@@ -517,7 +517,7 @@
 .table__userDetail--text__left {
   padding-left: 0 !important;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 600 !important;
   font-size: 14px !important;
   line-height: 16px !important;
   letter-spacing: -0.01em !important;
@@ -525,40 +525,40 @@
 }
 .table__userDetail--text__right {
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400 !important;
   font-size: 14px !important;
   line-height: 16px !important;
   letter-spacing: -0.01em;
   color: #ffffff !important;
 }
 .userDetail__description--title {
-  font-style: normal;
-  font-weight: 700;
+  font-style: normal !important;
+  font-weight: 700 !important;
   font-size: 16px !important;
   line-height: 19px;
   letter-spacing: -0.01em;
-  text-align: center;
+  text-align: center !important;
   color: #ffffff !important;
 }
 .userDetail__description--description {
-  font-style: normal;
-  font-weight: 400;
+  font-style: normal !important;
+  font-weight: 400 !important;
   font-size: 14px !important;
-  line-height: 16px;
-  text-align: justify;
-  letter-spacing: -0.01em;
+  line-height: 16px !important;
+  text-align: justify !important;
+  letter-spacing: -0.01em !important;
   color: #ffffff !important;
 }
 .userDetail__page--title {
-  font-style: normal;
-  font-weight: 700;
+  font-style: normal !important;
+  font-weight: 700 !important;
   font-size: 24px !important;
-  line-height: 28px;
-  letter-spacing: -0.01em;
+  line-height: 28px !important;
+  letter-spacing: -0.01em !important;
   color: #ffffff !important;
 }
 .input__userDetail {
-  width: 100%;
+  width: 100% !important;
 }
 .table__userDetail--body {
   tr {
@@ -597,10 +597,10 @@
   background-color: transparent !important;
   color: #fff !important;
   font-size: 20px !important;
-  font-weight: 700;
-  line-height: 23px;
-  letter-spacing: -0.01em;
-  text-align: center;
+  font-weight: 700 !important;
+  line-height: 23px !important;
+  letter-spacing: -0.01em !important;
+  text-align: center !important;
 
   &:after {
     content: '';
@@ -628,11 +628,11 @@
   padding: 5%;
 }
 .list_user_FU--info--box--username {
-  font-style: normal;
-  font-weight: 700;
+  font-style: normal !important;
+  font-weight: 700 !important  ;
   font-size: 20px !important;
-  line-height: 23px;
-  letter-spacing: -0.01em;
+  line-height: 23px !important;
+  letter-spacing: -0.01em !important;
   color: #ffffff !important;
 }
 .list_user_FU--info--box--lastactive {
@@ -789,7 +789,7 @@
   }
 }
 .fz-14 {
-  font-size: 14px;
+  font-size: 14px !important;
 }
 .p-7px {
   padding: 7px !important;
@@ -869,55 +869,55 @@
 }
 .table__userDetail--text__left {
   padding-left: 0 !important;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: -0.01em;
-  color: #ffffff;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
 }
 .table__userDetail--text__right {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: -0.01em;
-  color: #ffffff;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
 }
 .userDetail__description--title {
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: #ffffff;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  line-height: 19px !important;
+  letter-spacing: -0.01em !important;
+  text-align: center !important;
+  color: #ffffff !important;
 }
 .userDetail__description--description {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  text-align: justify;
-  letter-spacing: -0.01em;
-  color: #ffffff;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  text-align: justify !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
 }
 .userDetail__page--title {
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: -0.01em;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 28px !important;
+  letter-spacing: -0.01em !important;
   color: #ffffff;
 }
 
 .input__userDetail {
-  width: 100%;
+  width: 100% !important;
 }
 
 .table__userDetail--body {
   tr {
-    border: 0;
+    border: 0 !important;
   }
 }
 
@@ -935,10 +935,10 @@
   margin-top: 2% !important;
 }
 .btn__confirm {
-  float: right;
-  background: #ff2423;
-  border: 0.75px solid #000000;
-  border-radius: 3px;
+  float: right !important;
+  background: #ff2423 !important;
+  border: 0.75px solid #000000 !important;
+  border-radius: 3px !important;
 
   &:hover {
     background: #d61e1e !important;
@@ -948,15 +948,15 @@
 //   // color: #ff2423;
 // }
 .btn_outline {
-  margin: 5% 0 5% 0;
-  border: solid 1px #ff2423 !important;
+  margin: 5% 0 !important;
+  border: 1px solid #ff2423 !important;
   background-color: transparent !important;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 23px;
-  letter-spacing: -0.01em;
-  text-align: center;
+  color: #fff !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 23px !important;
+  letter-spacing: -0.01em !important;
+  text-align: center !important;
 
   &:after {
     content: '';
@@ -984,12 +984,12 @@
   padding: 5%;
 }
 .list_user_FU--info--box--username {
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 23px;
-  letter-spacing: -0.01em;
-  color: #ffffff;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  line-height: 23px !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
 }
 .list_user_FU--info--box--lastactive {
   font-style: normal;
@@ -1199,4 +1199,7 @@
       fill: #fff;
     }
   }
+}
+.ml-5pc {
+  margin-left: 5% !important;
 }

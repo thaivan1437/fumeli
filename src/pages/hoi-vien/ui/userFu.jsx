@@ -108,7 +108,7 @@ export default function UserFU() {
                     ) ? (
                       <Button
                         variant="contained"
-                        className="btn_outline ml-6 fz-14"
+                        className="btn_outline ml-6 fz-14 ml-5pc"
                       >
                         Đã là bạn bè
                       </Button>
