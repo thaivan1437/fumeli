@@ -44,6 +44,8 @@ export default function Activity() {
           variant="h4"
           component="h2"
           color={"#fff"}
+          fontSize={"48px"}
+          textTransform={"uppercase"}
           sx={{ padding: "30px 0" }}
         >
           Hoạt động

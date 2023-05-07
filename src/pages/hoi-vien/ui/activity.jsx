@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import ActivityDiary from "./activityDiary";
@@ -50,7 +49,7 @@ export default function ActivityHistory() {
         <Box className="activity__grid">
           <Box className="activity__grid--left">
             <Typography
-              variant="p"
+              variant="h6"
               component="p"
               color={"#FF2423"}
               className={`${!hidden ? "active" : ""}`}

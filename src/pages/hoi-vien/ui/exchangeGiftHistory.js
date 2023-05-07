@@ -40,7 +40,7 @@ const ExchangeGiftHistory = () => {
             <p className="center">
               {moment(row.createData).format("M/D/YYYY h:mm:ss A")}
             </p>
-            <p className="right">{row.point}</p>
+            <p className="right">- {row.point} Fpoint</p>
           </div>
         ))}
       </div>
