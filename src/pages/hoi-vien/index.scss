@@ -512,7 +512,7 @@
 }
 .table__userDetail {
   padding: 0 3%;
-  margin-top: 5%;
+  margin-top: 2% !important;
 }
 .table__userDetail--text__left {
   padding-left: 0 !important;
@@ -1202,4 +1202,9 @@
 }
 .ml-5pc {
   margin-left: 5% !important;
+}
+
+.css-q34dxg {
+  border-bottom: 1px solid rgb(224 224 224 / 39%) !important;
+  padding: 22px !important;
 }
