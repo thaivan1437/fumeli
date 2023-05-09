@@ -89,24 +89,24 @@ const DailyDetail = ({
   
     if (today < dateItem || isActive) {
       const message = today < dateItem ? 'Ngày mai quay lại sau.' : 'Hôm nay bạn đã điểm danh! Ngày mai quay lại sau.';
-      handleModal('LỖI', message, <ErrorOutlineIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
+      handleModal('LỖI', message, <ErrorOutlineIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
       return;
     }
   
     if (today > dateItem && !isActive) {
       setDate(newItem);
-      handleModal('ĐIỂM DANH BÙ', '200 Fpoint = 1 Lần điểm danh bù', <NotificationsActiveOutlinedIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>, 1);
+      handleModal('ĐIỂM DANH BÙ', '200 Fpoint = 1 Lần điểm danh bù', <NotificationsActiveOutlinedIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 1);
       return;
     }
   
     await dispatch(createMissionComplete({ idCamp: id, createDate: newItem }));
-    handleModal('THÀNH CÔNG', 'Bạn đã điểm danh thành công ngày hôm nay!', <CheckCircleOutlinedIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
+    handleModal('THÀNH CÔNG', 'Bạn đã điểm danh thành công ngày hôm nay!', <CheckCircleOutlinedIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
   };
   
   const handleConfirm = async () => {
     dispatch(createMissionComplete({ idCamp: id, createDate: date }));
     handleClose(1);
-    handleModal('THÀNH CÔNG', 'Bạn đã điểm danh bù thành công!', <CheckCircleOutlinedIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
+    handleModal('THÀNH CÔNG', 'Bạn đã điểm danh bù thành công!', <CheckCircleOutlinedIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
     setConfirm(false);
   };
   
