@@ -74,9 +74,9 @@ const SpinTurnTransactionModal = ({ onClose }) => {
     } else if (statusCode.isShow && statusCode.status === 'success') {
       return <Toast message="Đổi lượt quay thành công" type="success" />
     }
-    setTimeout(() => {
-      onClose()
-    }, 6000)
+    // setTimeout(() => {
+    //   onClose()
+    // }, 10000)
   }
 
   return (
@@ -110,11 +110,14 @@ const SpinTurnTransactionModal = ({ onClose }) => {
             color: '#FF2423',
           }}
         />
-        <Typography mb={3} className="modal__giftTransaction--title">
+        <Typography
+          mb={3}
+          className="modal__giftTransaction--title luckywheel__transactionTurn__title"
+        >
           THÊM LƯỢT QUAY
         </Typography>
         <Typography
-          className="modal__giftTransaction--description mb-150"
+          className="modal__giftTransaction--description"
           variant="h6"
           component="p"
         >
