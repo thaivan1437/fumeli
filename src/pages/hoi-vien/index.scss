@@ -308,8 +308,8 @@
 .exchange__gifts {
   width: 100%;
   color: #fff;
-  background-color: #0f0f0f;
-  margin-left: 30px;
+  border-left: 1px solid #d9d9d9;
+  padding-left: 30px;
   h3 {
     color: #ff2423;
     padding: 10px 0;
@@ -318,63 +318,66 @@
     font-size: 20px;
     background-color: #181818;
   }
+  .exchange__gifts__container {
+    background-color: #0f0f0f;
 
-  .exchange__gifts__body {
-    height: 500px;
-    &.scroll__style {
-      overflow-y: scroll;
+    .exchange__gifts__body {
+      height: 500px;
+      &.scroll__style {
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          width: 7px;
+        }
 
-      &::-webkit-scrollbar {
-        width: 7px;
-      }
+        &::-webkit-scrollbar-track {
+          border-radius: 10px;
+        }
 
-      &::-webkit-scrollbar-track {
-        background-color: transparent;
-        border-radius: 10px;
-      }
+        &::-webkit-scrollbar-thumb {
+          background-color: #8b8b8b;
+          border-radius: 10px;
+        }
 
-      &::-webkit-scrollbar-thumb {
-        background-color: #8b8b8b;
-        border-radius: 10px;
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background-color: #555;
+        &::-webkit-scrollbar-thumb:hover {
+          background-color: #555;
+        }
       }
     }
-  }
 
-  .exchange__gifts__grid {
-    color: #fff;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    align-items: center;
-    &.exchange__gifts__header {
-      padding-right: 6px;
+    .exchange__gifts__grid {
+      color: #fff;
       width: 100%;
-      background-color: #ff2423;
-      p {
-        font-weight: bold;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      align-items: center;
+      &.exchange__gifts__header {
+        overflow-x: auto;
+        padding-right: 6px;
+        width: 100%;
+        background-color: #ff2423;
+        p {
+          font-weight: bold;
+        }
       }
-    }
 
-    p {
-      border-left: 1px solid #8a8a8a;
-      padding: 16px;
-      grid-column: span 2 / span 2;
-      &:first-child {
-        grid-column: span 1 / span 1;
-        border-left: none;
-      }
-      &:last-child {
-        grid-column: span 1 / span 1;
-      }
-      &.right {
-        text-align: right;
-      }
-      &.center {
-        text-align: center;
+      p {
+        border-left: 1px solid #8a8a8a;
+        padding: 16px;
+        grid-column: span 2 / span 2;
+        height: 100%;
+        &:first-child {
+          grid-column: span 1 / span 1;
+          border-left: none;
+        }
+        &:last-child {
+          grid-column: span 1 / span 1;
+        }
+        &.right {
+          text-align: right;
+        }
+        &.center {
+          text-align: center;
+        }
       }
     }
   }
@@ -383,9 +386,9 @@
 .rotation__history {
   width: 100%;
   color: #fff;
+  border-left: 1px solid #d9d9d9;
   margin-bottom: 2rem;
-  margin-left: 30px;
-  background-color: #0f0f0f;
+  padding-left: 30px;
   h3 {
     color: #ff2423;
     padding: 10px 0;
@@ -394,60 +397,66 @@
     font-size: 20px;
     background-color: #181818;
   }
+  .rotation__history__container {
+    background-color: #0f0f0f;
+    .rotation__history__body {
+      height: 500px;
+      &.scroll__style {
+        overflow-y: scroll;
 
-  .rotation__history__body {
-    height: 500px;
-    &.scroll__style {
-      overflow-y: scroll;
+        &::-webkit-scrollbar {
+          width: 7px;
+        }
 
-      &::-webkit-scrollbar {
-        width: 7px;
-      }
+        &::-webkit-scrollbar-track {
+          background-color: transparent;
+          border-radius: 10px;
+        }
 
-      &::-webkit-scrollbar-track {
-        background-color: transparent;
-        border-radius: 10px;
-      }
+        &::-webkit-scrollbar-thumb {
+          background-color: #8b8b8b;
+          border-radius: 10px;
+        }
 
-      &::-webkit-scrollbar-thumb {
-        background-color: #8b8b8b;
-        border-radius: 10px;
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background-color: #555;
+        &::-webkit-scrollbar-thumb:hover {
+          background-color: #555;
+        }
       }
     }
-  }
 
-  .rotation__history__grid {
-    color: #fff;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    align-items: center;
-    &.rotation__history__header {
-      padding-right: 6px;
+    .rotation__history__grid {
+      color: #fff;
       width: 100%;
-      background-color: #ff2423;
-      p {
-        font-weight: bold;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      align-items: center;
+      &.rotation__history__header {
+        padding-right: 6px;
+        width: 100%;
+        background-color: #ff2423;
+        p {
+          font-weight: bold;
+        }
       }
-    }
 
-    p {
-      padding: 16px;
-      border-left: 1px solid #8a8a8a;
-      grid-column: span 2 / span 2;
-      &:first-child {
-        border-left: none;
-        grid-column: span 1 / span 1;
-      }
-      &.right {
-        text-align: right;
-      }
-      &.center {
-        text-align: center;
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+        padding: 16px;
+        border-left: 1px solid #8a8a8a;
+        grid-column: span 2 / span 2;
+        &:first-child {
+          border-left: none;
+          grid-column: span 1 / span 1;
+        }
+        &.right {
+          justify-content: right;
+        }
+        &.center {
+          justify-content: center;
+        }
       }
     }
   }
@@ -501,6 +510,7 @@
         padding: 0;
       }
       .point__container {
+        margin: 0;
         grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 0;
         .point__history {
@@ -510,22 +520,12 @@
         }
       }
       .rotation__history {
-        margin: 0;
-        .get__table {
-          td,
-          th {
-            font-size: 14px;
-          }
-        }
+        padding: 0;
+        border-left: none;
       }
       .exchange__gifts {
-        margin: 0;
-        .get__table {
-          td,
-          th {
-            font-size: 14px;
-          }
-        }
+        padding: 0;
+        border-left: none;
       }
     }
   }
