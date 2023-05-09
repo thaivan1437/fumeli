@@ -19,8 +19,10 @@ import {
 import ResponsiveDrawer from '@/components/drawer/drawer'
 import { useRouter } from 'next/router'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { usePathname } from 'next/navigation'
 
 const Header = ({ setHeaderHeight }) => {
+  const pathname = usePathname()
   const router = useRouter()
   const { code } = router.query
   const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } =
@@ -86,6 +88,8 @@ const Header = ({ setHeaderHeight }) => {
     window.location.href = '/'
   }
 
+  console.log(pathname)
+
   return (
     <React.StrictMode>
       {mobileView ? (
@@ -122,7 +126,7 @@ const Header = ({ setHeaderHeight }) => {
               {
                 // show user when logged
                 userName ? (
-                  userName
+                  <span className="header__text">{userName}</span>
                 ) : (
                   <Button
                     // variant="contained"
@@ -134,7 +138,7 @@ const Header = ({ setHeaderHeight }) => {
                         backgroundColor: '#d6221d',
                       },
                     }}
-                    className="p-7"
+                    className="p-7 "
                     onClick={handleOpenModalLogin}
                   >
                     Login
@@ -164,39 +168,139 @@ const Header = ({ setHeaderHeight }) => {
           </Toolbar>
           <Toolbar className="second-block">
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }} mr={2}>
-              <Button mr={2} color="inherit" className="p-7">
-                <Link href="/gioi-thieu">Giới thiệu</Link>
-              </Button>
-              <Button mr={2} color="inherit" className="submenu p-7">
-                <Link href="/nhiem-vu" className="submenu__parent">
-                  Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
-                </Link>
-                <ul className="submenu__list">
-                  <li>
-                    <Link href="/nhiem-vu">Nhiệm vụ hằng ngày</Link>
-                  </li>
-                  <li>
-                    <Link href="/nhiem-vu/invite">Mời bạn nhận quà</Link>
-                  </li>
-                </ul>
-              </Button>
-              <Button color="inherit" className="p-7">
-                <Link href="/vong-quay-may-man">Vòng quay may mắn</Link>
-              </Button>
+              {pathname === '/gioi-thieu' ? (
+                <Button
+                  mr={2}
+                  color="inherit"
+                  className="p-7 active__header hover__btn"
+                >
+                  <Link href="/gioi-thieu" className="header__text ">
+                    Giới thiệu
+                  </Link>
+                </Button>
+              ) : (
+                <Button mr={2} color="inherit" className="p-7 hover__btn">
+                  <Link href="/gioi-thieu" className="header__text">
+                    Giới thiệu
+                  </Link>
+                </Button>
+              )}
+              {pathname === '/nhiem-vu' ? (
+                <Button
+                  mr={2}
+                  color="inherit"
+                  className="submenu p-7 header__text active__header  "
+                >
+                  <Link href="/nhiem-vu" className="submenu__parent">
+                    Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
+                  </Link>
+                  <ul className="submenu__list ">
+                    <li>
+                      <Link href="/nhiem-vu">Nhiệm vụ hằng ngày</Link>
+                    </li>
+                    <li>
+                      <Link href="/nhiem-vu/invite">Mời bạn nhận quà</Link>
+                    </li>
+                  </ul>
+                </Button>
+              ) : (
+                <Button
+                  mr={2}
+                  color="inherit"
+                  className="submenu p-7 header__text hover__btn"
+                >
+                  <Link href="/nhiem-vu" className="submenu__parent">
+                    Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
+                  </Link>
+                  <ul className="submenu__list ">
+                    <li>
+                      <Link href="/nhiem-vu">Nhiệm vụ hằng ngày</Link>
+                    </li>
+                    <li>
+                      <Link href="/nhiem-vu/invite">Mời bạn nhận quà</Link>
+                    </li>
+                  </ul>
+                </Button>
+              )}
+              {pathname === '/vong-quay-may-man' ? (
+                <Button color="inherit" className="p-7 active__header">
+                  <Link href="/vong-quay-may-man" className="header__text">
+                    Vòng quay may mắn
+                  </Link>
+                </Button>
+              ) : (
+                <Button color="inherit" className="p-7 hover__btn">
+                  <Link href="/vong-quay-may-man" className="header__text">
+                    Vòng quay may mắn
+                  </Link>
+                </Button>
+              )}
             </Box>
-            <Box sx={{ display: 'flex', alignItems: 'left' }} ml={2}>
-              <Button mr={2} color="inherit" className="p-7">
-                <Link href="/giai-dau">Giải đấu</Link>
-              </Button>
-              <Button mr={2} color="inherit" className="p-7">
-                <Link href="/doi-qua">Đổi quà</Link>
-              </Button>
-              <Button mr={2} color="inherit" className="p-7">
-                <Link href="/lien-he">Liên hệ</Link>
-              </Button>
-              <Button color="inherit" className="p-7">
-                <Link href="/hoi-vien">Hội viên</Link>
-              </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }} ml={2}>
+              {pathname === '/giai-dau' ? (
+                <Button
+                  mr={2}
+                  color="inherit"
+                  className="p-7 active__header__b2"
+                >
+                  <Link href="/giai-dau" className="header__text">
+                    Giải đấu
+                  </Link>
+                </Button>
+              ) : (
+                <Button mr={2} color="inherit" className="p-7 hover__btn2">
+                  <Link href="/giai-dau" className="header__text">
+                    Giải đấu
+                  </Link>
+                </Button>
+              )}
+              {pathname === '/doi-qua' ? (
+                <Button
+                  mr={2}
+                  color="inherit"
+                  className="p-7 active__header__b2"
+                >
+                  <Link href="/doi-qua" className="header__text">
+                    Đổi quà
+                  </Link>
+                </Button>
+              ) : (
+                <Button mr={2} color="inherit" className="p-7 hover__btn2">
+                  <Link href="/doi-qua" className="header__text">
+                    Đổi quà
+                  </Link>
+                </Button>
+              )}
+              {pathname === '/lien-he' ? (
+                <Button
+                  mr={2}
+                  color="inherit"
+                  className="p-7 active__header__b2"
+                >
+                  <Link href="/lien-he" className="header__text">
+                    Liên hệ
+                  </Link>
+                </Button>
+              ) : (
+                <Button mr={2} color="inherit" className="p-7 hover__btn2">
+                  <Link href="/lien-he" className="header__text">
+                    Liên hệ
+                  </Link>
+                </Button>
+              )}
+              {pathname === '/hoi-vien' ? (
+                <Button color="inherit" className="p-7 active__header__b2">
+                  <Link href="/hoi-vien" className="header__text">
+                    Hội viên
+                  </Link>
+                </Button>
+              ) : (
+                <Button color="inherit" className="p-7 hover__btn2">
+                  <Link href="/hoi-vien" className="header__text">
+                    Hội viên
+                  </Link>
+                </Button>
+              )}
             </Box>
           </Toolbar>
         </AppBar>

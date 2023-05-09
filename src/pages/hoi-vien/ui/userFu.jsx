@@ -45,7 +45,6 @@ export default function UserFU() {
     }
   }, [])
 
-  useEffect(() => {}, [])
 
   const addFriend = (id) => {
     const currentTime = new Date().toLocaleTimeString()
