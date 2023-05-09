@@ -26,7 +26,7 @@ export default function RuleModal({ open, handleClose, message, title, icon,}) {
           className="btn__modal--close"
         />
         {icon}
-        <Typography my={3} variant="h4" component="h2" color='error' sx={{textAlign: 'center'}} className='modal__rule--title'>
+        <Typography my={3} variant="h4" component="h2" color='error' sx={{textAlign: 'center'}} className='modal__rule--title fs-32 fw-b'>
           {title}
         </Typography>
         <Box className='modal__rule--message'>
