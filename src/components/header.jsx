@@ -19,9 +19,11 @@ import {
 import ResponsiveDrawer from '@/components/drawer/drawer'
 import { useRouter } from 'next/router'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const Header = ({ setHeaderHeight }) => {
   const router = useRouter()
+  const { data: session } = useSession()
   const { code } = router.query
   const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } =
     useSelector((state) => state.authReducer)
@@ -124,23 +126,41 @@ const Header = ({ setHeaderHeight }) => {
               {
                 // show user when logged
                 userName ? (
-                  userName
+                  <>
+                    Signed in as {userName} <br />
+                    <button onClick={() => signOut()}>Sign out</button>
+                  </>
                 ) : (
-                  <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "#FF2423",
-                      borderRadius: "40px",
-                      color: "white",
-                      "&:hover": {
-                        backgroundColor: "#d6221d",
-                      },
-                    }}
-                    onClick={handleOpenModalLogin}
-                  >
-                    Login
-                  </Button>
+                  <>
+                    {session ? (
+                      <>
+                        Signed in as {session.user.email} <br />
+                        <button onClick={() => signOut()}>Sign out</button>
+                      </>
+                    ) : (
+                      <>
+                        Not signed in <br />
+                        <button onClick={() => signIn()}>Sign in</button>
+                      </>
+                    )}
+                  </>
                 )
+                
+                // <Button
+                  //   variant="contained"
+                  //   sx={{
+                  //     backgroundColor: "#FF2423",
+                  //     borderRadius: "40px",
+                  //     color: "white",
+                  //     "&:hover": {
+                  //       backgroundColor: "#d6221d",
+                  //     },
+                  //   }}
+                  //   onClick={handleOpenModalLogin}
+                  // >
+                  //   Login
+                  // </Button>
+                
               }
             </Box>
             <Link href="/">
