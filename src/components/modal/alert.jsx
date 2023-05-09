@@ -13,6 +13,7 @@ export default function AlertModal({ open, handleClose, message, title, icon, is
       open={open}
       onClose={() => handleClose()}
       className='modal__common'
+      disableScrollLock={true}
     >
       <Box
         className='modal__common--box'
@@ -37,10 +38,10 @@ export default function AlertModal({ open, handleClose, message, title, icon, is
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button
               variant="contained"
-              className="button--confirm"
+              className="button--confirm fs-20 fw-b w-200"
               onClick={() => handleClose()}
             >
-              <ArrowCircleLeftRoundedIcon sx={{ marginRight: '10px' }}/> OK
+              <ArrowCircleLeftRoundedIcon sx={{ marginRight: '10px' }}/> Quay lại
             </Button>
           </Box>
           )

@@ -34,15 +34,10 @@ export default function PostPage() {
 
   return (
     <React.StrictMode>
-      <Container>
-        {
-          type && type.length > 0 && type[0]?.Value == pid &&
-          <DailyDetail id={pid} />
-        }
-        <Box sx={{ backgroundColor: 'white', padding: '20px 30px'}}>
-          <div dangerouslySetInnerHTML={{ __html: missionDetail.Content }} />
-        </Box>
-      </Container>
+      {
+        type && type.length > 0 && type[0]?.Value == pid &&
+        <DailyDetail id={pid} />
+      }
     </React.StrictMode>
   )
 }

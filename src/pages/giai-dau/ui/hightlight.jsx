@@ -79,7 +79,7 @@ const HightLight = () => {
   return (
     <React.Fragment>
       <Container>
-        <Typography variant="h4" component="h2" color={'#fff'} className='fw-b tournament__title1'>
+        <Typography variant="h4" component="h2" color={'#fff'} className='fw-b tournament__title1 fs-48'>
           GIẢI ĐẤU NỔI BẬT
         </Typography>
         <Typography variant="p" my={2} color={'white'} className="mw-440" sx={{ fontSize: '14px', display: 'block'}}>

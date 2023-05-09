@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { AppBar, Box, IconButton, Toolbar, Button } from '@mui/material'
+import { AppBar, Box, IconButton, Toolbar, Button, Menu, MenuItem  } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import YouTubeIcon from '@mui/icons-material/YouTube'
@@ -29,6 +29,16 @@ const Header = ({ setHeaderHeight }) => {
   const headerRef = useRef(null)
   const [userName, setUserName] = useState('')
   const [mobileView, setMobileView] = useState(true)
+
+  const { pathname } = router;
+  console.log(router, process.env.apiHost)
+  const isActive = (href) => {
+    return pathname.indexOf(href) > -1  ? 'active' : '';
+  };
+  useEffect(() =>{
+    isActive(pathname);
+  }, [pathname])
+  
 
   const handleOpenModalLogin = useCallback(() => {
     dispatch(openLoginModal())
@@ -84,7 +94,24 @@ const Header = ({ setHeaderHeight }) => {
   }, [code, dispatch])
 
   const goHome = () => {
-    window.location.href = '/'
+    router.push('/')
+  }
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const openPageUser = () => {
+    handleClose();
+    router.push('/hoi-vien')
+  }
+  const openbag = () => {
+    handleClose();
+    router.push('/hoi-vien/bag')
   }
 
   return (
@@ -124,7 +151,59 @@ const Header = ({ setHeaderHeight }) => {
               {
                 // show user when logged
                 userName ? (
-                  userName
+                  <>
+                    <span onClick={handleClick}>
+                      {userName}
+                    </span>
+                    
+                    <Menu
+                      anchorEl={anchorEl}
+                      id="account-menu"
+                      open={open}
+                      onClose={handleClose}
+                      onClick={handleClose}
+                      PaperProps={{
+                        elevation: 0,
+                        sx: {
+                          overflow: 'visible',
+                          filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                          mt: 1.5,
+                          '& .MuiAvatar-root': {
+                            width: 32,
+                            height: 32,
+                            ml: -0.5,
+                            mr: 1,
+                          },
+                          '&:before': {
+                            content: '""',
+                            display: 'block',
+                            position: 'absolute',
+                            top: 0,
+                            right: 14,
+                            width: 10,
+                            height: 10,
+                            bgcolor: 'background.paper',
+                            transform: 'translateY(-50%) rotate(45deg)',
+                            zIndex: 0,
+                          },
+                        },
+                      }}
+                      transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                      anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                      className='menu--header'
+                    >
+                      <MenuItem className='menu--item' onClick={openPageUser}>
+                        Trang cá nhân
+                      </MenuItem>
+                      <MenuItem className='menu--item' onClick={openbag}>
+                        Túi đồ
+                      </MenuItem>
+                      <MenuItem className='menu--item' onClick={handleClose}>
+                        Đăng xuất
+                      </MenuItem>
+                    </Menu>
+                  </>
+                  
                 ) : (
                   <Button
                     variant="contained"
@@ -170,10 +249,10 @@ const Header = ({ setHeaderHeight }) => {
               sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
               mr={2}
             >
-              <Button mr={2} color="inherit">
+              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/gioi-thieu')}`}>
                 <Link href="/gioi-thieu">Giới thiệu</Link>
               </Button>
-              <Button mr={2} color="inherit" className="submenu">
+              <Button mr={2} color="inherit" className={`submenu ${isActive('/nhiem-vu')}`}>
                 <Link href="/nhiem-vu" className="submenu__parent">
                   Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
                 </Link>
@@ -186,7 +265,7 @@ const Header = ({ setHeaderHeight }) => {
                   </li>
                 </ul>
               </Button>
-              <Button color="inherit">
+              <Button color="inherit" className={`tabmenu ${isActive('/vong-quay-may-man')}`}>
                 <Link href="/vong-quay-may-man">Vòng quay may mắn</Link>
               </Button>
             </Box>
@@ -195,16 +274,16 @@ const Header = ({ setHeaderHeight }) => {
               sx={{ flexGrow: 1, display: 'flex', alignItems: 'left' }}
               ml={2}
             >
-              <Button mr={2} color="inherit">
+              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/giai-dau')}`}>
                 <Link href="/giai-dau">Giải đấu</Link>
               </Button>
-              <Button mr={2} color="inherit">
+              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/doi-qua')}`}>
                 <Link href="/doi-qua">Đổi quà</Link>
               </Button>
-              <Button mr={2} color="inherit">
+              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/lien-he')}`}>
                 <Link href="/lien-he">Liên hệ</Link>
               </Button>
-              <Button color="inherit">
+              <Button color="inherit" className={`tabmenu ${isActive('/hoi-vien')}`}>
                 <Link href="/hoi-vien">Hội viên</Link>
               </Button>
             </Box>

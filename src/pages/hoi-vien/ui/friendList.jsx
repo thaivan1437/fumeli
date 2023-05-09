@@ -32,7 +32,6 @@ export default function FriendList() {
     setDataModal({ title, message, icon });
     setOpen(prev => {
       const newModals = [...prev];
-      console.log(newModals[index], index)
       newModals[index] = true;
       return newModals;
     });
@@ -48,7 +47,7 @@ export default function FriendList() {
     setIsRemoveFriend(true);
   }
 
-  console.log('friends', friends, open, confirm);
+
   const handleCopy = (id) => {
     const input = document.getElementById(id);
     input.select();
@@ -57,7 +56,7 @@ export default function FriendList() {
   
 
   const deleteFriend = async(e) => {
-    console.log('deleteFriend', e)
+
     try {
       e.preventDefault();
       const idFriends = e.target.getAttribute('data-id');

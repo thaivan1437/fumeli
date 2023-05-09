@@ -38,6 +38,9 @@ const nextConfig = {
       },
     ]
   },
+  env: {
+    apiHost: 'https://api-demowebsite.cdktcnqn.edu.vn/api/'
+  }
 }
 
 module.exports = nextConfig

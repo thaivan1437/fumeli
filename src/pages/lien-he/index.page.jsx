@@ -28,7 +28,7 @@ const ContactPage = () => {
     event.preventDefault()
     const currentTime = new Date().toLocaleTimeString()
     axiosInstance
-      .post('/api/Contact/create', {
+      .post('Contact/create', {
         FullName: fullName,
         Email: email,
         PhoneNumber: phoneNumber,

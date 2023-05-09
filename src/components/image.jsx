@@ -4,17 +4,22 @@ import Image from "next/image";
 const AutoSizeImage = ({ src, alt, isResize = true, width, height, className = '' }) => {
   const [imageRatio, setImageRatio] = useState(null);
   const imageRef = useRef();
+  const [newSrc, setSrc] = useState(src);
 
   if (!isResize) {
     return (
       <Image
-        src={src}
+        src={newSrc}
         alt={alt ? alt : 'image'}
         height={height}
         width={width}
         layout='responsive'
         objectFit="unset"
         className={className}
+        sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 100vw,
+              100vw"
+        onError={() => setSrc('/images/mission-default.png')}
       />
     )
   }
@@ -30,7 +35,7 @@ const AutoSizeImage = ({ src, alt, isResize = true, width, height, className = '
     <div style={{ position: "relative", width: "100%" }}>
       <div style={{ paddingBottom: `${100 / imageRatio}%` }} />
       <Image
-        src={src}
+        src={newSrc}
         alt={alt ? alt : 'image'}
         layout="fill"
         objectFit="contain"
@@ -40,6 +45,7 @@ const AutoSizeImage = ({ src, alt, isResize = true, width, height, className = '
         sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 100vw,
               100vw"
+        onError={() => setSrc('/images/mission-default.png')}
       />
     </div>
   );

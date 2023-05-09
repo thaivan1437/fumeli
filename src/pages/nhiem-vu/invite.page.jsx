@@ -32,7 +32,7 @@ export default function PostPage() {
             <AutoSizeImage src="/images/mission/invite-friend.svg" alt="Thể lệ điểm danh"  width={1410} height={710} isResize={false}/>
 
             <Typography py={2} my={0} variant="p" component="p" color={'#fff'} sx={{textAlign: 'right'}}>
-              <Button variant="contained" color='error' onClick={() => console.log('ab')}>Thể lệ</Button>
+              <Button variant="contained" className='btn-rule fs-20' onClick={() => console.log('ab')}>Thể lệ</Button>
             </Typography>
           </Box>
           <Box sx={{ padding: '20px 30px'}} className='mission__invite--wrap'>
@@ -40,7 +40,7 @@ export default function PostPage() {
               Gửi bạn bè mã mời hoặc liên kết đăng ký cùng tham gia nhận thêm điểm FPOINT !!!
             </Typography>
 
-            <Typography pt={4} pb={2} variant="h6" component="p" color='error' sx={{textAlign: 'center', textTransform: 'uppercase'}}>
+            <Typography pt={4} pb={2} variant="h6" component="p" className='text-color' sx={{textAlign: 'center', textTransform: 'uppercase'}}>
               Gửi mã mời cho bạn bè:
             </Typography>
             <Box className='mission__invite--box'>
@@ -53,10 +53,10 @@ export default function PostPage() {
                 className='mission__invite--input'
                 id='code'
               />
-              <Button className='mission__invite--btn' variant="contained" color='error' onClick={() => handleCopy('code')}>COPY</Button>
+              <Button className='mission__invite--btn fs-20 bgcolor1' variant="contained" onClick={() => handleCopy('code')}>COPY</Button>
             </Box>
 
-            <Typography pt={4} pb={2} variant="h6" component="p" color='error' sx={{textAlign: 'center', textTransform: 'uppercase'}}>
+            <Typography pt={4} pb={2} variant="h6" component="p" className='text-color' sx={{textAlign: 'center', textTransform: 'uppercase'}}>
               Gửi liên kết cho bạn bè:
             </Typography>
             <Box className='mission__invite--box'>
@@ -69,7 +69,7 @@ export default function PostPage() {
                 className='mission__invite--input'
                 id='link'
               />
-              <Button className='mission__invite--btn' variant="contained" color='error' onClick={() => handleCopy('link')}>COPY</Button>
+              <Button className='mission__invite--btn fs-20 bgcolor1' variant="contained" onClick={() => handleCopy('link')}>COPY</Button>
             </Box>
           </Box>
         </Box>
