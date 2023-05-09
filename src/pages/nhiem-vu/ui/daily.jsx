@@ -40,8 +40,8 @@ const Daily = () => {
 			url = `tham-gia/daily/${item.TitleLink}/${item.Id}`
 		}
 		return <Grid key={item.CreateDate} item xs={12} sm={4} md={4} className={''}>
-			<Link href={url}>
-				<Box style={{ minHeight: 270, display: 'flex', alignItems: 'center' }}>
+			<Link href={url} className='custom'>
+				<Box style={{ minHeight: 210, display: 'flex', alignItems: 'start' }}>
 					<AutoSizeImage
 						src={item.ImagePath ? item.ImagePath : missionImage}
 						alt={item.Title}
@@ -57,7 +57,7 @@ const Daily = () => {
 					<Typography my={0} variant="p" component="p" color={'#fff'}>
 						{item.Amount ? item.Amount + ' Fpoint' : ''}
 					</Typography>
-					<Box className="wrap__btn--more css__btn" mx={0} my={2}>
+					<Box className="wrap__btn--more css__btn custom" mx={0} my={2}>
 						<Button variant="contained" className="w206" mx={0}>
 							THAM GIA
 						</Button>
@@ -72,11 +72,11 @@ const Daily = () => {
 			<SliderMission />
 			<Box className="bg-common">
 				<Container>
-					<Typography mt={4} variant="h4" component="h2" color={'#fff'}>
+					<Typography pt={4} variant="h4" component="h2" color={'#fff'} className='fs-48 fw-b'>
 						NHIỆM VỤ HẰNG NGÀY
 					</Typography>
 					<Box my={4} sx={{ flexGrow: 1, padding: 0 }} className="mission custom">
-						<Grid container spacing={{ xs: 2, md: 4 }} my={4} rowSpacing={{ xs: 2 }} columns={{ xs: 12, sm: 8, md: 12 }} >
+						<Grid container columnSpacing={{ xs: 2}} my={4} rowSpacing={{ xs: 2 }} columns={{ xs: 12, sm: 8, md: 12 }} >
 							{
 								displayData.map((item) => (
 									itemList(item)

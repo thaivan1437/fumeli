@@ -45,7 +45,7 @@ const SendFpointModal = ({ friend, onClose }) => {
   const sendFpoint = () => {
     axiosInstance
       .post(
-        '/api/UserSendFPoint/create',
+        'UserSendFPoint/create',
         {
           Active: true,
           CreateDate: currentTime,

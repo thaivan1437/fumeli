@@ -45,7 +45,7 @@ const SpinTurnTransactionModal = ({ onClose }) => {
   const spinTurnTransaction = () => {
     axiosInstance
       .post(
-        '/api/UserSpinGame/create',
+        'UserSpinGame/create',
         {
           Active: true,
           CreateDate: currentTime,

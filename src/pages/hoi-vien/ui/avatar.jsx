@@ -34,7 +34,7 @@ export default function LayoutUserPage() {
       formData.append('file', file)
 
       axiosInstance
-        .post('/api/upload/saveImage/avatar', formData, {
+        .post('upload/saveImage/avatar', formData, {
           headers: {
             Authorization: `Bearer ${user.access_token}`,
             'Content-Type': 'multipart/form-data',
@@ -46,7 +46,7 @@ export default function LayoutUserPage() {
           const str = response.data
           axiosInstance
             .put(
-              '/api/appUser/updateavatar',
+              'appUser/updateavatar',
               {
                 Id: user.userid,
                 Avatar: 'https://api-demowebsite.cdktcnqn.edu.vn/' + str,
@@ -87,7 +87,7 @@ export default function LayoutUserPage() {
       formData.append('file', file)
 
       axiosInstance
-        .post('/api/upload/saveImage/imagecover', formData, {
+        .post('upload/saveImage/imagecover', formData, {
           headers: {
             Authorization: `Bearer ${user.access_token}`,
             'Content-Type': 'multipart/form-data',
@@ -99,7 +99,7 @@ export default function LayoutUserPage() {
           const str = response.data
           axiosInstance
             .put(
-              '/api/appUser/updateimagecover',
+              'appUser/updateimagecover',
               {
                 Id: user.userid,
                 Imagecover: 'https://api-demowebsite.cdktcnqn.edu.vn/' + str,

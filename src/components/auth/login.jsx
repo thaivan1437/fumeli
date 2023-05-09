@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 import Toast from '@/components/toast';
 import Image from 'next/image'
+import {api_host} from '@/utils/api';
 
 const LoginModal = () => {
   const [rememberMe, setRememberMe] = useState(false);
@@ -73,7 +74,7 @@ const LoginModal = () => {
     params.append('Username', formData.Username);
     params.append('Password', formData.Password);
     params.append('grant_type', 'password');
-    axios.post('https://api-demowebsite.cdktcnqn.edu.vn/api/oauth/token', params)
+    axios.post(`${api_host}oauth/token`, params)
       .then(response => {
         setStatusCode({ isShow: true, status: 'success' })
         localStorage.setItem("user", JSON.stringify(response.data));

@@ -30,6 +30,16 @@ const Header = ({ setHeaderHeight }) => {
   const [userName, setUserName] = useState('')
   const [mobileView, setMobileView] = useState(true)
 
+  const { pathname } = router;
+  console.log(router, process.env.apiHost)
+  const isActive = (href) => {
+    return pathname.indexOf(href) > -1  ? 'active' : '';
+  };
+  useEffect(() =>{
+    isActive(pathname);
+  }, [pathname])
+  
+
   const handleOpenModalLogin = useCallback(() => {
     dispatch(openLoginModal())
   }, [dispatch])
@@ -239,10 +249,10 @@ const Header = ({ setHeaderHeight }) => {
               sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
               mr={2}
             >
-              <Button mr={2} color="inherit">
+              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/gioi-thieu')}`}>
                 <Link href="/gioi-thieu">Giới thiệu</Link>
               </Button>
-              <Button mr={2} color="inherit" className="submenu">
+              <Button mr={2} color="inherit" className={`submenu ${isActive('/nhiem-vu')}`}>
                 <Link href="/nhiem-vu" className="submenu__parent">
                   Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
                 </Link>
@@ -255,7 +265,7 @@ const Header = ({ setHeaderHeight }) => {
                   </li>
                 </ul>
               </Button>
-              <Button color="inherit">
+              <Button color="inherit" className={`tabmenu ${isActive('/vong-quay-may-man')}`}>
                 <Link href="/vong-quay-may-man">Vòng quay may mắn</Link>
               </Button>
             </Box>
@@ -264,16 +274,16 @@ const Header = ({ setHeaderHeight }) => {
               sx={{ flexGrow: 1, display: 'flex', alignItems: 'left' }}
               ml={2}
             >
-              <Button mr={2} color="inherit">
+              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/giai-dau')}`}>
                 <Link href="/giai-dau">Giải đấu</Link>
               </Button>
-              <Button mr={2} color="inherit">
+              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/doi-qua')}`}>
                 <Link href="/doi-qua">Đổi quà</Link>
               </Button>
-              <Button mr={2} color="inherit">
+              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/lien-he')}`}>
                 <Link href="/lien-he">Liên hệ</Link>
               </Button>
-              <Button color="inherit">
+              <Button color="inherit" className={`tabmenu ${isActive('/hoi-vien')}`}>
                 <Link href="/hoi-vien">Hội viên</Link>
               </Button>
             </Box>

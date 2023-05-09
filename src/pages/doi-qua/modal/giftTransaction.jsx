@@ -49,7 +49,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
   const giftTransactionAction = () => {
     axiosInstance
       .post(
-        '/api/UserGiftSpin/create',
+        'UserGiftSpin/create',
         {
           Active: true,
           CreateDate: currentTime,
