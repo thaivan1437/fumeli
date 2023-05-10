@@ -19,10 +19,8 @@ import {
 import ResponsiveDrawer from '@/components/drawer/drawer'
 import { useRouter } from 'next/router'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { usePathname } from 'next/navigation'
 
 const Header = ({ setHeaderHeight }) => {
-  const pathname = usePathname();
   const router = useRouter()
   const { code } = router.query
   const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } =
@@ -32,6 +30,7 @@ const Header = ({ setHeaderHeight }) => {
   const [userName, setUserName] = useState('')
   const [mobileView, setMobileView] = useState(true)
 
+  const pathname = router?.pathname;
   const isActive = (href) => {
     return pathname.indexOf(href) > -1  ? 'active' : '';
   };
