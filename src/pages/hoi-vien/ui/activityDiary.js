@@ -1,11 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
-
+import { useMediaQuery, useTheme } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import moment from "moment/moment";
 
 const ActivityDiary = () => {
+  const theme = useTheme();
+  const isMatchMD = useMediaQuery(theme.breakpoints.down("md"));
   const { activitiesHistory } = useSelector((state) => state?.userDetail);
   const { givePointsHistory } = useSelector((state) => state?.userDetail);
   const { friends } = useSelector((state) => state?.userDetail);
@@ -16,78 +18,96 @@ const ActivityDiary = () => {
   console.log("=>>> newFriendsHistory", newFriendsHistory);
   return (
     <div>
-      <Box className="activity__diary">
-        <Typography py={4} variant="h6" component="p" color={"#FF2423"}>
-          NHẬT KÝ HOẠT ĐỘNG
-        </Typography>
-        <div className="scroll__style">
-          {newActivityHistory &&
-            newActivityHistory.map((activity) => (
-              <ul className="activity__diary--list" key={activity.Id}>
-                <li>
-                  <NotificationsNoneIcon style={{ color: "#FF2423" }} />
-                  <Box>
-                    <Typography
-                      variant="p"
-                      component="p"
-                      color={"#ffffff"}
-                      className=""
-                    >
-                      Bạn đã tham gia hoạt động {activity.CampaignTitle} và nhận
-                      được {activity.FpointValue}
-                      {activity.FpointValue ? " Fpoint" : null}
-                    </Typography>
-                    <Typography
-                      variant="small"
-                      component="small"
-                      color={"#D9D9D9"}
-                      className=""
-                    >
-                      {moment(activity.CreateDate).format("M/D/YYYY h:mm:ss A")}
-                    </Typography>
-                  </Box>
-                </li>
-              </ul>
-            ))}
-        </div>
-      </Box>
+      <div className="activity__grid--right--top">
+        <Box className="activity__diary">
+          <Typography
+            pb={1}
+            pt={isMatchMD ? 2 : 0}
+            variant="h6"
+            component="p"
+            color={"#FF2423"}
+            borderBottom={1}
+            borderColor={"#d9d9d9"}
+          >
+            NHẬT KÝ HOẠT ĐỘNG
+          </Typography>
+          <div className="scroll__style">
+            {newActivityHistory &&
+              newActivityHistory.map((activity) => (
+                <ul className="activity__diary--list" key={activity.Id}>
+                  <li>
+                    <NotificationsNoneIcon style={{ color: "#FF2423" }} />
+                    <Box>
+                      <Typography
+                        variant="p"
+                        component="p"
+                        color={"#ffffff"}
+                        className=""
+                      >
+                        Bạn đã tham gia hoạt động {activity.CampaignTitle} và
+                        nhận được {activity.FpointValue}
+                        {activity.FpointValue ? " Fpoint" : null}
+                      </Typography>
+                      <Typography
+                        variant="small"
+                        component="small"
+                        color={"#D9D9D9"}
+                        className="time__show"
+                      >
+                        {moment(activity.CreateDate).format(
+                          "M/D/YYYY h:mm:ss A"
+                        )}
+                      </Typography>
+                    </Box>
+                  </li>
+                </ul>
+              ))}
+          </div>
+        </Box>
 
-      <Box className="invited__friend">
-        <Typography py={4} variant="h6" component="p" color={"#FFFFFF"}>
-          Bạn bè đã thêm
-        </Typography>
-        <div className="scroll__style">
-          {newFriendsHistory &&
-            newFriendsHistory.map((friend) => (
-              <ul className="invited__friend--list" key={friend.Id}>
-                <li>
-                  <NotificationsNoneIcon style={{ color: "#FF2423" }} />
-                  <Box>
-                    <Typography
-                      variant="p"
-                      component="p"
-                      color={"#ffffff"}
-                      className=""
-                    >
-                      <small className="text-capitalize">
-                        {friend.FriendUserName}
-                      </small>
-                      đã trở thành bạn bè với bạn.
-                    </Typography>
-                    <Typography
-                      variant="small"
-                      component="small"
-                      color={"#D9D9D9"}
-                      className=""
-                    >
-                      {moment(friend.CreateDate).format("M/D/YYYY h:mm:ss A")}
-                    </Typography>
-                  </Box>
-                </li>
-              </ul>
-            ))}
-        </div>
-      </Box>
+        <Box className="invited__friend">
+          <Typography
+            pt={4}
+            pb={1}
+            variant="h6"
+            component="p"
+            color={"#FFFFFF"}
+          >
+            Bạn bè đã thêm
+          </Typography>
+          <div className="scroll__style">
+            {newFriendsHistory &&
+              newFriendsHistory.map((friend) => (
+                <ul className="invited__friend--list" key={friend.Id}>
+                  <li>
+                    <NotificationsNoneIcon style={{ color: "#FF2423" }} />
+                    <Box>
+                      <Typography
+                        variant="p"
+                        component="p"
+                        color={"#ffffff"}
+                        className=""
+                      >
+                        <small className="text-capitalize">
+                          {friend.FriendUserName}
+                        </small>
+                        đã trở thành bạn bè với bạn.
+                      </Typography>
+                      <Typography
+                        variant="small"
+                        component="small"
+                        color={"#D9D9D9"}
+                        className=""
+                      >
+                        {moment(friend.CreateDate).format("M/D/YYYY h:mm:ss A")}
+                      </Typography>
+                    </Box>
+                  </li>
+                </ul>
+              ))}
+          </div>
+        </Box>
+      </div>
 
       <div className="point__container">
         <div className="point__history">
