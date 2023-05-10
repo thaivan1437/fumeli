@@ -44,7 +44,7 @@ const ActiveMailModal = ({userDetail,  onClose }) => {
   useEffect(() => {
     axiosInstance
       .post(
-        `/api/UserGift/update/`,
+        `UserGift/update/`,
         {
           Active: true,
           UpdateDate: userDetail?.userid,
@@ -69,7 +69,7 @@ const ActiveMailModal = ({userDetail,  onClose }) => {
   const ActiveEmail = () => {
     axiosInstance
       .post(
-        '/api/UserGiftSpin/create',
+        'UserGiftSpin/create',
         {
           Active: true,
           CreateDate: currentTime,
@@ -107,6 +107,7 @@ const ActiveMailModal = ({userDetail,  onClose }) => {
       BackdropProps={{
         timeout: 500,
       }}
+      disableScrollLock={true}
     >
       <Box className='modal__gift' sx={style}>
         <Image

@@ -15,6 +15,7 @@ import {
 import {sendEmailResetPass} from './logic/reducer';
 import { useDispatch, useSelector } from "react-redux";
 import {validateEmail} from '@/utils/help';
+import Image from 'next/image'
 
 const ForgotPasswordModal = () => {
   const dispatch = useDispatch();
@@ -54,14 +55,24 @@ const ForgotPasswordModal = () => {
         BackdropComponent={Backdrop}
         BackdropProps={{ timeout: 500 }}
         className='modal__common'
+        disableScrollLock={true}
       >
         <Box
           className='modal__common--box'
         >
+          <Image
+            src="/images/close.svg"
+            alt="btn close"
+            onClick={() => handleClose()}
+            width={27}
+            height={27}
+            className="btn__modal--close"
+          />
           <Typography
             id="forgot-password-modal-title"
             variant="h6"
             component="h2"
+            className="fw-b fs-40"
           >
             Quên mật khẩu
           </Typography>
@@ -93,7 +104,7 @@ const ForgotPasswordModal = () => {
                 {forgetData.message}
               </Typography>
             }
-            <Button color="error" fullWidth variant="contained" onClick={handleSubmit} sx={{ marginTop: '30px'}}>
+            <Button color="error" fullWidth variant="contained" onClick={handleSubmit} sx={{ marginTop: '30px'}} className='btn-login fs-20 custom'>
               GỬI EMAIL XÁC NHẬN
             </Button>
           </form>

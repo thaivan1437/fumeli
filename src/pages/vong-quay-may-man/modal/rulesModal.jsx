@@ -33,6 +33,7 @@ const RulesModal = ({ onClose }) => {
       BackdropProps={{
         timeout: 500,
       }}
+      disableScrollLock={true}
     >
       <Box className="modal__rules__spingame" sx={style}>
         <Image

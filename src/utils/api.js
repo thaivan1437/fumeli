@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const api_host = 'https://api-demowebsite.cdktcnqn.edu.vn/api/';
+export const api_host = process.env.apiHost;
 import { loginAction } from '@/components/auth/logic/action'
 
 export const axiosGet = async (url, dispatch) => {
@@ -63,7 +63,7 @@ export const axiosPost = async (url, data, dispatch) => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: 'https://api-demowebsite.cdktcnqn.edu.vn/',
+  baseURL: api_host,
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',

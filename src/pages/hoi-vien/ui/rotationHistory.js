@@ -24,21 +24,23 @@ const RotationHistory = () => {
   return (
     <div className="rotation__history">
       <h3>LỊCH SỬ QUAY SỐ</h3>
-      <div className="rotation__history__grid rotation__history__header">
-        <p className="center">STT</p>
-        <p className="center">Phần thưởng</p>
-        <p className="center">Thời gian</p>
-      </div>
-      <div className="rotation__history__body scroll__style">
-        {rows.map((row, idx) => (
-          <div key={row.id} className="rotation__history__grid">
-            <p className="center">{idx + 1}</p>
-            <p className="center">{row.giftTitle}</p>
-            <p className="right">
-              {moment(row.createData).format("M/D/YYYY h:mm:ss A")}
-            </p>
-          </div>
-        ))}
+      <div className="rotation__history__container">
+        <div className="rotation__history__grid rotation__history__header ">
+          <p className="center">STT</p>
+          <p className="center">Phần thưởng</p>
+          <p className="center">Thời gian</p>
+        </div>
+        <div className="rotation__history__body scroll__style">
+          {rows.map((row, idx) => (
+            <div key={row.id} className="rotation__history__grid">
+              <p className="center">{idx + 1}</p>
+              <p>{row.giftTitle}</p>
+              <p className="center">
+                {moment(row.createData).format("M/D/YYYY h:mm:ss A")}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

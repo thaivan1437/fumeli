@@ -78,7 +78,7 @@ const DailyDetail = ({
   
   const handleCreateCheckIn = async ({ active, newItem }) => {
     if (!user) {
-      handleModal('LỖI', 'Bạn cần đăng nhập trước khi điểm danh!', <ErrorOutlineIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
+      handleModal('LỖI', 'Bạn cần đăng nhập trước khi điểm danh!', <ErrorOutlineIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
       return;
     }
   
@@ -89,24 +89,24 @@ const DailyDetail = ({
   
     if (today < dateItem || isActive) {
       const message = today < dateItem ? 'Ngày mai quay lại sau.' : 'Hôm nay bạn đã điểm danh! Ngày mai quay lại sau.';
-      handleModal('LỖI', message, <ErrorOutlineIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
+      handleModal('LỖI', message, <ErrorOutlineIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
       return;
     }
   
     if (today > dateItem && !isActive) {
       setDate(newItem);
-      handleModal('ĐIỂM DANH BÙ', '200 Fpoint = 1 Lần điểm danh bù', <NotificationsActiveOutlinedIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>, 1);
+      handleModal('ĐIỂM DANH BÙ', '200 Fpoint = 1 Lần điểm danh bù', <NotificationsActiveOutlinedIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 1);
       return;
     }
   
     await dispatch(createMissionComplete({ idCamp: id, createDate: newItem }));
-    handleModal('THÀNH CÔNG', 'Bạn đã điểm danh thành công ngày hôm nay!', <CheckCircleOutlinedIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
+    handleModal('THÀNH CÔNG', 'Bạn đã điểm danh thành công ngày hôm nay!', <CheckCircleOutlinedIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
   };
   
   const handleConfirm = async () => {
     dispatch(createMissionComplete({ idCamp: id, createDate: date }));
     handleClose(1);
-    handleModal('THÀNH CÔNG', 'Bạn đã điểm danh bù thành công!', <CheckCircleOutlinedIcon className='' color='error' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
+    handleModal('THÀNH CÔNG', 'Bạn đã điểm danh bù thành công!', <CheckCircleOutlinedIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
     setConfirm(false);
   };
   
@@ -138,7 +138,7 @@ const DailyDetail = ({
     const dayOfWeekString = daysOfWeek[dayOfWeek];
     return (
       <Box p={2} key={item} className={`check__in--item ${active}`} onClick={() => handleCreateCheckIn({active, newItem})}>
-        <Typography py={2} variant="p" component="p" color={'#fff'} sx={{textAlign: 'center'}}>
+        <Typography py={2} variant="p" component="p" color={'#fff'} sx={{textAlign: 'center'}} className='fs-20 fw-b'>
           {dayOfWeekString}
         </Typography>
         <AutoSizeImage isResize={false} src="/images/mission/check-in.png" alt="điểm danh hằng ngày" className='image' width={225} height={225}/>
@@ -150,60 +150,65 @@ const DailyDetail = ({
 
   return (
     <React.StrictMode>
-      <Container>
-        { rule &&
-          <RuleModal open={rule} message={missionDetail.Content} title='Thể lệ' handleClose={closeModalRule}/>
-        }
-        {
-          open && open[0] && <AlertModal
-            open={open[0]}
-            handleClose={() => handleClose(0)}
-            message={dataModal.message}
-            title={dataModal.title}
-            icon={dataModal.icon}
-          />
-        }
-        {
-          open && open[1] && <ConfirmModal
-            open={open[1]}
-            handleClose={() => handleClose(1)}
-            message={dataModal.message}
-            title={dataModal.title}
-            icon={dataModal.icon}
-            setConfirm={setConfirm}
-          />
-        }
-        <Typography py={4} variant="h4" component="h2" color={'#fff'} sx={{textAlign: 'center', textTransform: 'uppercase'}}>
-          {missionDetail.Title || 'Nhiệm vụ'}
-        </Typography>
-        <Box my={2} sx={{position: 'relative'}}>
-          <AutoSizeImage src="/images/mission/diem-danh.png" alt="Thể lệ điểm danh"  width={1410} height={710} isResize={false}/>
-
-          <Typography py={2} my={0} variant="p" component="p" color={'#fff'} sx={{textAlign: 'right'}}>
-            <Button variant="contained" color='error' onClick={() => openModalRule()}>Thể lệ</Button>
+      <Box className="bg-common">
+        <Container>
+          { rule &&
+            <RuleModal open={rule} message={missionDetail.Content} title='Thể lệ' handleClose={closeModalRule}/>
+          }
+          {
+            open && open[0] && <AlertModal
+              open={open[0]}
+              handleClose={() => handleClose(0)}
+              message={dataModal.message}
+              title={dataModal.title}
+              icon={dataModal.icon}
+            />
+          }
+          {
+            open && open[1] && <ConfirmModal
+              open={open[1]}
+              handleClose={() => handleClose(1)}
+              message={dataModal.message}
+              title={dataModal.title}
+              icon={dataModal.icon}
+              setConfirm={setConfirm}
+            />
+          }
+          <Typography py={4} variant="h4" component="h2" color={'#fff'} sx={{textAlign: 'center', textTransform: 'uppercase'}} className='fs-48 fw-b'>
+            {missionDetail.Title || 'Nhiệm vụ'}
           </Typography>
-        </Box>
-        <Box my={2} sx={{position: 'relative'}}>
-          <Box className='check__in--week'>
-            <Box className='check__in--first'>
-              {
-                // Map over the array to perform the desired action for each date
-                daysOfWeeks && daysOfWeeks.length && daysOfWeeks.map((date) => {
-                  return itemCheckIn(date);
-                })
-              }
-            </Box>
-            <Box className='check__in--last'>
-              {itemCheckIn(lastDateOfWeek)}
+          <Box my={2} sx={{position: 'relative'}}>
+            <AutoSizeImage src="/images/mission/diem-danh.png" alt="Thể lệ điểm danh"  width={1410} height={710} isResize={false}/>
+
+            <Typography py={2} my={0} variant="p" component="p" color={'#fff'} sx={{textAlign: 'right'}}>
+              <Button variant="contained" className='btn-rule fs-20' onClick={() => openModalRule()}>Thể lệ</Button>
+            </Typography>
+          </Box>
+          <Box sx={{ padding: '20px 30px'}}>
+            <div dangerouslySetInnerHTML={{ __html: missionDetail.Content }} />
+          </Box>
+          <Box my={2} sx={{position: 'relative'}}>
+            <Box className='check__in--week'>
+              <Box className='check__in--first'>
+                {
+                  // Map over the array to perform the desired action for each date
+                  daysOfWeeks && daysOfWeeks.length && daysOfWeeks.map((date) => {
+                    return itemCheckIn(date);
+                  })
+                }
+              </Box>
+              <Box className='check__in--last'>
+                {itemCheckIn(lastDateOfWeek)}
+              </Box>
             </Box>
           </Box>
-        </Box>
-        <CountCheckInMonth 
-          checkInMonth={checkInMonth}
-          user={user}
-          AttendanceMonth={AttendanceMonth}
-        />
-      </Container>
+          <CountCheckInMonth 
+            checkInMonth={checkInMonth}
+            user={user}
+            AttendanceMonth={AttendanceMonth}
+          />
+        </Container>
+      </Box>
     </React.StrictMode>
   )
 }

@@ -41,13 +41,20 @@ export default function App({ Component, pageProps }) {
   const [headerHeight, setHeaderHeight] = React.useState(0);
   console.log('headerHeight', headerHeight);
 
+  const scrollToTop = () => {
+    window.scroll({top: 0, left: 0, behavior: 'smooth' })
+  }
+
   return (
     <Provider store={store}>
       <Header setHeaderHeight={setHeaderHeight}/>
-      <div className="main" style={{ background: '#19181c!important', marginTop: `${headerHeight ? headerHeight + 10 : 60}px` }}>
+      <div className="main" style={{ background: '#19181c !important', marginTop: `${headerHeight ? headerHeight + 10 : 85}px` }}>
         {
           isLoading ? <Loader/> : <Component {...pageProps} />
         }
+      </div>
+      <div onClick={scrollToTop} className='scroll-top'>
+        <img src="/images/scroll-top.svg" alt='scroll to top'/>
       </div>
       <Footer />
     </Provider>

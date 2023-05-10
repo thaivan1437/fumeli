@@ -23,7 +23,7 @@ const MiniGame = () => {
   return (
     <Box py={3} className="minigame">
       <Container>
-        <Typography variant="h4" component="h2" color={'#fff'} className='fw-b'>
+        <Typography variant="h4" component="h2" color={'#fff'} className='fw-b fs-48'>
           MINI GAMES
         </Typography>
         <Grid py={2} className="minigame__item" container spacing={{ xs: 0, md: 4 }} rowSpacing={{ xs: 2 }}>

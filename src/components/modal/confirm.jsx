@@ -21,6 +21,7 @@ export default function ConfirmModal({ open, handleClose, message, title, icon, 
       open={open}
       onClose={handleClose}
       className='modal__common'
+      disableScrollLock={true}
     >
       <Box
         className='modal__common--box'
@@ -37,14 +38,14 @@ export default function ConfirmModal({ open, handleClose, message, title, icon, 
         <Typography my={3} variant="h4" component="h2" color='error' sx={{textAlign: 'center'}} className='modal__common--title'>
           {title}
         </Typography>
-        <Typography variant="p" component="p" sx={{textAlign: 'center'}} className='modal__common--message'>
+        <Typography variant="p" component="p" sx={{textAlign: 'center'}} className='modal__common--message fs-16 fw-b'>
           {message}
         </Typography>
         
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             variant="contained"
-            className="button--back"
+            className="button--back fs-20 fw-b"
             onClick={() => handleCloseModal()}
             sx={{ marginRight: '4%' }}
           >
@@ -52,7 +53,7 @@ export default function ConfirmModal({ open, handleClose, message, title, icon, 
           </Button>
           <Button
             variant="contained"
-            className="button--confirm"
+            className="button--confirm fs-20 fw-b"
             onClick={() => handleSetConfirm()}
           >
             OK

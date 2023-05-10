@@ -103,7 +103,7 @@ export default function InfoUser() {
     const currentTime = new Date().toLocaleTimeString()
     axiosInstance
       .put(
-        '/api/appUser/update',
+        'appUser/update',
         {
           Id: user.userid,
           Introduction: introduction,

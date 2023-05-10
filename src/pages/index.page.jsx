@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container } from '@mui/system';
+import { Container, Box } from '@mui/system';
 import  Tournaments  from './home/ui/tournaments';
 import  Mission  from './home/ui/mission';
 import  MiniGame  from './home/ui/minigame';
@@ -15,28 +15,26 @@ export default function Home() {
   const { loading } = useSelector((state) => state?.loading);
   useEffect(() => {
     async function fetchData1() {
-      await dispatch(getSlideAndMissionData());
-    }
-    async function fetchData2() {
-      await dispatch(getVideoAndMiniGameData());
-    }
-    async function fetchData3() {
-      await dispatch(getMatchDataThunkAction());
+      await Promise.all([
+        dispatch(getSlideAndMissionData()),
+        dispatch(getVideoAndMiniGameData()),
+        dispatch(getMatchDataThunkAction())
+      ]);
     }
     void fetchData1();
-    void fetchData2();
-    void fetchData3();
   }, []);
 
   return (
     <React.StrictMode>
       {loading && <Loader />}
-      <SliderBanner></SliderBanner>
-      <Container>
-        <TopRank></TopRank>
-        <Mission></Mission>
-        <Tournaments></Tournaments>
-      </Container>
+      <Box className="bg-main">
+        <SliderBanner></SliderBanner>
+        <Container>
+          <TopRank></TopRank>
+          <Mission></Mission>
+          <Tournaments></Tournaments>
+        </Container>
+      </Box>
       <Videos></Videos>
       <MiniGame></MiniGame>
     </React.StrictMode>

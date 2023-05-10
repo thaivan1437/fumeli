@@ -45,7 +45,7 @@ const SpinTurnTransactionModal = ({ onClose }) => {
   const spinTurnTransaction = () => {
     axiosInstance
       .post(
-        '/api/UserSpinGame/create',
+        'UserSpinGame/create',
         {
           Active: true,
           CreateDate: currentTime,
@@ -88,6 +88,7 @@ const SpinTurnTransactionModal = ({ onClose }) => {
       BackdropProps={{
         timeout: 500,
       }}
+      disableScrollLock={true}
     >
       <Box className="modal__gift" sx={style}>
         {showToast()}
