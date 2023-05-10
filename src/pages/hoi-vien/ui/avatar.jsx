@@ -127,7 +127,9 @@ export default function LayoutUserPage() {
         })
     }
   }
-
+  const goToPage = (route) => {
+    window.location.href = `/hoi-vien/${route}`
+  }
   return (
     <>
       <input
@@ -189,33 +191,39 @@ export default function LayoutUserPage() {
           <Typography gutterBottom className="layoutAppUser--username">
             {user.username}
           </Typography>
+
           <Box className="button__avatar__group">
             <Button
               variant="contained"
               className="btn_fill ml-6 m-mb-0 w-158px"
+              onClick={() => goToPage('ui/infoUser')}
             >
               <PersonIcon />
-              <Link href="/hoi-vien/ui/infoUser">
-                <Typography className="btn_fill--text">THÔNG TIN</Typography>
-              </Link>
+              <Typography className="btn_fill--text">THÔNG TIN</Typography>
             </Button>
-            <Button variant="contained" className="btn_fill ml-6">
+            <Button
+              variant="contained"
+              className="btn_fill ml-6"
+              onClick={() => goToPage('activity')}
+            >
               <BoltIcon />
-              <Link href="/hoi-vien/activity">
-                <Typography className="btn_fill--text">HOẠT ĐỘNG</Typography>
-              </Link>
+              <Typography className="btn_fill--text">HOẠT ĐỘNG</Typography>
             </Button>
-            <Button variant="contained" className="btn_fill ml-6">
+            <Button
+              variant="contained"
+              className="btn_fill ml-6"
+              onClick={() => goToPage('bag')}
+            >
               <CardGiftcardIcon />
-              <Link href="/hoi-vien/bag">
               <Typography className="btn_fill--text">TÚI ĐỒ</Typography>
-              </Link>
             </Button>
-            <Button variant="contained" className="btn_fill ml-6">
+            <Button
+              variant="contained"
+              className="btn_fill ml-6"
+              onClick={() => goToPage('friend')}
+            >
               <GroupIcon />
-              <Link href="/hoi-vien/friend">
-                <Typography className="btn_fill--text">BẠN BÈ</Typography>
-              </Link>
+              <Typography className="btn_fill--text">BẠN BÈ</Typography>
             </Button>
           </Box>
         </Box>
