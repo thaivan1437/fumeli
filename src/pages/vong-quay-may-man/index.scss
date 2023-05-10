@@ -11,26 +11,26 @@
 .css__btn__spingame {
   border: solid 1px #ff2423 !important;
   background-color: transparent !important;
-  color: #fff;
-  position: relative;
-  margin: 0 10px;
+  color: #fff !important;
+  position: relative !important;
+  margin: 0 10px !important;
   width: 206px !important;
-  height: 46px;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 23px;
-  letter-spacing: -0.01em;
-  text-align: center;
+  height: 46px !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 23px !important;
+  letter-spacing: -0.01em !important;
+  text-align: center !important;
   @media (max-width: 768px) {
     height: 92px !important;
     width: 110px !important;
   }
 }
 .spingame__item {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
   background: #0f0f0f !important;
-  border: 1px solid #ffffff;
-  border-radius: 10px;
+  border: 1px solid #ffffff !important;
+  border-radius: 10px !important;
 }
 
 .spingame__item--img {
@@ -46,19 +46,19 @@
 
 .spingame__item--title {
   font-style: normal;
-  font-weight: 700;
+  font-weight: 700 !important;
   font-size: 16px !important;
-  line-height: 20px;
-  text-align: center;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
-  height: 40px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+  line-height: 20px !important;
+  text-align: center !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  -webkit-line-clamp: 2 !important;
+  height: 40px !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
 }
 
 .mb-150 {
@@ -93,16 +93,16 @@
 .css__btn__rules {
   border: solid 1px #ff2423 !important;
   background-color: transparent !important;
-  color: #fff;
+  color: #fff !important;
   position: relative;
-  margin: 0 10px;
+  margin: 0 10px !important;
   width: 206px !important;
-  height: 46px;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 23px;
-  letter-spacing: -0.01em;
-  text-align: center;
+  height: 46px !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 23px !important;
+  letter-spacing: -0.01em !important;
+  text-align: center !important;
   @media (max-width: 768px) {
     height: 92px !important;
     width: 110px !important;
@@ -114,14 +114,14 @@
 }
 
 .modal__rules__titleBox--title {
-  font-style: normal;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 38px;
-  text-align: center;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-  padding: 10px 0;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 32px !important;
+  line-height: 38px !important;
+  text-align: center !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
+  padding: 10px 0 !important;
 }
 
 .modal__rules__spingame {
