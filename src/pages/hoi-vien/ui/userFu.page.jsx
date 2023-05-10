@@ -121,7 +121,7 @@ export default function UserFU() {
                     ) : (
                       <Button
                         variant="contained"
-                        className="btn_outline ml-6"
+                        className="btn_outline ml-6 ml-5pc"
                         onClick={() => addFriend(item.Id)}
                       >
                         KẾT BẠN
@@ -135,6 +135,7 @@ export default function UserFU() {
             mt={3}
             className="minigame__item"
             sx={{
+              width: '100%!important',
               flexGrow: 1,
               display: 'flex',
               justifyContent: 'center',
