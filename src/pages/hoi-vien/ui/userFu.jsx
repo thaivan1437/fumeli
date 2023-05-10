@@ -13,11 +13,12 @@ import { format } from 'date-fns'
 import axiosInstance from '@/utils/api'
 import { useDispatch } from 'react-redux'
 import { getAllDataThunkAction } from '../logic/reducer'
+import Pagination from './pagination.jsx'
 
 export default function UserFU() {
   const dispatch = useDispatch()
   const dataUser = useSelector((state) => state.userDetail || [])
-  console.log(dataUser)
+
   const userFU = dataUser.allUser
   const userFriend = dataUser.userFriend
 
@@ -45,7 +46,6 @@ export default function UserFU() {
     }
   }, [])
 
-
   const addFriend = (id) => {
     const currentTime = new Date().toLocaleTimeString()
     axiosInstance
@@ -63,6 +63,13 @@ export default function UserFU() {
         console.log(error)
       })
   }
+
+  const [itemsPerPage, setItemsPerPage] = useState(6)
+
+  const start = (currentPage - 1) * itemsPerPage
+  const end = start + itemsPerPage
+  const newDatas = userFU?.slice(start, end)
+  const totalPages = Math.ceil(userFU?.length / itemsPerPage)
 
   return (
     <>
@@ -134,17 +141,11 @@ export default function UserFU() {
               alignItems: 'center',
             }}
           >
-            <ButtonGroup
-              className="css__btn"
-              variant="contained"
-              aria-label="button group"
-            >
-              {[...Array(maxPage)].map((_, index) => (
-                <Button key={index} onClick={() => handleClick(index + 1)}>
-                  {index + 1}
-                </Button>
-              ))}
-            </ButtonGroup>
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
           </Box>
         </Grid>
       </Container>
