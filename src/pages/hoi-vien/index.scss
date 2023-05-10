@@ -320,7 +320,6 @@
   }
 
   .table__container {
-    overflow-x: scroll;
     width: 100%;
 
     .exchange__gifts__table {
@@ -527,16 +526,18 @@
       .exchange__gifts {
         padding: 0;
         border-left: none;
-        .exchange__gifts__table {
-          width: 120%;
-
-          & > * {
-            width: 100%;
-            tr {
+        .table__container {
+          overflow-x: scroll;
+          .exchange__gifts__table {
+            width: 120%;
+            & > * {
               width: 100%;
+              tr {
+                width: 100%;
 
-              td {
-                width: 35%;
+                td {
+                  width: 35%;
+                }
               }
             }
           }
