@@ -48,7 +48,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Header setHeaderHeight={setHeaderHeight}/>
-      <div className="main" style={{ background: '#19181c !important', marginTop: `${headerHeight ? headerHeight + 10 : 85}px` }}>
+      <div className="main" style={{ background: '#19181c !important', marginTop: `${headerHeight ? headerHeight + 5 : 85}px` }}>
         {
           isLoading ? <Loader/> : <Component {...pageProps} />
         }

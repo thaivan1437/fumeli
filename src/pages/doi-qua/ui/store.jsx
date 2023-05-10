@@ -78,8 +78,8 @@ export const Store = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           {/* phâm loại */}
-          <Button mr={2} color="inherit" className="submenu f-right">
-            <p className="submenu__parent custom__filter__gift">
+          <Button mr={2} color="inherit" className="submenu f-right p-0">
+            <p className="submenu__parent custom__filter__gift ">
               PHÂN LOẠI <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
             </p>
             <ul className="submenu__list custom__filter__gift--list">
@@ -185,12 +185,7 @@ export const Store = () => {
               {hotItems &&
                 hotItems.map((item, index) => {
                   return (
-                    <li
-                      key={item.Id}
-                      className="hot_item__li"
-                      value={item.Id}
-                      onClick={(e) => openGiftTransactionModal(e.target.value)}
-                    >
+                    <li key={item.Id} className="hot_item__li">
                       <div className="hot_item__image_container">
                         <Image
                           src={item.ImagePath}
@@ -211,6 +206,13 @@ export const Store = () => {
                           {item.FpointValue} Fponit
                         </Typography>
                       </div>
+                      <div
+                        className="onclick__gift"
+                        data-id={item.Id}
+                        onClick={(e) =>
+                          openGiftTransactionModal(e.target.dataset.id)
+                        }
+                      ></div>
                     </li>
                   )
                 })}

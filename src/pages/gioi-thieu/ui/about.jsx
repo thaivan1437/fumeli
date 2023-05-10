@@ -12,13 +12,13 @@ const AboutChild = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 2000,
     centerMode: true,
     variableWidth: false,
-    centerPadding: '400px',
+    centerPadding: '200px',
     arrows: true,
     responsive: [
       {
@@ -86,55 +86,13 @@ const AboutChild = () => {
             aboutData.map((item, index) => {
               return (
                 <Box key={item.CreateDate} p={2}>
-                  <Typography
-                    variant="h6"
-                    color="initial"
-                    sx={{ textAlign: 'center' }}
-                  >
+                  <Typography variant="h6" color="initial">
                     <div dangerouslySetInnerHTML={{ __html: item.Content }} />
                   </Typography>
                 </Box>
               )
             })}
         </Box>
-        {/* <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
-          <Box
-            xs={12}
-            md={12}
-            borderRadius={2}
-            border={1}
-            borderColor="#fff"
-            bgcolor="#0F0F0F"
-          >
-            <Grid
-              container
-              spacing={8}
-              style={{
-                height: '100%',
-                textAlign: 'center',
-                justifyContent: 'center',
-                padding: '15px 50px',
-              }}
-            >
-              <Grid item xs={6} md={3} sx={styledText}>
-                <Typography variant="h4">70%</Typography>
-                <Typography variant="h6">ACCURACY</Typography>
-              </Grid>
-              <Grid item xs={6} md={3} sx={styledText}>
-                <Typography variant="h4">68%</Typography>
-                <Typography variant="h6">GAMES</Typography>
-              </Grid>
-              <Grid item xs={6} md={3} sx={styledText}>
-                <Typography variant="h4">91%</Typography>
-                <Typography variant="h6">CLIENT</Typography>
-              </Grid>
-              <Grid item xs={6} md={3} sx={styledText}>
-                <Typography variant="h4">59%</Typography>
-                <Typography variant="h6">AWARD</Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box> */}
         <Box mt={8} mb={6}>
           <Typography
             variant="h4"
@@ -155,30 +113,34 @@ const AboutChild = () => {
             borderColor="#fff"
             bgcolor="#0F0F0F"
           >
-            <Slider className="hot__item center" {...settings}>
-              {partnerLogos &&
-                partnerLogos.map((logo) => {
-                  return (
-                    <div
-                      key={logo.alt}
-                      style={{ marginRight: '0.6%' }}
-                      data-id={logo.alt}
-                    >
-                      <Image
+            <div className="custom__slider">
+              <Slider className="hot__item center" {...settings}>
+                {partnerLogos &&
+                  partnerLogos.map((logo) => {
+                    return (
+                      <div
                         key={logo.alt}
-                        src={logo.src}
-                        alt={logo.alt}
-                        width={logo.width / 1.5}
-                        height={logo.height / 1.5}
-                      />
-                    </div>
-                  )
-                })}
-            </Slider>
+                        style={{ marginRight: '0.6%', display: 'flex' }}
+                        data-id={logo.alt}
+                      >
+                        <Image
+                          key={logo.alt}
+                          src={logo.src}
+                          alt={logo.alt}
+                          width={logo.width / 1.5}
+                          height={logo.height / 1.5}
+                          className="custom__slide--img"
+                        />
+                      </div>
+                    )
+                  })}
+              </Slider>
+            </div>
           </Box>
         </Box>
       </Container>
     </Box>
   )
 }
+
 export default AboutChild

@@ -30,8 +30,7 @@ const Header = ({ setHeaderHeight }) => {
   const [userName, setUserName] = useState('')
   const [mobileView, setMobileView] = useState(true)
 
-  const { pathname } = router;
-  console.log(router, process.env.apiHost)
+  const pathname = router?.pathname;
   const isActive = (href) => {
     return pathname.indexOf(href) > -1  ? 'active' : '';
   };
@@ -79,7 +78,6 @@ const Header = ({ setHeaderHeight }) => {
   }, [])
 
   useEffect(() => {
-    console.log("user", user, userName);
     if (!user && userName) {
       setUserName()
       handleOpenModalLogin()
@@ -114,6 +112,8 @@ const Header = ({ setHeaderHeight }) => {
     router.push('/hoi-vien/bag')
   }
 
+  console.log(pathname)
+
   return (
     <React.StrictMode>
       {mobileView ? (
@@ -130,9 +130,7 @@ const Header = ({ setHeaderHeight }) => {
         >
           <Toolbar className="first-block">
             {/* Khối 1 */}
-            <Box
-              sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
-            >
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <IconButton size="large" color="inherit" sx={{ mr: 2 }}>
                 <FacebookIcon />
               </IconButton>
@@ -146,8 +144,9 @@ const Header = ({ setHeaderHeight }) => {
                 <TwitterIcon />
               </IconButton>
             </Box>
-            <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ flexGrow: 1 }}>
+            <Box
+              sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}
+            >
               {
                 // show user when logged
                 userName ? (
@@ -155,6 +154,7 @@ const Header = ({ setHeaderHeight }) => {
                     <span onClick={handleClick}>
                       {userName}
                     </span>
+                    <span className="header__text" onClick={handleClick}>{userName}</span>
                     
                     <Menu
                       anchorEl={anchorEl}
@@ -206,15 +206,16 @@ const Header = ({ setHeaderHeight }) => {
                   
                 ) : (
                   <Button
-                    variant="contained"
+                    // variant="contained"
                     sx={{
-                      backgroundColor: "#FF2423",
-                      borderRadius: "40px",
-                      color: "white",
-                      "&:hover": {
-                        backgroundColor: "#d6221d",
+                      backgroundColor: '#FF2423',
+                      borderRadius: '40px',
+                      color: 'white',
+                      '&:hover': {
+                        backgroundColor: '#d6221d',
                       },
                     }}
+                    className="p-7 "
                     onClick={handleOpenModalLogin}
                   >
                     Login
@@ -226,13 +227,11 @@ const Header = ({ setHeaderHeight }) => {
               <Image
                 src="/images/bgCenterNavbar.png"
                 alt="LogoCenter"
-                width={290}
-                height={224}
+                width={310}
+                height={270}
                 className="bgCenterNavbar"
                 onClick={goHome}
               />
-            </Link>
-            <Link href="/">
               <Image
                 src="/images/logoFU.png"
                 alt="LogoCenter"
@@ -294,7 +293,7 @@ const Header = ({ setHeaderHeight }) => {
       {loginModalOpen && <LoginModal></LoginModal>}
       {forgetPasswordModalOpen && <ForgotPasswordModal></ForgotPasswordModal>}
     </React.StrictMode>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
