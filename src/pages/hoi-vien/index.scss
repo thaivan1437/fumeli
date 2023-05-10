@@ -740,12 +740,12 @@
   }
 }
 .btn_fill--text {
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 23px;
-  letter-spacing: -0.01em;
-  color: #ffffff;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  line-height: 23px !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
 }
 .button__avatar__group {
   display: flex;
