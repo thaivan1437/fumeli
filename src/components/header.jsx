@@ -151,9 +151,6 @@ const Header = ({ setHeaderHeight }) => {
                 // show user when logged
                 userName ? (
                   <>
-                    <span onClick={handleClick}>
-                      {userName}
-                    </span>
                     <span className="header__text" onClick={handleClick}>{userName}</span>
                     
                     <Menu
