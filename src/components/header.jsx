@@ -111,6 +111,11 @@ const Header = ({ setHeaderHeight }) => {
     handleClose();
     router.push('/hoi-vien/bag')
   }
+  const handleLogout = () => {
+    localStorage.setItem("user", JSON.stringify(''));
+    handleClose();
+    router.reload();
+  }
 
   console.log(pathname)
 
@@ -151,7 +156,7 @@ const Header = ({ setHeaderHeight }) => {
                 // show user when logged
                 userName ? (
                   <>
-                    <span className="header__text" onClick={handleClick}>{userName}</span>
+                    <span className="header__text fs-20 fw-b text-color" onClick={handleClick}>{userName} <ExpandMoreIcon className='text-color' sx={{ marginLeft: '5px' }} /></span>
                     
                     <Menu
                       anchorEl={anchorEl}
@@ -188,14 +193,15 @@ const Header = ({ setHeaderHeight }) => {
                       transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                       className='menu--header'
+                      disableScrollLock={true}
                     >
-                      <MenuItem className='menu--item' onClick={openPageUser}>
+                      <MenuItem className='menu--item fs-16 fw-b' onClick={openPageUser}>
                         Trang cá nhân
                       </MenuItem>
-                      <MenuItem className='menu--item' onClick={openbag}>
+                      <MenuItem className='menu--item fs-16 fw-b' onClick={openbag}>
                         Túi đồ
                       </MenuItem>
-                      <MenuItem className='menu--item' onClick={handleClose}>
+                      <MenuItem className='menu--item fs-16 fw-b' onClick={handleLogout}>
                         Đăng xuất
                       </MenuItem>
                     </Menu>

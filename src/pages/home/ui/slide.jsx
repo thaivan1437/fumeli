@@ -10,18 +10,16 @@ import ImageModal from './imageModal';
 const SliderBanner = () => {
   const { slider } = useSelector((state) => state?.home) || [];
   const newSlider = slider && slider.filter(item => item?.IsMainBanner)
-  const sliderAds = slider && slider.filter(item => item?.IsCenterAdsBanner)
+  const sliderAds = slider && slider.filter(item => !item?.IsMainBanner)
   const [image, setImage] = useState();
   const [imageModal, setImageModal] = useState(false);
 
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: false,
-    autoplaySpeed: 2000,
     centerMode: true,
     centerPadding: '0',
     arrows: false,

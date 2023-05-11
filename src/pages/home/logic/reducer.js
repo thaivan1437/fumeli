@@ -59,7 +59,7 @@ export const getSlideAndMissionData = () => async (dispatch, getState) => {
     ];
 
     const [mission, slider] = await Promise.all(
-      urls.map(url => axiosGet(url))
+      urls.map(url => axiosGet(url, dispatch))
     );
 
     await dispatch(getMission(mission));
@@ -79,7 +79,7 @@ export const getVideoAndMiniGameData = () => async (dispatch, getState) => {
     ];
 
     const [videoRes, miniGameRes ] = await Promise.all(
-      urls.map(url => axiosGet(url))
+      urls.map(url => axiosGet(url, dispatch))
     );
 
     await dispatch(getVideo(videoRes));
@@ -98,7 +98,7 @@ export const getMatchDataThunkAction = () => async (dispatch, getState) => {
     ];
 
     const [ matchRes, matchCategory ] = await Promise.all(
-      urls.map(url => axiosGet(url))
+      urls.map(url => axiosGet(url, dispatch))
     );
 
     await dispatch(getMatch(matchRes));

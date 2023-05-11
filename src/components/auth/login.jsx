@@ -11,7 +11,7 @@ import {
 import axios from 'axios';
 import Toast from '@/components/toast';
 import Image from 'next/image'
-import {api_host} from '@/utils/api';
+import { getConfigUrl } from '@/utils/getConfig';
 
 const LoginModal = () => {
   const [rememberMe, setRememberMe] = useState(false);
@@ -70,11 +70,12 @@ const LoginModal = () => {
 
   const handleLogin = async() => {
     event.preventDefault();
+    const apiHost = await getConfigUrl();
     const params = new URLSearchParams();
     params.append('Username', formData.Username);
     params.append('Password', formData.Password);
     params.append('grant_type', 'password');
-    axios.post(`${api_host}oauth/token`, params)
+    axios.post(`${apiHost}oauth/token`, params)
       .then(response => {
         setStatusCode({ isShow: true, status: 'success' })
         localStorage.setItem("user", JSON.stringify(response.data));

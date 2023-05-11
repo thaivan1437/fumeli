@@ -39,7 +39,8 @@ const nextConfig = {
     ]
   },
   env: {
-    apiHost: 'https://api-demowebsite.cdktcnqn.edu.vn/api/'
+    apiHost: 'https://api-demowebsite.cdktcnqn.edu.vn/api/',
+    // apiHost: 'https://api.fumeli.net/api/'
   }
 }
 

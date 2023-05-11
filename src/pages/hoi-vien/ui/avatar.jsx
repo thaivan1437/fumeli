@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
-import Divider from '@mui/material/Divider'
 import { Box, Typography, Button, Grid } from '@mui/material'
 import Image from 'next/image'
 import PersonIcon from '@mui/icons-material/Person'
@@ -9,7 +7,6 @@ import CardGiftcardIcon from '@mui/icons-material/CardGiftcard'
 import GroupIcon from '@mui/icons-material/Group'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import axiosInstance from '@/utils/api'
-import Link from 'next/link'
 
 export default function LayoutUserPage() {
   const [user, setUser] = useState('')

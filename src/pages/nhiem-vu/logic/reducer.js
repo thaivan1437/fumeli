@@ -49,7 +49,7 @@ export const getMissionDataThunkAction = () => async (dispatch, getState) => {
     ];
 
     const [ missionRes ] = await Promise.all(
-      urls.map(url => axiosGet(url))
+      urls.map(url => axiosGet(url, dispatch))
     );
 
     await dispatch(getMission(missionRes));
@@ -68,7 +68,7 @@ export const getMissionCategoryDataThunkAction = () => async (dispatch, getState
     ];
 
     const [ missionCategories,configMission  ] = await Promise.all(
-      urls.map(url => axiosGet(url))
+      urls.map(url => axiosGet(url, dispatch))
     );
 
     await dispatch(getMissionCategory(missionCategories));

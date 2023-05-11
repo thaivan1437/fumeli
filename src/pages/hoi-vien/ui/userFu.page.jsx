@@ -49,7 +49,7 @@ export default function UserFU() {
   const addFriend = (id) => {
     const currentTime = new Date().toLocaleTimeString()
     axiosInstance
-      .post('api/UserFriend/create', {
+      .post('UserFriend/create', {
         FriendId: id,
         Active: true,
         CreateDate: currentTime,
