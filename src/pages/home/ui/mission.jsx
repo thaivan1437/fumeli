@@ -26,7 +26,7 @@ const Mission  = () => {
 			<Grid container spacing={{ xs: 2, md: 4 }} my={4} rowSpacing={{ xs: 2 }} columns={{ xs: 12, sm: 8, md: 12 }} >
 				<Grid item xs={12} sm={4} md={4} >
 					<Box sx={{ color: 'white'}}>
-						<Typography variant="h4" component="h2" className='fw-b'>
+						<Typography variant="h4" component="h2" className='fw-b fs-48'>
 							NHIỆM VỤ MỚI
 						</Typography>
 						<Typography variant="p" component="p" sx={{margin: '15px 0'}}>
@@ -59,13 +59,13 @@ const Mission  = () => {
 				}
 				<Grid item xs={12} sm={4} md={4}  className="order1">
 					<Box sx={{ color: 'white'}}>
-						<Typography variant="h4" component="h2">
+						<Typography variant="h4" component="h2" className='fs-48 fw-b text-right'>
 							NHIỆM VỤ NỔI BẬT
 						</Typography>
-						<Typography variant="p" component="p">
+						<Typography variant="p" component="p" className='text-right'>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum eleifend pellentesque. Fusce sed nisl lectus. Vestibulum suscipit mollis fermentum. 
 						</Typography>
-						<Box className="wrap__btn--more css__btn">
+						<Box className="wrap__btn--more css__btn text-right">
 							<Link href="/nhiem-vu?noibat=true" color='white'>
 								<Button variant="contained" className="w206">
 									Xem thêm

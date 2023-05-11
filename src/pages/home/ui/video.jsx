@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import { Container } from '@mui/system';
 import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
@@ -9,6 +9,7 @@ import AutoSizeImage from '@/components/image';
 
 const Videos = () => {
 	const {video} = useSelector((state) => state?.home);
+  const slider = React.useRef(null);
   const settings = {
     dots: false,
     infinite: true,
@@ -51,11 +52,21 @@ const Videos = () => {
         <Typography variant="h4" component="h2" color={'#fff'} className='video__title fw-b'>
           VIDEO HOT
         </Typography>
-        <Typography variant="p" my={2} color={'white'} className="mw-440" sx={{ fontSize: '14px', display: 'block'}}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Typography>
+        <Box className="d-flex justify-content-between">
+          <Typography variant="p" my={2} color={'white'} className="mw-440" sx={{ fontSize: '14px', display: 'block'}}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </Typography>
+          <Box className="d-flex hide-xs">
+            <Box pr={1} className='previous_caro cursor' onClick={() => slider?.current?.slickPrev()}>
+              <img src="/images/prev.png"/>
+            </Box>
+            <Box pl={1} className='next_caro cursor' onClick={() => slider?.current?.slickNext()}>
+              <img src="/images/next.png"/>
+            </Box>
+          </Box>
+        </Box>
       </Container>
-      <Slider className="video__slider center" {...settings}>
+      <Slider ref={slider} className="video__slider center" {...settings}>
         { video && (
           video.map((item) => {
             return <div className='video__slider--item' key={item.CreateDate}>

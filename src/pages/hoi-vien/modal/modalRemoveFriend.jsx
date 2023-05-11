@@ -73,6 +73,7 @@ const RemoveFriendModal = ({ friend, onClose }) => {
       BackdropProps={{
         timeout: 500,
       }}
+      disableScrollLock={true}
     >
       <Box className='modal__gift' sx={style}>
         <Image

@@ -45,7 +45,7 @@ const SendFpointModal = ({ friend, onClose }) => {
   const sendFpoint = () => {
     axiosInstance
       .post(
-        '/api/UserSendFPoint/create',
+        'UserSendFPoint/create',
         {
           Active: true,
           CreateDate: currentTime,
@@ -86,6 +86,7 @@ const SendFpointModal = ({ friend, onClose }) => {
       BackdropProps={{
         timeout: 500,
       }}
+      disableScrollLock={true}
     >
       <Box className='modal__gift' sx={style}>
         <Image

@@ -27,11 +27,13 @@ export default function Activity() {
       return;
     }
     async function fetchAllData() {
-      await dispatch(getFriendsData({ userId: user?.userid }));
-      await dispatch(getActivitiesHistoryData({ userId: user?.userid }));
-      await dispatch(getGivePointsHistorysData({ userId: user?.userid }));
-      await dispatch(getUserGiftData({ userId: user?.userid }));
-      await dispatch(getSpinsHistorysData({ userId: user?.userid }));
+      await Promise.all([
+        dispatch(getFriendsData({ userId: user?.userid })),
+        dispatch(getActivitiesHistoryData({ userId: user?.userid })),
+        dispatch(getGivePointsHistorysData({ userId: user?.userid })),
+        dispatch(getUserGiftData({ userId: user?.userid })),
+        dispatch(getSpinsHistorysData({ userId: user?.userid }))
+      ]);
     }
     void fetchAllData();
   }, [user]);
@@ -44,6 +46,8 @@ export default function Activity() {
           variant="h4"
           component="h2"
           color={"#fff"}
+          fontSize={"48px"}
+          textTransform={"uppercase"}
           sx={{ padding: "30px 0" }}
         >
           Hoạt động

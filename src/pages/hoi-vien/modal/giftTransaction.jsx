@@ -49,7 +49,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
   const giftTransactionAction = () => {
     axiosInstance
       .post(
-        '/api/UserGiftSpin/create',
+        'UserGiftSpin/create',
         {
           Active: true,
           CreateDate: currentTime,
@@ -91,6 +91,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
       BackdropProps={{
         timeout: 500,
       }}
+      disableScrollLock={true}
     >
       <Box className='modal__gift' sx={style}>
         <Image

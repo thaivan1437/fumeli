@@ -26,6 +26,9 @@ const RulesSpinGame = () => {
   return (
     <>
       <Container mt={8}>
+        <Typography mt={4} mb={4} color="white" className='main__title'>
+          VÒNG QUAY MAY MẮN
+        </Typography>
         <Box className="rules__block">
           <Image
             src={imgSpinGame.ImagePath}

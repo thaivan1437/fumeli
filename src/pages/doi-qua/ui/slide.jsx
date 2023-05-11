@@ -1,16 +1,22 @@
-import React from 'react'
+import * as React from 'react'
 import { Typography } from '@mui/material'
 import { Container, Box } from '@mui/system'
 import { useSelector } from 'react-redux'
 import Slider from 'react-slick'
+import { useState, useEffect } from 'react'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import AutoSizeImage from '@/components/image'
+import GiftTransactionModal from '../modal/giftTransaction'
 
 const NewItem = () => {
+  const [showGiftTranscationModal, setGiftModal] = useState(false)
+  const [gift, setGift] = useState('')
+
   const { giftData } = useSelector((state) => state?.gift) || []
   giftData.sort((a, b) => b.Id - a.Id)
   giftData.slice(0, 5)
+
   const settings = {
     dots: false,
     infinite: true,
@@ -47,6 +53,16 @@ const NewItem = () => {
     ],
   }
 
+  const closeGiftTransactionModal = () => {
+    setGiftModal(false)
+    setGift('')
+  }
+  const openGiftTransactionModal = (e) => {
+    const giftFilterById = giftData.filter((item) => item.Id == e)
+    setGift(giftFilterById)
+    setGiftModal(true)
+  }
+
   return (
     <React.Fragment>
       <Container>
@@ -59,10 +75,15 @@ const NewItem = () => {
           giftData.map((item) => {
             return (
               <div
-                className="hot__item--item"
+                className="hot__item--item pos--relative"
                 key={item.CreateDate}
                 sx={{ height: '440px!important' }}
               >
+                <div
+                  className="onclick__gift"
+                  data-id={item.Id}
+                  onClick={(e) => openGiftTransactionModal(e.target.dataset.id)}
+                ></div>
                 <div style={{ position: 'relative' }}>
                   <AutoSizeImage
                     isResize={false}
@@ -84,6 +105,9 @@ const NewItem = () => {
             )
           })}
       </Slider>
+      {showGiftTranscationModal ? (
+        <GiftTransactionModal gift={gift} onClose={closeGiftTransactionModal} />
+      ) : null}
     </React.Fragment>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import InfoUser from './ui/userFu'
+import InfoUser from './ui/userFu.page'
 import { getAllDataThunkAction } from './logic/reducer'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/material'

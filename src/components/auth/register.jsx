@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { axiosPost } from '@/utils/api';
 import Loader from '@/components/loading';
+import Image from 'next/image'
 
 const SignUpModal = () => {
   const dispatch = useDispatch();
@@ -105,11 +106,20 @@ const SignUpModal = () => {
         aria-labelledby="signup-modal-title"
         aria-describedby="signup-modal-description"
         className="modal__register modal__common"
+        disableScrollLock={true}
       >
         <Box
           className="modal__register--paper modal__common--box"
         >
-          <Typography variant="h4" component="h2" id="signup-modal-title" sx={{textAlign: 'center'}}>
+          <Image
+            src="/images/close.svg"
+            alt="btn close"
+            onClick={() => handleClose()}
+            width={27}
+            height={27}
+            className="btn__modal--close"
+          />
+          <Typography variant="h4" component="h2" id="signup-modal-title" sx={{textAlign: 'center'}} className="fw-b fs-40">
             Đăng ký
           </Typography>
           <form onSubmit={handleSubmit}>
@@ -129,6 +139,7 @@ const SignUpModal = () => {
             ))}
             <Box my={2}>
               <FormControlLabel
+                className="note-term"
                 defaultChecked
                 control={
                   <Checkbox
@@ -137,7 +148,12 @@ const SignUpModal = () => {
                     name="rememberMe"
                   />
                 }
-                label="Tôi xác nhận rằng tôi trên 18 tuổi và đồng ý với các Điều khoản & Điều kiện!"
+                label={
+                  <>
+                    Tôi xác nhận rằng tôi trên 18 tuổi và đồng ý với các. <br />
+                    <span className="text-color">Điều khoản & Điều kiện!</span>
+                  </>
+                }
                 slotProps={
                   <Typography variant="p">
                     Vui lòng điền các thông tin bên dưới để đăng ký tài khoản mới.
@@ -151,7 +167,7 @@ const SignUpModal = () => {
               </Typography>
             }
             <Box my={2}>
-              <Button color="error" type="submit" fullWidth variant="contained">
+              <Button color="error" type="submit" fullWidth variant="contained" className="btn-login fs-20 custom">
                 ĐĂNG KÝ NGAY
               </Button>
             </Box>

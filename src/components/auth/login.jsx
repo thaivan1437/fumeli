@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 import Toast from '@/components/toast';
 import Image from 'next/image'
+import {api_host} from '@/utils/api';
 
 const LoginModal = () => {
   const [rememberMe, setRememberMe] = useState(false);
@@ -73,7 +74,7 @@ const LoginModal = () => {
     params.append('Username', formData.Username);
     params.append('Password', formData.Password);
     params.append('grant_type', 'password');
-    axios.post('https://api-demowebsite.cdktcnqn.edu.vn/api/oauth/token', params)
+    axios.post(`${api_host}oauth/token`, params)
       .then(response => {
         setStatusCode({ isShow: true, status: 'success' })
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -102,7 +103,7 @@ const LoginModal = () => {
   return (
     <React.StrictMode>
       {showToast()}
-      <Modal open={loginModalOpen} onClose={handleClose} className='modal__common'>
+      <Modal disableScrollLock={true} open={loginModalOpen} onClose={handleClose} className='modal__common'>
         <Box
           className='modal__common--box'
         >
@@ -114,8 +115,8 @@ const LoginModal = () => {
             height={27}
             className="btn__modal--close"
           />
-          <Typography variant="h6" component="h2" sx={{textAlign: 'center'}}>
-            Đăng nhập <Typography variant="span">Fumeli</Typography>
+          <Typography variant="h6" component="h2" sx={{textAlign: 'center', textTransform: 'uppercase'}} className='fw-b fs-40'>
+            Đăng nhập <Typography variant="span" className='text-color'>Fumeli</Typography>
           </Typography>
           <form>
             <Box my={2}>
@@ -139,10 +140,11 @@ const LoginModal = () => {
                 </Box>
               ))}
               <Box className='forget--btn'>
-                <Button variant='text' color='error' onClick={handleForgetPassword}>Quên mật khẩu</Button>
+                <Button variant='text' color='error' onClick={handleForgetPassword}>Quên mật khẩu?</Button>
               </Box>
               <Box className='text-left'>
                 <FormControlLabel
+                  className='ftcolor1'
                   control={
                     <Checkbox
                       checked={rememberMe}
@@ -150,15 +152,15 @@ const LoginModal = () => {
                       name="rememberMe"
                     />
                   }
-                  label="Ghi nhớ tài khoản"
+                  label="Nhớ tài khoản"
                 />
               </Box>
             </Box>
             <Box mt={5} mb={2}>
-              <Button type="submit" variant="contained" color="error" onClick={handleLogin} sx={{ width: '100%' , margin: 'auto'}}>Đăng nhập</Button>
+              <Button type="submit" variant="contained" color="error" onClick={handleLogin} sx={{ width: '100%' , margin: 'auto'}} className='btn-login fs-20 custom'>Đăng nhập</Button>
             </Box>
             <Box my={2}>
-              <Button variant="contained" onClick={handleOpenRegister} sx={{ width: '100%', margin: 'auto', background: '#F0F0F0', color: '#000' }}>ĐĂNG KÝ TÀI KHOẢN</Button>
+              <Button variant="contained" onClick={handleOpenRegister} className='btn-register fs-20 custom'>ĐĂNG KÝ TÀI KHOẢN</Button>
             </Box>
           </form>
         </Box>
