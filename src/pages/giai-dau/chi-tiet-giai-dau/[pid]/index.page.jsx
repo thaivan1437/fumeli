@@ -51,7 +51,6 @@ const DetailTournament = () => {
 							<Box className="tournament__box">
 								{
 									match && match.map((item, _) => {
-										console.log(item)
 										return (
 											<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item custom" p={2} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}  onClick={() => openVideoModal(item.VideoPath)}>
 												<Box className="tournament__item--images" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>

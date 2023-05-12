@@ -9,7 +9,7 @@ const Tournaments = () => {
 	const [isActive, setIsActive] = useState();
 	const { match, matchCategory } = useSelector((state) => state?.home);
 	useEffect(() => {
-		// console.log('count loop');
+
 		if(matchs?.length == 0 && match?.length) {
 			setMatchs(match);
 		}
@@ -21,7 +21,6 @@ const Tournaments = () => {
 		newMatch && newMatch[0].Matchs && setMatchs(newMatch[0].Matchs);
 		setIsActive(id);
 	}
-	// console.log('Matchs	', match, matchCategory, matchs);
 
   return (
     <React.Fragment>

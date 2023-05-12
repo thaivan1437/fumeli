@@ -50,7 +50,7 @@ const DailyDetail = ({
 
   let AttendanceMonth = configMission.filter((item) => item.Type == 'AttendanceMonth')
   AttendanceMonth = AttendanceMonth.sort((a,b) => a.OrderOfNumber - b.OrderOfNumber)
-  console.log('daily detail',configMission, missionDetail, AttendanceMonth)
+
 
   // config date
   const daysOfWeeks = dateOfWeek();
@@ -85,7 +85,6 @@ const DailyDetail = ({
     const dateItem = new Date(newItem);
     const isActive = active === 'active';
 
-    console.log('dateItem', dateItem)
   
     if (today < dateItem || isActive) {
       const message = today < dateItem ? 'Ngày mai quay lại sau.' : 'Hôm nay bạn đã điểm danh! Ngày mai quay lại sau.';

@@ -64,7 +64,6 @@ const GiftTransactionModal = ({ gift, onClose }) => {
         }
       )
       .then((response) => {
-        console.log(response.data)
         $('.modal__giftTransaction--title').text('THÀNH CÔNG')
         $('.modal__giftTransaction--description')
           .empty()
@@ -73,7 +72,6 @@ const GiftTransactionModal = ({ gift, onClose }) => {
         $('.button--back').css({ marginTop: '4%' })
       })
       .catch((error) => {
-        console.log(error)
         $('.modal__giftTransaction--title').text('THẤT BẠI')
         $('.modal__giftTransaction--img').remove()
         $('.modal__giftTransaction--description').empty().text(error.message)

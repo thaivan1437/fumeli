@@ -39,7 +39,6 @@ export default function App({ Component, pageProps }) {
     }
   }
   const [headerHeight, setHeaderHeight] = React.useState(0);
-  console.log('headerHeight', headerHeight);
 
   const scrollToTop = () => {
     window.scroll({top: 0, left: 0, behavior: 'smooth' })

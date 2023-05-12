@@ -84,14 +84,12 @@ const ActiveMailModal = ({userDetail,  onClose }) => {
         }
       )
       .then((response) => {
-        console.log(response.data)
         $('.modal__giftTransaction--title').text('THÀNH CÔNG')
         $('.modal__giftTransaction--description')
           .empty()
           .text('Bạn đã đổi quà thành công ' + gift[0].GiftTitle)
       })
       .catch((error) => {
-        console.log(error)
         $('.modal__giftTransaction--title').text('THẤT BẠI')
         $('.modal__giftTransaction--img').remove()
         $('.modal__giftTransaction--description').empty().text(error.message)

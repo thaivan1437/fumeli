@@ -18,7 +18,6 @@ export default function PostPage() {
 
 
   const type = configMission.filter(item => item.Type == 'AttendanceDay')
-  console.log('configMission', configMission, type)
 
   useEffect(() => {
     if(mission && mission.length === 0 || configMission && configMission.length === 0) {

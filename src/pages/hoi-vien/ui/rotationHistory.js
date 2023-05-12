@@ -15,7 +15,6 @@ function createData(id, giftTitle, createData) {
 
 const RotationHistory = () => {
   const { spinsHistory } = useSelector((state) => state?.userDetail);
-  console.log(spinsHistory);
   const rows = spinsHistory
     ?.sort((a, b) => b.Id - a.Id)
     .map((item) =>

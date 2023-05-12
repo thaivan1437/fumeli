@@ -24,7 +24,6 @@ const ContactPage = () => {
   const [content, setContent] = useState('')
 
   const handleSubmit = (event) => {
-    console.log(1)
     event.preventDefault()
     const currentTime = new Date().toLocaleTimeString()
     axiosInstance

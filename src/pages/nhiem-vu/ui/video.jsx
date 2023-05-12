@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import AutoSizeImage from '@/components/image';
 import YoutubeModal from '@/components/modal/video';
-
+import Link from 'next/link'
 
 const Video = () => {
 	const { missionCategory } = useSelector((state) => state?.mission);
@@ -77,9 +77,9 @@ const Video = () => {
       <Slider className="video__slider center" {...settings}>
         { video && (
           video.map((item) => {
-            return <div className='video__slider--item' key={item.CreateDate} onClick={() => openVideoModal(item.VideoPath)}>
+            return <Link className='video__slider--item' key={item.CreateDate} href={item.TitleLink}>
               <AutoSizeImage isResize={false} src={item.ImagePath} alt={item.Title} width={777} height={440}/>
-            </div>
+            </Link>
           })
         )}
       </Slider>

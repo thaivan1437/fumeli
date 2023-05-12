@@ -16,7 +16,7 @@ const Daily = () => {
 		}
 	}, [missionCategory && missionCategory.length]);
 
-	console.log('missionCategory', missionCategory)
+
 	// handle pagination
 	const ITEMS_PER_PAGE = 6;
   const [currentPage, setCurrentPage] = useState(1);

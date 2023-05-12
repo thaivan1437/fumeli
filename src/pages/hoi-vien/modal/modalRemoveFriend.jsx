@@ -33,8 +33,6 @@ const RemoveFriendModal = ({ friend, onClose }) => {
   let user = localStorage.getItem("user");
   user = JSON.parse(user);
 
-  console.log("user",friend, user)
-
   const handleClose = () => {
     setOpen(false)
     onClose()
