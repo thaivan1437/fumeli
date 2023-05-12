@@ -26,10 +26,15 @@
 }
 
 .drawer__header {
+  z-index: 1200;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 20px 10px;
-  margin-bottom: 25px;
+  padding: 3px 10px;
   align-items: center;
   .hamburder__icon__btn {
     width: fit-content;

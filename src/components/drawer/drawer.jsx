@@ -17,8 +17,7 @@ function ResponsiveDrawer(props) {
 
   const toggleMenu = () => setShowMenu(true);
 
-  const { userName, handleOpenModalLogin, setHeaderHeight } = props;
-  setHeaderHeight(-5);
+  const { userName, handleOpenModalLogin } = props;
   const pageLinks = [
     {
       id: 1,

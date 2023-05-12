@@ -121,7 +121,6 @@ const Header = ({ setHeaderHeight }) => {
           className="navbar--mobile"
           userName={userName}
           handleOpenModalLogin={handleOpenModalLogin}
-          setHeaderHeight={setHeaderHeight}
         />
       ) : (
         <AppBar
