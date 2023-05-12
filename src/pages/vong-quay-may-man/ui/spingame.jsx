@@ -9,10 +9,9 @@ import {
 } from '@mui/material'
 import { useSelector } from 'react-redux'
 import Image from 'next/image'
-import axiosInstance from '@/utils/api'
 import NotiModal from '../modal/notiModal'
 import SpinTurnTransactionModal from '../modal/spinTurnTransaction'
-import {axiosInstance} from '@/utils/api'
+import axiosInstance from '@/utils/api'
 import { getAllDataThunkAction } from '../logic/reducer'
 import { useDispatch } from 'react-redux'
 
@@ -85,7 +84,7 @@ const SpinGame = () => {
       const images = document.querySelectorAll('.spingame__item--img')
 
       axiosInstance.put(
-        `api/UserSpinGame/update/${user.userid}`,
+        `/UserSpinGame/update/${user.userid}`,
         {
           Id: user.userid,
         },
@@ -135,8 +134,7 @@ const SpinGame = () => {
           activeImage.classList.remove('spingame__item--img-active')
           images[prizeIndex].classList.add('spingame__item--img-active')
 
-          axiosInstance
-            .post(
+          axiosInstance.post(
               'UserGiftSpin/create',
               {
                 Active: true,
