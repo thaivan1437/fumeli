@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import { useSelector } from 'react-redux';
-import { axiosPost } from '@/utils/api'
-import AlertModal from '@/components/modal/alert';
-import ConfirmModal from '@/components/modal/confirm';
-import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
-import RemoveFriendModal from '../modal/modalRemoveFriend';
-import SendFpointModal from '../modal/sendGiftPoint';
+import React, { useEffect, useState } from "react";
+import { Box, Typography, Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import { axiosPost } from "@/utils/api";
+import AlertModal from "@/components/modal/alert";
+import ConfirmModal from "@/components/modal/confirm";
+import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
+import RemoveFriendModal from "../modal/modalRemoveFriend";
+import SendFpointModal from "../modal/sendGiftPoint";
 
 export default function FriendList() {
   const { user } = useSelector((state) => state?.authReducer);
   const { friends } = useSelector((state) => state?.userDetail);
-  const [code, setCode] = useState({code: '', link:''})
+  const [code, setCode] = useState({ code: "", link: "" });
   const [open, setOpen] = useState([false, false]); // 0 modal alert, 1 modal confirm
-  const [dataModal, setDataModal] = useState({ title: '', message: '', icon: '' });
+  const [dataModal, setDataModal] = useState({
+    title: "",
+    message: "",
+    icon: "",
+  });
   const [confirm, setConfirm] = useState(false); // value when modal confirmation return
   const [fpoint, setFpoint] = useState(0); // value fpoint
 
@@ -30,7 +34,7 @@ export default function FriendList() {
 
   const handleModal = ({ title, message, icon, index }) => {
     setDataModal({ title, message, icon });
-    setOpen(prev => {
+    setOpen((prev) => {
       const newModals = [...prev];
       newModals[index] = true;
       return newModals;
@@ -40,33 +44,30 @@ export default function FriendList() {
   const sendPointModal = (friend) => {
     setFriend(friend);
     setIsSendFpointModal(true);
-  }
+  };
 
   const removeFriendModal = (friend) => {
     setFriend(friend);
     setIsRemoveFriend(true);
-  }
-
+  };
 
   const handleCopy = (id) => {
     const input = document.getElementById(id);
     input.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
   };
-  
 
-  const deleteFriend = async(e) => {
-
+  const deleteFriend = async (e) => {
     try {
       e.preventDefault();
-      const idFriends = e.target.getAttribute('data-id');
+      const idFriends = e.target.getAttribute("data-id");
       const url = `UserFriend/update/${idFriends}`;
       const now = new Date();
-      const data ={
-        "UpdateUser": user.userid,
-        "UpdateDate": now,
-        "Active": false,
-      }
+      const data = {
+        UpdateUser: user.userid,
+        UpdateDate: now,
+        Active: false,
+      };
       const response = await axiosPost(url, data);
       console.log(response);
     } catch (error) {
@@ -76,53 +77,54 @@ export default function FriendList() {
 
   useEffect(() => {
     if (user) {
-      setCode({code: user.userid, link: window.location.origin + '/?code=' + user.userid })
+      setCode({
+        code: user.userid,
+        link: window.location.origin + "/?code=" + user.userid,
+      });
     }
-  },[user])
+  }, [user]);
 
   const frienditem = (item) => {
     const lastActive = new Date(item.LastActive).toLocaleString();
-    return ( 
-    <Box className='friend__box' key={`${item.UserId}-${item.Id}`}>
-      <Box className='friend__box--avatar'>
-        <img src={item.Avatar} alt="avatar" />
+    return (
+      <Box className="friend__box" key={`${item.UserId}-${item.Id}`}>
+        <div className="friend__box--avatar">
+          <img src={item.Avatar} alt="avatar" />
+        </div>
+        <div className="friend__box--info">
+          <div className="friend__box--info--gift fs-16">
+            <p>{item.FriendUserName}</p>
+            <img
+              src="/images/gift.svg"
+              alt="send gift"
+              onClick={() => sendPointModal(item)}
+            />
+          </div>
+          <p variant="h6" component="p" color={"#fff"} className="fs-12">
+            {lastActive}
+          </p>
+        </div>
+        <div className="friend__box--btnClose">
+          <img
+            src="/images/closeRed.svg"
+            alt="btn close"
+            onClick={() => removeFriendModal(item)}
+          />
+        </div>
       </Box>
-      <Box className='friend__box--info'>
-        <Typography variant="h6" component="p" color='error' className='friend__box--gift'>
-          {item.FriendUserName}
-          <img src="/images/gift.svg" alt="send gift" onClick={() => sendPointModal(item)}/>
-        </Typography>
-        <Typography variant="h6" component="p" color={'#fff'}>
-          {lastActive}
-        </Typography>
-        {/* <Button className='friend__box--gift'>
-          
-        </Button> */}
-      </Box>
-      <Box className='friend__box--btnClose'>
-        <img src="/images/closeRed.svg" alt="btn close" onClick={() => removeFriendModal(item)}/>
-      </Box>
-    </Box>)
-  }
+    );
+  };
 
   return (
     <React.StrictMode>
-      {
-        isRemoveFriend &&
-        <RemoveFriendModal
-          friend={friend}
-          onClose={setIsRemoveFriend}
-        />
-      }
-      {
-        isSendFpointModal &&
-        <SendFpointModal
-          friend={friend}
-          onClose={setIsSendFpointModal}
-        />
-      }
-      {
-        open && open[1] && <ConfirmModal
+      {isRemoveFriend && (
+        <RemoveFriendModal friend={friend} onClose={setIsRemoveFriend} />
+      )}
+      {isSendFpointModal && (
+        <SendFpointModal friend={friend} onClose={setIsSendFpointModal} />
+      )}
+      {open && open[1] && (
+        <ConfirmModal
           open={open[1]}
           handleClose={() => handleClose(1)}
           message={dataModal.message}
@@ -133,14 +135,12 @@ export default function FriendList() {
           setFpoint={setFpoint}
           fpoint={fpoint}
         />
-      }
-      <Box className='friend__list'>
-        {
-          friends.map((item) => {
-            return frienditem(item)
-          })
-        }
+      )}
+      <Box className="friend__list">
+        {friends.map((item) => {
+          return frienditem(item);
+        })}
       </Box>
     </React.StrictMode>
-  )
+  );
 }
