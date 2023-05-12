@@ -174,7 +174,7 @@ const DailyDetail = ({
               setConfirm={setConfirm}
             />
           }
-          <Typography py={4} variant="h4" component="h2" color={'#fff'} sx={{textAlign: 'center', textTransform: 'uppercase'}} className='fs-48 fw-b'>
+          <Typography py={4} variant="h4" component="h2" color={'#fff'} sx={{textAlign: 'center', textTransform: 'uppercase'}} className='fs-48 fw-b mb-28'>
             {missionDetail.Title || 'Nhiệm vụ'}
           </Typography>
           <Box my={2} sx={{position: 'relative'}}>

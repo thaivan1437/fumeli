@@ -24,10 +24,10 @@ const CountCheckInMonth = ({
   return (
     <React.StrictMode>
       <Box my={2} sx={{position: 'relative'}}>
-        <Typography py={4} variant="h6" component="h6" color={'#fff'} className='fs-48 fw-b bd-t' sx={{textAlign: 'center', textTransform: 'uppercase'}}>
+        <Typography py={4} variant="h6" component="h6" color={'#fff'} className='fs-48 fw-b bd-t pb-0' sx={{textAlign: 'center', textTransform: 'uppercase'}}>
           Điểm danh tháng
         </Typography>
-        <Typography py={2} my={0} component="p" color={'#fff'} className='fs-16 fw-b' sx={{ textTransform: 'uppercase' }}>
+        <Typography py={2} my={0} component="p" color={'#fff'} className='fs-16 fw-b pb-0' sx={{ textTransform: 'uppercase' }}>
           Tháng này đã điểm danh tổng: <span className='text-color'>{checkInMonth}</span> ngày
         </Typography>
         <Box className='check__in--month' pb={2}>
