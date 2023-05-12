@@ -24,7 +24,7 @@ const RotationHistory = () => {
   return (
     <div className="rotation__history">
       <h3>LỊCH SỬ QUAY SỐ</h3>
-      <div className="rotation__history__container">
+      <div className="rotation__history__container fs-16">
         <div className="rotation__history__grid rotation__history__header ">
           <p className="center">STT</p>
           <p className="center">Phần thưởng</p>

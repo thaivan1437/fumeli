@@ -17,7 +17,7 @@ const ExchangeGiftHistory = () => {
   return (
     <div className="exchange__gifts">
       <h3>LỊCH SỬ ĐỔI QUÀ</h3>
-      <div className="table__container">
+      <div className="table__container fs-16">
         <table className="exchange__gifts__table">
           <thead>
             <tr>

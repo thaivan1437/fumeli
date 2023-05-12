@@ -18,7 +18,7 @@ const ActivityDiary = () => {
   console.log("=>>> newFriendsHistory", newFriendsHistory);
   return (
     <div>
-      <div className="activity__grid--right--top">
+      <div className="activity__grid--right--top fs-16">
         <Box className="activity__diary">
           <Typography
             pb={1}
@@ -45,8 +45,11 @@ const ActivityDiary = () => {
                         className=""
                       >
                         Bạn đã tham gia hoạt động {activity.CampaignTitle} và
-                        nhận được {activity.FpointValue}
-                        {activity.FpointValue ? " Fpoint" : null}
+                        nhận được
+                        <span>
+                          {activity.FpointValue}
+                          {activity.FpointValue ? " Fpoint" : null}
+                        </span>
                       </Typography>
                       <Typography
                         variant="small"
@@ -88,7 +91,7 @@ const ActivityDiary = () => {
                         color={"#ffffff"}
                         className=""
                       >
-                        <small className="text-capitalize">
+                        <small className="text-capitalize fs-16">
                           {friend.FriendUserName}
                         </small>
                         đã trở thành bạn bè với bạn.
@@ -112,12 +115,12 @@ const ActivityDiary = () => {
       <div className="point__container">
         <div className="point__history">
           <h3>LỊCH SỬ TẶNG FPOINT</h3>
-          <div className="point__grid point__header">
+          <div className="point__grid point__header fs-16">
             <p>Tên tài khoản</p>
             <p className="center">Số điểm</p>
             <p className="right">Thời gian</p>
           </div>
-          <div className="point__body scroll__style">
+          <div className="point__body scroll__style fs-16">
             {newGivePointsHistory.map((givePoint, idx) => (
               <div
                 key={givePoint.Id}
@@ -135,12 +138,12 @@ const ActivityDiary = () => {
 
         <div className="point__history">
           <h3>LỊCH SỬ NHẬN FPOINT</h3>
-          <div className="point__grid point__header">
+          <div className="point__grid point__header fs-16">
             <p>Tên tài khoản</p>
             <p className="center">Số điểm</p>
             <p className="right">Thời gian</p>
           </div>
-          <div className="point__body scroll__style">
+          <div className="point__body scroll__style fs-16">
             {newActivityHistory.map((activity, idx) => (
               <div
                 key={activity.Id}
