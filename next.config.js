@@ -30,13 +30,25 @@ const nextConfig = {
     }
     return config;
   },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/tham-gia/daily/:name/:pid',
+  //       destination: '/nhiem-vu/:pid',
+  //     },
+  //   ]
+  // },
   async rewrites() {
     return [
+      // {
+      //   source: '/:path*.html',
+      //   destination: '/:path*',
+      // },
       {
-        source: '/tham-gia/daily/:name/:pid',
-        destination: '/nhiem-vu/:pid',
+        source: '/:path.html',
+        destination: '/:path',
       },
-    ]
+    ];
   },
   env: {
     // apiHost: 'https://api-demowebsite.cdktcnqn.edu.vn/api/',

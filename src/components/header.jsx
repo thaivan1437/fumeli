@@ -275,7 +275,7 @@ const Header = ({ setHeaderHeight }) => {
               ml={2}
             >
               <Button mr={2} color="inherit" className={`tabmenu ${isActive('/giai-dau')}`}>
-                <Link href="/giai-dau">Giải đấu</Link>
+                <Link href="/giai-dau.html">Giải đấu</Link>
               </Button>
               <Button mr={2} color="inherit" className={`tabmenu ${isActive('/doi-qua')}`}>
                 <Link href="/doi-qua">Đổi quà</Link>
