@@ -1,12 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  Table,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+
 import moment from "moment/moment";
 
 function createData(id, giftTitle, createData) {
@@ -15,7 +9,6 @@ function createData(id, giftTitle, createData) {
 
 const RotationHistory = () => {
   const { spinsHistory } = useSelector((state) => state?.userDetail);
-  console.log(spinsHistory);
   const rows = spinsHistory
     ?.sort((a, b) => b.Id - a.Id)
     .map((item) =>

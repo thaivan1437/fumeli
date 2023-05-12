@@ -15,7 +15,6 @@ const ActivityDiary = () => {
   const newActivityHistory = activitiesHistory?.sort((a, b) => b.Id - a.Id);
   const newGivePointsHistory = givePointsHistory?.sort((a, b) => b.Id - a.Id);
   const newFriendsHistory = friends?.sort((a, b) => b.Id - a.Id);
-  console.log("=>>> newFriendsHistory", newFriendsHistory);
   return (
     <div>
       <div className="activity__grid--right--top fs-16">
@@ -28,6 +27,7 @@ const ActivityDiary = () => {
             color={"#FF2423"}
             borderBottom={1}
             borderColor={"#d9d9d9"}
+            fontWeight={"bold"}
           >
             NHẬT KÝ HOẠT ĐỘNG
           </Typography>
@@ -75,6 +75,7 @@ const ActivityDiary = () => {
             variant="h6"
             component="p"
             color={"#FFFFFF"}
+            fontWeight={"bold"}
           >
             Bạn bè đã thêm
           </Typography>
