@@ -12,7 +12,7 @@ import Image from 'next/image'
 import axiosInstance from '@/utils/api'
 import NotiModal from '../modal/notiModal'
 import SpinTurnTransactionModal from '../modal/spinTurnTransaction'
-import axios from 'axios'
+import {axiosInstance} from '@/utils/api'
 import { getAllDataThunkAction } from '../logic/reducer'
 import { useDispatch } from 'react-redux'
 

@@ -11,7 +11,7 @@ import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 
 const NotiModal = ({  onClose }) => {
   const style = {

@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import Image from 'next/image'
 import { format } from 'date-fns'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import { useDispatch } from 'react-redux'
 import { getAllDataThunkAction } from '../logic/reducer'
 import Pagination from './pagination.jsx'
