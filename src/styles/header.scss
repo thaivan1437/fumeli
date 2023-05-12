@@ -62,7 +62,7 @@
   color: #fff;
   .drawer__link {
     display: block;
-    border-bottom: 1px solid #8b8b8b;
+    border-bottom: 0.6px solid #8b8b8b;
     padding: 5px 0;
     font-weight: bold;
     text-transform: uppercase;
@@ -89,8 +89,10 @@
     flex-direction: column;
     padding-left: 20px;
     .drawer__link {
+      font-weight: unset;
+      text-transform: unset;
       &:last-child {
-        border-bottom: 1px solid #8b8b8b !important;
+        border-bottom: 0.6px solid #8b8b8b !important;
       }
     }
   }
