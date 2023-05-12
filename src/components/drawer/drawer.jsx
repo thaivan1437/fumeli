@@ -73,7 +73,7 @@ function ResponsiveDrawer(props) {
       id: 7,
       type: "link",
       title: "Hội viên",
-      link: "/",
+      link: "/hoi-vien",
     },
   ];
   return (
