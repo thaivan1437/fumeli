@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Skeleton, Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
@@ -13,6 +13,10 @@ const SliderBanner = () => {
   const sliderAds = slider && slider.filter(item => !item?.IsMainBanner)
   const [image, setImage] = useState();
   const [imageModal, setImageModal] = useState(false);
+  // Khởi tạo ref
+  const sliderRef = useRef(null);
+  const isDraggingRef = useRef(false);
+  const isClickEnabledRef = useRef(true);
 
   const settings = {
     dots: false,
@@ -38,7 +42,19 @@ const SliderBanner = () => {
           verticalSwiping: true
         }
       }
-    ]
+    ],
+    onSwipe: () => {
+      // Thiết lập giá trị của ref khi bắt đầu kéo slide
+      isDraggingRef.current = true;
+      isClickEnabledRef.current = false;
+    },
+    afterChange: () => {
+      // Thiết lập giá trị của ref khi kết thúc kéo slide
+      isDraggingRef.current = false;
+      setTimeout(() => {
+        isClickEnabledRef.current = true;
+      }, 0);
+    }
   };
 
   const setting2 = {
@@ -54,17 +70,51 @@ const SliderBanner = () => {
           arrows: false,
         }
       }
-    ]
+    ],
+    onSwipe: () => {
+      // Thiết lập giá trị của ref khi bắt đầu kéo slide
+      isDraggingRef.current = true;
+      isClickEnabledRef.current = false;
+    },
+    afterChange: () => {
+      // Thiết lập giá trị của ref khi kết thúc kéo slide
+      isDraggingRef.current = false;
+      setTimeout(() => {
+        isClickEnabledRef.current = true;
+      }, 0);
+    }
   }
 
   const onCloseModal = () => {
     setImageModal(false)
   }
   const openImageModal = (src) => {
-    setImage(src);
-    setImageModal(true);
-    
+    if (!isDraggingRef.current && isClickEnabledRef.current) {
+      setImage(src);
+      setImageModal(true);
+    }
   }
+
+  // Thêm sự kiện click vào slider để thiết lập giá trị của ref
+  useEffect(() => {
+    const sliderNode = sliderRef.current;
+    if (sliderNode && sliderNode.querySelector) { // kiểm tra sliderNode và xem có thể sử dụng querySelector hay không
+      const handleClickOutside = (e) => {
+        if (isDraggingRef.current) {
+          e.stopPropagation();
+          isClickEnabledRef.current = false;
+          setTimeout(() => {
+            isClickEnabledRef.current = true;
+          }, 0);
+        }
+      };
+      sliderNode.querySelector('.slick-list').addEventListener('click', handleClickOutside, true);
+      return () => {
+        sliderNode.querySelector('.slick-list').removeEventListener('click', handleClickOutside, true);
+      };
+    }
+  }, []);
+
 
   return (
     <React.Fragment>
@@ -88,6 +138,7 @@ const SliderBanner = () => {
               <Slider
                 {...settings}
                 className="banner__slider center"
+                ref={sliderRef}
               >
                 { sliderAds && (
                   sliderAds.map((item, index) => {

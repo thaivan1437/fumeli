@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,11 @@ import YoutubeModal from '@/components/modal/video';
 import Link from 'next/link'
 
 const Video = () => {
+  // Khởi tạo ref
+  const sliderRef = useRef(null);
+  const isDraggingRef = useRef(false);
+  const isClickEnabledRef = useRef(true);
+
 	const { missionCategory } = useSelector((state) => state?.mission);
   let video = missionCategory && missionCategory.filter(item => item.IsVideo);
   video = video && video.length && video[0].Campaigns
@@ -60,8 +65,46 @@ const Video = () => {
           variableWidth: false,
         }
       }
-    ]
+    ],
+    onSwipe: () => {
+      // Thiết lập giá trị của ref khi bắt đầu kéo slide
+      isDraggingRef.current = true;
+      isClickEnabledRef.current = false;
+    },
+    afterChange: () => {
+      // Thiết lập giá trị của ref khi kết thúc kéo slide
+      isDraggingRef.current = false;
+      setTimeout(() => {
+        isClickEnabledRef.current = true;
+      }, 0);
+    }
   };
+
+  const openLinkVideo = (src) => {
+    if (!isDraggingRef.current && isClickEnabledRef.current) {
+      location.href = src;
+    }
+  }
+
+  // Thêm sự kiện click vào slider để thiết lập giá trị của ref
+  useEffect(() => {
+    const sliderNode = sliderRef.current;
+    if (sliderNode && sliderNode.querySelector) { // kiểm tra sliderNode và xem có thể sử dụng querySelector hay không
+      const handleClickOutside = (e) => {
+        if (isDraggingRef.current) {
+          e.stopPropagation();
+          isClickEnabledRef.current = false;
+          setTimeout(() => {
+            isClickEnabledRef.current = true;
+          }, 0);
+        }
+      };
+      sliderNode.querySelector('.slick-list').addEventListener('click', handleClickOutside, true);
+      return () => {
+        sliderNode.querySelector('.slick-list').removeEventListener('click', handleClickOutside, true);
+      };
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -74,12 +117,12 @@ const Video = () => {
         </Typography>
       </Container>
 
-      <Slider className="video__slider center" {...settings}>
+      <Slider className="video__slider center" {...settings} ref={sliderRef}>
         { video && (
           video.map((item) => {
-            return <Link className='video__slider--item' key={item.CreateDate} href={item.TitleLink}>
+            return <div className='video__slider--item' key={item.CreateDate} onClick={openLinkVideo(item.TitleLink)}>
               <AutoSizeImage isResize={false} src={item.ImagePath} alt={item.Title} width={777} height={440}/>
-            </Link>
+            </div>
           })
         )}
       </Slider>
