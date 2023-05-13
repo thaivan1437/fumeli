@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { loginAction } from '@/components/auth/logic/action'
+import { loginAction, openLoginModal } from '@/components/auth/logic/action'
 import { getConfigUrl } from './getConfig';
 
 async function myFunction() {
@@ -36,6 +36,7 @@ export const axiosGet = async (url, dispatch) => {
     if (error?.response?.status == 401) {
       // need show modal token expired
       await dispatch(loginAction());
+      dispatch(openLoginModal());
       localStorage.setItem("user", JSON.stringify(''));
     }
   }
@@ -66,6 +67,7 @@ export const axiosPost = async (url, data, dispatch) => {
     if (error?.response?.status == 401) {
       // need show modal token expired
       await dispatch(loginAction());
+      dispatch(openLoginModal());
       localStorage.setItem("user", JSON.stringify(''));
     }
     return error?.response;

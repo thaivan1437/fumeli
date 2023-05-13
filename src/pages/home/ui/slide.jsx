@@ -90,6 +90,7 @@ const SliderBanner = () => {
   }
   const openImageModal = (src) => {
     if (!isDraggingRef.current && isClickEnabledRef.current) {
+      console.log('in case move page')
       setImage(src);
       setImageModal(true);
     }

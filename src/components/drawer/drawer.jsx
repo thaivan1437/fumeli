@@ -41,21 +41,21 @@ function ResponsiveDrawer(props) {
         <ListItem disablePadding>
           <ListItemButton className="navbar__listNav">
             <Typography variant="body1" className="navbar__listNav--title">
-              <Link href="/gioi-thieu">GIỚI THIỆU</Link>
+              <Link href="/gioi-thieu.html">GIỚI THIỆU</Link>
             </Typography>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton className="navbar__listNav">
             <Typography variant="body1" className="navbar__listNav--title">
-              <Link href="/nhiem-vu"> NHIỆM VỤ</Link>
+              <Link href="/nhiem-vu.html"> NHIỆM VỤ</Link>
             </Typography>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton className="navbar__listNav">
             <Typography variant="body1" className="navbar__listNav--title">
-              <Link href="/vong-quay-may-man"> VÒNG QUAY MAY MẮN</Link>
+              <Link href="/vong-quay-may-man.html"> VÒNG QUAY MAY MẮN</Link>
             </Typography>
           </ListItemButton>
         </ListItem>

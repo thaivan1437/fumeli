@@ -39,9 +39,9 @@ if (typeof window !== 'undefined') {
 export const getAllDataThunkAction = () => async (dispatch, getState) => {
   try {
     const urls = [
-      '/SpinGame/detail/getallclientbyspingameid/2',
-      '/Campaign/getsinglebyid?ID=4',
-      `UserSpinGame/getallclientbyuserid/${data.userid}`,
+      'api/SpinGame/detail/getallclientbyspingameid/2',
+      'api/Campaign/getsinglebyid?ID=4',
+      `api/UserSpinGame/getallclientbyuserid/${data.userid}`,
     ]
 
     const [spinGiftItem, imgSpinGame, spinturn] = await Promise.all(

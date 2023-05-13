@@ -22,7 +22,7 @@ export const topRank = (state = initialState, action) => {
 export const getTopRankDataThunkAction = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'UserFPoint/getallclient'
+      'api/UserFPoint/getallclient'
     ];
 
     const [topRank] = await Promise.all(

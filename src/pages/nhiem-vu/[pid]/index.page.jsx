@@ -31,10 +31,12 @@ export default function PostPage() {
     }
   }, []);
 
+  console.log('pid', pid)
+
   return (
     <React.StrictMode>
       {
-        type && type.length > 0 && type[0]?.Value == pid &&
+        // type && type.length > 0 && type[0]?.Value == pid &&
         <DailyDetail id={pid} />
       }
     </React.StrictMode>

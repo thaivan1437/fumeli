@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axiosInstance from '../../utils/api'
+import {axiosInstance} from '../../utils/api'
 import {
   Box,
   Button,
@@ -27,7 +27,7 @@ const ContactPage = () => {
     event.preventDefault()
     const currentTime = new Date().toLocaleTimeString()
     axiosInstance
-      .post('Contact/create', {
+      .post('api/Contact/create', {
         FullName: fullName,
         Email: email,
         PhoneNumber: phoneNumber,

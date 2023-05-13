@@ -67,8 +67,8 @@ export const giftTransaction = () => async (dispatch, getState) => {
 export const getAllDataThunkAction = () => async (dispatch, getState) => {
   try {
     const [giftData, categoryGiftData] = await Promise.all([
-      axiosGet('Gift/getallclient'),
-      axiosGet('CategoriesGift/getallclient'),
+      axiosGet('api/Gift/getallclient'),
+      axiosGet('api/CategoriesGift/getallclient'),
     ])
     await dispatch(getGift(giftData))
     await dispatch(getGiftCategory(categoryGiftData))

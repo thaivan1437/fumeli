@@ -11,7 +11,7 @@ import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import $ from 'jquery'
 
 const RemoveFriendModal = ({ friend, onClose }) => {
@@ -42,7 +42,7 @@ const RemoveFriendModal = ({ friend, onClose }) => {
   const giftTransactionAction = () => {
     axiosInstance
       .post(
-        `UserFriend/update/${friend.UserId}ahahahahah`,
+        `api/UserFriend/update/${friend.UserId}ahahahahah`,
         {
           UpdateUser: user.userid,
           UpdateDate: currentTime,

@@ -11,7 +11,7 @@ import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import $ from 'jquery'
 import InputField from '@/components/input';
 import {formatNumber} from '@/utils/help'
@@ -45,7 +45,7 @@ const SendFpointModal = ({ friend, onClose }) => {
   const sendFpoint = () => {
     axiosInstance
       .post(
-        'UserSendFPoint/create',
+        'api/UserSendFPoint/create',
         {
           Active: true,
           CreateDate: currentTime,

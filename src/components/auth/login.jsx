@@ -75,7 +75,7 @@ const LoginModal = () => {
     params.append('Username', formData.Username);
     params.append('Password', formData.Password);
     params.append('grant_type', 'password');
-    axios.post(`${apiHost}oauth/token`, params)
+    axios.post(`${apiHost}api/oauth/token`, params)
       .then(response => {
         setStatusCode({ isShow: true, status: 'success' })
         localStorage.setItem("user", JSON.stringify(response.data));

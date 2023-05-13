@@ -1,16 +1,21 @@
 .bg-main {
 	background: url('/images/bg-mission.png') no-repeat top 450px center;
-	background-size: contain;
+	background-size: cover;
   @media (max-width: 768px) {
     background: transparent;
   } 
 }
 .bg-common {
 	background: url('/images/bg-mission.png') no-repeat top center;
-	background-size: contain;
+	background-size: cover;
   @media (max-width: 768px) {
     background: transparent;
   } 
+}
+.mission__images {
+  img {
+    min-height: 265px;
+  }
 }
 	img {
     max-width: 100%;

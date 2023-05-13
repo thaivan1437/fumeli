@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import Image from 'next/image'
 import { format } from 'date-fns'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import { useDispatch } from 'react-redux'
 import { getAllDataThunkAction } from '../logic/reducer'
 import Pagination from './pagination.jsx'
@@ -25,13 +25,13 @@ export default function UserFU() {
   const ITEMS_PER_PAGE = 6
 
   const [currentPage, setCurrentPage] = useState(1)
-  const maxPage = Math.ceil(userFU.length / ITEMS_PER_PAGE)
+  const maxPage = Math.ceil(userFU?.length / ITEMS_PER_PAGE)
 
   const handleClick = (page) => {
     setCurrentPage(page)
   }
 
-  const displayData = userFU.slice(
+  const displayData = userFU && userFU.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   )
@@ -49,7 +49,7 @@ export default function UserFU() {
   const addFriend = (id) => {
     const currentTime = new Date().toLocaleTimeString()
     axiosInstance
-      .post('UserFriend/create', {
+      .post('api/UserFriend/create', {
         FriendId: id,
         Active: true,
         CreateDate: currentTime,

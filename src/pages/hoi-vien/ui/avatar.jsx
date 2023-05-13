@@ -6,7 +6,8 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard'
 import GroupIcon from '@mui/icons-material/Group'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
+import { getConfigUrl } from '@/utils/getConfig';
 
 export default function LayoutUserPage() {
   const [user, setUser] = useState('')
@@ -23,14 +24,15 @@ export default function LayoutUserPage() {
   const handleClick = (event) => {
     hiddenFileInput.current.click()
   }
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     if (event.target.files && event.target.files[0]) {
       const file = hiddenFileInput.current.files[0]
       const formData = new FormData()
       formData.append('file', file)
+      const apiHost = await getConfigUrl();
 
       axiosInstance
-        .post('upload/saveImage/avatar', formData, {
+        .post('api/upload/saveImage/avatar', formData, {
           headers: {
             Authorization: `Bearer ${user.access_token}`,
             'Content-Type': 'multipart/form-data',
@@ -42,10 +44,10 @@ export default function LayoutUserPage() {
           const str = response.data
           axiosInstance
             .put(
-              'appUser/updateavatar',
+              'api/appUser/updateavatar',
               {
                 Id: user.userid,
-                Avatar: 'https://api-demowebsite.cdktcnqn.edu.vn/' + str,
+                Avatar: apiHost + str,
               },
               {
                 headers: {
@@ -75,14 +77,15 @@ export default function LayoutUserPage() {
   const handleChangeImgCoverClick = (event) => {
     hiddenFileImageCoverInput.current.click()
   }
-  const handleImageCoverChange = (event) => {
+  const handleImageCoverChange = async (event) => {
     if (event.target.files && event.target.files[0]) {
       const file = hiddenFileImageCoverInput.current.files[0]
       const formData = new FormData()
       formData.append('file', file)
+      const apiHost = await getConfigUrl();
 
       axiosInstance
-        .post('upload/saveImage/imagecover', formData, {
+        .post('api/upload/saveImage/imagecover', formData, {
           headers: {
             Authorization: `Bearer ${user.access_token}`,
             'Content-Type': 'multipart/form-data',
@@ -94,10 +97,10 @@ export default function LayoutUserPage() {
           const str = response.data
           axiosInstance
             .put(
-              'appUser/updateimagecover',
+              'api/appUser/updateimagecover',
               {
                 Id: user.userid,
-                Imagecover: 'https://api-demowebsite.cdktcnqn.edu.vn/' + str,
+                Imagecover: apiHost + str,
               },
               {
                 headers: {
@@ -123,8 +126,11 @@ export default function LayoutUserPage() {
     }
   }
   const goToPage = (route) => {
-    window.location.href = `/hoi-vien/${route}`
+    window.location.href = `/hoi-vien/${route}.html`
   }
+
+  const bannerDefault = '/images/default-banner.svg';
+  const bannerAvatar = '/images/default-avatar.svg';
   return (
     <>
       <input
@@ -142,7 +148,7 @@ export default function LayoutUserPage() {
       <Box className="layoutAppUser parent">
         <Box className="layoutAppUser--avatar">
           <Image
-            src={user.imagecover}
+            src={user.imagecover || bannerDefault}
             alt={user.imagecover}
             width={446}
             height={251}
@@ -174,7 +180,7 @@ export default function LayoutUserPage() {
 
         <Box className="child">
           <Image
-            src={user.avatar}
+            src={user.avatar || bannerAvatar}
             alt={user.avatar}
             width={226}
             height={226}

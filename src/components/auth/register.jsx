@@ -54,7 +54,7 @@ const SignUpModal = () => {
       InviteCode: signUp.InviteCode,
     };
 
-    await axiosPost('appUser/add', data)
+    await axiosPost('api/appUser/add', data)
       .then((response) => {
         console.log('Submit response', response)
         if (response.status === 200) {

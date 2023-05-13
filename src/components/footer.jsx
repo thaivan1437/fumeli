@@ -11,12 +11,12 @@ import EmailIcon from '@mui/icons-material/Email'
 import Link from 'next/link'
 
 const footerLinks = [
-  { label: 'GIỚI THIỆU', href: '/gioi-thieu' },
-  { label: 'NHIỆM VỤ', href: '/nhiem-vu' },
-  { label: 'GIẢI ĐẤU', href: '/giai-dau' },
-  { label: 'ĐỔI QUÀ', href: '/doi-qua' },
-  { label: 'LIÊN HỆ', href: '/lien-he' },
-  { label: 'HỘI VIÊN', href: '/hoi-vien' },
+  { label: 'GIỚI THIỆU', href: '/gioi-thieu.html' },
+  { label: 'NHIỆM VỤ', href: '/nhiem-vu.html' },
+  { label: 'GIẢI ĐẤU', href: '/giai-dau.html' },
+  { label: 'ĐỔI QUÀ', href: '/doi-qua.html' },
+  { label: 'LIÊN HỆ', href: '/lien-he.html' },
+  { label: 'HỘI VIÊN', href: '/hoi-vien.html' },
 ]
 
 const linkColor = '#fff'

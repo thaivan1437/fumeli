@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import LayoutUserPage from './avatar'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -103,7 +103,7 @@ export default function InfoUser() {
     const currentTime = new Date().toLocaleTimeString()
     axiosInstance
       .put(
-        'appUser/update',
+        'api/appUser/update',
         {
           Id: user.userid,
           Introduction: introduction,
@@ -130,7 +130,7 @@ export default function InfoUser() {
   const updatePassWord = () => {
     axiosInstance
       .put(
-        'appUser/updatepassword',
+        'api/appUser/updatepassword',
         {
           Id: user.userid,
           CurrentPassword: currentPass,

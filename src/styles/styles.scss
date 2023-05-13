@@ -88,6 +88,12 @@ a:hover {
     display: none !important;
   }
 }
+.cursor-pointer {
+  cursor: pointer;
+}
+.text-left {
+  text-align: left !important;
+}
 @import "./other.scss";
 @import "../pages/home/index";
 @import "../pages/gioi-thieu/index";

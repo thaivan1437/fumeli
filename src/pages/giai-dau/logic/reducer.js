@@ -26,8 +26,8 @@ export const match = (state = initialState, action) => {
 export const getMatchDataThunkAction = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'Match/getallclient',
-      'CategoriesMatch/getallclient',
+      'api/Match/getallclient',
+      'api/CategoriesMatch/getallclient',
     ];
 
     const [ matchRes, matchCategory ] = await Promise.all(

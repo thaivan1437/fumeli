@@ -11,19 +11,20 @@ import { useRouter } from 'next/router';
 const DetailTournament = () => {
 	const router = useRouter()
   const {pid} = router.query;
-	const { match, matchCategory } = useSelector((state) => state?.match);
+	const { matchCategory } = useSelector((state) => state?.match);
 	const detail = matchCategory.filter(item => item.Id == pid);
 	const matchOther = matchCategory.filter(item => item.Id != pid);
+	const newMtach = matchCategory && matchCategory.find(item => item.Id == pid)
 
 	const dispatch = useDispatch();
   useEffect(() => {
-    if( match && match.length == 0) {
+    if( matchCategory && matchCategory.length == 0) {
 			async function fetchData3() {
 				await dispatch(getMatchDataThunkAction());
 			}
 			void fetchData3();
 		}
-  }, [match]);
+  }, [matchCategory]);
 
 
 	const [showVideoModal, setShowVideoModal] = useState(false);
@@ -50,7 +51,7 @@ const DetailTournament = () => {
 						<Box className="tournament__grid">
 							<Box className="tournament__box">
 								{
-									match && match.map((item, _) => {
+									newMtach && newMtach.Matchs && newMtach.Matchs.map((item, _) => {
 										return (
 											<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item custom" p={2} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}  onClick={() => openVideoModal(item.VideoPath)}>
 												<Box className="tournament__item--images" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -117,7 +118,7 @@ const DetailTournament = () => {
 												matchOther.map((item, index) => {
 													return (
 														<li key={item.Id} className="hot_item__li custom">
-															<Link href={`giai-dau/chi-tiet-giai-dau/${item.Id}`} >
+															<Link href={`/giai-dau/chi-tiet-giai-dau/${item.Id}.html`} >
 																<Box className='d-flex'>
 																	<img src="/images/avatar.png" alt={item.Title} />
 																	<Typography variant="body1" className="hot_item__title custom">

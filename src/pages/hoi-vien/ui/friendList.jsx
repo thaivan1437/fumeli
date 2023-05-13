@@ -60,7 +60,7 @@ export default function FriendList() {
     try {
       e.preventDefault();
       const idFriends = e.target.getAttribute('data-id');
-      const url = `UserFriend/update/${idFriends}`;
+      const url = `api/UserFriend/update/${idFriends}`;
       const now = new Date();
       const data ={
         "UpdateUser": user.userid,

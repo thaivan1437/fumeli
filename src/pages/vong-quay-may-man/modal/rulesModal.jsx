@@ -55,7 +55,7 @@ const RulesModal = ({ onClose }) => {
         </Box>
         <Container>
           <Typography
-            className="modal__giftTransaction--description"
+            className="modal__giftTransaction--description text-left"
             variant="h6"
             component="p"
             dangerouslySetInnerHTML={{

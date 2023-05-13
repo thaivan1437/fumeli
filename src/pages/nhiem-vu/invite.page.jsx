@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getMissionCategoryDataThunkAction } from './logic/reducer';
 import RuleModal from './ui/rule';
 
-export default function PostPage() {
+export default function InviteFrinedPage() {
   const dispatch = useDispatch();
   useEffect(() => {
     async function fetchData3() {

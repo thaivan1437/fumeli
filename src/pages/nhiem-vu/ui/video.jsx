@@ -82,7 +82,7 @@ const Video = () => {
 
   const openLinkVideo = (src) => {
     if (!isDraggingRef.current && isClickEnabledRef.current) {
-      location.href = src;
+      window.open(src, "_blank");
     }
   }
 
@@ -120,7 +120,7 @@ const Video = () => {
       <Slider className="video__slider center" {...settings} ref={sliderRef}>
         { video && (
           video.map((item) => {
-            return <div className='video__slider--item' key={item.CreateDate} onClick={openLinkVideo(item.TitleLink)}>
+            return <div className='video__slider--item cursor-pointer' key={item.CreateDate} onClick={() => openLinkVideo(item.TitleLink)}>
               <AutoSizeImage isResize={false} src={item.ImagePath} alt={item.Title} width={777} height={440}/>
             </div>
           })

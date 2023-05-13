@@ -88,6 +88,7 @@ export default function TopRank() {
         </ListItemText>
         {
           newTopRank && newTopRank.map((item, index) =>{
+            if (index > 9) return
             return renderItem(item, index)
           })
         }

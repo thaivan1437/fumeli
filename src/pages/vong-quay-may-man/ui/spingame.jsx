@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import { useSelector } from 'react-redux'
 import Image from 'next/image'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import NotiModal from '../modal/notiModal'
 import SpinTurnTransactionModal from '../modal/spinTurnTransaction'
 import axios from 'axios'
@@ -85,7 +85,7 @@ const SpinGame = () => {
       const images = document.querySelectorAll('.spingame__item--img')
 
       axiosInstance.put(
-        `UserSpinGame/update/${user.userid}`,
+        `api/UserSpinGame/update/${user.userid}`,
         {
           Id: user.userid,
         },
@@ -137,7 +137,7 @@ const SpinGame = () => {
 
           axiosInstance
             .post(
-              'UserGiftSpin/create',
+              'api/UserGiftSpin/create',
               {
                 Active: true,
                 CreateDate: currentTime,
