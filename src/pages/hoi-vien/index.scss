@@ -682,6 +682,10 @@
     height: 4px;
     position: absolute;
   }
+  
+@media (max-width: 768px) {
+  padding: 8px!important;
+}
 }
 .w-100 {
   width: 100% !important;

@@ -112,8 +112,6 @@ const Header = ({ setHeaderHeight }) => {
     router.push("/hoi-vien/bag");
   };
 
-  console.log(pathname);
-
   return (
     <React.StrictMode>
       {mobileView ? (

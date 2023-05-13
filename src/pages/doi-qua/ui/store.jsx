@@ -76,9 +76,9 @@ export const Store = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={8} className='gifttransaction'>
           {/* phâm loại */}
-          <Button mr={2} color="inherit" className="submenu f-right p-0">
+          <Button mr={2} color="inherit" className="submenu f-right p-0 custom__gifttransaction">
             <p className="submenu__parent custom__filter__gift ">
               PHÂN LOẠI <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
             </p>

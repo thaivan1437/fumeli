@@ -64,3 +64,15 @@ label.Mui-focused {
 .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
   background-color: #be1e1e !important;
 }
+
+.contact__info{
+  &--description{
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+letter-spacing: -0.01em;
+
+color: #FFFFFF;
+  }
+}
