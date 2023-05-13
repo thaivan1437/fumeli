@@ -81,7 +81,7 @@ const SpinGame = () => {
     if (spinTurn == 0) {
       openOutOfTurnModal()
     } else {
-      const images = document.querySelectorAll('.spingame__item--img')
+      const images = document.querySelectorAll('.spingame__item')
 
       axiosInstance.put(
         `/UserSpinGame/update/${user.userid}`,

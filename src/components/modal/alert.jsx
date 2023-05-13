@@ -24,7 +24,7 @@ export default function AlertModal({ open, handleClose, message, title, icon, is
           onClick={() => handleClose()}
           width={27}
           height={27}
-          className="btn__modal--close"
+          className="btn__modal--close btn__modal"
         />
         {icon}
         <Typography my={3} variant="h4" component="h2" color='error' sx={{textAlign: 'center'}} className='modal__common--title'>

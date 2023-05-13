@@ -64,7 +64,7 @@ const NotiModal = ({  onClose }) => {
               top: '-225px',
               right: '330px',
             }}
-            className="modal__youtube--btn-close"
+            className="modal__youtube--btn-close btn__close"
           />
 
           <Box sx={style}>
