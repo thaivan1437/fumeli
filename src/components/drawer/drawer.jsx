@@ -8,7 +8,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 function ResponsiveDrawer(props) {
-  console.log(props);
   const pathname = usePathname();
   const [active, setActive] = useState(false);
 
