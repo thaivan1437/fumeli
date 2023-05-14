@@ -12,9 +12,7 @@ function ResponsiveDrawer(props) {
   const [active, setActive] = useState(false);
 
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
 
-  const toggleMenu = () => setShowMenu(true);
 
   const { userName, handleOpenModalLogin } = props;
   const pageLinks = [
@@ -135,20 +133,16 @@ function ResponsiveDrawer(props) {
               ) : item.type === "menu" ? (
                 <>
                   <Link
-                    onMouseEnter={toggleMenu}
                     className={`drawer__link drawler__menu ${
                       pathname === item.link ? "active" : ""
                     }`}
+                    onClick={() => setOpenDrawer(!openDrawer)}
                     href={item.link}
                     key={item.id}
                   >
                     <div>
                       <p className="w-fit p-0 m-0">{item.title}</p>
-                      {showMenu ? (
-                        <ArrowForwardIosIcon className="text-[16px]" />
-                      ) : (
                         <KeyboardArrowDownIcon />
-                      )}
                     </div>
                   </Link>
 
@@ -156,6 +150,7 @@ function ResponsiveDrawer(props) {
                     <ul className="drawler__menu__lists">
                       {item.menuItems.map((menuItem) => (
                         <Link
+                        onClick={() => setOpenDrawer(!openDrawer)}
                           href={menuItem.link}
                           className={`drawer__link ${
                             pathname === menuItem.link ? "active" : ""

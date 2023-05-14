@@ -112,6 +112,8 @@ const Header = ({ setHeaderHeight }) => {
     router.push("/hoi-vien/bag");
   };
 
+  console.log("=>> headerRef",headerRef);
+
   return (
     <React.StrictMode>
       {mobileView ? (
@@ -224,7 +226,7 @@ const Header = ({ setHeaderHeight }) => {
                 src="/images/bgCenterNavbar.png"
                 alt="LogoCenter"
                 width={310}
-                height={270}
+                height={230}
                 className="bgCenterNavbar"
                 onClick={goHome}
               />

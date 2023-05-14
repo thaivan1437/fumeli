@@ -160,7 +160,7 @@ const SpinGame = () => {
       }, 4000)
     }
   }
-
+  
   return (
     <>
       <Container mt={8}>
