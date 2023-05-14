@@ -11,7 +11,7 @@ const RulesModal = ({ onClose }) => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '475px',
+    width: '1098px',
     minHeight: '420px',
     bgcolor: 'background.paper',
     border: '2px solid #000',
@@ -35,7 +35,7 @@ const RulesModal = ({ onClose }) => {
       }}
       disableScrollLock={true}
     >
-      <Box className="modal__rules__spingame" sx={style}>
+      <Box sx={style}>
         <Image
           src="/images/close.svg"
           alt="btn close"

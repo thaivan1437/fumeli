@@ -449,7 +449,7 @@
       p {
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: flex-start;
         height: 100%;
         padding: 16px;
         border-left: 1px solid #8a8a8a;
@@ -459,7 +459,86 @@
           grid-column: span 1 / span 1;
         }
         &.right {
-          justify-content: right;
+          justify-content: flex-end;
+        }
+        &.center {
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+.invited__friend__history {
+  width: 100%;
+  color: #fff;
+  border-left: 1px solid #d9d9d9;
+  margin-bottom: 2rem;
+  padding-left: 30px;
+  h3 {
+    color: #ff2423;
+    padding: 10px 0;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #d9d9d9;
+    font-size: 20px;
+    background-color: #181818;
+  }
+  .invited__friend__history__container {
+    background-color: #0f0f0f;
+    .invited__friend__history__body {
+      height: 500px;
+      &.scroll__style {
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+          width: 7px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: transparent;
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: #8b8b8b;
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background-color: #555;
+        }
+      }
+    }
+
+    .invited__friend__history__grid {
+      color: #fff;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      align-items: center;
+      &.invited__friend__history__header {
+        padding-right: 6px;
+        width: 100%;
+        background-color: #ff2423;
+        p {
+          font-weight: bold;
+        }
+      }
+
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%;
+        padding: 16px;
+        border-left: 1px solid #8a8a8a;
+        grid-column: span 2 / span 2;
+        &:first-child {
+          border-left: none;
+          grid-column: span 1 / span 1;
+        }
+        &.right {
+          justify-content: flex-end;
         }
         &.center {
           justify-content: center;

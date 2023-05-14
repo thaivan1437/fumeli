@@ -26,7 +26,7 @@ const RulesSpinGame = () => {
   return (
     <>
       <Container mt={8}>
-        <Typography mt={4} mb={4} color="white" className='main__title'>
+        <Typography mt={4} mb={4} pt={3} color="white" className='main__title'>
           VÒNG QUAY MAY MẮN
         </Typography>
         <Box className="rules__block">
