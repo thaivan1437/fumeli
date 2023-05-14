@@ -197,7 +197,7 @@ export default function LayoutUserPage() {
             <Button
               variant="contained"
               className="btn_fill ml-6 m-mb-0 w-158px"
-              onClick={() => goToPage('ui/infoUser')}
+              onClick={() => goToPage('infoUser')}
             >
               <PersonIcon />
               <Typography className="btn_fill--text">THÔNG TIN</Typography>

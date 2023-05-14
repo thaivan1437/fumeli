@@ -31,7 +31,6 @@ export default function PostPage() {
     }
   }, []);
 
-  console.log('pid', pid)
 
   return (
     <React.StrictMode>

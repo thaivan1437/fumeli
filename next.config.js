@@ -57,6 +57,22 @@ const nextConfig = {
         source: "/nhiem-vu/invite.html",
         destination: "/nhiem-vu/invite"
       },
+      {
+        source: "/hoi-vien/activity.html",
+        destination: "/hoi-vien/activity"
+      },
+      {
+        source: "/hoi-vien/bag.html",
+        destination: "/hoi-vien/bag"
+      },
+      {
+        source: "/hoi-vien/friend.html",
+        destination: "/hoi-vien/friend"
+      },
+      {
+        source: "/hoi-vien/infoUser.html",
+        destination: "/hoi-vien/infoUser"
+      },
     ];
   },
   serverRuntimeConfig: {

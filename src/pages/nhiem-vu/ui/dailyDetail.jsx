@@ -22,7 +22,6 @@ const DailyDetail = ({
   const idInviteConfig = configMission?.find(item =>  item.Key == "InviteFriend")
 	const idLuckyConfig = configMission?.find(item =>  item.Key == "LuckyWheelCampaign")
   
-  console.log(id, idInviteConfig, idLuckyConfig)
   return (
     <React.StrictMode>
       {
