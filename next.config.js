@@ -42,18 +42,6 @@ const nextConfig = {
         destination: "/giai-dau/chi-tiet-giai-dau/:pid"
       },
       {
-        source: "/tham-gia/daily/:name/:pid.html",
-        destination: "/nhiem-vu/:pid"
-      },
-      {
-        source: "/tham-gia/daily/vong-quay-may-man/:pid.html",
-        destination: "/vong-quay-may-man"
-      },
-      {
-        source: "/tham-gia/other/:name/:pid.html",
-        destination: "/nhiem-vu/:pid"
-      },
-      {
         source: "/nhiem-vu/invite.html",
         destination: "/nhiem-vu/invite"
       },
@@ -73,6 +61,18 @@ const nextConfig = {
         source: "/hoi-vien/infoUser.html",
         destination: "/hoi-vien/infoUser"
       },
+      {
+        source: "/tham-gia/daily/:name/:pid.html",
+        destination: "/nhiem-vu/:pid"
+      },
+      {
+        source: "/tham-gia/daily/vong-quay-may-man/:pid.html",
+        destination: "/vong-quay-may-man"
+      },
+      {
+        source: "/tham-gia/other/:name/:pid.html",
+        destination: "/nhiem-vu/:pid"
+      }
     ];
   },
   serverRuntimeConfig: {
