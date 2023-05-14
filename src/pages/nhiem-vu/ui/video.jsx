@@ -66,7 +66,7 @@ const Video = () => {
   return (
     <React.Fragment>
       <Container>
-        <Typography variant="h4" component="h2" color={'#fff'} className='fs-48 fw-b bd-t'>
+        <Typography variant="h4" component="h2" color={'#fff'} className='fs-48 fw-b bd-t mb-28'>
           XEM VIDEO NHẬN QUÀ
         </Typography>
         <Typography variant="p" my={2} color={'#fff'} className="mw-440 fs-16" sx={{ display: 'block'}}>

@@ -47,7 +47,7 @@ const NotiModal = ({ onClose }) => {
             top: '-13px',
             right: '-30px',
           }}
-          className="modal__youtube--btn-close"
+          className="modal__youtube--btn-close btn__close"
         />
         <NotificationsActiveOutlinedIcon
           sx={{

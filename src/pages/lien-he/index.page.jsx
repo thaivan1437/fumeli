@@ -66,12 +66,12 @@ const ContactPage = () => {
                       sx={{ mb: '-3px', mr: 1 }}
                       className="iconItem"
                     />
-                    Địa chỉ:
-                  </strong>
-                  <Typography variant="body1">
+                    Địa chỉ: {" "} <span className='contact__info--description'>
                     Số 52 Đường 10, Khu dân cư Nam Long, Phường Tân Thuận Đông,
                     Quận 7, TP.HCM, Việt Nam
-                  </Typography>
+                    </span>
+                  </strong>
+                
                 </Typography>
                 <Typography variant="subtitle1" sx={{ mb: 2 }}>
                   <strong>
@@ -79,11 +79,10 @@ const ContactPage = () => {
                       sx={{ mb: '-3px', mr: 1 }}
                       className="iconItem"
                     />
-                    Phone:{' '}
+                    Phone:{" "} <span className='contact__info--description'>0968236915 – 0988666415</span>
+                   
                   </strong>
-                  <Typography variant="body1">
-                    0968236915 – 0988666415
-                  </Typography>
+                  
                 </Typography>
                 <Typography variant="subtitle1" sx={{ mb: 2 }}>
                   <strong>
@@ -91,13 +90,13 @@ const ContactPage = () => {
                       sx={{ mb: '-3px', mr: 1 }}
                       className="iconItem"
                     />
-                    Email:
-                  </strong>
-                  <Typography variant="body1">
+                    Email:{" "}  <span className='contact__info--description'>
                     <Link href="mailto:info@fusoft.vn" color="inherit">
                       info@fusoft.vn
                     </Link>
-                  </Typography>
+                    </span>
+                  </strong>
+                
                 </Typography>
               </Grid>
             </Grid>

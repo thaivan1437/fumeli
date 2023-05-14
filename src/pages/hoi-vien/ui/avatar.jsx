@@ -29,7 +29,6 @@ export default function LayoutUserPage() {
   const handleChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       const file = hiddenFileInput.current.files[0]
-      console.log('Upload Image', file)
       const formData = new FormData()
       formData.append('file', file)
 
@@ -82,7 +81,6 @@ export default function LayoutUserPage() {
   const handleImageCoverChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       const file = hiddenFileImageCoverInput.current.files[0]
-      console.log('Upload Image', file)
       const formData = new FormData()
       formData.append('file', file)
 

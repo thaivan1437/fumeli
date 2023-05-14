@@ -29,16 +29,16 @@ const Tournaments = () => {
 				<Typography variant="h4" component="h2" color={'#fff'} className='fw-b fs-48'>
 					GIẢI ĐẤU
 				</Typography>
-				<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff', marginBottom: '20px'}}>
+				<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'right', alignItems: 'center', color: '#fff', background:"none!important"}} className='category__match tournament'>
 					<Stack
 						direction="row"
-						divider={<Divider orientation="vertical" flexItem />}
-						spacing={2}
+						divider={<Divider orientation="vertical" flexItem  className='divider'/>}
+						spacing={1}
 					>
 						{
 							matchCategory && matchCategory.map((item) => {
 								return (
-									<span className={`fw-b fs-20 ${isActive == item.Id ? 'active' : ''}`} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</span>
+									<Typography component="span" sx={{ cursor: 'pointer'}} className={`tabCategory ${isActive == item.Id ? 'active' : ''}`} key={item.CreateDate} data-id={item.Id} onClick={(e)=> handleShowMatchByCategory(e)}>{item.Title}</Typography>
 								)
 							})
 						}

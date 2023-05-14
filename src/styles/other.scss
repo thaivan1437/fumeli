@@ -275,3 +275,9 @@
     max-width: 65px;
   }
 }
+
+.btn__close{
+  @media (max-width: 768px) {
+    display: none!important;
+  }
+}

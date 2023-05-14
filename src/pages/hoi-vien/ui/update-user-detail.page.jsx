@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography, Container, Grid, Button } from '@mui/material'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -22,8 +22,33 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import dayjs from 'dayjs'
 import InputField from '@/components/input'
 import NotiModal from '../modal/noti'
+import {
+  getUserGiftData,
+} from "../logic/reducer";
 
 export default function InfoUser() {
+  const dispatch = useDispatch();
+  const [user, setUser] = useState('')
+  useEffect(() => {
+    // check login has data in localStore
+    const userData = JSON.parse(localStorage.getItem('user'))
+    if (userData && userData.username) {
+      setUser(userData)
+    }
+  }, [])
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    async function fetchAllData() {
+      await Promise.all([
+        dispatch(getUserGiftData({ userId: user?.userid }))
+      ]);
+    }
+    void fetchAllData();
+  }, [user]);
+
+  
   const userDetail = useSelector((state) => state.userDetail)
 
   const [currentPass, setCurrentPass] = useState('')
@@ -41,12 +66,12 @@ export default function InfoUser() {
 
   const getInfoUser = () => {
     const value = {
-      city: userDetail.userData.City,
-      introduction: userDetail.userData.Introduction,
-      fullname: userDetail.userData.FullName,
-      dateOfBirth: userDetail.userData.DateOfBirth,
-      email: userDetail.userData.Email,
-      phoneNumber: userDetail.userData.PhoneNumber,
+      city: userDetail.userDetail.City,
+      introduction: userDetail.userDetail.Introduction,
+      fullname: userDetail.userDetail.FullName,
+      dateOfBirth: userDetail.userDetail.DateOfBirth,
+      email: userDetail.userDetail.Email,
+      phoneNumber: userDetail.userDetail.PhoneNumber,
     }
     return value
   }
@@ -75,14 +100,20 @@ export default function InfoUser() {
     getInfoUser().phoneNumber || ''
   )
 
-  const [user, setUser] = useState('')
+
   useEffect(() => {
-    // check login has data in localStore
-    const userData = JSON.parse(localStorage.getItem('user'))
-    if (userData && userData.username) {
-      setUser(userData)
+    if (!user) {
+      return;
     }
-  }, [])
+    setCity(getInfoUser().city|| '')
+    setIntroduction(getInfoUser().introduction|| '')
+    setFullName(getInfoUser().fullname|| '')
+    setDateOfBirth( getInfoUser().dateOfBirth|| '')
+    setEmail(getInfoUser().email|| '')
+    setPhoneNumber(
+      getInfoUser().phoneNumber || ''
+    )
+  }, [userDetail.userDetail]);
 
   const handleChange = (event) => {
     setCity(event.target.value)
@@ -130,11 +161,32 @@ export default function InfoUser() {
   const updatePassWord = () => {
     axiosInstance
       .put(
-        'api/appUser/updatepassword',
+        '/appUser/updatepassword',
         {
           Id: user.userid,
           CurrentPassword: currentPass,
           Password: pass,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+          },
+        }
+      )
+      .then((response) => {
+        setNotiModal(true)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  const activeEmail = () => {
+    axiosInstance
+      .post(
+        '/appUser/sendactiveemail',
+        {
+          Id: user.userid
         },
         {
           headers: {
@@ -182,7 +234,7 @@ export default function InfoUser() {
                           multiline
                           rows={6}
                           className="input__userDetail"
-                          defaultValue={userDetail.userData.Introduction}
+                          defaultValue={introduction}
                           onChange={(event) =>
                             setIntroduction(event.target.value)
                           }
@@ -206,7 +258,8 @@ export default function InfoUser() {
                         <TextField
                           className="input__userDetail"
                           required
-                          defaultValue={userDetail.userData.FullName}
+                          multiline
+                          defaultValue={userDetail?.userDetail?.FullName || ''}
                           onChange={(event) => setFullName(event.target.value)}
                           id="fullnameTxt"
                         />
@@ -230,7 +283,7 @@ export default function InfoUser() {
                             className="input__userDetail date__input"
                             color="white"
                             defaultValue={dayjs(
-                              userDetail.userData.DateOfBirth
+                             dateOfBirth
                             )}
                             onChange={(value) => setDateOfBirth(value)}
                             id="dateOfBirthTxt"
@@ -286,13 +339,14 @@ export default function InfoUser() {
                         <TextField
                           className="input__userDetail"
                           required
-                          defaultValue={userDetail.userData.Email}
+                          multiline
+                          defaultValue={email}
                           onChange={(event) => setEmail(event.target.value)}
                           id="emailTxt"
                         />
                       </Grid>
                       <Grid item xs={12} md={2}>
-                        <Button variant="contained" className="btn__confirm">
+                        <Button variant="contained" className="btn__confirm" onClick={activeEmail}>
                           XÁC MINH
                         </Button>
                       </Grid>
@@ -313,7 +367,8 @@ export default function InfoUser() {
                         <TextField
                           className="input__userDetail"
                           required
-                          defaultValue={userDetail.userData.PhoneNumber}
+                          multiline
+                          defaultValue={phoneNumber}
                           onChange={(event) =>
                             setPhoneNumber(event.target.value)
                           }
@@ -321,9 +376,9 @@ export default function InfoUser() {
                         />
                       </Grid>
                       <Grid item xs={12} md={2}>
-                        <Button variant="contained" className="btn__confirm">
+                        {/* <Button variant="contained" className="btn__confirm">
                           XÁC MINH
-                        </Button>
+                        </Button> */}
                       </Grid>
                     </Grid>
                   </TableCell>

@@ -53,3 +53,21 @@
       }
     }
   }
+
+  .footer__route{
+    @media screen and (max-width: 768px) {
+     text-align: left;
+    }
+  }
+
+  .footer__icon{
+    @media screen and (max-width: 768px) {
+      text-align: left;
+     }
+  }
+  .footer__logo{ 
+    @media screen and (max-width: 768px) {
+width: 122px;
+height: 49px;
+   }
+  }
