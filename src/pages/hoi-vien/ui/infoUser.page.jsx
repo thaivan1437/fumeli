@@ -55,7 +55,14 @@ export default function InfoUser() {
       title: "Tham gia",
       value: moment(userDetail?.Created).format("DD/MM/YYYY"),
     },
+    {
+      id: 8,
+      title: "Giới thiệu",
+      value: userDetail?.Introduction,
+    },
   ];
+
+  console.log()
 
   return (
     <>
@@ -66,11 +73,7 @@ export default function InfoUser() {
           <div className="userDetail__description">
             <p className="fs-20">GIỚI THIỆU</p>
             <small className="fs-16">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-              obcaecati odit magnam rerum nobis mollitia iure in amet, eligendi
-              placeat, assumenda facere voluptas, repellat reiciendis eius iste.
-              Facilis, eligendi facere.
-              {/* {userDetail.userData.Introduction}*/}
+              {userDetail?.Introduction}
             </small>
           </div>
 

@@ -51,7 +51,7 @@ export default function App({ Component, pageProps }) {
         className="main"
         style={{
           background: "#19181c !important",
-          marginTop: `${headerHeight ? headerHeight + 5 : 85}px`,
+          marginTop: `${headerHeight ? headerHeight + 5 :130}px`,
         }}
       >
         {isLoading ? <Loader /> : <Component {...pageProps} />}

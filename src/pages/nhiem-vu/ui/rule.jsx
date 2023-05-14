@@ -11,11 +11,11 @@ export default function RuleModal({ open, handleClose, message, title, icon,}) {
     <Modal
       open={open}
       onClose={() => handleClose()}
-      className='modal__common'
+      className='modal__common '
       disableScrollLock={true}
     >
       <Box
-        className='modal__common--box modal__rule'
+        className='modal__common--box modal__rule w-1098'
       >
         <Image
           src="/images/close.svg"
@@ -33,7 +33,6 @@ export default function RuleModal({ open, handleClose, message, title, icon,}) {
           <div dangerouslySetInnerHTML={{ __html: message }} />
         </Box>
       </Box>
-      
     </Modal>
   );
 }
