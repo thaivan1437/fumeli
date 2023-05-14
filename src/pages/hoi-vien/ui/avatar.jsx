@@ -8,8 +8,10 @@ import GroupIcon from '@mui/icons-material/Group'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import {axiosInstance} from '@/utils/api'
 import { getConfigUrl } from '@/utils/getConfig';
+import { useRouter } from "next/router";
 
 export default function LayoutUserPage() {
+  const router = useRouter();
   const [user, setUser] = useState('')
 
   useEffect(() => {
@@ -126,7 +128,7 @@ export default function LayoutUserPage() {
     }
   }
   const goToPage = (route) => {
-    window.location.href = `/hoi-vien/${route}.html`
+    router.push(`/hoi-vien/${route}.html`)
   }
 
   const bannerDefault = '/images/default-banner.svg';

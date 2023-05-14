@@ -90,7 +90,6 @@ function ResponsiveDrawer(props) {
             alt="LogoCenter"
             width={112}
             height={39}
-            isResize={false}
           />
         </Link>
         {

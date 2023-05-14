@@ -191,6 +191,7 @@ const Header = ({ setHeaderHeight }) => {
                       transformOrigin={{ horizontal: "right", vertical: "top" }}
                       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                       className="menu--header"
+                      disableScrollLock={true}
                     >
                       <MenuItem className="menu--item" onClick={() => openPageUser()}>
                         Trang cá nhân
