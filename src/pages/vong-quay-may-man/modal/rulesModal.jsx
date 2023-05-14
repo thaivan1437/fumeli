@@ -46,7 +46,7 @@ const RulesModal = ({ onClose }) => {
             top: '-13px',
             right: '-30px',
           }}
-          className="modal__youtube--btn-close"
+          className="modal__youtube--btn-close btn__close"
         />
         <Box className="modal__rules__titleBox">
           <Typography mb={3} className="modal__rules__titleBox--title">

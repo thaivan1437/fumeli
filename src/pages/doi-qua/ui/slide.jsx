@@ -132,6 +132,7 @@ const NewItem = () => {
                     alt={item.Title}
                     width={777}
                     height={440}
+                    style="width:'100%"
                   />
                   <div className="hot__item--info">
                     <Typography variant="body1" className="hot__item--title">

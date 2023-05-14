@@ -12,7 +12,6 @@ import Image from 'next/image'
 import {axiosInstance} from '@/utils/api'
 import NotiModal from '../modal/notiModal'
 import SpinTurnTransactionModal from '../modal/spinTurnTransaction'
-import axios from 'axios'
 import { getAllDataThunkAction } from '../logic/reducer'
 import { useDispatch } from 'react-redux'
 
@@ -82,10 +81,10 @@ const SpinGame = () => {
     if (spinTurn == 0) {
       openOutOfTurnModal()
     } else {
-      const images = document.querySelectorAll('.spingame__item--img')
+      const images = document.querySelectorAll('.spingame__item')
 
       axiosInstance.put(
-        `api/UserSpinGame/update/${user.userid}`,
+        `/UserSpinGame/update/${user.userid}`,
         {
           Id: user.userid,
         },

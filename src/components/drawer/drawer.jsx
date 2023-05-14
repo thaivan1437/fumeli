@@ -1,193 +1,181 @@
-import React, { useState, useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import CssBaseline from '@mui/material/CssBaseline'
-import Divider from '@mui/material/Divider'
-import Drawer from '@mui/material/Drawer'
-import IconButton from '@mui/material/IconButton'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import MenuIcon from '@mui/icons-material/Menu'
-import Toolbar from '@mui/material/Toolbar'
-import Image from 'next/image'
-import Typography from '@mui/material/Typography'
-import { Button } from '@mui/material'
-import { useDispatch } from 'react-redux'
-import { openLoginModal } from '@/components/auth/logic/action'
-import Link from 'next/link'
-
-const drawerWidth = 240
+import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Button, Drawer, IconButton, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 function ResponsiveDrawer(props) {
-  const dispatch = useDispatch()
-  const handleOpenModalLogin = () => {
-    dispatch(openLoginModal())
-  }
+  const pathname = usePathname();
+  const [active, setActive] = useState(false);
 
-  const { window, reff, userName } = props
-  const [mobileOpen, setMobileOpen] = React.useState(false)
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen)
-  }
+  const toggleMenu = () => setShowMenu(true);
 
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton className="navbar__listNav">
-            <Typography variant="body1" className="navbar__listNav--title">
-              <Link href="/gioi-thieu.html">GIỚI THIỆU</Link>
-            </Typography>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton className="navbar__listNav">
-            <Typography variant="body1" className="navbar__listNav--title">
-              <Link href="/nhiem-vu.html"> NHIỆM VỤ</Link>
-            </Typography>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton className="navbar__listNav">
-            <Typography variant="body1" className="navbar__listNav--title">
-              <Link href="/vong-quay-may-man.html"> VÒNG QUAY MAY MẮN</Link>
-            </Typography>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton className="navbar__listNav">
-            <Typography variant="body1" className="navbar__listNav--title">
-              <Link href="/giai-dau"> GIẢI ĐẤU</Link>
-            </Typography>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton className="navbar__listNav">
-            <Typography variant="body1" className="navbar__listNav--title">
-              <Link href="/doi-qua"> ĐỔI QUÀ</Link>
-            </Typography>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton className="navbar__listNav">
-            <Typography variant="body1" className="navbar__listNav--title">
-              <Link href="/lien-he"> LIÊN HỆ</Link>
-            </Typography>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton className="navbar__listNav">
-            <Typography variant="body1" className="navbar__listNav--title">
-              <Link href="/hoi-vien"> HỘI VIÊN</Link>
-            </Typography>
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </div>
-  )
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined
-
+  const { userName, handleOpenModalLogin } = props;
+  const pageLinks = [
+    {
+      id: 1,
+      type: "link",
+      title: "Giới thiệu",
+      link: "/gioi-thieu.html",
+    },
+    {
+      id: 2,
+      type: "menu",
+      title: "Nhiệm vụ",
+      link: "/nhiem-vu.html",
+      menuItems: [
+        {
+          id: 1,
+          type: "link",
+          title: "Nhiệm vụ hằng ngày",
+          link: "/nhiem-vu.html",
+        },
+        {
+          id: 2,
+          type: "link",
+          title: "Mời bạn nhận quà",
+          link: "/nhiem-vu/invite.html",
+        },
+      ],
+    },
+    {
+      id: 3,
+      type: "link",
+      title: "Vòng quay may mắn",
+      link: "/vong-quay-may-man.html",
+    },
+    {
+      id: 4,
+      type: "link",
+      title: "Giải đấu",
+      link: "/giai-dau.html",
+    },
+    {
+      id: 5,
+      type: "link",
+      title: "Đổi quà",
+      link: "/doi-qua.html",
+    },
+    {
+      id: 6,
+      type: "link",
+      title: "Liên hệ",
+      link: "/lien-he.html",
+    },
+    {
+      id: 7,
+      type: "link",
+      title: "Hội viên",
+      link: "/hoi-vien.html",
+    },
+  ];
   return (
-    <Box ref={reff} sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" sx={{ background: '#000' }}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            <Link href="/">
-              <Image
-                src="/images/logoFU.png"
-                alt="LogoCenter"
-                width={112}
-                height={39}
-                className="logoFU"
-                style={{ top: '50%' }}
-              />
-            </Link>
-          </Typography>
-          {
-            // show user when logged
-            userName ? (
-              <Typography variant="body1" sx={{ marginLeft: 'auto' }}>
-                {userName}
-              </Typography>
-            ) : (
-              <Button
-                variant="contained"
-                sx={{
-                  marginLeft: 'auto',
-                  backgroundColor: '#FF2423',
-                  borderRadius: '40px',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: '#d6221d',
-                  },
-                }}
-                onClick={handleOpenModalLogin}
-              >
-                Login
-              </Button>
-            )
-          }
-        </Toolbar>
-      </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+    <>
+      <div className="drawer__header">
+        <IconButton
+          onClick={() => setOpenDrawer(!openDrawer)}
+          className="hamburder__icon__btn"
+        >
+          <MenuIcon className="hamburder__icon" />
+        </IconButton>
+        <Link href="/">
+          <Image
+            src="/images/logoFU.png"
+            alt="LogoCenter"
+            width={112}
+            height={39}
+            isResize={false}
+          />
+        </Link>
+        {
+          // show user when logged
+          userName ? (
+            <Typography
+              variant="body1"
+              sx={{ color: "#fff", fontWeight: "bold" }}
+            >
+              {userName}
+            </Typography>
+          ) : (
+            <button
+              className="drawer__login__btn"
+              onClick={handleOpenModalLogin}
+            >
+              Login
+            </button>
+          )
+        }
+      </div>
+      <Drawer
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        anchor="top"
       >
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-    </Box>
-  )
+        <div className="drawer__links">
+          {pageLinks &&
+            pageLinks.map((item) =>
+              item.type === "link" ? (
+                <Link
+                  href={item.link}
+                  className={`drawer__link ${
+                    pathname === item.link ? "active" : ""
+                  }`}
+                  key={item.id}
+                  aria-current="page"
+                  onClick={() => setOpenDrawer(false)}
+                >
+                  {item.title}
+                </Link>
+              ) : item.type === "menu" ? (
+                <>
+                  <Link
+                    onMouseEnter={toggleMenu}
+                    className={`drawer__link drawler__menu ${
+                      pathname === item.link ? "active" : ""
+                    }`}
+                    href={item.link}
+                    key={item.id}
+                  >
+                    <div>
+                      <p className="w-fit p-0 m-0">{item.title}</p>
+                      {showMenu ? (
+                        <ArrowForwardIosIcon className="text-[16px]" />
+                      ) : (
+                        <KeyboardArrowDownIcon />
+                      )}
+                    </div>
+                  </Link>
+
+                  {item.menuItems && (
+                    <ul className="drawler__menu__lists">
+                      {item.menuItems.map((menuItem) => (
+                        <Link
+                          href={menuItem.link}
+                          className={`drawer__link ${
+                            pathname === menuItem.link ? "active" : ""
+                          }`}
+                          key={menuItem.id}
+                        >
+                          {menuItem.title}
+                        </Link>
+                      ))}
+                    </ul>
+                  )}
+                </>
+              ) : (
+                ""
+              )
+            )}
+        </div>
+      </Drawer>
+    </>
+  );
 }
 
-ResponsiveDrawer.propTypes = {
-  window: PropTypes.func,
-}
-
-export default ResponsiveDrawer
+export default ResponsiveDrawer;

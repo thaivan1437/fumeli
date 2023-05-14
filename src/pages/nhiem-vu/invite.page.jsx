@@ -61,7 +61,7 @@ export default function InviteFrinedPage() {
           <RuleModal open={rule} message={daily.Content} title='Thể lệ' handleClose={closeModalRule}/>
         }
         <Box className='mission__invite'>
-          <Typography py={4} variant="h4" component="h2" color={'#fff'} sx={{textAlign: 'center', textTransform: 'uppercase'}}>
+          <Typography py={4} variant="h4" component="h2" color={'#fff'} sx={{textAlign: 'center', textTransform: 'uppercase'}} className='invite__page--title'>
             Mời bạn nhận quà
           </Typography>
           <Box my={2} sx={{position: 'relative'}}>
@@ -72,7 +72,7 @@ export default function InviteFrinedPage() {
             </Typography>
           </Box>
           <Box sx={{ padding: '20px 30px'}} className='mission__invite--wrap'>
-            <Typography py={4} variant="h6" component="p" color={'#fff'} sx={{textAlign: 'center'}}>
+            <Typography py={4} variant="h6" component="p" color={'#fff'} sx={{textAlign: 'center',padding:'0!important'}}>
               Gửi bạn bè mã mời hoặc liên kết đăng ký cùng tham gia nhận thêm điểm FPOINT !!!
             </Typography>
 

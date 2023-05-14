@@ -1,99 +1,99 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { AppBar, Box, IconButton, Toolbar, Button, Menu, MenuItem  } from '@mui/material'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import InstagramIcon from '@mui/icons-material/Instagram'
-import YouTubeIcon from '@mui/icons-material/YouTube'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import Image from 'next/image'
-import Link from 'next/link'
-import LoginModal from '@/components/auth/login'
-import ForgotPasswordModal from '@/components/auth/forgetPassword'
-import SignUpModal from '@/components/auth/register'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import {
+  AppBar,
+  Box,
+  IconButton,
+  Toolbar,
+  Button,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import Image from "next/image";
+import Link from "next/link";
+import LoginModal from "@/components/auth/login";
+import ForgotPasswordModal from "@/components/auth/forgetPassword";
+import SignUpModal from "@/components/auth/register";
+import { useDispatch, useSelector } from "react-redux";
 import {
   openLoginModal,
   loginAction,
   openRegisterModal,
   signDataAction,
-} from '@/components/auth/logic/action'
-import ResponsiveDrawer from '@/components/drawer/drawer'
-import { useRouter } from 'next/router'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+} from "@/components/auth/logic/action";
+import ResponsiveDrawer from "@/components/drawer/drawer";
+import { useRouter } from "next/router";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Header = ({ setHeaderHeight }) => {
-  const router = useRouter()
-  const { code } = router.query
+  const router = useRouter();
+  const { code } = router.query;
   const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } =
-    useSelector((state) => state.authReducer)
-  const dispatch = useDispatch()
-  const headerRef = useRef(null)
-  const [userName, setUserName] = useState('')
-  const [mobileView, setMobileView] = useState(true)
+    useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
+  const headerRef = useRef(null);
+  const [userName, setUserName] = useState("");
+  const [mobileView, setMobileView] = useState(true);
 
   const pathname = router?.pathname;
   const isActive = (href) => {
-    return pathname.indexOf(href) > -1  ? 'active' : '';
+    return pathname.indexOf(href) > -1 ? "active" : "";
   };
-  useEffect(() =>{
+  useEffect(() => {
     isActive(pathname);
-  }, [pathname])
-  
+  }, [pathname]);
 
   const handleOpenModalLogin = useCallback(() => {
-    dispatch(openLoginModal())
-  }, [dispatch])
-
-  useEffect(() => {
-    // set margin top
-    const height = headerRef.current.offsetHeight
-    setHeaderHeight(height)
-  }, [mobileView])
+    dispatch(openLoginModal());
+  }, [dispatch]);
 
   const setResponsiveness = useCallback(() => {
-    setMobileView(window.innerWidth < 900)
-  }, [])
-
+    setMobileView(window.innerWidth < 900);
+  }, []);
   useEffect(() => {
-    setResponsiveness()
-    window.addEventListener('resize', setResponsiveness)
+    setResponsiveness();
+    window.addEventListener("resize", setResponsiveness);
     return () => {
-      window.removeEventListener('resize', setResponsiveness)
-    }
-  }, [setResponsiveness])
+      window.removeEventListener("resize", setResponsiveness);
+    };
+  }, [setResponsiveness]);
 
   useEffect(() => {
     // dispatch data in store
-    const userData = JSON.parse(localStorage.getItem('user'))
+    const userData = JSON.parse(localStorage.getItem("user"));
     if (userData && userData.username && userName) {
-      dispatch(loginAction(userData))
+      dispatch(loginAction(userData));
     }
-  }, [userName, dispatch])
+  }, [userName, dispatch]);
 
   useEffect(() => {
     // check login has data in localStore
-    const userData = JSON.parse(localStorage.getItem('user'))
+    const userData = JSON.parse(localStorage.getItem("user"));
     if (userData && userData.username) {
-      setUserName(userData.username)
+      setUserName(userData.username);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!user && userName) {
-      setUserName()
-      handleOpenModalLogin()
+      setUserName();
+      handleOpenModalLogin();
     }
-  }, [user])
+  }, [user]);
 
   useEffect(() => {
     if (code) {
-      dispatch(signDataAction({ signUpData: { ['InviteCode']: code } }))
-      dispatch(openRegisterModal())
+      dispatch(signDataAction({ signUpData: { ["InviteCode"]: code } }));
+      dispatch(openRegisterModal());
     }
-  }, [code, dispatch])
+  }, [code, dispatch]);
 
   const goHome = () => {
-    router.push('/')
-  }
+    router.push("/");
+  };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -121,19 +121,19 @@ const Header = ({ setHeaderHeight }) => {
     <React.StrictMode>
       {mobileView ? (
         <ResponsiveDrawer
-          userName={userName}
-          reff={headerRef}
           className="navbar--mobile"
+          userName={userName}
+          handleOpenModalLogin={handleOpenModalLogin}
         />
       ) : (
         <AppBar
           ref={headerRef}
           position="fixed"
-          sx={{ background: '#000000!important' }}
+          sx={{ background: "#000000!important" }}
         >
           <Toolbar className="first-block">
             {/* Khối 1 */}
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <IconButton size="large" color="inherit" sx={{ mr: 2 }}>
                 <FacebookIcon />
               </IconButton>
@@ -148,7 +148,7 @@ const Header = ({ setHeaderHeight }) => {
               </IconButton>
             </Box>
             <Box
-              sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}
+              sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
             >
               {
                 // show user when logged
@@ -165,55 +165,53 @@ const Header = ({ setHeaderHeight }) => {
                       PaperProps={{
                         elevation: 0,
                         sx: {
-                          overflow: 'visible',
-                          filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                          overflow: "visible",
+                          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                           mt: 1.5,
-                          '& .MuiAvatar-root': {
+                          "& .MuiAvatar-root": {
                             width: 32,
                             height: 32,
                             ml: -0.5,
                             mr: 1,
                           },
-                          '&:before': {
+                          "&:before": {
                             content: '""',
-                            display: 'block',
-                            position: 'absolute',
+                            display: "block",
+                            position: "absolute",
                             top: 0,
                             right: 14,
                             width: 10,
                             height: 10,
-                            bgcolor: 'background.paper',
-                            transform: 'translateY(-50%) rotate(45deg)',
+                            bgcolor: "background.paper",
+                            transform: "translateY(-50%) rotate(45deg)",
                             zIndex: 0,
                           },
                         },
                       }}
-                      transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                      anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                      className='menu--header'
-                      disableScrollLock={true}
+                      transformOrigin={{ horizontal: "right", vertical: "top" }}
+                      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                      className="menu--header"
                     >
-                      <MenuItem className='menu--item fs-16 fw-b' onClick={openPageUser}>
+                      <MenuItem className="menu--item" onClick={() => openPageUser()}>
                         Trang cá nhân
                       </MenuItem>
-                      <MenuItem className='menu--item fs-16 fw-b' onClick={openbag}>
+                      <MenuItem className="menu--item" onClick={() => openbag()}>
                         Túi đồ
                       </MenuItem>
-                      <MenuItem className='menu--item fs-16 fw-b' onClick={handleLogout}>
+                      <MenuItem className="menu--item" onClick={() => handleLogout()}>
                         Đăng xuất
                       </MenuItem>
                     </Menu>
                   </>
-                  
                 ) : (
                   <Button
                     // variant="contained"
                     sx={{
-                      backgroundColor: '#FF2423',
-                      borderRadius: '40px',
-                      color: 'white',
-                      '&:hover': {
-                        backgroundColor: '#d6221d',
+                      backgroundColor: "#FF2423",
+                      borderRadius: "40px",
+                      color: "white",
+                      "&:hover": {
+                        backgroundColor: "#d6221d",
                       },
                     }}
                     className="p-7 "
@@ -249,12 +247,20 @@ const Header = ({ setHeaderHeight }) => {
               sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
               mr={2}
             >
-              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/gioi-thieu')}`}>
+              <Button
+                mr={2}
+                color="inherit"
+                className={`tabmenu ${isActive("/gioi-thieu")}`}
+              >
                 <Link href="/gioi-thieu.html">Giới thiệu</Link>
               </Button>
-              <Button mr={2} color="inherit" className={`submenu ${isActive('/nhiem-vu')}`}>
+              <Button
+                mr={2}
+                color="inherit"
+                className={`submenu ${isActive("/nhiem-vu")}`}
+              >
                 <Link href="/nhiem-vu.html" className="submenu__parent">
-                  Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: '5px' }} />
+                  Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: "5px" }} />
                 </Link>
                 <ul className="submenu__list">
                   <li>
@@ -265,25 +271,43 @@ const Header = ({ setHeaderHeight }) => {
                   </li>
                 </ul>
               </Button>
-              <Button color="inherit" className={`tabmenu ${isActive('/vong-quay-may-man')}`}>
+              <Button
+                color="inherit"
+                className={`tabmenu ${isActive("/vong-quay-may-man")}`}
+              >
                 <Link href="/tham-gia/daily/vong-quay-may-man/4.html">Vòng quay may mắn</Link>
               </Button>
             </Box>
             <Box sx={{ flexGrow: 2 }} />
             <Box
-              sx={{ flexGrow: 1, display: 'flex', alignItems: 'left' }}
+              sx={{ flexGrow: 1, display: "flex", alignItems: "left" }}
               ml={2}
             >
-              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/giai-dau')}`}>
+              <Button
+                mr={2}
+                color="inherit"
+                className={`tabmenu ${isActive("/giai-dau")}`}
+              >
                 <Link href="/giai-dau.html">Giải đấu</Link>
               </Button>
-              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/doi-qua')}`}>
+              <Button
+                mr={2}
+                color="inherit"
+                className={`tabmenu ${isActive("/doi-qua")}`}
+              >
                 <Link href="/doi-qua.html">Đổi quà</Link>
               </Button>
-              <Button mr={2} color="inherit" className={`tabmenu ${isActive('/lien-he')}`}>
+              <Button
+                mr={2}
+                color="inherit"
+                className={`tabmenu ${isActive("/lien-he")}`}
+              >
                 <Link href="/lien-he.html">Liên hệ</Link>
               </Button>
-              <Button color="inherit" className={`tabmenu ${isActive('/hoi-vien')}`}>
+              <Button
+                color="inherit"
+                className={`tabmenu ${isActive("/hoi-vien")}`}
+              >
                 <Link href="/hoi-vien.html">Hội viên</Link>
               </Button>
             </Box>
@@ -294,7 +318,7 @@ const Header = ({ setHeaderHeight }) => {
       {loginModalOpen && <LoginModal></LoginModal>}
       {forgetPasswordModalOpen && <ForgotPasswordModal></ForgotPasswordModal>}
     </React.StrictMode>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

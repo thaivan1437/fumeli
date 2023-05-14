@@ -120,7 +120,7 @@ const SignUpModal = () => {
             className="btn__modal--close"
           />
           <Typography variant="h4" component="h2" id="signup-modal-title" sx={{textAlign: 'center'}} className="fw-b fs-40">
-            Đăng ký
+            ĐĂNG KÝ
           </Typography>
           <form onSubmit={handleSubmit}>
             {fields.map((field, index) => (

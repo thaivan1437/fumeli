@@ -32,7 +32,7 @@ export default function Activity() {
         dispatch(getActivitiesHistoryData({ userId: user?.userid })),
         dispatch(getGivePointsHistorysData({ userId: user?.userid })),
         dispatch(getUserGiftData({ userId: user?.userid })),
-        dispatch(getSpinsHistorysData({ userId: user?.userid }))
+        dispatch(getSpinsHistorysData({ userId: user?.userid })),
       ]);
     }
     void fetchAllData();

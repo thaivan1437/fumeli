@@ -37,9 +37,10 @@ function Footer() {
           width={258}
           height={91}
           style="margin-top:64px"
+          className='footer__logo'
         />
-        <Box mt={4}>
-          <Grid container spacing={2}>
+        <Box mt={4} >
+          <Grid container spacing={2} className="footer__route">
             {footerLinks.map((link) => (
               <Grid item xs={12} md={2} key={link.label}>
                 <Link
@@ -55,18 +56,18 @@ function Footer() {
             ))}
           </Grid>
           <Grid item xs={12} md={4} mt={4}>
-            <Box textAlign="center">
+          <Box textAlign= 'center' className="footer__icon">
               <FacebookIcon
                 className="socialIcon"
-                sx={{ marginRight: '2%', fontSize: '36px' }}
+                sx={{ marginRight: '6%', fontSize: '36px' }}
               />
               <YouTubeIcon
                 className="socialIcon"
-                sx={{ marginRight: '2%', fontSize: '36px' }}
+                sx={{ marginRight: '6%', fontSize: '36px' }}
               />
               <InstagramIcon
                 className="socialIcon"
-                sx={{ marginRight: '2%', fontSize: '36px' }}
+                sx={{ marginRight: '6%', fontSize: '36px' }}
               />
               <TwitterIcon
                 className="socialIcon"

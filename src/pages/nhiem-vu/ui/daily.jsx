@@ -78,7 +78,7 @@ const Daily = () => {
 			<SliderMission />
 			<Box className="bg-common">
 				<Container>
-					<Typography pt={4} variant="h4" component="h2" color={'#fff'} className='fs-48 fw-b'>
+					<Typography pt={4} variant="h4" component="h2" color={'#fff'} className='fs-48 fw-b mb-28'>
 						NHIỆM VỤ HẰNG NGÀY
 					</Typography>
 					<Box my={4} sx={{ flexGrow: 1, padding: 0 }} className="mission custom">
