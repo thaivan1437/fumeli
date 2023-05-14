@@ -19,7 +19,7 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
       }
     }
     if (startPage > 1) {
-      pages = [1, 2, '...', ...pages]
+      pages = [ 2, '...', ...pages]
     } else if (endPage < totalPages) {
       pages = [...pages, '...', totalPages]
     }

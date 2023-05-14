@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import ActivityDiary from "./activityDiary";
+import InvitedFriend from "./invitedFriend";
 import ExchangeGiftHistory from "./exchangeGiftHistory";
 import RotationHistory from "./rotationHistory";
 import { useMediaQuery, useTheme } from "@mui/material";
@@ -70,6 +71,7 @@ export default function ActivityHistory() {
           </Box>
           <Box className="activity__grid--right">
             {controlType && controlType === 1 ? <ActivityDiary /> : null}
+            {controlType && controlType === 2 ? <InvitedFriend /> : null}
             {controlType && controlType === 4 ? <RotationHistory /> : null}
             {controlType && controlType === 5 ? <ExchangeGiftHistory /> : null}
           </Box>
