@@ -19,7 +19,7 @@ const SpinGame = () => {
   const dispatch = useDispatch()
   const spinGiftItemData = useSelector((state) => state.spinGiftItem)
   const spinGiftItem = spinGiftItemData.spinGiftItem.sort(
-    (a, b) => b.Percentage - a.Percentage
+    (a, b) => a.Percentage - b.Percentage
   )
   const [isDisabled, setIsDisabled] = useState(false)
 
@@ -160,9 +160,7 @@ const SpinGame = () => {
       }, 4000)
     }
   }
-
-console.log(spinGiftItem)
-
+  
   return (
     <>
       <Container mt={8}>
