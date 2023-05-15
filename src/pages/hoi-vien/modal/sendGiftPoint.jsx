@@ -49,9 +49,9 @@ const SendFpointModal = ({ friend, onClose }) => {
         {
           Active: true,
           CreateDate: currentTime,
-          CreateUser: user.username,
-          UserId: user.userid,
-          UserReceiveId: friend.UserId,
+          CreateUser: user?.username,
+          UserId: user?.userid,
+          UserReceiveId: friend?.FriendId,
           FpointValue: fpoint
         },
         {
@@ -87,12 +87,14 @@ const SendFpointModal = ({ friend, onClose }) => {
         timeout: 500,
       }}
       disableScrollLock={true}
+      py={4}
+      my={4}
     >
       <Box className='modal__gift' sx={style}>
         <Image
           src="/images/close.svg"
           alt="btn close"
-          onClick={() => handleClose()}
+          onClick={() => handleClose()} 
           width={27}
           height={27}
           style={{
@@ -101,18 +103,20 @@ const SendFpointModal = ({ friend, onClose }) => {
           }}
           className="modal__youtube--btn-close btn__close"
         />
-        <NotificationsActiveOutlinedIcon
-          sx={{
-            width: '86px',
-            height: '82px',
-            color: '#FF2423',
-          }}
+
+        <Image
+          src="/images/gift1.svg"
+          alt="gift icon"
+          width={80}
+          height={86}
+          className="modal__youtube--icon text-color"
         />
-        <Typography mb={3} className="modal__giftTransaction--title">
-          THÔNG BÁO
+
+        <Typography mb={3} className="modal__giftTransaction--title fs-40 fw-b">
+          TẶNG ĐIỂM
         </Typography>
 
-        <Typography mb={3} className="modal__giftTransaction--description"></Typography>
+        <Typography mb={3} className="modal__giftTransaction--description text-color"></Typography>
 
         <Box mb={4}>
           <InputField
@@ -140,7 +144,7 @@ const SendFpointModal = ({ friend, onClose }) => {
             className="button--confirm"
             onClick={() => sendFpoint()}
           >
-            XÁC NHẬN
+            GỬI
           </Button>
         </Box>
       </Box>

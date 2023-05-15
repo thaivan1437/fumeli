@@ -142,7 +142,7 @@ const CheckInDetail = ({
         </Typography>
         <AutoSizeImage isResize={false} src="/images/mission/check-in.png" alt="điểm danh hằng ngày" className='image' width={225} height={225}/>
         <AutoSizeImage isResize={false} src="/images/mission/check.png" alt="checked" className='checked' width={172} height={141}/>
-        <Button className={`${today > newItem && !active && user ? 'isShow': 'hide'} upCheckIn`}>Điểm danh bù</Button> 
+        <Button variant="contained" className={`${today > newItem && !active && user ? 'isShow': 'hide'} upCheckIn`}>Điểm danh bù</Button> 
       </Box>
     )
   }

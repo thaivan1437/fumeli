@@ -3,6 +3,7 @@ import { Box, Typography, Divider, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import AutoSizeImage from '@/components/image';
+import YoutubeModal from '@/components/modal/video';
 
 const Tournaments = () => {
 	const [matchs, setMatchs] = useState([]);
@@ -21,6 +22,19 @@ const Tournaments = () => {
 		newMatch && newMatch[0].Matchs && setMatchs(newMatch[0].Matchs);
 		setIsActive(id);
 	}
+
+	const [showVideoModal, setShowVideoModal] = useState(false);
+  const [videoId, setVideoId] = useState("");
+
+  const openVideoModal = (id) => {
+    setShowVideoModal(true);
+    setVideoId(id);
+  };
+
+  const closeVideoModal = () => {
+    setShowVideoModal(false);
+    setVideoId("");
+  };
 
   return (
     <React.Fragment>
@@ -46,7 +60,7 @@ const Tournaments = () => {
 				{
 					matchs && matchs.map((item, _) => {
 						return (
-							<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item" p={2} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+							<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item" p={2} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}  onClick={() => openVideoModal(item.VideoPath)}>
 								<Box className="tournament__item--images" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
 									<Box p={2} className="tournament__item--logo">
 										<AutoSizeImage src={item.LogoTeamOnePath} alt="tournament" />
@@ -73,15 +87,18 @@ const Tournaments = () => {
 									</Typography>
 								</Box>
 								<Box className="tournament__item--view">
-									<Link href={item.TitleLink} variant="contained" color="white">
+
 										Xem trận đấu
-									</Link>
+									
 								</Box>
 							</Box>
 						)
 					})
 				}
 			</Box>
+			{showVideoModal ? (
+				<YoutubeModal videoId={videoId} onClose={closeVideoModal} />
+			) : null}
 		</React.Fragment>
   );
 }

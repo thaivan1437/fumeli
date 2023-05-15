@@ -97,7 +97,7 @@ export const getUserGiftData = (props) => async (dispatch, getState) => {
     dispatch(getUserGift(gift));
     dispatch(getUserDetail(userDetail));
   } else {
-    console.log("cc");
+    console.log("error");
   }
 };
 
@@ -112,7 +112,7 @@ export const getUserGiftHistoryData = (props) => async (dispatch, getState) => {
   if (typeof gift !== "undefined") {
     dispatch(getUserGiftHistory(gift));
   } else {
-    console.log("cc");
+    console.log("error");
   }
 };
 
@@ -139,11 +139,10 @@ export const getFriendsData = (props) => async (dispatch, getState) => {
     `api/UserFriend/getallclientbyuserid/${userId}`,
     dispatch
   );
-  console.log(friends);
   if (typeof friends !== "undefined") {
     dispatch(getFriends(friends));
   } else {
-    console.log("cc");
+    console.log("error");
   }
 };
 
@@ -158,7 +157,7 @@ export const getActivitiesHistoryData =
     if (typeof activities !== "undefined") {
       dispatch(getActivitiesHistory(activities));
     } else {
-      console.log("cc");
+      console.log("error");
     }
   };
 
@@ -173,7 +172,7 @@ export const getGivePointsHistorysData =
     if (typeof givePoints !== "undefined") {
       dispatch(getGivePointsHistory(givePoints));
     } else {
-      console.log("cc");
+      console.log("error");
     }
   };
 
@@ -184,11 +183,11 @@ export const getSpinsHistorysData = (props) => async (dispatch, getState) => {
     `api/UserGiftSpin/getallclientbyuserid/${userId}`,
     dispatch
   );
-  console.log(gift);
+
   if (typeof gift !== "undefined") {
     dispatch(getSpinsHistory(gift));
   } else {
-    console.log("cc");
+    console.log("error");
   }
 };
 

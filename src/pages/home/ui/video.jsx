@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Typography, Box } from '@mui/material';
 import { Container } from '@mui/system';
 import { useSelector } from 'react-redux';
@@ -6,6 +6,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import AutoSizeImage from '@/components/image';
+import YoutubeModal from '@/components/modal/video';
+
 
 const Videos = () => {
 	const {video} = useSelector((state) => state?.home);
@@ -46,6 +48,19 @@ const Videos = () => {
     ]
   };
 
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [videoId, setVideoId] = useState("");
+
+  const openVideoModal = (id) => {
+    setShowVideoModal(true);
+    setVideoId(id);
+  };
+
+  const closeVideoModal = () => {
+    setShowVideoModal(false);
+    setVideoId("");
+  };
+
   return (
     <React.Fragment>
       <Container>
@@ -69,12 +84,15 @@ const Videos = () => {
       <Slider ref={slider} className="video__slider center" {...settings}>
         { video && (
           video.map((item) => {
-            return <div className='video__slider--item' key={item.CreateDate}>
+            return <div className='video__slider--item' key={item.CreateDate} onClick={() => openVideoModal(item.VideoPath)}>
               <AutoSizeImage isResize={false} src={item.ThumbnailPath} alt={item.Title} width={777} height={440}/>
             </div>
           })
         )}
       </Slider>
+      {showVideoModal ? (
+				<YoutubeModal videoId={videoId} onClose={closeVideoModal} />
+			) : null}
     </React.Fragment>
   );
 }
