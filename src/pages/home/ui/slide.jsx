@@ -12,7 +12,7 @@ const SliderBanner = () => {
   const router = useRouter();
   const { slider } = useSelector((state) => state?.home) || [];
   const newSlider = slider && slider.filter(item => item?.IsMainBanner)
-  const sliderAds = slider && slider.filter(item => !item?.IsMainBanner)
+  const sliderAds = slider && slider.filter(item => item?.IsCenterAdsBanner)
   const [image, setImage] = useState();
   const [imageModal, setImageModal] = useState(false);
   // Khởi tạo ref

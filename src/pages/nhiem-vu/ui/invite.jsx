@@ -23,7 +23,7 @@ export default function InviteFrinedPage() {
   const idInvite = configMission.find(item => item?.Type == "InviteFriend");
 
 	useEffect(() => {
-		if(daily?.length == 0 && missionCategory?.length) {
+		if(!daily && missionCategory?.length) {
 			const dailyList = missionCategory && missionCategory.find(item => item.IsOther);
 			const dailyDetail = dailyList && dailyList.Campaigns && dailyList.Campaigns.find(item => item.Id ==  parseInt(idInvite?.Value));
       setDaily(dailyDetail)
@@ -58,7 +58,7 @@ export default function InviteFrinedPage() {
     <React.StrictMode>
       <Container>
         { rule &&
-          <RuleModal open={rule} message={daily.Content} title='Thể lệ' handleClose={closeModalRule}/>
+          <RuleModal open={rule} message={daily?.Content} title='Thể lệ' handleClose={closeModalRule}/>
         }
         <Box className='mission__invite'>
           <Typography py={4} variant="h4" component="h2" color={'#fff'} sx={{textAlign: 'center', textTransform: 'uppercase'}}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal, Box, TextField, Typography, FormControlLabel, Checkbox } from "@mui/material";
 import InputField from '@/components/input';
 import {
@@ -13,7 +13,7 @@ import Image from 'next/image'
 const SignUpModal = () => {
   const dispatch = useDispatch();
   const [rememberMe, setRememberMe] = useState(false);
-  const { registerModalOpen } = useSelector((state) => state.authReducer);
+  const { registerModalOpen, signUpData } = useSelector((state) => state.authReducer);
   const [statusCode, setStatusCode] = useState({ isShow: false, status: '', msg: '' });
   const [formData, setFormData] = useState({
     FullName: '',
@@ -25,6 +25,12 @@ const SignUpModal = () => {
     ConfirmPassword: ''
   });
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if (signUpData && signUpData.InviteCode) {
+      setFormData({...formData, ['InviteCode']: signUpData.InviteCode });
+    }
+  }, [signUpData])
 
   const handleClose = () => {
     dispatch(closeRegisterModal());
