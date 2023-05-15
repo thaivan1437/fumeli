@@ -117,8 +117,6 @@ const Header = ({ setHeaderHeight }) => {
     router.reload();
   }
 
-  console.log("=>> headerRef",headerRef);
-
   return (
     <React.StrictMode>
       {mobileView ? (

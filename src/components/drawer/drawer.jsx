@@ -113,6 +113,7 @@ function ResponsiveDrawer(props) {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
         anchor="top"
+        disableScrollLock={true}
       >
         <div className="drawer__links">
           {pageLinks &&

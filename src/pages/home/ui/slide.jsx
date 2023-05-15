@@ -6,8 +6,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import AutoSizeImage from '@/components/image';
 import ImageModal from './imageModal';
+import { useRouter } from "next/router";
 
 const SliderBanner = () => {
+  const router = useRouter();
   const { slider } = useSelector((state) => state?.home) || [];
   const newSlider = slider && slider.filter(item => item?.IsMainBanner)
   const sliderAds = slider && slider.filter(item => !item?.IsMainBanner)
@@ -90,9 +92,9 @@ const SliderBanner = () => {
   }
   const openImageModal = (src) => {
     if (!isDraggingRef.current && isClickEnabledRef.current) {
-      console.log('in case move page')
-      setImage(src);
-      setImageModal(true);
+      router.push(src);
+      // setImage(src);
+      // setImageModal(true);
     }
   }
 
@@ -143,7 +145,7 @@ const SliderBanner = () => {
               >
                 { sliderAds && (
                   sliderAds.map((item, index) => {
-                    return <div className='banner__slider--item' key={item.CreateDate} onClick={() => openImageModal(item.UrlImage)}>
+                    return <div className='banner__slider--item cursor-pointer' key={item.CreateDate} onClick={() => openImageModal(item.Link)}>
                       <AutoSizeImage isResize={false} width={380} height={270}src={item.UrlSmallImage} alt={item.Link ? item.Link : 'slide image'} />
                     </div>
                   })
