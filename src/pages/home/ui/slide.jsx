@@ -128,10 +128,11 @@ const SliderBanner = () => {
             <Slider
               className="banner__sliderM"
               {...setting2}
+              ref={sliderRef}
             >
               { newSlider && (
                 newSlider.map((item) => {
-                  return <div className='banner__slider--main' key={item.CreateDate}>
+                  return <div className='banner__slider--main' key={item.CreateDate} onClick={() => openImageModal(item.Link)}>
                     <AutoSizeImage src={item.UrlImage} alt={item.link} />
                   </div>
                 })

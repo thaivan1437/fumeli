@@ -268,7 +268,7 @@ const Header = ({ setHeaderHeight }) => {
                     <Link href="/nhiem-vu.html">Nhiệm vụ hằng ngày</Link>
                   </li>
                   <li>
-                    <Link href="/tham-gia/other/moi-ban-1/1019.html">Mời bạn nhận quà</Link>
+                    <Link href="/tham-gia/other/moi-ban/1019.html">Mời bạn nhận quà</Link>
                   </li>
                 </ul>
               </Button>
