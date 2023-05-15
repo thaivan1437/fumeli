@@ -63,9 +63,15 @@ const SpinTurnTransactionModal = ({ onClose }) => {
       )
       .then((response) => {
         setStatusCode({ isShow: true, status: 'success' })
+         setTimeout(() => {
+      onClose()
+    }, 3000)
       })
       .catch((error) => {
         setStatusCode({ isShow: true, status: 'error' })
+        setTimeout(() => {
+          onClose()
+        }, 3000)
       })
     dispatch(getAllDataThunkAction())
   }

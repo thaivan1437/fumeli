@@ -25,8 +25,6 @@ const initialState = {
   userFriend: [],
 };
 
-console.log(initialState.allUser);
-
 export const userDetail = (state = initialState, action) => {
   switch (action.type) {
     case "GET_USER_GIFT":
