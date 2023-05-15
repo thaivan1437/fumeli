@@ -22,6 +22,7 @@ export default function UserFU() {
   const userFU = dataUser.allUser
   const userFriend = dataUser.userFriend
 
+
   const ITEMS_PER_PAGE = 6
 
   const [currentPage, setCurrentPage] = useState(1)

@@ -69,7 +69,6 @@ export default function FriendList() {
         Active: false,
       };
       const response = await axiosPost(url, data);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

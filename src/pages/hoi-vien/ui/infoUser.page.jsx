@@ -62,8 +62,6 @@ export default function InfoUser() {
     },
   ];
 
-  console.log()
-
   return (
     <>
       <LayoutUserPage />

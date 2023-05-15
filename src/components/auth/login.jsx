@@ -76,6 +76,7 @@ const LoginModal = () => {
     params.append('grant_type', 'password');
     axios.post(`${api_host}oauth/token`, params)
       .then(response => {
+        if(response.data.roles=='["user"]'){
         setStatusCode({ isShow: true, status: 'success' })
         localStorage.setItem("user", JSON.stringify(response.data));
         dispatch(loginAction(response.data));
@@ -83,7 +84,10 @@ const LoginModal = () => {
           // wait toast end
           handleClose();
           location.reload();
-        }, 2500)
+        }, 2500)}
+        else{
+          setStatusCode({ isShow: true, status: 'error' })
+        }
       })
       .catch(error => {
         setStatusCode({ isShow: true, status: 'error' })

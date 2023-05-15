@@ -11,7 +11,6 @@ import Link from "next/link";
 
 export default function InfoUser() {
   const userDetail = useSelector((state) => state.userDetail);
-  console.log(userDetail);
 
   return (
     <>
