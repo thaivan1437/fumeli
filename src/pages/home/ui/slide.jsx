@@ -93,8 +93,6 @@ const SliderBanner = () => {
   const openImageModal = (src) => {
     if (!isDraggingRef.current && isClickEnabledRef.current) {
       router.push(src);
-      // setImage(src);
-      // setImageModal(true);
     }
   }
 

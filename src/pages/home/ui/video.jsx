@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { Typography, Box } from '@mui/material';
 import { Container } from '@mui/system';
 import { useSelector } from 'react-redux';
@@ -11,7 +11,9 @@ import YoutubeModal from '@/components/modal/video';
 
 const Videos = () => {
 	const {video} = useSelector((state) => state?.home);
-  const slider = React.useRef(null);
+  const slider = useRef(null);
+  const isDraggingRef = useRef(false);
+  const isClickEnabledRef = useRef(true);
   const settings = {
     dots: false,
     infinite: true,
@@ -45,21 +47,55 @@ const Videos = () => {
           variableWidth: false,
         }
       }
-    ]
+    ],
+    onSwipe: () => {
+      // Thiết lập giá trị của ref khi bắt đầu kéo slide
+      isDraggingRef.current = true;
+      isClickEnabledRef.current = false;
+    },
+    afterChange: () => {
+      // Thiết lập giá trị của ref khi kết thúc kéo slide
+      isDraggingRef.current = false;
+      setTimeout(() => {
+        isClickEnabledRef.current = true;
+      }, 0);
+    }
   };
 
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [videoId, setVideoId] = useState("");
 
-  const openVideoModal = (id) => {
-    setShowVideoModal(true);
-    setVideoId(id);
-  };
-
   const closeVideoModal = () => {
     setShowVideoModal(false);
     setVideoId("");
   };
+
+  const openVideoModal = (id) => {
+    if (!isDraggingRef.current && isClickEnabledRef.current) {
+      setShowVideoModal(true);
+     setVideoId(id);
+    }
+  }
+
+  // Thêm sự kiện click vào slider để thiết lập giá trị của ref
+  useEffect(() => {
+    const sliderNode = slider.current;
+    if (sliderNode && sliderNode.querySelector) { // kiểm tra sliderNode và xem có thể sử dụng querySelector hay không
+      const handleClickOutside = (e) => {
+        if (isDraggingRef.current) {
+          e.stopPropagation();
+          isClickEnabledRef.current = false;
+          setTimeout(() => {
+            isClickEnabledRef.current = true;
+          }, 0);
+        }
+      };
+      sliderNode.querySelector('.slick-list').addEventListener('click', handleClickOutside, true);
+      return () => {
+        sliderNode.querySelector('.slick-list').removeEventListener('click', handleClickOutside, true);
+      };
+    }
+  }, []);
 
   return (
     <React.Fragment>

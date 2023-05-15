@@ -62,7 +62,7 @@ export default function InviteFrinedPage() {
             <RuleModal open={rule} message={daily?.Content} title='Thể lệ' handleClose={closeModalRule}/>
           }
           <Box className='mission__invite'>
-            <Typography py={4} variant="h4" component="h2" color={'#fff'} sx={{textAlign: 'center', textTransform: 'uppercase'}}>
+            <Typography py={4} variant="h4" component="h2" color={'#fff'} sx={{textAlign: 'center', textTransform: 'uppercase'}} className='fs-40 fw-b'>
               Mời bạn nhận quà
             </Typography>
             <Box my={2} sx={{position: 'relative'}}>
