@@ -18,3 +18,11 @@ export const getSpinTurn = (res) => {
     payload: res,
   }
 }
+
+
+export const getSpinTurnValue = (res) => {
+  return {
+    type: 'GET_SPINTURNVALUE',
+    payload: res,
+  }
+}

@@ -7,8 +7,11 @@ import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRound
 import Toast from '@/components/toast'
 import { getAllDataThunkAction } from '../logic/reducer'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const SpinTurnTransactionModal = ({ onClose }) => {
+  const {spinTurnValue} = useSelector((state) => state.spinGiftItem)
+
   const dispatch = useDispatch()
   const style = {
     position: 'absolute',
@@ -121,7 +124,7 @@ const SpinTurnTransactionModal = ({ onClose }) => {
           variant="h6"
           component="p"
         >
-          100 Fpoint = 1 lượt quay
+          {spinTurnValue.Value} Fpoint = 1 lượt quay
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
