@@ -20,6 +20,11 @@ const MiniGame = () => {
     currentPage * ITEMS_PER_PAGE
   );
 
+  const openLink = (src) => {
+    window.open(src, "_blank");
+  }
+
+
   return (
     <Box py={3} className="minigame">
       <Container>
@@ -30,7 +35,7 @@ const MiniGame = () => {
           {
             displayData && displayData.map((item, index) => {
               return (
-                <Grid item key={item.CreateDate} className="minigame__item--logo" xs={12} sm={4} md={4} >
+                <Grid item key={item.CreateDate} className="minigame__item--logo cursor-pointer" xs={12} sm={4} md={4} onClick={() => openLink(item.GamePath)}>
                   <AutoSizeImage isResize={false} src={item.Image} alt={item.Title} width={430} height={430}/>
                   <Typography variant="h6" color={'white'} sx={{ textAlign: 'center'}}>
                     {item.Title}
