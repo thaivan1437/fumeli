@@ -20,9 +20,10 @@
 
 .logoFU {
   position: absolute;
-  margin-top: 3%;
+  margin-top: 2%;
   left: 52%;
   transform: translate(-50%, -50%);
+  z-index: 1200;
 }
 
 .drawer__header {
