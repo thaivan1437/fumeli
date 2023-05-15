@@ -26,12 +26,12 @@ const SignUpModal = () => {
   });
   const [isLoading, setIsLoading] = useState(false)
 
-  console.log('authReducer', formData)
   const handleClose = () => {
     dispatch(closeRegisterModal());
   };
 
   const handleRememberMe = (event) => {
+    setStatusCode({ isShow: false, status: '', msg: '' })
     setRememberMe(event.target.checked);
   };
 
@@ -43,6 +43,10 @@ const SignUpModal = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    if (!rememberMe) {
+      setStatusCode({ isShow: true, status: 'error', msg: 'Bạn cần đồng ý với các điều lệ trước!' })
+      return
+    }
     setIsLoading(true);
     const signUp = formData;
     const data = {
@@ -57,8 +61,17 @@ const SignUpModal = () => {
     await axiosPost('api/appUser/add', data)
       .then((response) => {
         console.log('Submit response', response)
-        if (response.status === 200) {
-          setStatusCode({ isShow: true, status: 'success', msg: 'Đăng ký thành công!' })
+        setFormData({
+          FullName: '',
+          UserName: '',
+          Email: '',
+          PhoneNumber: '',
+          Password: '',
+          InviteCode: '',
+          ConfirmPassword: ''
+        })
+        if (response && response.UserName) {
+          setStatusCode({ isShow: true, status: 'success', msg: 'Đăng ký thành công! Một email đã được gửi về cho bạn.' })
         } else {
           setStatusCode({ isShow: true, status: 'error', msg: response?.data?.Message })
         }
