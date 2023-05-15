@@ -1,68 +1,64 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Typography, Container, Grid, Button } from '@mui/material'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableRow from '@mui/material/TableRow'
-import TextField from '@mui/material/TextField'
-import Radio from '@mui/material/Radio'
-import RadioGroup from '@mui/material/RadioGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-import LayoutUserPage from './avatar'
-import axiosInstance from '@/utils/api'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import dayjs from 'dayjs'
-import InputField from '@/components/input'
-import NotiModal from '../modal/noti'
-import {
-  getUserGiftData,
-} from "../logic/reducer";
+import { Box, Typography, Container, Grid, Button } from "@mui/material";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import TextField from "@mui/material/TextField";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import CheckIcon from "@mui/icons-material/Check";
+import LayoutUserPage from "./avatar";
+import axiosInstance from "@/utils/api";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import dayjs from "dayjs";
+import InputField from "@/components/input";
+import NotiModal from "../modal/noti";
+import { getUserGiftData } from "../logic/reducer";
 
 export default function InfoUser() {
   const dispatch = useDispatch();
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState("");
   useEffect(() => {
     // check login has data in localStore
-    const userData = JSON.parse(localStorage.getItem('user'))
+    const userData = JSON.parse(localStorage.getItem("user"));
     if (userData && userData.username) {
-      setUser(userData)
+      setUser(userData);
     }
-  }, [])
+  }, []);
   useEffect(() => {
     if (!user) {
       return;
     }
     async function fetchAllData() {
-      await Promise.all([
-        dispatch(getUserGiftData({ userId: user?.userid }))
-      ]);
+      await Promise.all([dispatch(getUserGiftData({ userId: user?.userid }))]);
     }
     void fetchAllData();
   }, [user]);
 
-  
-  const userDetail = useSelector((state) => state.userDetail)
+  const userDetail = useSelector((state) => state.userDetail);
 
-  const [currentPass, setCurrentPass] = useState('')
-  const [pass, setPass] = useState('')
+  const [currentPass, setCurrentPass] = useState("");
+  const [pass, setPass] = useState("");
 
   const fields = [
-    { name: 'currentPassword', label: 'Mật khẩu hiện tại', type: 'password' },
-    { name: 'newPassword', label: 'Mật khẩu mới', type: 'password' },
+    { name: "currentPassword", label: "Mật khẩu hiện tại", type: "password" },
+    { name: "newPassword", label: "Mật khẩu mới", type: "password" },
     {
-      name: 'confirmPassword',
-      label: 'Nhập lại mật khẩu mới',
-      type: 'password',
+      name: "confirmPassword",
+      label: "Nhập lại mật khẩu mới",
+      type: "password",
     },
-  ]
+  ];
 
   const getInfoUser = () => {
     const value = {
@@ -72,69 +68,68 @@ export default function InfoUser() {
       dateOfBirth: userDetail.userDetail.DateOfBirth,
       email: userDetail.userDetail.Email,
       phoneNumber: userDetail.userDetail.PhoneNumber,
-    }
-    return value
-  }
+    };
+    return value;
+  };
+
+  console.log(userDetail.userDetail);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
-    if (name === 'currentPassword') {
-      setCurrentPass(value)
-    } else if (name === 'newPassword') {
-      setPass(value)
+    if (name === "currentPassword") {
+      setCurrentPass(value);
+    } else if (name === "newPassword") {
+      setPass(value);
     }
-  }
-  const [showNotiModal, setNotiModal] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [city, setCity] = useState(getInfoUser().city || '')
+  };
+  const [showNotiModal, setNotiModal] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [city, setCity] = useState(getInfoUser().city || "");
   const [introduction, setIntroduction] = useState(
-    getInfoUser().introduction || ''
-  )
-  const [fullname, setFullName] = useState(getInfoUser().fullname || '')
+    getInfoUser().introduction || ""
+  );
+  const [fullname, setFullName] = useState(getInfoUser().fullname || "");
   const [dateOfBirth, setDateOfBirth] = useState(
-    getInfoUser().dateOfBirth || ''
-  )
-  const [email, setEmail] = useState(getInfoUser().email || '')
+    getInfoUser().dateOfBirth || ""
+  );
+  const [email, setEmail] = useState(getInfoUser().email || "");
   const [phoneNumber, setPhoneNumber] = useState(
-    getInfoUser().phoneNumber || ''
-  )
-
+    getInfoUser().phoneNumber || ""
+  );
 
   useEffect(() => {
     if (!user) {
       return;
     }
-    setCity(getInfoUser().city|| '')
-    setIntroduction(getInfoUser().introduction|| '')
-    setFullName(getInfoUser().fullname|| '')
-    setDateOfBirth( getInfoUser().dateOfBirth|| '')
-    setEmail(getInfoUser().email|| '')
-    setPhoneNumber(
-      getInfoUser().phoneNumber || ''
-    )
+    setCity(getInfoUser().city || "");
+    setIntroduction(getInfoUser().introduction || "");
+    setFullName(getInfoUser().fullname || "");
+    setDateOfBirth(getInfoUser().dateOfBirth || "");
+    setEmail(getInfoUser().email || "");
+    setPhoneNumber(getInfoUser().phoneNumber || "");
   }, [userDetail.userDetail]);
 
   const handleChange = (event) => {
-    setCity(event.target.value)
-  }
+    setCity(event.target.value);
+  };
 
   const handleDateClick = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const handleDateClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const closeNotiModal = () => {
-    setNotiModal(false)
-  }
+    setNotiModal(false);
+  };
   const updateUserDetail = () => {
-    const currentTime = new Date().toLocaleTimeString()
+    const currentTime = new Date().toLocaleTimeString();
     axiosInstance
       .put(
-        'appUser/update',
+        "appUser/update",
         {
           Id: user.userid,
           Introduction: introduction,
@@ -152,16 +147,16 @@ export default function InfoUser() {
         }
       )
       .then((response) => {
-        setNotiModal(true)
+        setNotiModal(true);
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
   const updatePassWord = () => {
     axiosInstance
       .put(
-        '/appUser/updatepassword',
+        "/appUser/updatepassword",
         {
           Id: user.userid,
           CurrentPassword: currentPass,
@@ -174,19 +169,19 @@ export default function InfoUser() {
         }
       )
       .then((response) => {
-        setNotiModal(true)
+        setNotiModal(true);
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   const activeEmail = () => {
     axiosInstance
       .post(
-        '/appUser/sendactiveemail',
+        "/appUser/sendactiveemail",
         {
-          Id: user.userid
+          Id: user.userid,
         },
         {
           headers: {
@@ -195,13 +190,12 @@ export default function InfoUser() {
         }
       )
       .then((response) => {
-        setNotiModal(true)
+        setNotiModal(true);
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
-
+        console.log(error);
+      });
+  };
 
   return (
     <>
@@ -221,7 +215,7 @@ export default function InfoUser() {
               <TableBody>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 'none' },
+                    "&:last-child td, &:last-child th": { border: "none" },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -247,7 +241,7 @@ export default function InfoUser() {
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -260,7 +254,7 @@ export default function InfoUser() {
                           className="input__userDetail"
                           required
                           multiline
-                          defaultValue={userDetail?.userDetail?.FullName || ''}
+                          defaultValue={userDetail?.userDetail?.FullName || ""}
                           onChange={(event) => setFullName(event.target.value)}
                           id="fullnameTxt"
                         />
@@ -270,7 +264,7 @@ export default function InfoUser() {
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -283,9 +277,7 @@ export default function InfoUser() {
                           <DatePicker
                             className="input__userDetail date__input"
                             color="white"
-                            defaultValue={dayjs(
-                             dateOfBirth
-                            )}
+                            defaultValue={dayjs(dateOfBirth)}
                             onChange={(value) => setDateOfBirth(value)}
                             id="dateOfBirthTxt"
                           />
@@ -296,7 +288,7 @@ export default function InfoUser() {
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -328,7 +320,7 @@ export default function InfoUser() {
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -347,16 +339,24 @@ export default function InfoUser() {
                         />
                       </Grid>
                       <Grid item xs={12} md={2}>
-                        <Button variant="contained" className="btn__confirm" onClick={activeEmail}>
-                          XÁC MINH
-                        </Button>
+                        {userDetail?.userDetail?.EmailConfirmed ? (
+                          <CheckIcon className="confirm__icon" />
+                        ) : (
+                          <Button
+                            variant="contained"
+                            className="btn__confirm"
+                            onClick={activeEmail}
+                          >
+                            XÁC MINH
+                          </Button>
+                        )}
                       </Grid>
                     </Grid>
                   </TableCell>
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -386,7 +386,7 @@ export default function InfoUser() {
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -488,7 +488,7 @@ export default function InfoUser() {
 
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -536,5 +536,5 @@ export default function InfoUser() {
       </Container>
       {showNotiModal ? <NotiModal onClose={closeNotiModal} /> : null}
     </>
-  )
+  );
 }

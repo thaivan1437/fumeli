@@ -836,6 +836,12 @@
 .mt-2 {
   margin-top: 2% !important;
 }
+.confirm__icon {
+  float: right;
+  background-color: green;
+  border-radius: 100%;
+  padding: 3px;
+}
 .btn__confirm {
   float: right;
   background: #ff2423;
@@ -870,10 +876,10 @@
     height: 4px;
     position: absolute;
   }
-  
-@media (max-width: 768px) {
-  padding: 8px!important;
-}
+
+  @media (max-width: 768px) {
+    padding: 8px !important;
+  }
 }
 .w-100 {
   width: 100% !important;
