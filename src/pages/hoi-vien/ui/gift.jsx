@@ -34,10 +34,6 @@ const Bag = () => {
   const handleClick = (page) => {
     setCurrentPage(page)
   }
-
-
-
-
   // const hotItems = userGift.filter((item) => item.isHot === true)
   const distributeClick = () => {
     setOpen(!open)
@@ -62,6 +58,8 @@ const Bag = () => {
   }
 
   const hotItems = userGift.filter(item => item.Active === false)
+
+console.log(userDetail);
 
   return (
     <Container>

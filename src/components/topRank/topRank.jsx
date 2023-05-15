@@ -48,7 +48,7 @@ export default function TopRank() {
     return <ListItem alignItems="flex-start" className="topRank__item" key={`${item.CreateDate}_${item.UserName}`}>
       <div className="topRank__item--info">
         <ListItemAvatar>
-          <Avatar alt={item.UserName} src={item.Avatar} sx={{ width: 88, height: 88 }} variant="rounded"/>
+          <Avatar alt={item.UserName} src={item.Avatar} sx={{ width: 77, height: 77 }} variant="rounded"/>
         </ListItemAvatar>
         <ListItemText
           primary={item.UserName}
@@ -81,6 +81,19 @@ export default function TopRank() {
       </div>
       {/* list rank */}
       <List className={`topRank ${isShowRank ? 'active' : ''}`} sx={{ width: '100%', maxWidth: 580, bgcolor: 'background.paper' }}>
+      <Image
+          src="/images/close.svg"
+          alt="btn close"
+          onClick={(e) => handleShowTopRank(e)}
+          width={20}
+          height={20}
+          style={{
+            top: '1%',
+            right: '93%',
+            zIndex:99999
+          }}
+          className="modal__youtube--btn-close btn__close"
+        />
         <ListItemText sx={{position: 'sticky', top: 0 }}>
           <Typography component="p" sx={{ textAlign: 'center', color: '#fff', fontSize: '30px', margin: 0, padding: '15px 0'}}>
             BẢNG XẾP HẠNG
@@ -91,6 +104,7 @@ export default function TopRank() {
             return renderItem(item, index)
           })
         }
+        <div className="current__fpoint">Điểm tích lũy của bạn: </div>
       </List>
     </React.StrictMode>
   );

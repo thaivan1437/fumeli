@@ -132,7 +132,8 @@
   position: fixed !important;
   z-index: 9999;
   right: -580px;
-  top: calc(30% + 65px);
+  top: 20%;
+  // top: calc(30% + 65px);
   -webkit-transition: width 0.5s ease-in-out;
   transition: width 0.5s ease-in-out;
   .topRank__item {
