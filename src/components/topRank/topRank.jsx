@@ -101,12 +101,10 @@ export default function TopRank() {
         </ListItemText>
         {
           newTopRank && newTopRank.map((item, index) =>{
-            return renderItem(item, index)
-         
+            return  renderItem(item, index)
+          
           })
         }
-            <div className="current__fpoint">Điểm tích lũy của bạn: <span className='cl-red'>500 Fpoint</span></div>
-
       </List>
     </React.StrictMode>
   );
