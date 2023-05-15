@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import axiosInstance from '../../utils/api'
+import React, { useState } from "react";
+import axiosInstance from "../../utils/api";
 import {
   Box,
   Button,
@@ -8,27 +8,29 @@ import {
   Link,
   TextField,
   Typography,
-} from '@mui/material'
-import EmailIcon from '@mui/icons-material/Email'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import PhoneIcon from '@mui/icons-material/Phone'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import YouTubeIcon from '@mui/icons-material/YouTube'
-import InstagramIcon from '@mui/icons-material/Instagram'
-import TwitterIcon from '@mui/icons-material/Twitter'
+} from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PhoneIcon from "@mui/icons-material/Phone";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import ContactModal from "./modal/contactModal";
 
 const ContactPage = () => {
-  const [fullName, setFullName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [content, setContent] = useState('')
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [content, setContent] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = (event) => {
-    console.log(1)
-    event.preventDefault()
-    const currentTime = new Date().toLocaleTimeString()
+    console.log(1);
+    event.preventDefault();
+    const currentTime = new Date().toLocaleTimeString();
     axiosInstance
-      .post('Contact/create', {
+      .post("Contact/create", {
         FullName: fullName,
         Email: email,
         PhoneNumber: phoneNumber,
@@ -37,13 +39,16 @@ const ContactPage = () => {
         CreateUser: fullName,
       })
       .then((response) => {
-        console.log(response.data)
+        setOpen(true);
+        setFullName("");
+        setEmail("");
+        setPhoneNumber("");
+        setContent("");
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
-
+        console.log(error);
+      });
+  };
   return (
     <Box mb={2}>
       <iframe
@@ -63,40 +68,41 @@ const ContactPage = () => {
                 <Typography variant="subtitle1" sx={{ mb: 2 }}>
                   <strong>
                     <LocationOnIcon
-                      sx={{ mb: '-3px', mr: 1 }}
+                      sx={{ mb: "-3px", mr: 1 }}
                       className="iconItem"
                     />
-                    Địa chỉ: {" "} <span className='contact__info--description'>
-                    Số 52 Đường 10, Khu dân cư Nam Long, Phường Tân Thuận Đông,
-                    Quận 7, TP.HCM, Việt Nam
+                    Địa chỉ:{" "}
+                    <span className="contact__info--description">
+                      Số 52 Đường 10, Khu dân cư Nam Long, Phường Tân Thuận
+                      Đông, Quận 7, TP.HCM, Việt Nam
                     </span>
                   </strong>
-                
                 </Typography>
                 <Typography variant="subtitle1" sx={{ mb: 2 }}>
                   <strong>
                     <PhoneIcon
-                      sx={{ mb: '-3px', mr: 1 }}
+                      sx={{ mb: "-3px", mr: 1 }}
                       className="iconItem"
                     />
-                    Phone:{" "} <span className='contact__info--description'>0968236915 – 0988666415</span>
-                   
+                    Phone:{" "}
+                    <span className="contact__info--description">
+                      0968236915 – 0988666415
+                    </span>
                   </strong>
-                  
                 </Typography>
                 <Typography variant="subtitle1" sx={{ mb: 2 }}>
                   <strong>
                     <EmailIcon
-                      sx={{ mb: '-3px', mr: 1 }}
+                      sx={{ mb: "-3px", mr: 1 }}
                       className="iconItem"
                     />
-                    Email:{" "}  <span className='contact__info--description'>
-                    <Link href="mailto:info@fusoft.vn" color="inherit">
-                      info@fusoft.vn
-                    </Link>
+                    Email:{" "}
+                    <span className="contact__info--description">
+                      <Link href="mailto:info@fusoft.vn" color="inherit">
+                        info@fusoft.vn
+                      </Link>
                     </span>
                   </strong>
-                
                 </Typography>
               </Grid>
             </Grid>
@@ -186,6 +192,7 @@ const ContactPage = () => {
                   <Button type="submit" variant="contained" className="btnSend">
                     XÁC NHẬN GỬI
                   </Button>
+                  <ContactModal setOpen={setOpen} open={open} />
                 </Grid>
               </Grid>
             </form>
@@ -193,6 +200,6 @@ const ContactPage = () => {
         </Grid>
       </Container>
     </Box>
-  )
-}
-export default ContactPage
+  );
+};
+export default ContactPage;
