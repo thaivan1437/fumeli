@@ -26,6 +26,7 @@ const initialState = {
   userData: [],
   allUser: [],
   userFriend: [],
+  userPoint: [],
 };
 
 export const userDetail = (state = initialState, action) => {
@@ -84,6 +85,11 @@ export const userDetail = (state = initialState, action) => {
       return {
         ...state,
         userFriend: action.payload,
+      };
+    case "GET_FPOINT_USER":
+      return {
+        ...state,
+        userPoint: action.payload,
       };
     default:
       return state;
