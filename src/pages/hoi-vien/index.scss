@@ -771,6 +771,10 @@
 .table__userDetail {
   padding: 0 3%;
   margin-top: 2% !important;
+  &--confirmTick{
+    font-size: 35px;
+    transform: translate(10px, 10px);
+  }
 }
 .table__userDetail--text__left {
   padding-left: 0 !important;
@@ -1469,4 +1473,8 @@
 .css-1ex1afd-MuiTableCell-root {
   border-bottom: 1px solid rgb(224 224 224 / 39%) !important;
   padding: 22px !important;
+}
+
+.css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+  -webkit-text-fill-color:#fff!important;
 }

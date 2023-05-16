@@ -15,6 +15,7 @@ const ActivityDiary = () => {
   const newActivityHistory = activitiesHistory?.sort((a, b) => b.Id - a.Id);
   const newGivePointsHistory = givePointsHistory?.sort((a, b) => b.Id - a.Id);
   const newFriendsHistory = friends?.sort((a, b) => b.Id - a.Id);
+
   return (
     <div>
       <div className="activity__grid--right--top fs-16">

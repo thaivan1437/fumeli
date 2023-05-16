@@ -128,6 +128,7 @@ export default function LayoutUserPage() {
   const goToPage = (route) => {
     window.location.href = `/hoi-vien/${route}`
   }
+
   return (
     <>
       <input
@@ -189,7 +190,7 @@ export default function LayoutUserPage() {
           <Typography gutterBottom className="layoutAppUser--username">
             {user.username}
           </Typography>
-
+          
           <Box className="button__avatar__group">
             <Button
               variant="contained"
