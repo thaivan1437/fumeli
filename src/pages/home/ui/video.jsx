@@ -120,7 +120,7 @@ const Videos = () => {
       <Slider ref={slider} className="video__slider center" {...settings}>
         { video && (
           video.map((item) => {
-            return <div className='video__slider--item' key={item.CreateDate} onClick={() => openVideoModal(item.VideoPath)}>
+            return <div className='video__slider--item cursor-pointer' key={item.CreateDate} onClick={() => openVideoModal(item.VideoPath)}>
               <AutoSizeImage isResize={false} src={item.ThumbnailPath} alt={item.Title} width={777} height={440}/>
             </div>
           })

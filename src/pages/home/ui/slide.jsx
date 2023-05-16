@@ -130,7 +130,7 @@ const SliderBanner = () => {
             >
               { newSlider && (
                 newSlider.map((item) => {
-                  return <div className='banner__slider--main' key={item.CreateDate} onClick={() => openImageModal(item.Link)}>
+                  return <div className='banner__slider--main cursor-pointer' key={item.CreateDate} onClick={() => openImageModal(item.Link)}>
                     <AutoSizeImage src={item.UrlImage} alt={item.link} />
                   </div>
                 })
