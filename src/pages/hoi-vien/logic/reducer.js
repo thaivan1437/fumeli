@@ -6,11 +6,13 @@ import {
   getUserDetail,
   getActivitiesHistory,
   getGivePointsHistory,
+  getReceivePointsHistory,
   getSpinsHistory,
   getDataUser,
   getAllUser,
   getAllFriendByUserId,
 } from "./action";
+import { error } from "jquery";
 
 const initialState = {
   userGift: [],
@@ -19,6 +21,7 @@ const initialState = {
   userDetail: [],
   activitiesHistory: [],
   givePointsHistory: [],
+  receivePointsHistory: [],
   spinsHistory: [],
   userData: [],
   allUser: [],
@@ -57,12 +60,16 @@ export const userDetail = (state = initialState, action) => {
         ...state,
         givePointsHistory: action.payload,
       };
+    case "GET_RECEIVE_POINTS_HISTORY":
+      return {
+        ...state,
+        receivePointsHistory: action.payload,
+      };
     case "GET_SPINS_HISTORY":
       return {
         ...state,
         spinsHistory: action.payload,
       };
-
     case "GET_DATAUSER":
       return {
         ...state,
@@ -96,7 +103,7 @@ export const getUserGiftData = (props) => async (dispatch, getState) => {
     dispatch(getUserGift(gift));
     dispatch(getUserDetail(userDetail));
   } else {
-    console.log("cc");
+    console.log(error);
   }
 };
 
@@ -111,7 +118,7 @@ export const getUserGiftHistoryData = (props) => async (dispatch, getState) => {
   if (typeof gift !== "undefined") {
     dispatch(getUserGiftHistory(gift));
   } else {
-    console.log("cc");
+    console.log(error);
   }
 };
 
@@ -138,11 +145,10 @@ export const getFriendsData = (props) => async (dispatch, getState) => {
     `UserFriend/getallclientbyuserid/${userId}`,
     dispatch
   );
-  console.log(friends);
   if (typeof friends !== "undefined") {
     dispatch(getFriends(friends));
   } else {
-    console.log("cc");
+    console.log(error);
   }
 };
 
@@ -157,7 +163,7 @@ export const getActivitiesHistoryData =
     if (typeof activities !== "undefined") {
       dispatch(getActivitiesHistory(activities));
     } else {
-      console.log("cc");
+      console.log(error);
     }
   };
 
@@ -172,22 +178,37 @@ export const getGivePointsHistorysData =
     if (typeof givePoints !== "undefined") {
       dispatch(getGivePointsHistory(givePoints));
     } else {
-      console.log("cc");
+      console.log(error);
+    }
+  };
+
+export const getReceivePointsHistorysData =
+  (props) => async (dispatch, getState) => {
+    // console.log("props", props);
+    const { userId } = props;
+    const receivePoints = await axiosGet(
+      `UserSendFPoint/getreceivefpointbyuserid/${userId}`,
+      dispatch
+    );
+    if (typeof receivePoints !== "undefined") {
+      dispatch(getReceivePointsHistory(receivePoints));
+    } else {
+      console.log(error);
     }
   };
 
 export const getSpinsHistorysData = (props) => async (dispatch, getState) => {
-  console.log("props", props);
+  // console.log("props", props);
   const { userId } = props;
   const gift = await axiosGet(
     `UserGiftSpin/getallclientbyuserid/${userId}`,
     dispatch
   );
-  console.log(gift);
+  // console.log(gift);
   if (typeof gift !== "undefined") {
     dispatch(getSpinsHistory(gift));
   } else {
-    console.log("cc");
+    console.log(error);
   }
 };
 

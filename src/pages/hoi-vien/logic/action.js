@@ -32,9 +32,17 @@ export const getActivitiesHistory = (res) => {
     payload: res,
   };
 };
+
 export const getGivePointsHistory = (res) => {
   return {
     type: "GET_GIVE_POINTS_HISTORY",
+    payload: res,
+  };
+};
+
+export const getReceivePointsHistory = (res) => {
+  return {
+    type: "GET_RECEIVE_POINTS_HISTORY",
     payload: res,
   };
 };
@@ -47,16 +55,16 @@ export const getSpinsHistory = (res) => {
 };
 
 export const getDataUser = (res) => ({
-  type: 'GET_DATAUSER',
+  type: "GET_DATAUSER",
   payload: res,
-})
+});
 
 export const getAllUser = (res) => ({
-  type: 'GET_ALLUSER',
+  type: "GET_ALLUSER",
   payload: res,
-})
+});
 
 export const getAllFriendByUserId = (res) => ({
-  type: 'GET_ALLUSERFRIEND',
+  type: "GET_ALLUSERFRIEND",
   payload: res,
-})
+});
