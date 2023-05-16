@@ -83,7 +83,7 @@ const LoginModal = () => {
         setTimeout(() => {
           // wait toast end
           handleClose();
-          location.href("/");
+          window.location = "/";
         }, 2500)
       })
       .catch(error => {

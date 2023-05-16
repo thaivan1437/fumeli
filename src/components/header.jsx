@@ -114,7 +114,7 @@ const Header = ({ setHeaderHeight }) => {
   const handleLogout = () => {
     localStorage.setItem("user", JSON.stringify(''));
     handleClose();
-    window.location.href("/");
+    window.location = "/";
   }
 
   return (
