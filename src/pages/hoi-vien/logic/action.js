@@ -68,3 +68,19 @@ export const getFpointByUser = (res) => {
     payload: res,
   };
 };
+
+
+export const getHistoryUserRedeemGift = (res) => {
+  return {
+    type: "GET_HISTORY_USER_REDEEM_GIFT",
+    payload: res,
+  };
+};
+
+
+export const getHistoryUserRedeemGiftSpin = (res) => {
+  return {
+    type: "GET_HISTORY_USER_REDEEM_GIFT_SPIN",
+    payload: res,
+  };
+};

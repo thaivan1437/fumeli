@@ -18,6 +18,7 @@ export default function InfoUser() {
     }
     void fetchAllData();
   }, [user]);
+  
   const { userDetail } = useSelector((state) => state?.userDetail);
   const userDetailInfo = [
     {
