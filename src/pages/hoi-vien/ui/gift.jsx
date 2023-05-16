@@ -48,6 +48,7 @@ const Bag = () => {
     setGift(giftFilterById)
     setGiftModal(true)
   }
+  
   const closeGiftTransactionModal = () => {
     setGiftModal(false)
     setGift('')
@@ -59,14 +60,10 @@ const Bag = () => {
 
   const hotItems = userGift.filter(item => item.Active === false)
 
-console.log(userDetail);
-
   return (
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
-          {/* phâm loại */}
-
           <Grid container spacing={3}>
             {displayData &&
               displayData.map((item, index) => {
