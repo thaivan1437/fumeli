@@ -23,7 +23,7 @@ export default function RuleModal({ open, handleClose, message, title, icon,}) {
           onClick={() => handleClose()}
           width={27}
           height={27}
-          className="btn__modal--close"
+          className="btn__modal--close btn__close"
         />
         {icon}
         <Typography my={3} variant="h4" component="h2" color='error' sx={{textAlign: 'center'}} className='modal__rule--title fs-32 fw-b'>

@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import Image from 'next/image'
 import { format } from 'date-fns'
-import {axiosInstance} from '@/utils/api'
+import axiosInstance from '@/utils/api'
 import { useDispatch } from 'react-redux'
 import { getAllDataThunkAction } from '../logic/reducer'
 import Pagination from './pagination.jsx'
@@ -21,6 +21,7 @@ export default function UserFU() {
 
   const userFU = dataUser.allUser
   const userFriend = dataUser.userFriend
+
 
   const ITEMS_PER_PAGE = 6
 
@@ -49,7 +50,7 @@ export default function UserFU() {
   const addFriend = (id) => {
     const currentTime = new Date().toLocaleTimeString()
     axiosInstance
-      .post('api/UserFriend/create', {
+      .post('/UserFriend/create', {
         FriendId: id,
         Active: true,
         CreateDate: currentTime,

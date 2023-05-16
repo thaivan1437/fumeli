@@ -17,6 +17,7 @@ import InputField from '@/components/input';
 import {formatNumber} from '@/utils/help'
 
 const SendFpointModal = ({ friend, onClose }) => {
+  console.log(friend);
   const style = {
     position: 'absolute',
     top: '50%',

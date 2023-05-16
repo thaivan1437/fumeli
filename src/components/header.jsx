@@ -112,7 +112,7 @@ const Header = ({ setHeaderHeight }) => {
     router.push("/hoi-vien/bag");
   };
 
-  console.log("=>> headerRef",headerRef);
+  setHeaderHeight(headerRef?.current?.offsetHeight)
 
   return (
     <React.StrictMode>

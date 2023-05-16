@@ -49,7 +49,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
   const giftTransactionAction = () => {
     axiosInstance
       .post(
-        'UserGiftSpin/create',
+        'UserGift/create',
         {
           Active: true,
           CreateDate: currentTime,
@@ -73,10 +73,9 @@ const GiftTransactionModal = ({ gift, onClose }) => {
         $('.button--back').css({ marginTop: '4%' })
       })
       .catch((error) => {
-        console.log(error)
         $('.modal__giftTransaction--title').text('THẤT BẠI')
         $('.modal__giftTransaction--img').remove()
-        $('.modal__giftTransaction--description').empty().text(error.message)
+        $('.modal__giftTransaction--description').empty().text(error.response.data)
         $('.button--confirm').remove()
         $('.button--back').css({ marginTop: '41%' })
       })

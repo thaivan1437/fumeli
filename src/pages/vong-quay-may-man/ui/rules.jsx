@@ -13,7 +13,8 @@ import RulesModal from '../modal/rulesModal'
 
 const RulesSpinGame = () => {
   const { imgSpinGame } = useSelector((state) => state?.spinGiftItem)
-
+  const {spinTurnValue} = useSelector((state) => state.spinGiftItem)
+  
   const [showRulesModal, setRulesModal] = useState(false)
 
   const openRulesModal = () => {
@@ -52,7 +53,7 @@ const RulesSpinGame = () => {
         <Typography mt={2} mb={4} gutterBottom color="white">
           - Hoàn thành các nhiệm vụ đơn giản mỗi ngày để nhận lượt mở quà <br />
           - Tích lũy lượt mở quà vượt các mốc, nhận thêm quà tích lũy <br /> -
-          Thời gian diễn ra sự kiện: 09.11 - 19.12 <br /> Lưu ý: 100 Fpoint = 1
+          Thời gian diễn ra sự kiện: 09.11 - 19.12 <br /> Lưu ý: {spinTurnValue.Value} Fpoint = 1
           lượt quay
         </Typography>
       </Container>

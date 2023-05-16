@@ -10,10 +10,14 @@ const ActivityDiary = () => {
   const isMatchMD = useMediaQuery(theme.breakpoints.down("md"));
   const { activitiesHistory } = useSelector((state) => state?.userDetail);
   const { givePointsHistory } = useSelector((state) => state?.userDetail);
+  const { receivePointsHistory } = useSelector((state) => state?.userDetail);
   const { friends } = useSelector((state) => state?.userDetail);
 
   const newActivityHistory = activitiesHistory?.sort((a, b) => b.Id - a.Id);
   const newGivePointsHistory = givePointsHistory?.sort((a, b) => b.Id - a.Id);
+  const newReceivePointsHistory = receivePointsHistory?.sort(
+    (a, b) => b.Id - a.Id
+  );
   const newFriendsHistory = friends?.sort((a, b) => b.Id - a.Id);
   return (
     <div>
@@ -145,7 +149,7 @@ const ActivityDiary = () => {
             <p className="right">Thời gian</p>
           </div>
           <div className="point__body scroll__style fs-16">
-            {newActivityHistory.map((activity, idx) => (
+            {newReceivePointsHistory.map((activity, idx) => (
               <div
                 key={activity.Id}
                 className={`point__grid ${idx % 2 === 0 ? "gray" : ""}`}

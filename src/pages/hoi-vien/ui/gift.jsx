@@ -24,7 +24,6 @@ const Bag = () => {
   const ITEMS_PER_PAGE = 4
   const { userGift, userGiftHistory, userDetail } = useSelector((state) => state?.userDetail)
   const EmailConfirmed = userDetail && userDetail?.EmailConfirmed;
-  console.log('userGift', userGift, userDetail, EmailConfirmed)
   userGift.sort((a, b) => b.Id - a.Id)
   const [currentPage, setCurrentPage] = useState(1)
   const maxPage = Math.ceil(userGift.length / ITEMS_PER_PAGE)
@@ -35,10 +34,6 @@ const Bag = () => {
   const handleClick = (page) => {
     setCurrentPage(page)
   }
-
-
-
-
   // const hotItems = userGift.filter((item) => item.isHot === true)
   const distributeClick = () => {
     setOpen(!open)
@@ -63,6 +58,8 @@ const Bag = () => {
   }
 
   const hotItems = userGift.filter(item => item.Active === false)
+
+console.log(userDetail);
 
   return (
     <Container>

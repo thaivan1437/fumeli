@@ -12,9 +12,12 @@ import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsAc
 import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import axiosInstance from '@/utils/api'
+import { getFriendsData } from '../logic/reducer'
+import { useDispatch } from 'react-redux'
 import $ from 'jquery'
 
 const RemoveFriendModal = ({ friend, onClose }) => {
+  const dispatch = useDispatch()
   const style = {
     position: 'absolute',
     top: '50%',
@@ -33,20 +36,20 @@ const RemoveFriendModal = ({ friend, onClose }) => {
   let user = localStorage.getItem("user");
   user = JSON.parse(user);
 
-  console.log("user",friend, user)
 
   const handleClose = () => {
     setOpen(false)
     onClose()
   }
 
+
   const currentTime = new Date().toLocaleTimeString()
   const giftTransactionAction = () => {
     axiosInstance
-      .post(
-        `UserFriend/update/${friend.UserId}ahahahahah`,
+      .put(
+        `UserFriend/update/${friend.Id}`,
         {
-          UpdateUser: user.userid,
+          UpdateUser: user.username,
           UpdateDate: currentTime,
           Active: false,
         },
@@ -58,6 +61,8 @@ const RemoveFriendModal = ({ friend, onClose }) => {
       )
       .then((response) => {
         console.log(response.data)
+        dispatch(getFriendsData({ userId: user?.userid }))
+    onClose()
       })
       .catch((error) => {
         console.log(error)

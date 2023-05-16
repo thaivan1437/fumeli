@@ -14,7 +14,6 @@ const InvitedFriend = () => {
         .map((item) =>
             createData(item.Id, item.CreateUser, item.CreateDate, item.FpointValue)
         );
-    console.log("=>> invitedFriendDatas", invitedFriendDatas);
     return (
         <div className="invited__friend__history">
             <h3>LỊCH SỬ MỜI BẠN</h3>

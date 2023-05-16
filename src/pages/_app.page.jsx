@@ -38,7 +38,6 @@ export default function App({ Component, pageProps }) {
     }
   }
   const [headerHeight, setHeaderHeight] = React.useState(0);
-  console.log("headerHeight", headerHeight);
 
   const scrollToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: "smooth" });
@@ -51,7 +50,7 @@ export default function App({ Component, pageProps }) {
         className="main"
         style={{
           background: "#19181c !important",
-          marginTop: `${headerHeight ? headerHeight + 5 :130}px`,
+          marginTop: `${headerHeight ? headerHeight + 5 :85}px`,
         }}
       >
         {isLoading ? <Loader /> : <Component {...pageProps} />}
