@@ -9,7 +9,7 @@ import {
   getSpinsHistory,
   getDataUser,
   getAllUser,
-  getAllFriendByUserId,
+  getAllFriendByUserId,getFpointByUser
 } from "./action";
 
 const initialState = {
@@ -23,6 +23,7 @@ const initialState = {
   userData: [],
   allUser: [],
   userFriend: [],
+  userPoint: [],
 };
 
 export const userDetail = (state = initialState, action) => {
@@ -77,6 +78,11 @@ export const userDetail = (state = initialState, action) => {
       return {
         ...state,
         userFriend: action.payload,
+      };
+    case "GET_FPOINT_USER":
+      return {
+        ...state,
+        userPoint: action.payload,
       };
     default:
       return state;
@@ -214,6 +220,22 @@ export const getAllDataThunkAction = () => async (dispatch, getState) => {
     await dispatch(getAllUser(allUserResponse));
     await dispatch(getAllFriendByUserId(userFriendResponse));
   } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export const getFpointByUserData = (props) => async (dispatch, getState) => {
+  // console.log("props", props);
+  const { userId } = props;
+  const userPoint = await axiosGet(
+    `UserFPoint/getsinglebyuserid/${userId}`,
+    dispatch
+  );
+  // console.log(gift);
+  if (typeof userPoint !== "undefined") {
+    dispatch(getFpointByUser(userPoint));
+  } else {
     console.log(error);
   }
 };

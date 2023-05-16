@@ -60,3 +60,11 @@ export const getAllFriendByUserId = (res) => ({
   type: 'GET_ALLUSERFRIEND',
   payload: res,
 })
+
+
+export const getFpointByUser = (res) => {
+  return {
+    type: "GET_FPOINT_USER",
+    payload: res,
+  };
+};

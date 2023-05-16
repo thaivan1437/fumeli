@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import Divider from '@mui/material/Divider'
 import { Box, Typography, Button, Grid } from '@mui/material'
 import Image from 'next/image'
@@ -10,9 +10,15 @@ import GroupIcon from '@mui/icons-material/Group'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import axiosInstance from '@/utils/api'
 import Link from 'next/link'
+import {
+  getFpointByUserData
+} from "../logic/reducer";
 
 export default function LayoutUserPage() {
+  const dispatch = useDispatch();
   const [user, setUser] = useState('')
+  const { userPoint } = useSelector((state) => state?.userDetail);
+
 
   useEffect(() => {
     // check login has data in localStore
@@ -21,6 +27,21 @@ export default function LayoutUserPage() {
       setUser(userData)
     }
   }, [])
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    async function fetchAllData() {
+      await Promise.all([
+        dispatch(getFpointByUserData({ userId: user?.userid })),
+
+      ]);
+    }
+    void fetchAllData();
+  }, [user]);
+
+
 
   const hiddenFileInput = useRef(null)
   const handleClick = (event) => {
@@ -190,39 +211,41 @@ export default function LayoutUserPage() {
           <Typography gutterBottom className="layoutAppUser--username">
             {user.username}
           </Typography>
-          
+          <Typography gutterBottom className="layoutAppUser--fpoint" mt={2} mb={2}>
+            Điểm của bạn: <span className='cl-red'>{userPoint.FpointValue} </span> Fpoint
+          </Typography>
           <Box className="button__avatar__group">
             <Button
               variant="contained"
-              className="btn_fill ml-6 m-mb-0 w-158px"
+              className="btn_fill ml-6 m-mb-0 w-158px custom__btnfill"
               onClick={() => goToPage('ui/infoUser')}
             >
               <PersonIcon />
-              <Typography className="btn_fill--text">THÔNG TIN</Typography>
+              <Typography className="btn_fill--text ">THÔNG TIN</Typography>
             </Button>
             <Button
               variant="contained"
-              className="btn_fill ml-6"
+              className="btn_fill ml-6 custom__btnfill"
               onClick={() => goToPage('activity')}
             >
               <BoltIcon />
-              <Typography className="btn_fill--text">HOẠT ĐỘNG</Typography>
+              <Typography className="btn_fill--text ">HOẠT ĐỘNG</Typography>
             </Button>
             <Button
               variant="contained"
-              className="btn_fill ml-6"
+              className="btn_fill ml-6 custom__btnfill"
               onClick={() => goToPage('bag')}
             >
               <CardGiftcardIcon />
-              <Typography className="btn_fill--text">TÚI ĐỒ</Typography>
+              <Typography className="btn_fill--text ">TÚI ĐỒ</Typography>
             </Button>
             <Button
               variant="contained"
-              className="btn_fill ml-6"
+              className="btn_fill ml-6 custom__btnfill"
               onClick={() => goToPage('friend')}
             >
               <GroupIcon />
-              <Typography className="btn_fill--text">BẠN BÈ</Typography>
+              <Typography className="btn_fill--text ">BẠN BÈ</Typography>
             </Button>
           </Box>
         </Box>
