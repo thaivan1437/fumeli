@@ -18,6 +18,7 @@ const ActivityDiary = () => {
   const newReceivePointsHistory = receivePointsHistory?.sort(
     (a, b) => b.Id - a.Id
   );
+  console.log(newReceivePointsHistory)
   const newFriendsHistory = friends?.sort((a, b) => b.Id - a.Id);
 
   return (
@@ -150,7 +151,7 @@ const ActivityDiary = () => {
             <p className="right">Thời gian</p>
           </div>
           <div className="point__body scroll__style fs-16">
-            {newReceivePointsHistory.map((activity, idx) => (
+            {/* {newReceivePointsHistory.map((activity, idx) => (
               <div
                 key={activity.Id}
                 className={`point__grid ${idx % 2 === 0 ? "gray" : ""}`}
@@ -161,7 +162,7 @@ const ActivityDiary = () => {
                   {moment(activity.CreateDate).format("M/D/YYYY h:mm:ss A")}
                 </p>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

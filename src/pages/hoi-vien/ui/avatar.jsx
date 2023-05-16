@@ -212,7 +212,7 @@ export default function LayoutUserPage() {
             {user.username}
           </Typography>
           <Typography gutterBottom className="layoutAppUser--fpoint" mt={2} mb={2}>
-            Điểm của bạn: <span className='cl-red'>{userPoint.FpointValue} </span> Fpoint
+            Điểm của bạn: <span className='cl-red'>{userPoint?.FpointValue} </span> Fpoint
           </Typography>
           <Box className="button__avatar__group">
             <Button
