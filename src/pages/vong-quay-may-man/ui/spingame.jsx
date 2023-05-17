@@ -18,6 +18,7 @@ import { useDispatch } from 'react-redux'
 const SpinGame = () => {
   const dispatch = useDispatch()
   const spinGiftItemData = useSelector((state) => state.spinGiftItem)
+ 
   const spinGiftItem = spinGiftItemData.spinGiftItem.sort(
     (a, b) => a.Percentage - b.Percentage
   )

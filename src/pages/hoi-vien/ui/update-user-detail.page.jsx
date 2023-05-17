@@ -25,6 +25,7 @@ import NotiModal from '../modal/noti'
 import {
   getUserGiftData,
 } from "../logic/reducer";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export default function InfoUser() {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ export default function InfoUser() {
     void fetchAllData();
   }, [user]);
 
-  
+
   const userDetail = useSelector((state) => state.userDetail)
 
   const [currentPass, setCurrentPass] = useState('')
@@ -105,11 +106,11 @@ export default function InfoUser() {
     if (!user) {
       return;
     }
-    setCity(getInfoUser().city|| '')
-    setIntroduction(getInfoUser().introduction|| '')
-    setFullName(getInfoUser().fullname|| '')
-    setDateOfBirth( getInfoUser().dateOfBirth|| '')
-    setEmail(getInfoUser().email|| '')
+    setCity(getInfoUser().city || '')
+    setIntroduction(getInfoUser().introduction || '')
+    setFullName(getInfoUser().fullname || '')
+    setDateOfBirth(getInfoUser().dateOfBirth || '')
+    setEmail(getInfoUser().email || '')
     setPhoneNumber(
       getInfoUser().phoneNumber || ''
     )
@@ -203,6 +204,9 @@ export default function InfoUser() {
   }
 
 
+  const xs_email = userDetail.userDetail.EmailConfirmed ? 10 : 12
+  const xs1_email = userDetail.userDetail.EmailConfirmed ? 2 : 12
+
   return (
     <>
       <LayoutUserPage />
@@ -284,7 +288,7 @@ export default function InfoUser() {
                             className="input__userDetail date__input"
                             color="white"
                             defaultValue={dayjs(
-                             dateOfBirth
+                              dateOfBirth
                             )}
                             onChange={(value) => setDateOfBirth(value)}
                             id="dateOfBirthTxt"
@@ -336,20 +340,30 @@ export default function InfoUser() {
                       <Grid item xs={12} md={2}>
                         EMAIL<span className="cl-red">*</span>
                       </Grid>
-                      <Grid item xs={12} md={8}>
-                        <TextField
+                      <Grid item xs={xs_email} md={8}>
+                        {userDetail.userDetail.EmailConfirmed ? <TextField
+                          className="input__userDetail"
+                          required
+                          multiline
+                          value={email}
+                          onChange={(event) => setEmail(event.target.value)}
+                          id="emailTxt"
+                          disabled
+                        /> : <TextField
                           className="input__userDetail"
                           required
                           multiline
                           defaultValue={email}
                           onChange={(event) => setEmail(event.target.value)}
                           id="emailTxt"
-                        />
+
+                        />}
                       </Grid>
-                      <Grid item xs={12} md={2}>
-                        <Button variant="contained" className="btn__confirm" onClick={activeEmail}>
+                      <Grid item xs={xs1_email} md={2}>
+                        {userDetail.userDetail.EmailConfirmed ? <CheckCircleIcon className='table__userDetail--confirmTick' /> : <Button variant="contained" className="btn__confirm" onClick={activeEmail}>
                           XÁC MINH
-                        </Button>
+                        </Button>}
+
                       </Grid>
                     </Grid>
                   </TableCell>
@@ -377,9 +391,9 @@ export default function InfoUser() {
                         />
                       </Grid>
                       <Grid item xs={12} md={2}>
-                        {/* <Button variant="contained" className="btn__confirm">
+                        {/* {userDetail.userDetail.PhoneNumberConfirmed?<CheckCircleIcon className='table__userDetail--confirmTick' />:  <Button variant="contained" className="btn__confirm" onClick={activeEmail}>
                           XÁC MINH
-                        </Button> */}
+                        </Button>} */}
                       </Grid>
                     </Grid>
                   </TableCell>

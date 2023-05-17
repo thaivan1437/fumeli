@@ -10,31 +10,46 @@ import {
 import Image from 'next/image'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
-import GiftTransactionModal from '../modal/giftTransaction'
-import { getUserGiftData } from "../logic/reducer";
+import GiftTransactionModal from '../modal/giftSpinTransaction'
 import ActiveMailModal from '../modal/activeMail';
+import { getSpinsHistorysData } from "../logic/reducer";
 import Pagination from './pagination.jsx'
 import moment from "moment/moment";
 
 const Bag = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false)
   const [showGiftTranscationModal, setGiftModal] = useState(false)
   const [gift, setGift] = useState('')
   const [activeEmail, setActiveEmail] = useState(false)
+
   const { user } = useSelector((state) => state?.authReducer);
 
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    async function fetchAllData() {
+      await Promise.all([dispatch(getSpinsHistorysData({ userId: user?.userid }))]);
+    }
+    void fetchAllData();
+  }, [user]);
+
   const ITEMS_PER_PAGE = 4
-  const { userGift, userGiftHistory, userDetail } = useSelector((state) => state?.userDetail)
+  const { userGift, userGiftHistory, userDetail, spinsHistory } = useSelector((state) => state?.userDetail)
+
+  const lstspinsHistory = spinsHistory.filter(history => history.Active === true);
 
   const EmailConfirmed = userDetail && userDetail?.EmailConfirmed;
-  userGift.filter(gift => gift.Acitce === true);
-  userGift.sort((a, b) => b.Id - a.Id)
+  lstspinsHistory.sort((a, b) => b.Id - a.Id)
   const [currentPage, setCurrentPage] = useState(1)
-  const totalPages = Math.ceil(userGift.length / ITEMS_PER_PAGE)
-  const displayData = userGift.slice(
+  const maxPage = Math.ceil(lstspinsHistory.length / ITEMS_PER_PAGE)
+  const displayData = lstspinsHistory.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   )
+  const totalPages = Math.ceil(lstspinsHistory?.length / ITEMS_PER_PAGE)
+
   const handleClick = (page) => {
     setCurrentPage(page)
   }
@@ -48,7 +63,7 @@ const Bag = () => {
       setActiveEmail(true);
       return
     }
-    const giftFilterById = userGift.filter((item) => item.Id == e)
+    const giftFilterById = lstspinsHistory.filter((item) => item.Id == e)
     setGift(giftFilterById)
     setGiftModal(true)
   }
@@ -62,7 +77,7 @@ const Bag = () => {
     setActiveEmail(false)
   }
 
-  const hotItems = userGift.filter(item => item.Active === false)
+  const hotItems = spinsHistory.filter(item => item.Active === false)
 
   return (
     <Container>
@@ -137,12 +152,11 @@ const Bag = () => {
               />
             </ButtonGroup>
           </Box>
-          <hr style={{ margin: '4% 0 4% 0' }} />
         </Grid>
         <Grid item xs={12} md={4} mb={4} mt={{ xs: 2 }} className='bag__history'>
           <Box className='bag__history--item'>
             <Typography variant="h5" className="titleHotItem">
-              LỊCH SỬ NHẬN QUÀ
+              LỊCH SỬ ĐỔI QUÀ TẶNG
             </Typography>
             <Box>
               <ul className="hot_item__ul">

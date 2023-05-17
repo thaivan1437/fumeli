@@ -6,10 +6,13 @@ import {
   getUserDetail,
   getActivitiesHistory,
   getGivePointsHistory,
+  getReceivePointsHistory,
   getSpinsHistory,
   getDataUser,
   getAllUser,
   getAllFriendByUserId,
+  getFpointByUser,
+  getHistoryUserRedeemGift,
 } from "./action";
 
 const initialState = {
@@ -19,12 +22,15 @@ const initialState = {
   userDetail: [],
   activitiesHistory: [],
   givePointsHistory: [],
+  receivePointsHistory: [],
   spinsHistory: [],
   userData: [],
   allUser: [],
   userFriend: [],
-};
+  userPoint: [],
+  historyUserRedeemGift: [],
 
+};
 
 export const userDetail = (state = initialState, action) => {
   switch (action.type) {
@@ -58,6 +64,11 @@ export const userDetail = (state = initialState, action) => {
         ...state,
         givePointsHistory: action.payload,
       };
+    case "GET_RECEIVE_POINTS_HISTORY":
+      return {
+        ...state,
+        receivePointsHistory: action.payload,
+      };
     case "GET_SPINS_HISTORY":
       return {
         ...state,
@@ -78,6 +89,16 @@ export const userDetail = (state = initialState, action) => {
       return {
         ...state,
         userFriend: action.payload,
+      };
+    case "GET_FPOINT_USER":
+      return {
+        ...state,
+        userPoint: action.payload,
+      };
+    case "GET_HISTORY_USER_REDEEM_GIFT_SPIN":
+      return {
+        ...state,
+        historyUserRedeemGift: action.payload,
       };
     default:
       return state;
@@ -176,8 +197,23 @@ export const getGivePointsHistorysData =
     }
   };
 
+export const getReceivePointsHistorysData =
+  (props) => async (dispatch, getState) => {
+    // console.log("props", props);
+    const { userId } = props;
+    const receivePoints = await axiosGet(
+      `api/UserSendFPoint/getreceivefpointbyuserid/${userId}`,
+      dispatch
+    );
+    if (typeof receivePoints !== "undefined") {
+      dispatch(getReceivePointsHistory(receivePoints));
+    } else {
+      console.log("error");
+    }
+  };
+
 export const getSpinsHistorysData = (props) => async (dispatch, getState) => {
-  console.log("props", props);
+  // console.log("props", props);
   const { userId } = props;
   const gift = await axiosGet(
     `api/UserGiftSpin/getallclientbyuserid/${userId}`,
@@ -203,17 +239,35 @@ if (typeof window !== "undefined") {
 
 export const getAllDataThunkAction = () => async (dispatch, getState) => {
   try {
-    const [userDataResponse, allUserResponse, userFriendResponse] =
+    const [userDataResponse, allUserResponse, userFriendResponse, historyUserRedeemGift] =
       await Promise.all([
-        axiosGet(`api/${USER_DETAIL_API_ENDPOINT}${data.userid}`, dispatch),
-        axiosGet("api/appUser/getallclientbyuserrole?role=user", dispatch),
-        axiosGet(`api/UserFriend/getallclientbyuserid/${data.userid}`, dispatch),
+        axiosGet(`api/${USER_DETAIL_API_ENDPOINT}${data.userid}`),
+        axiosGet("api/appUser/getallclientbyuserrole?role=user"),
+        axiosGet(`api/UserFriend/getallclientbyuserid/${data.userid}`),
+        axiosGet(`api/UserGiftSpin/getallclientbyuserid/${data.userid}`),
       ]);
 
     await dispatch(getDataUser(userDataResponse));
     await dispatch(getAllUser(allUserResponse));
     await dispatch(getAllFriendByUserId(userFriendResponse));
+    await dispatch(getHistoryUserRedeemGift(historyUserRedeemGift));
+
   } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getFpointByUserData = (props) => async (dispatch, getState) => {
+  // console.log("props", props);
+  const { userId } = props;
+  const userPoint = await axiosGet(
+    `api/UserFPoint/getsinglebyuserid/${userId}`,
+    dispatch
+  );
+  // console.log(gift);
+  if (typeof userPoint !== "undefined") {
+    dispatch(getFpointByUser(userPoint));
+  } else {
     console.log(error);
   }
 };

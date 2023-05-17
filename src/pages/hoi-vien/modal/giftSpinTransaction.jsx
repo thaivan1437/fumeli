@@ -7,24 +7,24 @@ import {
   Typography,
   Button,
 } from '@mui/material'
+import { getSpinsHistorysData } from "../logic/reducer";
+import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import axiosInstance from '@/utils/api'
-import { getFriendsData } from '../logic/reducer'
-import { useDispatch } from 'react-redux'
 import $ from 'jquery'
 
-const RemoveFriendModal = ({ friend, onClose }) => {
-  const dispatch = useDispatch()
+const GiftTransactionModal = ({ gift, onClose }) => {
+  const dispatch = useDispatch();
   const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '475px',
-    minHeight: '350px',
+    minHeight: '420px',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -32,25 +32,31 @@ const RemoveFriendModal = ({ friend, onClose }) => {
     borderRadius: '10px',
   }
   const [open, setOpen] = useState(true)
-  // init user data in local storage
-  let user = localStorage.getItem("user");
-  user = JSON.parse(user);
+
+  const [user, setUser] = useState('')
+
+  useEffect(() => {
+    // check login has data in localStore
+    const userData = JSON.parse(localStorage.getItem('user'))
+    if (userData && userData.username) {
+      setUser(userData)
+    }
+  }, [])
 
   const handleClose = () => {
     setOpen(false)
     onClose()
   }
-
-
   const currentTime = new Date().toLocaleTimeString()
   const giftTransactionAction = () => {
     axiosInstance
-      .post(
-        `api/UserFriend/update/${friend.UserId}ahahahahah`,
+      .put(
+        `UserGiftSpin/update/${gift[0].Id}`,
         {
-          UpdateUser: user.username,
-          UpdateDate: currentTime,
           Active: false,
+          UpdateDate: currentTime,
+          UpdateUser: user.username,
+          UserId: user.userid,
         },
         {
           headers: {
@@ -59,12 +65,20 @@ const RemoveFriendModal = ({ friend, onClose }) => {
         }
       )
       .then((response) => {
-        console.log(response.data)
-        dispatch(getFriendsData({ userId: user?.userid }))
-    onClose()
+        dispatch(getSpinsHistorysData({ userId: user?.userid }))
+        $('.modal__giftTransaction--title').text('THÀNH CÔNG')
+        $('.modal__giftTransaction--description')
+          .empty()
+          .text('Bạn đã đổi quà thành công ' + gift[0].GiftTitle)
+        $('.button--confirm').remove()
+        $('.button--back').css({ marginTop: '4%' })
       })
       .catch((error) => {
-        console.log(error)
+        $('.modal__giftTransaction--title').text('THẤT BẠI')
+        $('.modal__giftTransaction--img').remove()
+        $('.modal__giftTransaction--description').empty().text(error.response.data.Message)
+        $('.button--confirm').remove()
+        $('.button--back').css({ marginTop: '41%' })
       })
   }
 
@@ -90,7 +104,7 @@ const RemoveFriendModal = ({ friend, onClose }) => {
             top: '-13px',
             right: '-30px',
           }}
-          className="modal__youtube--btn-close"
+          className="modal__youtube--btn-close btn__close"
         />
         <NotificationsActiveOutlinedIcon
           sx={{
@@ -100,22 +114,33 @@ const RemoveFriendModal = ({ friend, onClose }) => {
           }}
         />
         <Typography mb={3} className="modal__giftTransaction--title">
-          THÔNG BÁO
+          XÁC NHẬN
         </Typography>
 
+        <Image
+          className="modal__giftTransaction--img"
+          src={gift[0].ImagePath}
+          alt="btn close"
+          width={150}
+          height={150}
+          style={{
+            objectFit: 'contain',
+          }}
+        />
         <Typography
-          className="modal__giftTransaction--description remove-friend"
+          className="modal__giftTransaction--description"
           variant="h6"
           component="p"
         >
-          Xác nhận xóa bạn{' '}
+          Bạn có chắn chắn muốn đổi lấy{' '}
           <span
             style={{
               color: '#FF2423',
             }}
           >
-            {friend.FriendUserName}
+            {gift[0].GiftTitle}
           </span>{' '}
+          này không?
         </Typography>
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -132,7 +157,7 @@ const RemoveFriendModal = ({ friend, onClose }) => {
             className="button--confirm"
             onClick={() => giftTransactionAction()}
           >
-            XÁC NHẬN
+            ĐỒNG Ý
           </Button>
         </Box>
       </Box>
@@ -140,4 +165,4 @@ const RemoveFriendModal = ({ friend, onClose }) => {
   )
 }
 
-export default RemoveFriendModal
+export default GiftTransactionModal

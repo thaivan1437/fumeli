@@ -1,10 +1,11 @@
 import { axiosGet } from '../../../utils/api'
-import { getSpinGameItem, getImgSpinGame, getSpinTurn } from './action'
+import { getSpinGameItem, getImgSpinGame, getSpinTurn,getSpinTurnValue } from './action'
 
 const initialState = {
   spinGiftItem: [],
   imgSpinGame: [],
   spinturn: [],
+  spinTurnValue: [],
 }
 
 export const spinGiftItem = (state = initialState, action) => {
@@ -24,6 +25,11 @@ export const spinGiftItem = (state = initialState, action) => {
         ...state,
         spinturn: action.payload,
       }
+      case 'GET_SPINTURNVALUE':
+        return {
+          ...state,
+          spinTurnValue: action.payload,
+        }
     default:
       return state
   }
@@ -42,14 +48,16 @@ export const getAllDataThunkAction = () => async (dispatch, getState) => {
       'api/SpinGame/detail/getallclientbyspingameid/2',
       'api/Campaign/getsinglebyid?ID=4',
       `api/UserSpinGame/getallclientbyuserid/${data.userid}`,
+      'api/config/getsinglebyid?key=BuySpinGameTurn'
     ]
 
-    const [spinGiftItem, imgSpinGame, spinturn] = await Promise.all(
+    const [spinGiftItem, imgSpinGame, spinturn,spinTurnValue] = await Promise.all(
       urls.map((url) => axiosGet(url, dispatch))
     )
     await dispatch(getSpinGameItem(spinGiftItem))
     await dispatch(getImgSpinGame(imgSpinGame))
     await dispatch(getSpinTurn(spinturn))
+    await dispatch(getSpinTurnValue(spinTurnValue))
   } catch (error) {
     console.log(error)
   }

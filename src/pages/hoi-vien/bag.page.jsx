@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@mui/material'
 import Bag from './ui/gift';
+import Gift from './ui/giftLuckywheel';
 import { getUserGiftData, getUserGiftHistoryData } from './logic/reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import LayoutUserPage from './ui/avatar'
@@ -35,7 +36,11 @@ export default function UserDetail() {
         <Typography variant="h4" component="h2" color={'#fff'} sx={{padding: '30px 0'}}>
           Túi Đồ
         </Typography>
-        <Bag />
+        <Bag />  
+        <Typography variant="h4" component="h2" color={'#fff'} sx={{padding: '30px 0'}}>
+          Quà Tặng
+        </Typography>
+        <Gift />
       </Container>
     </React.StrictMode>
   )

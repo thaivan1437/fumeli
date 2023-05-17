@@ -34,6 +34,7 @@ const RulesModal = ({ onClose }) => {
         timeout: 500,
       }}
       disableScrollLock={true}
+      className='custom__modal__rules__spingame'
     >
       <Box sx={style}>
         <Image
