@@ -11,7 +11,8 @@ import {
   getAllUser,
   getAllFriendByUserId,
   getFpointByUser,
-  getHistoryUserRedeemGift
+  getHistoryUserRedeemGift,
+  getReceivePointsHistory,
 } from "./action";
 
 const initialState = {
@@ -227,13 +228,29 @@ export const getAllDataThunkAction = () => async (dispatch, getState) => {
 
     await dispatch(getDataUser(userDataResponse));
     await dispatch(getAllUser(allUserResponse));
-    await dispatch(getAllFriendByUserId(userFriendResponse)); 
+    await dispatch(getAllFriendByUserId(userFriendResponse));
     await dispatch(getHistoryUserRedeemGift(historyUserRedeemGift));
 
   } catch (error) {
     console.log(error);
   }
 };
+
+
+export const getReceivePointsHistorysData =
+  (props) => async (dispatch, getState) => {
+    // console.log("props", props);
+    const { userId } = props;
+    const receivePoints = await axiosGet(
+      `UserSendFPoint/getreceivefpointbyuserid/${userId}`,
+      dispatch
+    );
+    if (typeof receivePoints !== "undefined") {
+      dispatch(getReceivePointsHistory(receivePoints));
+    } else {
+      console.log("error");
+    }
+  };
 
 
 export const getFpointByUserData = (props) => async (dispatch, getState) => {
