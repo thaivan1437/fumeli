@@ -157,3 +157,9 @@
 .luckywheel__transactionTurn__title {
   margin: 30px 0 !important;
 }
+
+.custom__modal__rules__spingame{
+  @media (max-width: 768px) {
+    max-width: 375px;
+  }
+}

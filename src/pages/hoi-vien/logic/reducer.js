@@ -11,8 +11,9 @@ import {
   getDataUser,
   getAllUser,
   getAllFriendByUserId,
+  getFpointByUser,
+  getHistoryUserRedeemGift,
 } from "./action";
-import { error } from "jquery";
 
 const initialState = {
   userGift: [],
@@ -27,6 +28,8 @@ const initialState = {
   allUser: [],
   userFriend: [],
   userPoint: [],
+  historyUserRedeemGift: [],
+
 };
 
 export const userDetail = (state = initialState, action) => {
@@ -71,6 +74,7 @@ export const userDetail = (state = initialState, action) => {
         ...state,
         spinsHistory: action.payload,
       };
+
     case "GET_DATAUSER":
       return {
         ...state,
@@ -91,6 +95,11 @@ export const userDetail = (state = initialState, action) => {
         ...state,
         userPoint: action.payload,
       };
+    case "GET_HISTORY_USER_REDEEM_GIFT_SPIN":
+      return {
+        ...state,
+        historyUserRedeemGift: action.payload,
+      };
     default:
       return state;
   }
@@ -100,7 +109,7 @@ export const getUserGiftData = (props) => async (dispatch, getState) => {
   // console.log("props", props);
   const { userId } = props;
   const gift = await axiosGet(
-    `UserGift/getallclientbyuserid/${userId}`,
+    `UserGift/getalladminbyuserid/${userId}`,
     dispatch
   );
   const userDetail = await axiosGet(`appUser/detail/${userId}`, dispatch);
@@ -109,7 +118,7 @@ export const getUserGiftData = (props) => async (dispatch, getState) => {
     dispatch(getUserGift(gift));
     dispatch(getUserDetail(userDetail));
   } else {
-    console.log(error);
+    console.log("cc");
   }
 };
 
@@ -124,7 +133,7 @@ export const getUserGiftHistoryData = (props) => async (dispatch, getState) => {
   if (typeof gift !== "undefined") {
     dispatch(getUserGiftHistory(gift));
   } else {
-    console.log(error);
+    console.log("cc");
   }
 };
 
@@ -151,10 +160,11 @@ export const getFriendsData = (props) => async (dispatch, getState) => {
     `UserFriend/getallclientbyuserid/${userId}`,
     dispatch
   );
+  // console.log(friends);
   if (typeof friends !== "undefined") {
     dispatch(getFriends(friends));
   } else {
-    console.log(error);
+    console.log("cc");
   }
 };
 
@@ -169,7 +179,7 @@ export const getActivitiesHistoryData =
     if (typeof activities !== "undefined") {
       dispatch(getActivitiesHistory(activities));
     } else {
-      console.log(error);
+      console.log("cc");
     }
   };
 
@@ -184,7 +194,7 @@ export const getGivePointsHistorysData =
     if (typeof givePoints !== "undefined") {
       dispatch(getGivePointsHistory(givePoints));
     } else {
-      console.log(error);
+      console.log("cc");
     }
   };
 
@@ -199,7 +209,7 @@ export const getReceivePointsHistorysData =
     if (typeof receivePoints !== "undefined") {
       dispatch(getReceivePointsHistory(receivePoints));
     } else {
-      console.log(error);
+      console.log("error");
     }
   };
 
@@ -207,14 +217,14 @@ export const getSpinsHistorysData = (props) => async (dispatch, getState) => {
   // console.log("props", props);
   const { userId } = props;
   const gift = await axiosGet(
-    `UserGiftSpin/getallclientbyuserid/${userId}`,
+    `UserGiftSpin/getalladminbyuserid/${userId}`,
     dispatch
   );
   // console.log(gift);
   if (typeof gift !== "undefined") {
     dispatch(getSpinsHistory(gift));
   } else {
-    console.log(error);
+    console.log("cc");
   }
 };
 
@@ -230,17 +240,35 @@ if (typeof window !== "undefined") {
 
 export const getAllDataThunkAction = () => async (dispatch, getState) => {
   try {
-    const [userDataResponse, allUserResponse, userFriendResponse] =
+    const [userDataResponse, allUserResponse, userFriendResponse, historyUserRedeemGift] =
       await Promise.all([
         axiosGet(`${USER_DETAIL_API_ENDPOINT}${data.userid}`),
         axiosGet("appUser/getallclientbyuserrole?role=user"),
         axiosGet(`UserFriend/getallclientbyuserid/${data.userid}`),
+        axiosGet(`UserGiftSpin/getallclientbyuserid/${data.userid}`),
       ]);
 
     await dispatch(getDataUser(userDataResponse));
     await dispatch(getAllUser(allUserResponse));
     await dispatch(getAllFriendByUserId(userFriendResponse));
+    await dispatch(getHistoryUserRedeemGift(historyUserRedeemGift));
+
   } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getFpointByUserData = (props) => async (dispatch, getState) => {
+  // console.log("props", props);
+  const { userId } = props;
+  const userPoint = await axiosGet(
+    `UserFPoint/getsinglebyuserid/${userId}`,
+    dispatch
+  );
+  // console.log(gift);
+  if (typeof userPoint !== "undefined") {
+    dispatch(getFpointByUser(userPoint));
+  } else {
     console.log(error);
   }
 };

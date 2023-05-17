@@ -13,9 +13,10 @@ export default function RuleModal({ open, handleClose, message, title, icon,}) {
       onClose={() => handleClose()}
       className='modal__common '
       disableScrollLock={true}
+     
     >
       <Box
-        className='modal__common--box modal__rule w-1098'
+        className='modal__common--box modal__rule w-1098 custom__modal__dailyAttendance'
       >
         <Image
           src="/images/close.svg"

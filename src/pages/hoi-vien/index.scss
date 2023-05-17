@@ -771,6 +771,10 @@
 .table__userDetail {
   padding: 0 3%;
   margin-top: 2% !important;
+  &--confirmTick {
+    font-size: 35px;
+    transform: translate(10px, 10px);
+  }
 }
 .table__userDetail--text__left {
   padding-left: 0 !important;
@@ -870,10 +874,10 @@
     height: 4px;
     position: absolute;
   }
-  
-@media (max-width: 768px) {
-  padding: 8px!important;
-}
+
+  @media (max-width: 768px) {
+    padding: 8px !important;
+  }
 }
 .w-100 {
   width: 100% !important;
@@ -935,8 +939,12 @@
 }
 .layoutAppUser {
   z-index: 0;
-  height: 520px !important;
+  min-height: 555px!important;
+  max-height: 555px!important;
   overflow: hidden;
+  @media (max-width: 768px) {
+    height: 562px !important;
+  }
 }
 .parent {
   position: relative;
@@ -970,6 +978,19 @@
   color: #ffffff;
   text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.5);
   margin: 0 0 0 0 !important;
+}
+
+.layoutAppUser--fpoint {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: -0.01em;
+
+  color: #ffffff;
+
+  text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.5);
 }
 .btn_fill {
   margin-top: 0 !important;
@@ -1039,7 +1060,7 @@
   }
 }
 .miniIcon-svg {
-  margin-top: 140%;
+  margin-top: 199%;
   color: white;
   position: absolute; // top: 50%;
   transform: translateY(-50%);
@@ -1048,7 +1069,7 @@
   padding: 10%;
 
   @media (max-width: 768px) {
-    margin-top: -815%;
+    margin-top: -940%;
   }
 }
 .fz-14 {
@@ -1063,7 +1084,7 @@
   height: auto;
   background: #ffffff;
   border-radius: 5px;
-  bottom: 2%;
+  bottom: 14%;
   right: 3%;
   z-index: 9999;
   width: 15% !important;
@@ -1284,11 +1305,6 @@
   background-repeat: no-repeat;
   padding-bottom: 3%;
 }
-.layoutAppUser {
-  z-index: 0;
-  height: 520px !important;
-  overflow: hidden;
-}
 .parent {
   position: relative;
 }
@@ -1390,7 +1406,7 @@
   }
 }
 .miniIcon-svg {
-  margin-top: 140%;
+  margin-top: 199%;
   color: white;
   position: absolute; // top: 50%;
   transform: translateY(-50%);
@@ -1399,7 +1415,7 @@
   padding: 10%;
 
   @media (max-width: 768px) {
-    margin-top: -815%;
+    margin-top: -940%;
   }
 }
 .fz-14 {
@@ -1414,7 +1430,7 @@
   height: auto;
   background: #ffffff;
   border-radius: 5px;
-  bottom: 2%;
+  bottom: 14%;
   right: 3%;
   z-index: 9999;
   width: 15%;
@@ -1469,4 +1485,18 @@
 .css-1ex1afd-MuiTableCell-root {
   border-bottom: 1px solid rgb(224 224 224 / 39%) !important;
   padding: 22px !important;
+}
+
+.css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+  -webkit-text-fill-color: #fff !important;
+}
+
+.custom__btnfill {
+  margin: 0% 5% 0 0 !important;
+
+  @media (max-width: 768px) {
+    width: 80% !important;
+    margin: 3% 0 1% 0 !important;
+    padding: 8px 0 !important;
+  }
 }

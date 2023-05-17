@@ -67,12 +67,10 @@ export const getAllUser = (res) => ({
 export const getAllFriendByUserId = (res) => ({
   type: "GET_ALLUSERFRIEND",
   payload: res,
-});
+})
 
 
-export const getFpointByUser = (res) => {
-  return {
-    type: "GET_FPOINT_USER",
-    payload: res,
-  };
-};
+export const getFpointByUser = (res) => ({
+  type: "GET_FPOINT_USER",
+  payload: res,
+})
