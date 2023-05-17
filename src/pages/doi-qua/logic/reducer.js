@@ -1,4 +1,4 @@
-import { axiosGet } from '../../../utils/api'
+import { axiosGet } from '@/utils/api'
 import { getGift, getGiftCategory } from './action'
 import {
   OPEN_GIFTTRANSACTION_MODAL,

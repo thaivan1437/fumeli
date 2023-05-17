@@ -162,7 +162,7 @@ export default function InfoUser() {
   const updatePassWord = () => {
     axiosInstance
       .put(
-        '/appUser/updatepassword',
+        'api/appUser/updatepassword',
         {
           Id: user.userid,
           CurrentPassword: currentPass,

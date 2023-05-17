@@ -85,7 +85,7 @@ const SpinGame = () => {
       const images = document.querySelectorAll('.spingame__item')
 
       axiosInstance.put(
-        `/UserSpinGame/update/${user.userid}`,
+        `api/UserSpinGame/update/${user.userid}`,
         {
           Id: user.userid,
         },

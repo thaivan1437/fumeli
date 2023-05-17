@@ -3,21 +3,21 @@ import {
   Modal,
   Backdrop,
   Box,
-  Container,
   Typography,
   Button,
 } from '@mui/material'
 import Image from 'next/image'
-import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
-import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import {axiosInstance} from '@/utils/api'
 import $ from 'jquery'
 import InputField from '@/components/input';
-import {formatNumber} from '@/utils/help'
+import {
+  getFpointByUserData
+} from "../logic/reducer";
+import { useDispatch } from 'react-redux'
 
 const SendFpointModal = ({ friend, onClose }) => {
-  console.log(friend);
+  const dispatch = useDispatch();
   const style = {
     position: 'absolute',
     top: '50%',
@@ -43,7 +43,7 @@ const SendFpointModal = ({ friend, onClose }) => {
   }
 
   const currentTime = new Date().toLocaleTimeString()
-  const sendFpoint = () => {
+  const sendFpoint = async() => {
     axiosInstance
       .post(
         'api/UserSendFPoint/create',
@@ -61,8 +61,8 @@ const SendFpointModal = ({ friend, onClose }) => {
           },
         }
       )
-      .then((response) => {
-        console.log(response.data)
+      .then(async(response) => {
+        await dispatch(getFpointByUserData({ userId: user?.userid })),
         $('.modal__giftTransaction--title').text('THÀNH CÔNG')
         $('.modal__giftTransaction--description')
           .empty()

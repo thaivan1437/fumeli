@@ -12,8 +12,10 @@ import {
   getFpointByUserData
 } from "../logic/reducer";
 import { getConfigUrl } from '@/utils/getConfig';
+import { useRouter } from "next/router";
 
 export default function LayoutUserPage() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [user, setUser] = useState('')
   const { userPoint } = useSelector((state) => state?.userDetail);
@@ -221,7 +223,7 @@ export default function LayoutUserPage() {
             <Button
               variant="contained"
               className="btn_fill ml-6 m-mb-0 w-158px custom__btnfill"
-              onClick={() => goToPage('ui/infoUser')}
+              onClick={() => goToPage('infoUser')}
             >
               <PersonIcon />
               <Typography className="btn_fill--text ">THÔNG TIN</Typography>

@@ -92,11 +92,11 @@ const CheckInDetail = ({
       return;
     }
   
-    if (today > dateItem && !isActive) {
-      setDate(newItem);
-      handleModal('ĐIỂM DANH BÙ', '200 Fpoint = 1 Lần điểm danh bù', <NotificationsActiveOutlinedIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 1);
-      return;
-    }
+    // if (today > dateItem && !isActive) {
+    //   setDate(newItem);
+    //   handleModal('ĐIỂM DANH BÙ', '200 Fpoint = 1 Lần điểm danh bù', <NotificationsActiveOutlinedIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 1);
+    //   return;
+    // }
   
     await dispatch(createMissionComplete({ idCamp: id, createDate: newItem }));
     handleModal('THÀNH CÔNG', 'Bạn đã điểm danh thành công ngày hôm nay!', <CheckCircleOutlinedIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
@@ -142,7 +142,7 @@ const CheckInDetail = ({
         </Typography>
         <AutoSizeImage isResize={false} src="/images/mission/check-in.png" alt="điểm danh hằng ngày" className='image' width={225} height={225}/>
         <AutoSizeImage isResize={false} src="/images/mission/check.png" alt="checked" className='checked' width={172} height={141}/>
-        <Button variant="contained" className={`${today > newItem && !active && user ? 'isShow': 'hide'} upCheckIn`}>Điểm danh bù</Button> 
+        {/* <Button variant="contained" className={`${today > newItem && !active && user ? 'isShow': 'hide'} upCheckIn`}>Điểm danh bù</Button>  */}
       </Box>
     )
   }

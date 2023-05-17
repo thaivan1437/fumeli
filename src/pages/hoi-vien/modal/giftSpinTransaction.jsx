@@ -13,7 +13,7 @@ import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import $ from 'jquery'
 
 const GiftTransactionModal = ({ gift, onClose }) => {
@@ -51,7 +51,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
   const giftTransactionAction = () => {
     axiosInstance
       .put(
-        `UserGiftSpin/update/${gift[0].Id}`,
+        `api/UserGiftSpin/update/${gift[0].Id}`,
         {
           Active: false,
           UpdateDate: currentTime,
