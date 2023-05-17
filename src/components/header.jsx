@@ -112,8 +112,6 @@ const Header = ({ setHeaderHeight }) => {
     router.push("/hoi-vien/bag");
   };
 
-  setHeaderHeight(headerRef?.current?.offsetHeight)
-
   return (
     <React.StrictMode>
       {mobileView ? (
