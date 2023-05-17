@@ -14,6 +14,7 @@ import GiftTransactionModal from '../modal/giftSpinTransaction'
 import ActiveMailModal from '../modal/activeMail';
 import { getSpinsHistorysData } from "../logic/reducer";
 import Pagination from './pagination.jsx'
+import moment from "moment/moment";
 
 const Bag = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,9 @@ const Bag = () => {
   const [showGiftTranscationModal, setGiftModal] = useState(false)
   const [gift, setGift] = useState('')
   const [activeEmail, setActiveEmail] = useState(false)
+
   const { user } = useSelector((state) => state?.authReducer);
+
   useEffect(() => {
     if (!user) {
       return;
@@ -34,7 +37,6 @@ const Bag = () => {
 
   const ITEMS_PER_PAGE = 4
   const { userGift, userGiftHistory, userDetail, spinsHistory } = useSelector((state) => state?.userDetail)
-  // console.log(spinsHistory)
 
   const lstspinsHistory = spinsHistory.filter(history => history.Active === true);
 
@@ -76,7 +78,6 @@ const Bag = () => {
   }
 
   const hotItems = spinsHistory.filter(item => item.Active === false)
-  console.log(spinsHistory);
 
   return (
     <Container>
@@ -168,10 +169,12 @@ const Bag = () => {
                           style={{ color: '#fff' }}
                         >
                           <Typography variant="body1" className="hot_item__title">
-                            {item.Title}
+                            {item.GiftTitle}
                           </Typography>
                           <Typography variant="body2" className="hot_item__value">
-                            {item.FpointValue} Fponit
+                            {moment(item.UpdateDate).format(
+                              "M/D/YYYY h:mm:ss A"
+                            )}
                           </Typography>
                         </div>
                       </li>

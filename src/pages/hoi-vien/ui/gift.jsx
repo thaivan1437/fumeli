@@ -13,6 +13,8 @@ import { useState } from 'react'
 import GiftTransactionModal from '../modal/giftTransaction'
 import { getUserGiftData } from "../logic/reducer";
 import ActiveMailModal from '../modal/activeMail';
+import Pagination from './pagination.jsx'
+import moment from "moment/moment";
 
 const Bag = () => {
   const [open, setOpen] = React.useState(false)
@@ -20,7 +22,7 @@ const Bag = () => {
   const [gift, setGift] = useState('')
   const [activeEmail, setActiveEmail] = useState(false)
   const { user } = useSelector((state) => state?.authReducer);
-  
+
   const ITEMS_PER_PAGE = 4
   const { userGift, userGiftHistory, userDetail } = useSelector((state) => state?.userDetail)
 
@@ -28,7 +30,7 @@ const Bag = () => {
   userGift.filter(gift => gift.Acitce === true);
   userGift.sort((a, b) => b.Id - a.Id)
   const [currentPage, setCurrentPage] = useState(1)
-  const maxPage = Math.ceil(userGift.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(userGift.length / ITEMS_PER_PAGE)
   const displayData = userGift.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
@@ -128,11 +130,11 @@ const Bag = () => {
               variant="contained"
               aria-label="button group"
             >
-              {[...Array(maxPage)].map((_, index) => (
-                <Button key={index} onClick={() => handleClick(index + 1)}>
-                  {index + 1}
-                </Button>
-              ))}
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
             </ButtonGroup>
           </Box>
           <hr style={{ margin: '4% 0 4% 0' }} />
@@ -153,10 +155,12 @@ const Bag = () => {
                           style={{ color: '#fff' }}
                         >
                           <Typography variant="body1" className="hot_item__title">
-                            {item.Title}
+                            {item.GiftTitle}
                           </Typography>
                           <Typography variant="body2" className="hot_item__value">
-                            {item.FpointValue} Fponit
+                            {moment(item.UpdateDate).format(
+                              "M/D/YYYY h:mm:ss A"
+                            )}
                           </Typography>
                         </div>
                       </li>

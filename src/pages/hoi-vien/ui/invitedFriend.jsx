@@ -8,6 +8,7 @@ function createData(id, createUser, createData) {
 
 const InvitedFriend = () => {
     const { activitiesHistory } = useSelector((state) => state?.userDetail);
+
     const invitedFriendDatas = activitiesHistory.filter((item) => item.CampaignId == 1002);
     const rows = invitedFriendDatas
         ?.sort((a, b) => b.Id - a.Id)

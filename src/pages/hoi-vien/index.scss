@@ -939,7 +939,8 @@
 }
 .layoutAppUser {
   z-index: 0;
-  height: 520px!important;
+  min-height: 555px!important;
+  max-height: 555px!important;
   overflow: hidden;
   @media (max-width: 768px) {
     height: 562px !important;
@@ -1059,7 +1060,7 @@
   }
 }
 .miniIcon-svg {
-  margin-top: 140%;
+  margin-top: 199%;
   color: white;
   position: absolute; // top: 50%;
   transform: translateY(-50%);
@@ -1068,7 +1069,7 @@
   padding: 10%;
 
   @media (max-width: 768px) {
-    margin-top: -815%;
+    margin-top: -940%;
   }
 }
 .fz-14 {
@@ -1083,7 +1084,7 @@
   height: auto;
   background: #ffffff;
   border-radius: 5px;
-  bottom: 2%;
+  bottom: 14%;
   right: 3%;
   z-index: 9999;
   width: 15% !important;
@@ -1405,7 +1406,7 @@
   }
 }
 .miniIcon-svg {
-  margin-top: 140%;
+  margin-top: 199%;
   color: white;
   position: absolute; // top: 50%;
   transform: translateY(-50%);
@@ -1414,7 +1415,7 @@
   padding: 10%;
 
   @media (max-width: 768px) {
-    margin-top: -815%;
+    margin-top: -940%;
   }
 }
 .fz-14 {
@@ -1429,7 +1430,7 @@
   height: auto;
   background: #ffffff;
   border-radius: 5px;
-  bottom: 2%;
+  bottom: 14%;
   right: 3%;
   z-index: 9999;
   width: 15%;

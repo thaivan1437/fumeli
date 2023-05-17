@@ -8,19 +8,13 @@ import moment from "moment/moment";
 const ActivityDiary = () => {
   const theme = useTheme();
   const isMatchMD = useMediaQuery(theme.breakpoints.down("md"));
-  const { activitiesHistory } = useSelector((state) => state?.userDetail);
-  const { givePointsHistory } = useSelector((state) => state?.userDetail);
-  const { receivePointsHistory } = useSelector((state) => state?.userDetail);
-  const { friends } = useSelector((state) => state?.userDetail);
-
+  const { activitiesHistory,receivePointsHistory,givePointsHistory,friends } = useSelector((state) => state?.userDetail);
   const newActivityHistory = activitiesHistory?.sort((a, b) => b.Id - a.Id);
   const newGivePointsHistory = givePointsHistory?.sort((a, b) => b.Id - a.Id);
   const newReceivePointsHistory = receivePointsHistory?.sort(
     (a, b) => b.Id - a.Id
   );
-  console.log(newReceivePointsHistory)
   const newFriendsHistory = friends?.sort((a, b) => b.Id - a.Id);
-
   return (
     <div>
       <div className="activity__grid--right--top fs-16">
@@ -151,18 +145,18 @@ const ActivityDiary = () => {
             <p className="right">Thời gian</p>
           </div>
           <div className="point__body scroll__style fs-16">
-            {/* {newReceivePointsHistory.map((activity, idx) => (
+            {newReceivePointsHistory.map((receivePoint, idx) => (
               <div
-                key={activity.Id}
+                key={receivePoint.Id}
                 className={`point__grid ${idx % 2 === 0 ? "gray" : ""}`}
               >
-                <p>{activity.CreateUser}</p>
-                <p className="center">{activity.FpointValue}</p>
+                <p>{receivePoint.CreateUser}</p>
+                <p className="center">{receivePoint.FpointValue}</p>
                 <p className="right">
-                  {moment(activity.CreateDate).format("M/D/YYYY h:mm:ss A")}
+                  {moment(receivePoint.CreateDate).format("M/D/YYYY h:mm:ss A")}
                 </p>
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
       </div>
