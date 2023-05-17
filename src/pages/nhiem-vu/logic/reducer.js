@@ -45,11 +45,11 @@ export const getMissionDataThunkAction = () => async (dispatch, getState) => {
   try {
     dispatch(startLoading());
     const urls = [
-      'Campaign/getallclient',
+      'api/Campaign/getallclient',
     ];
 
     const [ missionRes ] = await Promise.all(
-      urls.map(url => axiosGet(url))
+      urls.map(url => axiosGet(url, dispatch))
     );
 
     await dispatch(getMission(missionRes));
@@ -63,12 +63,12 @@ export const getMissionDataThunkAction = () => async (dispatch, getState) => {
 export const getMissionCategoryDataThunkAction = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'CategoriesCampaign/getallclient',
-      'config',
+      'api/CategoriesCampaign/getallclient',
+      'api/config',
     ];
 
     const [ missionCategories,configMission  ] = await Promise.all(
-      urls.map(url => axiosGet(url))
+      urls.map(url => axiosGet(url, dispatch))
     );
 
     await dispatch(getMissionCategory(missionCategories));
@@ -81,7 +81,9 @@ export const getMissionCategoryDataThunkAction = () => async (dispatch, getState
 export const getMissionComplete = (idCamp) => async (dispatch, getState) => {
   try {
     dispatch(startLoading());
-    const url = 'UserCampaign/getusercampaignbyuserid';
+    // const url = 'api/UserCampaign/getusercampaignbyuserid';
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const url = `api/usercampaign/getallclientbyuserid/${userData?.userid}`
     const { authReducer } = getState();
     const now = new Date();
     const startOfWeek = new Date(now);
@@ -95,8 +97,12 @@ export const getMissionComplete = (idCamp) => async (dispatch, getState) => {
       "FromDate": startOfWeek,
       "ToDate": endOfWeek
     }
-    const response = await axiosPost(url, data, dispatch);
-    response ? await dispatch(getUserMission(response)) : null;
+    const response = await axiosGet(url, dispatch);
+    if (typeof response !== "undefined") {
+      dispatch(getUserMission(response))
+    } else {
+      console.log("error");
+    }
   } catch (error) {
     console.log(error);
   } finally {
@@ -107,7 +113,7 @@ export const getMissionComplete = (idCamp) => async (dispatch, getState) => {
 export const createMissionComplete = ({idCamp, createDate}) => async (dispatch, getState) => {
   try {
     dispatch(startLoading());
-    const url = 'UserCampaign/create';
+    const url = 'api/UserCampaign/create';
     const { authReducer } = getState();
     const userID = authReducer && authReducer.user && authReducer.user.userid;
     const userName = authReducer && authReducer.user && authReducer.user.username;
@@ -120,8 +126,11 @@ export const createMissionComplete = ({idCamp, createDate}) => async (dispatch, 
       "Active": true,
     }
     const response = await axiosPost(url, data, dispatch);
-    console.log('response create',response);
-    response ? await dispatch(getUserMission([response])) : null;
+    if (typeof response !== "undefined") {
+      dispatch(getUserMission(response))
+    } else {
+      console.log("error");
+    }
   } catch (error) {
     console.log(error);
   } finally {

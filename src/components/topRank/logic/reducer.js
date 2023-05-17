@@ -25,7 +25,7 @@ export const topRank = (state = initialState, action) => {
 
 export const getTopRankDataThunkAction = () => async (dispatch, getState) => {
   try {
-    const urls = ["UserFPoint/getallclient"];
+    const urls = ["api/UserFPoint/getallclient"];
 
     const [topRank] = await Promise.all(urls.map((url) => axiosGet(url)));
 
@@ -39,13 +39,13 @@ export const getFpointByUserData = (props) => async (dispatch, getState) => {
   // console.log("props", props);
   const { userId } = props;
   const userPoint = await axiosGet(
-    `UserFPoint/getsinglebyuserid/${userId}`,
+    `api/UserFPoint/getsinglebyuserid/${userId}`,
     dispatch
   );
   // console.log(gift);
   if (typeof userPoint !== "undefined") {
     dispatch(getFpointByUser(userPoint));
   } else {
-    console.log(error);
+    console.log('get fpoint failed');
   }
 };

@@ -18,7 +18,6 @@ export default function PostPage() {
 
 
   const type = configMission.filter(item => item.Type == 'AttendanceDay')
-  console.log('configMission', configMission, type)
 
   useEffect(() => {
     if(mission && mission.length === 0 || configMission && configMission.length === 0) {
@@ -32,10 +31,11 @@ export default function PostPage() {
     }
   }, []);
 
+
   return (
     <React.StrictMode>
       {
-        type && type.length > 0 && type[0]?.Value == pid &&
+        // type && type.length > 0 && type[0]?.Value == pid &&
         <DailyDetail id={pid} />
       }
     </React.StrictMode>

@@ -135,16 +135,18 @@ export default function TopRank() {
             BẢNG XẾP HẠNG
           </Typography>
         </ListItemText>
-        {newTopRank &&
-          newTopRank.map((item, index) => {
-            return renderItem(item, index);
-          })}
+        {
+          newTopRank && newTopRank.map((item, index) =>{
+            if (index > 9) return
+            return renderItem(item, index)
+          })
+        }
+        <div className={`total__fpoint ${isShowRank ? "active" : ""}`}>
+          <p className="fs-20">
+            Điểm tích lũy của bạn: <span>{userPoint?.FpointValue} Fpoint</span>
+          </p>
+        </div>
       </List>
-      <div className={`total__fpoint ${isShowRank ? "active" : ""}`}>
-        <p className="fs-20">
-          Điểm tích lũy của bạn: <span>{userPoint?.FpointValue} Fpoint</span>
-        </p>
-      </div>
     </React.StrictMode>
   );
 }

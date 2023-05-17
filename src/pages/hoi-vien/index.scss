@@ -932,6 +932,7 @@
     letter-spacing: -0.01em;
   }
 }
+
 .bgPage {
   background-image: url(/images/bgFumeli.png); // background-size: cover;
   background-repeat: no-repeat;
@@ -1300,6 +1301,7 @@
     line-height: 28px;
   }
 }
+
 .bgPage {
   background-image: url(/images/bgFumeli.png); // background-size: cover;
   background-repeat: no-repeat;
@@ -1308,9 +1310,11 @@
 .parent {
   position: relative;
 }
+
 .child {
   position: absolute;
-  top: 0;
+  top: unset;
+  bottom: 10px;
   left: 0;
   right: 0;
   margin-left: auto;

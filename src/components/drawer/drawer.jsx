@@ -37,25 +37,25 @@ function ResponsiveDrawer(props) {
       id: 1,
       type: "link",
       title: "Giới thiệu",
-      link: "/gioi-thieu",
+      link: "/gioi-thieu.html",
     },
     {
       id: 2,
       type: "menu",
       title: "Nhiệm vụ",
-      link: "/nhiem-vu",
+      link: "/nhiem-vu.html",
       menuItems: [
         {
           id: 1,
           type: "link",
           title: "Nhiệm vụ hằng ngày",
-          link: "/nhiem-vu",
+          link: "/nhiem-vu.html",
         },
         {
           id: 2,
           type: "link",
           title: "Mời bạn nhận quà",
-          link: "/nhiem-vu/invite",
+          link: "/nhiem-vu/invite.html",
         },
       ],
     },
@@ -63,31 +63,31 @@ function ResponsiveDrawer(props) {
       id: 3,
       type: "link",
       title: "Vòng quay may mắn",
-      link: "/vong-quay-may-man",
+      link: "/vong-quay-may-man.html",
     },
     {
       id: 4,
       type: "link",
       title: "Giải đấu",
-      link: "/giai-dau",
+      link: "/giai-dau.html",
     },
     {
       id: 5,
       type: "link",
       title: "Đổi quà",
-      link: "/doi-qua",
+      link: "/doi-qua.html",
     },
     {
       id: 6,
       type: "link",
       title: "Liên hệ",
-      link: "/lien-he",
+      link: "/lien-he.html",
     },
     {
       id: 7,
       type: "link",
       title: "Hội viên",
-      link: "/hoi-vien",
+      link: "/hoi-vien.html",
     },
   ];
   return (
@@ -105,7 +105,6 @@ function ResponsiveDrawer(props) {
             alt="LogoCenter"
             width={112}
             height={39}
-            isResize={false}
           />
         </Link>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -188,6 +187,7 @@ function ResponsiveDrawer(props) {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
         anchor="top"
+        disableScrollLock={true}
       >
         <div className="drawer__links">
           {pageLinks &&

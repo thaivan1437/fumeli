@@ -15,10 +15,8 @@ const MenuLeft = ({
     anchor= 'left',
     stateM= false,
 }) => {
-    console.log('out', anchor, stateM);
 
     React.useEffect(()=>{
-        console.log('MenuLeft', anchor, stateM);
         // toggleDrawer(anchor, stateM)
         setState({ ...state, [anchor]: stateM });
     },[stateM])
@@ -38,7 +36,6 @@ const MenuLeft = ({
     ) {
       return;
     }
-    console.log('in', {...state, [anchor]: open})
     setState({ ...state, [anchor]: open });
   };
 

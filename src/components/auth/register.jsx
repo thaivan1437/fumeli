@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal, Box, TextField, Typography, FormControlLabel, Checkbox } from "@mui/material";
 import InputField from '@/components/input';
 import {
@@ -13,7 +13,7 @@ import Image from 'next/image'
 const SignUpModal = () => {
   const dispatch = useDispatch();
   const [rememberMe, setRememberMe] = useState(false);
-  const { registerModalOpen } = useSelector((state) => state.authReducer);
+  const { registerModalOpen, signUpData } = useSelector((state) => state.authReducer);
   const [statusCode, setStatusCode] = useState({ isShow: false, status: '', msg: '' });
   const [formData, setFormData] = useState({
     FullName: '',
@@ -26,12 +26,18 @@ const SignUpModal = () => {
   });
   const [isLoading, setIsLoading] = useState(false)
 
-  console.log('authReducer', formData)
+  useEffect(() => {
+    if (signUpData && signUpData.InviteCode) {
+      setFormData({...formData, ['InviteCode']: signUpData.InviteCode });
+    }
+  }, [signUpData])
+
   const handleClose = () => {
     dispatch(closeRegisterModal());
   };
 
   const handleRememberMe = (event) => {
+    setStatusCode({ isShow: false, status: '', msg: '' })
     setRememberMe(event.target.checked);
   };
 
@@ -43,6 +49,10 @@ const SignUpModal = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    if (!rememberMe) {
+      setStatusCode({ isShow: true, status: 'error', msg: 'Bạn cần đồng ý với các điều lệ trước!' })
+      return
+    }
     setIsLoading(true);
     const signUp = formData;
     const data = {
@@ -54,11 +64,20 @@ const SignUpModal = () => {
       InviteCode: signUp.InviteCode,
     };
 
-    await axiosPost('appUser/add', data)
+    await axiosPost('api/appUser/add', data)
       .then((response) => {
         console.log('Submit response', response)
-        if (response.status === 200) {
-          setStatusCode({ isShow: true, status: 'success', msg: 'Đăng ký thành công!' })
+        setFormData({
+          FullName: '',
+          UserName: '',
+          Email: '',
+          PhoneNumber: '',
+          Password: '',
+          InviteCode: '',
+          ConfirmPassword: ''
+        })
+        if (response && response.UserName) {
+          setStatusCode({ isShow: true, status: 'success', msg: 'Đăng ký thành công! Một email đã được gửi về cho bạn.' })
         } else {
           setStatusCode({ isShow: true, status: 'error', msg: response?.data?.Message })
         }

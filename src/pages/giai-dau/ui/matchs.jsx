@@ -8,7 +8,6 @@ import YoutubeModal from '@/components/modal/video';
 const Tournaments = () => {
 	const { match, matchCategory } = useSelector((state) => state?.match);
 	useEffect(() => {
-		// console.log('count loop');
 		if(matchs?.length == 0 && match?.length) {
 			setMatchs(match);
 		}
@@ -62,7 +61,6 @@ const Tournaments = () => {
 				<Box className="tournament__box">
 					{
 						matchs && matchs.map((item, _) => {
-							console.log(item)
 							return (
 								<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item" p={2} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}  onClick={() => openVideoModal(item.VideoPath)}>
 									<Box className="tournament__item--images" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>

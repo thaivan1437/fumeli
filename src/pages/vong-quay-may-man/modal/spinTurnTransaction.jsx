@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Modal, Backdrop, Box, Typography, Button } from '@mui/material'
 import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import Toast from '@/components/toast'
 import { getAllDataThunkAction } from '../logic/reducer'
@@ -46,8 +46,9 @@ const SpinTurnTransactionModal = ({ onClose }) => {
   }
 
   const spinTurnTransaction = () => {
-    axiosInstance.post(
-        'UserSpinGame/create',
+    axiosInstance
+      .post(
+        'api/UserSpinGame/create',
         {
           Active: true,
           CreateDate: currentTime,

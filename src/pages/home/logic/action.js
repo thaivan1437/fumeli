@@ -36,3 +36,9 @@ export const getSlider = (res) => {
     payload: res,
   };
 };
+export const getConfigMission = (res) => {
+  return {
+    type: 'GET_CONFIG_MISSION',
+    payload: res,
+  };
+};

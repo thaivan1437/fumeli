@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="Rewrite1">
+          <match url="^tham-gia/daily/([^/]+)/([^/]+)/?" />
+          <action type="Rewrite" url="/nhiem-vu/{R:2}" />
+        </rule>
+        <rule name="Rewrite2">
+          <match url="^nhiem-vu/([^/]+)/?" />
+          <action type="Rewrite" url="/nhiem-vu/{R:1}" />
+        </rule>
+        <rule name="Rewrite3">
+          <match url="^giai-dau/chi-tiet-giai-dau/([^/]+)/?" />
+          <action type="Rewrite" url="/giai-dau/chi-tiet-giai-dau/{R:1}" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+</configuration>

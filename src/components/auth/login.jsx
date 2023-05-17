@@ -11,7 +11,7 @@ import {
 import axios from 'axios';
 import Toast from '@/components/toast';
 import Image from 'next/image'
-import {api_host} from '@/utils/api';
+import { getConfigUrl } from '@/utils/getConfig';
 
 const LoginModal = () => {
   const [rememberMe, setRememberMe] = useState(false);
@@ -70,11 +70,12 @@ const LoginModal = () => {
 
   const handleLogin = async() => {
     event.preventDefault();
+    const apiHost = await getConfigUrl();
     const params = new URLSearchParams();
     params.append('Username', formData.Username);
     params.append('Password', formData.Password);
     params.append('grant_type', 'password');
-    axios.post(`${api_host}oauth/token`, params)
+    axios.post(`${apiHost}api/oauth/token`, params)
       .then(response => {
         if(response.data.roles=='["user"]'){
         setStatusCode({ isShow: true, status: 'success' })
@@ -83,7 +84,7 @@ const LoginModal = () => {
         setTimeout(() => {
           // wait toast end
           handleClose();
-          location.reload();
+          window.location = "/";
         }, 2500)}
         else{
           setStatusCode({ isShow: true, status: 'error' })

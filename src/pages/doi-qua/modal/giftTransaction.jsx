@@ -11,7 +11,7 @@ import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import $ from 'jquery'
 
 const GiftTransactionModal = ({ gift, onClose }) => {
@@ -49,7 +49,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
   const giftTransactionAction = () => {
     axiosInstance
       .post(
-        'UserGift/create',
+        'api/UserGiftSpin/create',
         {
           Active: true,
           CreateDate: currentTime,
@@ -64,7 +64,6 @@ const GiftTransactionModal = ({ gift, onClose }) => {
         }
       )
       .then((response) => {
-        console.log(response.data)
         $('.modal__giftTransaction--title').text('THÀNH CÔNG')
         $('.modal__giftTransaction--description')
           .empty()

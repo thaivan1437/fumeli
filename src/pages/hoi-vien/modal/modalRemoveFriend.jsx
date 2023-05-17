@@ -11,7 +11,7 @@ import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import { getFriendsData } from '../logic/reducer'
 import { useDispatch } from 'react-redux'
 import $ from 'jquery'
@@ -36,7 +36,6 @@ const RemoveFriendModal = ({ friend, onClose }) => {
   let user = localStorage.getItem("user");
   user = JSON.parse(user);
 
-
   const handleClose = () => {
     setOpen(false)
     onClose()
@@ -47,7 +46,7 @@ const RemoveFriendModal = ({ friend, onClose }) => {
   const giftTransactionAction = () => {
     axiosInstance
       .put(
-        `UserFriend/update/${friend.Id}`,
+        `api/UserFriend/update/${friend.FriendId}`,
         {
           UpdateUser: user.username,
           UpdateDate: currentTime,

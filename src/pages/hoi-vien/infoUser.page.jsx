@@ -1,16 +1,67 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Box, Typography, Container, Button } from "@mui/material";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
+import React, { useEffect, Fragment } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Container } from "@mui/material";
+import { getUserGiftData } from "./logic/reducer";
 import LayoutUserPage from "./ui/avatar";
 import Link from "next/link";
+import moment from "moment/moment";
 
 export default function InfoUser() {
-  const userDetail = useSelector((state) => state.userDetail);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state?.authReducer);
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    async function fetchAllData() {
+      await Promise.all([dispatch(getUserGiftData({ userId: user?.userid }))]);
+    }
+    void fetchAllData();
+  }, [user]);
+  
+  const { userDetail } = useSelector((state) => state?.userDetail);
+  const userDetailInfo = [
+    {
+      id: 1,
+      title: "Họ tên",
+      value: userDetail?.UserName,
+    },
+    {
+      id: 2,
+      title: "Ngày sinh",
+      value: moment(userDetail?.DateOfBirth).format("DD/MM/YYYY"),
+    },
+    {
+      id: 3,
+      title: "Giới tính",
+      value: userDetail?.Gender,
+    },
+    {
+      id: 4,
+      title: "Số điện thoại",
+      value: userDetail?.PhoneNumber,
+    },
+    {
+      id: 5,
+      title: "Email",
+      value: userDetail?.Email,
+    },
+    {
+      id: 6,
+      title: "Tỉnh thành",
+      value: userDetail?.City,
+    },
+    {
+      id: 7,
+      title: "Tham gia",
+      value: moment(userDetail?.Created).format("DD/MM/YYYY"),
+    },
+    {
+      id: 8,
+      title: "Giới thiệu",
+      value: userDetail?.Introduction,
+    },
+  ];
 
   return (
     <>
@@ -21,130 +72,33 @@ export default function InfoUser() {
           <div className="userDetail__description">
             <p className="fs-20">GIỚI THIỆU</p>
             <small className="fs-16">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-              obcaecati odit magnam rerum nobis mollitia iure in amet, eligendi
-              placeat, assumenda facere voluptas, repellat reiciendis eius iste.
-              Facilis, eligendi facere.
-              {/* {userDetail.userData.Introduction}*/}
+              {userDetail?.Introduction}
             </small>
           </div>
 
           <div className="info__box">
             <p className="fs-20">THÔNG TIN CƠ BẢN</p>
             <div className="info__box--container fs-16">
-              <div className="info__box--container--left">
-                <p>Họ tên</p>
-              </div>
-              <div className="info__box--container--right">
-                <p>Vũ Thu Huyền</p>
-              </div>
-              <div className="info__box--container--left">
-                <p>Họ tên</p>
-              </div>
-              <div className="info__box--container--right">
-                <p>Vũ Thu Huyền</p>
-              </div>
+              {userDetailInfo &&
+                userDetailInfo.map((info) => (
+                  <Fragment key={info.id}>
+                    <div className="info__box--container--left">
+                      <p>{info.title}</p>
+                    </div>
+                    <div className="info__box--container--right">
+                      <p>{info.value}</p>
+                    </div>
+                  </Fragment>
+                ))}
             </div>
           </div>
-
-          <Box className="info__box">
-            <TableContainer className="table__userDetail">
-              <Table aria-label="simple table">
-                <TableBody className="table__userDetail--body">
-                  <TableRow
-                    sx={{
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                  >
-                    <TableCell className="table__userDetail--text__left">
-                      Họ tên
-                    </TableCell>
-                    <TableCell className="table__userDetail--text__right">
-                      {userDetail.userData.UserName}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow
-                    sx={{
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                  >
-                    <TableCell className="table__userDetail--text__left">
-                      Ngày sinh
-                    </TableCell>
-                    <TableCell className="table__userDetail--text__right">
-                      {userDetail.userData.DateOfBirth}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow
-                    sx={{
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                  >
-                    <TableCell className="table__userDetail--text__left">
-                      Giới tính
-                    </TableCell>
-                    <TableCell className="table__userDetail--text__right">
-                      {userDetail.userData.Gender}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow
-                    sx={{
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                  >
-                    <TableCell className="table__userDetail--text__left">
-                      Số điện thoại
-                    </TableCell>
-                    <TableCell className="table__userDetail--text__right">
-                      {userDetail.userData.PhoneNumber}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow
-                    sx={{
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                  >
-                    <TableCell className="table__userDetail--text__left">
-                      Email
-                    </TableCell>
-                    <TableCell className="table__userDetail--text__right">
-                      {userDetail.userData.Email}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow
-                    sx={{
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                  >
-                    <TableCell className="table__userDetail--text__left">
-                      Tỉnh thành
-                    </TableCell>
-                    <TableCell className="table__userDetail--text__right">
-                      {userDetail.userData.City}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow
-                    sx={{
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                  >
-                    <TableCell className="table__userDetail--text__left">
-                      Tham gia
-                    </TableCell>
-                    <TableCell className="table__userDetail--text__right">
-                      {userDetail.userData.Created}
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Box>
+          <Link
+            href="/hoi-vien/ui/update-user-detail"
+            className="userDetail__page--btn"
+          >
+            <div className="fs-20">THAY ĐỔI THÔNG TIN CÁ NHÂN</div>
+          </Link>
         </div>
-        <Link href="/hoi-vien/ui/update-user-detail">
-          <Button variant="contained" className="btn_outline w-100 mt-2 p-7px">
-            THAY ĐỔI THÔNG TIN CÁ NHÂN
-          </Button>
-        </Link>
       </Container>
     </>
   );

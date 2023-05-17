@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axiosInstance from "../../utils/api";
+import React, { useState } from 'react'
+import {axiosInstance} from '@/utils/api'
 import {
   Box,
   Button,
@@ -26,11 +26,10 @@ const ContactPage = () => {
   const [open, setOpen] = useState(false);
 
   const handleSubmit = (event) => {
-    console.log(1);
-    event.preventDefault();
-    const currentTime = new Date().toLocaleTimeString();
+    event.preventDefault()
+    const currentTime = new Date().toLocaleTimeString()
     axiosInstance
-      .post("Contact/create", {
+      .post('api/Contact/create', {
         FullName: fullName,
         Email: email,
         PhoneNumber: phoneNumber,

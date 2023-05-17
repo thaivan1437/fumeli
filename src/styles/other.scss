@@ -125,22 +125,22 @@
   width: 0;
   height: 600px;
   overflow-y: scroll;
-  background-color: #000;
+  background-color: #000 !important;
   position: relative;
   position: fixed !important;
   z-index: 9999;
   right: -580px;
   top: 20%;
-  // top: calc(30% + 65px);
+  padding-bottom: 0;
   -webkit-transition: width 0.5s ease-in-out;
   transition: width 0.5s ease-in-out;
   .topRank__item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #252525;
+    background-color: #000;
     &:nth-child(2n + 1) {
-      background-color: #000;
+      background-color: #252525;
     }
     &:last-child {
       margin-bottom: 98px !important;
@@ -178,7 +178,7 @@
 }
 
 .total__fpoint {
-  position: fixed;
+  position: sticky;
   background-color: #252525;
   bottom: 0;
   opacity: 0;
@@ -194,10 +194,10 @@
   -webkit-transition: width 0.5s ease-in-out;
   transition: width 0.5s ease-in-out;
   &.active {
-    width: calc(480px - 2%);
-    right: 2%;
+    width: 100%;
+    right: 0;
     opacity: 1;
-    margin-bottom: 4px;
+    margin-bottom: 0;
   }
   p {
     span {
@@ -316,10 +316,11 @@
 }
 .scroll-top {
   position: fixed;
-  bottom: 150px;
+  bottom: 50px;
   right: 30px;
   z-index: 99999;
   cursor: pointer;
+  max-width: 72px;
   @media (max-width: 768px) {
     right: 0px;
     max-width: 65px;

@@ -1,9 +1,19 @@
 import axios from 'axios'
-export const api_host = process.env.apiHost;
-import { loginAction } from '@/components/auth/logic/action'
+import { loginAction, openLoginModal } from '@/components/auth/logic/action'
+import { getConfigUrl } from './getConfig';
+
+async function myFunction() {
+  const configData = await getConfigUrl();
+  if (configData) {
+    return configData
+  } else {
+    return { apiHost: process.env.apiHost }
+  }
+}
 
 export const axiosGet = async (url, dispatch) => {
   let user;
+  const api_host = await myFunction();
   if (typeof localStorage !== 'undefined') {
     user = JSON.parse(localStorage.getItem("user"));
   }
@@ -26,13 +36,14 @@ export const axiosGet = async (url, dispatch) => {
     if (error?.response?.status == 401) {
       // need show modal token expired
       await dispatch(loginAction());
+      dispatch(openLoginModal());
       localStorage.setItem("user", JSON.stringify(''));
     }
   }
 };
 
 export const axiosPost = async (url, data, dispatch) => {
-  
+  const api_host = await myFunction();
   let user;
   if (typeof localStorage !== 'undefined') {
     user = JSON.parse(localStorage.getItem("user"));
@@ -56,6 +67,7 @@ export const axiosPost = async (url, data, dispatch) => {
     if (error?.response?.status == 401) {
       // need show modal token expired
       await dispatch(loginAction());
+      dispatch(openLoginModal());
       localStorage.setItem("user", JSON.stringify(''));
     }
     return error?.response;
@@ -95,11 +107,18 @@ export const axiosPut = async (url, data, dispatch) => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: api_host,
+  baseURL: '',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-export default axiosInstance
+async function setBaseURL() {
+  const baseURL = await myFunction();
+  axiosInstance.defaults.baseURL = baseURL;
+}
+
+setBaseURL();
+export { axiosInstance };
+

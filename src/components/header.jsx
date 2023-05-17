@@ -105,12 +105,17 @@ const Header = ({ setHeaderHeight }) => {
   };
   const openPageUser = () => {
     handleClose();
-    router.push("/hoi-vien");
-  };
+    router.push('/hoi-vien.html')
+  }
   const openbag = () => {
     handleClose();
-    router.push("/hoi-vien/bag");
-  };
+    router.push('/hoi-vien/bag.html')
+  }
+  const handleLogout = () => {
+    localStorage.setItem("user", JSON.stringify(''));
+    handleClose();
+    window.location = "/";
+  }
 
   return (
     <React.StrictMode>
@@ -149,10 +154,8 @@ const Header = ({ setHeaderHeight }) => {
                 // show user when logged
                 userName ? (
                   <>
-                    <span className="header__text" onClick={handleClick}>
-                      {userName}
-                    </span>
-
+                    <span className="header__text fs-20 fw-b text-color" onClick={handleClick}>{userName} <ExpandMoreIcon className='text-color' sx={{ marginLeft: '5px' }} /></span>
+                    
                     <Menu
                       anchorEl={anchorEl}
                       id="account-menu"
@@ -188,14 +191,15 @@ const Header = ({ setHeaderHeight }) => {
                       transformOrigin={{ horizontal: "right", vertical: "top" }}
                       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                       className="menu--header"
+                      disableScrollLock={true}
                     >
-                      <MenuItem className="menu--item" onClick={openPageUser}>
+                      <MenuItem className="menu--item" onClick={() => openPageUser()}>
                         Trang cá nhân
                       </MenuItem>
-                      <MenuItem className="menu--item" onClick={openbag}>
+                      <MenuItem className="menu--item" onClick={() => openbag()}>
                         Túi đồ
                       </MenuItem>
-                      <MenuItem className="menu--item" onClick={handleClose}>
+                      <MenuItem className="menu--item" onClick={() => handleLogout()}>
                         Đăng xuất
                       </MenuItem>
                     </Menu>
@@ -249,22 +253,22 @@ const Header = ({ setHeaderHeight }) => {
                 color="inherit"
                 className={`tabmenu ${isActive("/gioi-thieu")}`}
               >
-                <Link href="/gioi-thieu">Giới thiệu</Link>
+                <Link href="/gioi-thieu.html">Giới thiệu</Link>
               </Button>
               <Button
                 mr={2}
                 color="inherit"
                 className={`submenu ${isActive("/nhiem-vu")}`}
               >
-                <Link href="/nhiem-vu" className="submenu__parent">
+                <Link href="/nhiem-vu.html" className="submenu__parent">
                   Nhiệm vụ <ExpandMoreIcon sx={{ marginLeft: "5px" }} />
                 </Link>
                 <ul className="submenu__list">
                   <li>
-                    <Link href="/nhiem-vu">Nhiệm vụ hằng ngày</Link>
+                    <Link href="/nhiem-vu.html">Nhiệm vụ hằng ngày</Link>
                   </li>
                   <li>
-                    <Link href="/nhiem-vu/invite">Mời bạn nhận quà</Link>
+                    <Link href="/tham-gia/other/moi-ban/1019.html">Mời bạn nhận quà</Link>
                   </li>
                 </ul>
               </Button>
@@ -272,7 +276,7 @@ const Header = ({ setHeaderHeight }) => {
                 color="inherit"
                 className={`tabmenu ${isActive("/vong-quay-may-man")}`}
               >
-                <Link href="/vong-quay-may-man">Vòng quay may mắn</Link>
+                <Link href="/tham-gia/daily/vong-quay-may-man/4.html">Vòng quay may mắn</Link>
               </Button>
             </Box>
             <Box sx={{ flexGrow: 2 }} />
@@ -285,27 +289,27 @@ const Header = ({ setHeaderHeight }) => {
                 color="inherit"
                 className={`tabmenu ${isActive("/giai-dau")}`}
               >
-                <Link href="/giai-dau">Giải đấu</Link>
+                <Link href="/giai-dau.html">Giải đấu</Link>
               </Button>
               <Button
                 mr={2}
                 color="inherit"
                 className={`tabmenu ${isActive("/doi-qua")}`}
               >
-                <Link href="/doi-qua">Đổi quà</Link>
+                <Link href="/doi-qua.html">Đổi quà</Link>
               </Button>
               <Button
                 mr={2}
                 color="inherit"
                 className={`tabmenu ${isActive("/lien-he")}`}
               >
-                <Link href="/lien-he">Liên hệ</Link>
+                <Link href="/lien-he.html">Liên hệ</Link>
               </Button>
               <Button
                 color="inherit"
                 className={`tabmenu ${isActive("/hoi-vien")}`}
               >
-                <Link href="/hoi-vien">Hội viên</Link>
+                <Link href="/hoi-vien.html">Hội viên</Link>
               </Button>
             </Box>
           </Toolbar>
