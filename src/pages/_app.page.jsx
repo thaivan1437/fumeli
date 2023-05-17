@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import Loader from "@/components/loading";
 import "@/styles/globals.css";
 import "@/styles/styles.scss";
+import TopRank from '@/components/topRank/topRank';
 
 export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -50,9 +51,10 @@ export default function App({ Component, pageProps }) {
         className="main"
         style={{
           background: "#19181c !important",
-          marginTop: `${headerHeight ? headerHeight + 5 :85}px`,
+          marginTop: `${headerHeight ? headerHeight + 5 : 85}px`,
         }}
       >
+        <TopRank></TopRank>
         {isLoading ? <Loader /> : <Component {...pageProps} />}
       </div>
       <div onClick={scrollToTop} className="scroll-top">

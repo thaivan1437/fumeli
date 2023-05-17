@@ -12,7 +12,6 @@ import {
   getAllUser,
   getAllFriendByUserId,
   getFpointByUser,
-  getHistoryUserRedeemGift,
 } from "./action";
 
 const initialState = {
@@ -250,7 +249,6 @@ export const getAllDataThunkAction = () => async (dispatch, getState) => {
     await dispatch(getDataUser(userDataResponse));
     await dispatch(getAllUser(allUserResponse));
     await dispatch(getAllFriendByUserId(userFriendResponse));
-    await dispatch(getHistoryUserRedeemGift(historyUserRedeemGift));
 
   } catch (error) {
     console.log(error);

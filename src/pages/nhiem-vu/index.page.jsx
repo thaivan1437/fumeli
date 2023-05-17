@@ -4,7 +4,6 @@ import { getMissionCategoryDataThunkAction, getMissionDataThunkAction } from './
 import { useDispatch } from 'react-redux';
 import Daily from './ui/daily';
 import Video from './ui/video';
-import TopRank from '@/components/topRank/topRank';
 
 export default function Mission() {
   const dispatch = useDispatch();
@@ -20,9 +19,6 @@ export default function Mission() {
 
   return (
     <React.StrictMode>
-      <Container>
-        <TopRank></TopRank>
-      </Container>
       <Daily></Daily>
       <Video></Video>
     </React.StrictMode>
