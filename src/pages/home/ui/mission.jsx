@@ -6,15 +6,28 @@ import AutoSizeImage from '@/components/image';
 import Link from 'next/link'
 
 const Mission  = () => {
-	const { mission } = useSelector((state) => state?.home);
-	const firstTwoItems = mission.slice(0, 2);
-  const filteredItems = mission.slice(2).filter((item) => item.IsHot);
+	const missionImage = '/images/mission-default.png';
+	const { mission, configMission } = useSelector((state) => state?.home);
+	const firstTwoItems = mission.slice(0, 2); // need sort by time
+  const filteredItems = mission.filter((item) => item.IsHot);
+
+	const idInviteConfig = configMission.find(item =>  item.Key == "InviteFriend")
+	const idLuckyConfig = configMission.find(item =>  item.Key == "LuckyWheelCampaign")
 
 	const itemList = (item, isOrder = 0)=> {
+		let url = ''
+		if (parseInt(idInviteConfig?.Value) == item.Id) {
+			// url = 'nhiem-vu/invite.html'
+			url = `tham-gia/other/${item.TitleLink}/${item.Id}.html`
+		} else if (parseInt(idLuckyConfig?.Value) == item.Id) {
+			url = `tham-gia/daily/${item.TitleLink}/${item.Id}.html`
+		} else {
+			url = `tham-gia/daily/${item.TitleLink}/${item.Id}.html`
+		}
 		return <Grid key={item.CreateDate} item xs={12} sm={4} md={4} className={isOrder ? `order${isOrder}` : ''}>
-			<Link href={`nhiem-vu/${item.Id}`}>
+			<Link href={url}>
 				<AutoSizeImage
-					src={item.ImagePath}
+					src={item.ImagePath ? item.ImagePath : missionImage}
 					alt={item.Title}
 				/>
 			</Link>
@@ -33,7 +46,7 @@ const Mission  = () => {
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum eleifend pellentesque. Fusce sed nisl lectus. Vestibulum suscipit mollis fermentum. 
 						</Typography>
 						<div className="wrap__btn--more css__btn">
-							<Link href="/nhiem-vu" color='white'>
+							<Link href="/nhiem-vu.html" color='white'>
 								<Button variant="contained" className="w206 fw-b">
 									Xem thêm
 								</Button>
@@ -66,7 +79,7 @@ const Mission  = () => {
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum eleifend pellentesque. Fusce sed nisl lectus. Vestibulum suscipit mollis fermentum. 
 						</Typography>
 						<Box className="wrap__btn--more css__btn text-right">
-							<Link href="/nhiem-vu?noibat=true" color='white'>
+							<Link href="/nhiem-vu.html" color='white'>
 								<Button variant="contained" className="w206">
 									Xem thêm
 								</Button>

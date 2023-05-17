@@ -64,3 +64,81 @@ label.Mui-focused {
 .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
   background-color: #be1e1e !important;
 }
+
+.contact__info {
+  &--description {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+  }
+}
+
+.contact__modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  background-color: #fff;
+  padding: 16px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & > svg {
+    width: 80px;
+    height: 80px;
+    color: #ff2423;
+    border: 4px solid #ff2423;
+    border-radius: 100%;
+  }
+
+  &--title {
+    color: #ff2423;
+    font-weight: bold;
+    letter-spacing: -0.01em;
+    margin: 30px 0;
+  }
+  &--description {
+    text-align: center;
+    line-height: 19px;
+    letter-spacing: -0.01em;
+    color: #000000;
+    margin-bottom: 30px;
+  }
+  &--btn {
+    font-weight: 600;
+    color: #fff;
+    background-color: #ff2423;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 29px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+    svg {
+      background-color: #fff;
+      border-radius: 100%;
+      color: #ff2423;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 2px;
+      margin-right: 8px;
+    }
+  }
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}

@@ -1,5 +1,5 @@
-.check__in{
-  &--week  {
+.check__in {
+  &--week {
     display: flex;
   }
   &--first {
@@ -24,8 +24,8 @@
     margin-right: 10px;
     position: relative;
     cursor: pointer;
-    &:hover{
-      background: linear-gradient(360deg, #FF2423 0%, rgba(0, 0, 0, 0) 99.2%);
+    &:hover {
+      background: linear-gradient(360deg, #ff2423 0%, rgba(0, 0, 0, 0) 99.2%);
     }
     img {
       border-radius: 5px;
@@ -48,7 +48,7 @@
         border-radius: 0;
       }
       img.image {
-        filter: grayscale(1)
+        filter: grayscale(1);
       }
     }
     .upCheckIn {
@@ -73,8 +73,8 @@
   &--monthItem {
     position: relative;
     img {
-      border-radius:50%;
-      border: solid 2px #FF2423;
+      border-radius: 50%;
+      border: solid 2px #ff2423;
       margin: auto;
     }
     .checked {
@@ -93,13 +93,13 @@
         border-radius: 0;
       }
       img.image {
-        filter: grayscale(1)
+        filter: grayscale(1);
       }
     }
   }
 
   @media (max-width: 768px) {
-    &--week  {
+    &--week {
       flex-wrap: wrap;
       justify-content: space-between;
     }
@@ -114,7 +114,7 @@
       margin-right: 5px;
       margin-bottom: 5px;
       &:nth-child(2n) {
-        margin-right:0;
+        margin-right: 0;
       }
     }
     &--month {
@@ -122,6 +122,7 @@
     }
     &--monthItem {
       width: 33%;
+      padding: 2% !important;
       &.active {
         .checked {
           max-width: 55px;
@@ -156,7 +157,7 @@
     border-radius: 5px;
     text-align: center;
     &::placeholder {
-      color: #000
+      color: #000;
     }
   }
   &--btn {
@@ -221,7 +222,6 @@
       }
     }
   }
-
 }
 .bd-t {
   border-top: 1px solid #707070 !important;
@@ -248,4 +248,37 @@
   &:hover {
     background: #ff2423 !important;
   }
+}
+
+.mb-28 {
+  @media (max-width: 768px) {
+    font-size: 28px !important;
+  }
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+
+.invite__page {
+  @media (max-width: 768px) {
+    &--title {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 38px;
+      /* identical to box height */
+
+      text-align: center;
+      letter-spacing: -0.01em;
+
+      color: #ffffff;
+    }
+  }
+}
+.w-1098{
+  width: 1098px!important;
+}
+.custom__modal__dailyAttendance{
+  text-align: start!important;
 }

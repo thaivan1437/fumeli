@@ -3,20 +3,21 @@ import {
   Modal,
   Backdrop,
   Box,
-  Container,
   Typography,
   Button,
 } from '@mui/material'
 import Image from 'next/image'
-import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
-import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import $ from 'jquery'
 import InputField from '@/components/input';
-import {formatNumber} from '@/utils/help'
+import {
+  getFpointByUserData
+} from "../logic/reducer";
+import { useDispatch } from 'react-redux'
 
 const SendFpointModal = ({ friend, onClose }) => {
+  const dispatch = useDispatch();
   const style = {
     position: 'absolute',
     top: '50%',
@@ -42,16 +43,16 @@ const SendFpointModal = ({ friend, onClose }) => {
   }
 
   const currentTime = new Date().toLocaleTimeString()
-  const sendFpoint = () => {
+  const sendFpoint = async() => {
     axiosInstance
       .post(
-        'UserSendFPoint/create',
+        'api/UserSendFPoint/create',
         {
           Active: true,
           CreateDate: currentTime,
-          CreateUser: user.username,
-          UserId: user.userid,
-          UserReceiveId: friend.UserId,
+          CreateUser: user?.username,
+          UserId: user?.userid,
+          UserReceiveId: friend?.FriendId,
           FpointValue: fpoint
         },
         {
@@ -60,8 +61,8 @@ const SendFpointModal = ({ friend, onClose }) => {
           },
         }
       )
-      .then((response) => {
-        console.log(response.data)
+      .then(async(response) => {
+        await dispatch(getFpointByUserData({ userId: user?.userid })),
         $('.modal__giftTransaction--title').text('THÀNH CÔNG')
         $('.modal__giftTransaction--description')
           .empty()
@@ -87,32 +88,36 @@ const SendFpointModal = ({ friend, onClose }) => {
         timeout: 500,
       }}
       disableScrollLock={true}
+      py={4}
+      my={4}
     >
       <Box className='modal__gift' sx={style}>
         <Image
           src="/images/close.svg"
           alt="btn close"
-          onClick={() => handleClose()}
+          onClick={() => handleClose()} 
           width={27}
           height={27}
           style={{
             top: '-13px',
             right: '-30px',
           }}
-          className="modal__youtube--btn-close"
+          className="modal__youtube--btn-close btn__close"
         />
-        <NotificationsActiveOutlinedIcon
-          sx={{
-            width: '86px',
-            height: '82px',
-            color: '#FF2423',
-          }}
+
+        <Image
+          src="/images/gift1.svg"
+          alt="gift icon"
+          width={80}
+          height={86}
+          className="modal__youtube--icon text-color"
         />
-        <Typography mb={3} className="modal__giftTransaction--title">
-          THÔNG BÁO
+
+        <Typography mb={3} className="modal__giftTransaction--title fs-40 fw-b">
+          TẶNG ĐIỂM
         </Typography>
 
-        <Typography mb={3} className="modal__giftTransaction--description"></Typography>
+        <Typography mb={3} className="modal__giftTransaction--description text-color"></Typography>
 
         <Box mb={4}>
           <InputField
@@ -140,7 +145,7 @@ const SendFpointModal = ({ friend, onClose }) => {
             className="button--confirm"
             onClick={() => sendFpoint()}
           >
-            XÁC NHẬN
+            GỬI
           </Button>
         </Box>
       </Box>

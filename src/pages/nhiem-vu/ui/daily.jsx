@@ -7,7 +7,7 @@ import SliderMission from './slider'
 
 const Daily = () => {
 	const [daily, setDaily] = useState([]);
-	const {missionCategory} = useSelector((state) => state?.mission);
+	const {missionCategory, configMission} = useSelector((state) => state?.mission);
 
 	useEffect(() => {
 		if(daily?.length == 0 && missionCategory?.length) {
@@ -16,7 +16,7 @@ const Daily = () => {
 		}
 	}, [missionCategory && missionCategory.length]);
 
-	console.log('missionCategory', missionCategory)
+
 	// handle pagination
 	const ITEMS_PER_PAGE = 6;
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,17 +31,23 @@ const Daily = () => {
 
 	const missionImage = '/images/mission-default.png';
 
+	const idInviteConfig = configMission?.find(item =>  item.Key == "InviteFriend")
+	const idLuckyConfig = configMission?.find(item =>  item.Key == "LuckyWheelCampaign")
+
 
 	const itemList = (item, isOrder = 0)=> {
 		let url = ''
-		if (item.Id == 4) {
-			url = 'vong-quay-may-man'
+		if (parseInt(idInviteConfig?.Value) == item.Id) {
+			// url = 'nhiem-vu/invite.html'
+			url = `tham-gia/other/${item.TitleLink}/${item.Id}.html`
+		} else if (parseInt(idLuckyConfig?.Value) == item.Id) {
+			url = `tham-gia/daily/${item.TitleLink}/${item.Id}.html`
 		} else {
-			url = `tham-gia/daily/${item.TitleLink}/${item.Id}`
+			url = `tham-gia/daily/${item.TitleLink}/${item.Id}.html`
 		}
 		return <Grid key={item.CreateDate} item xs={12} sm={4} md={4} className={''}>
 			<Link href={url} className='custom'>
-				<Box style={{ minHeight: 210, display: 'flex', alignItems: 'start' }}>
+				<Box style={{ minHeight: 210, display: 'flex', alignItems: 'start' }} className='mission__images'>
 					<AutoSizeImage
 						src={item.ImagePath ? item.ImagePath : missionImage}
 						alt={item.Title}
@@ -72,7 +78,7 @@ const Daily = () => {
 			<SliderMission />
 			<Box className="bg-common">
 				<Container>
-					<Typography pt={4} variant="h4" component="h2" color={'#fff'} className='fs-48 fw-b'>
+					<Typography pt={4} variant="h4" component="h2" color={'#fff'} className='fs-48 fw-b mb-28'>
 						NHIỆM VỤ HẰNG NGÀY
 					</Typography>
 					<Box my={4} sx={{ flexGrow: 1, padding: 0 }} className="mission custom">

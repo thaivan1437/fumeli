@@ -11,7 +11,7 @@ import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import $ from 'jquery'
 
 const GiftTransactionModal = ({ gift, onClose }) => {
@@ -49,7 +49,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
   const giftTransactionAction = () => {
     axiosInstance
       .post(
-        'UserGiftSpin/create',
+        'api/UserGiftSpin/create',
         {
           Active: true,
           CreateDate: currentTime,
@@ -64,7 +64,6 @@ const GiftTransactionModal = ({ gift, onClose }) => {
         }
       )
       .then((response) => {
-        console.log(response.data)
         $('.modal__giftTransaction--title').text('THÀNH CÔNG')
         $('.modal__giftTransaction--description')
           .empty()
@@ -73,10 +72,9 @@ const GiftTransactionModal = ({ gift, onClose }) => {
         $('.button--back').css({ marginTop: '4%' })
       })
       .catch((error) => {
-        console.log(error)
         $('.modal__giftTransaction--title').text('THẤT BẠI')
         $('.modal__giftTransaction--img').remove()
-        $('.modal__giftTransaction--description').empty().text(error.message)
+        $('.modal__giftTransaction--description').empty().text(error.response.data)
         $('.button--confirm').remove()
         $('.button--back').css({ marginTop: '41%' })
       })
@@ -104,7 +102,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
             top: '-13px',
             right: '-30px',
           }}
-          className="modal__youtube--btn-close"
+          className="modal__youtube--btn-close btn__close"
         />
         <NotificationsActiveOutlinedIcon
           sx={{

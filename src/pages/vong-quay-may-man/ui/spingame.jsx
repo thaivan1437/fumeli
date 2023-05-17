@@ -9,16 +9,16 @@ import {
 } from '@mui/material'
 import { useSelector } from 'react-redux'
 import Image from 'next/image'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import NotiModal from '../modal/notiModal'
 import SpinTurnTransactionModal from '../modal/spinTurnTransaction'
-import axios from 'axios'
 import { getAllDataThunkAction } from '../logic/reducer'
 import { useDispatch } from 'react-redux'
 
 const SpinGame = () => {
   const dispatch = useDispatch()
   const spinGiftItemData = useSelector((state) => state.spinGiftItem)
+ 
   const spinGiftItem = spinGiftItemData.spinGiftItem.sort(
     (a, b) => a.Percentage - b.Percentage
   )
@@ -82,7 +82,7 @@ const SpinGame = () => {
     if (spinTurn == 0) {
       openOutOfTurnModal()
     } else {
-      const images = document.querySelectorAll('.spingame__item--img')
+      const images = document.querySelectorAll('.spingame__item')
 
       axiosInstance.put(
         `api/UserSpinGame/update/${user.userid}`,
@@ -137,7 +137,7 @@ const SpinGame = () => {
 
           axiosInstance
             .post(
-              'UserGiftSpin/create',
+              'api/UserGiftSpin/create',
               {
                 Active: true,
                 CreateDate: currentTime,
@@ -162,7 +162,7 @@ const SpinGame = () => {
       }, 4000)
     }
   }
-
+  
   return (
     <>
       <Container mt={8}>

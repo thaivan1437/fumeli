@@ -80,7 +80,7 @@ export const signUp = () => async (dispatch, getState) => {
       Password: signUp.Password,
       InviteCode: signUp.InviteCode,
     };
-    const sendEmailForget = await axiosPost('appUser/add', data);
+    const sendEmailForget = await axiosPost('api/appUser/add', data);
     console.log('sendEmailForget',sendEmailForget)
     // await dispatch(getMatch(matchRes));
   } catch (error) {
@@ -93,7 +93,7 @@ export const sendEmailResetPass = () => async (dispatch, getState) => {
   try {
     const { authReducer } = getState();
     const data = { email: authReducer.forgetData.email };
-    const sendEmailForget = await axiosPost('appUser/sendresetpassword', data, dispatch);
+    const sendEmailForget = await axiosPost('api/appUser/sendresetpassword', data, dispatch);
     dispatch(forgetDataAction({ forgetData: {['message']: sendEmailForget?.data?.Message}}))
   } catch (error) {
     console.log(error);

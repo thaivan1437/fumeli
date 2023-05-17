@@ -14,13 +14,13 @@ body {
   background: #19181c !important;
 }
 .text-color {
-  color: #FF2423 !important;
+  color: #ff2423 !important;
 }
 .bgcolor1 {
-  background-color: #FF2423 !important;
+  background-color: #ff2423 !important;
 }
 .ftcolor1 {
-  color: #8B8B8B !important;
+  color: #8b8b8b !important;
 }
 .hide {
   display: none !important;
@@ -58,6 +58,12 @@ body {
     font-size: 14px !important;
   }
 }
+.fs-12 {
+  font-size: 12px !important;
+  @media (max-width: 768px) {
+    font-size: 10px !important;
+  }
+}
 .w-200 {
   width: 200px !important;
 }
@@ -88,6 +94,12 @@ a:hover {
     display: none !important;
   }
 }
+.cursor-pointer {
+  cursor: pointer;
+}
+.text-left {
+  text-align: left !important;
+}
 @import "./other.scss";
 @import "../pages/home/index";
 @import "../pages/gioi-thieu/index";
@@ -99,4 +111,4 @@ a:hover {
 @import "../pages/doi-qua/index";
 @import "../pages/nhiem-vu/index";
 @import "../pages/hoi-vien/index";
-@import '../pages/vong-quay-may-man/index.scss';
+@import "../pages/vong-quay-may-man/index.scss";

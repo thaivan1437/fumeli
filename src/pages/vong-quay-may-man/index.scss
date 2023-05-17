@@ -1,5 +1,5 @@
 .spingame__item--img-active {
-  background: linear-gradient(360deg, #ff2423 0%, rgba(0, 0, 0, 0) 99.2%);
+  background: linear-gradient(360deg, #ff2423 0%, rgba(0, 0, 0, 0) 99.2%)!important;
 }
 
 .btn___spingame--group {
@@ -22,13 +22,14 @@
   letter-spacing: -0.01em !important;
   text-align: center !important;
   @media (max-width: 768px) {
-    height: 92px !important;
+    font-size: 13px !important;
+    // height: 92px !important;
     width: 110px !important;
   }
 }
 .spingame__item {
   box-sizing: border-box !important;
-  background: #0f0f0f !important;
+  background: #0f0f0f ;
   border: 1px solid #ffffff !important;
   border-radius: 10px !important;
 }
@@ -42,6 +43,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+  padding: 8% !important;
 }
 
 .spingame__item--title {
@@ -104,8 +106,9 @@
   letter-spacing: -0.01em !important;
   text-align: center !important;
   @media (max-width: 768px) {
-    height: 92px !important;
-    width: 110px !important;
+    font-size: 16px !important;
+    // height: 92px !important;
+    // width: 110px !important;
   }
 }
 
@@ -153,4 +156,10 @@
 
 .luckywheel__transactionTurn__title {
   margin: 30px 0 !important;
+}
+
+.custom__modal__rules__spingame{
+  @media (max-width: 768px) {
+    max-width: 375px;
+  }
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
-import Divider from '@mui/material/Divider'
+import { useSelector,useDispatch } from 'react-redux'
 import { Box, Typography, Button, Grid } from '@mui/material'
 import Image from 'next/image'
 import PersonIcon from '@mui/icons-material/Person'
@@ -8,11 +7,19 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard'
 import GroupIcon from '@mui/icons-material/Group'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
-import axiosInstance from '@/utils/api'
-import Link from 'next/link'
+import {axiosInstance} from '@/utils/api'
+import {
+  getFpointByUserData
+} from "../logic/reducer";
+import { getConfigUrl } from '@/utils/getConfig';
+import { useRouter } from "next/router";
 
 export default function LayoutUserPage() {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [user, setUser] = useState('')
+  const { userPoint } = useSelector((state) => state?.userDetail);
+
 
   useEffect(() => {
     // check login has data in localStore
@@ -22,19 +29,34 @@ export default function LayoutUserPage() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    async function fetchAllData() {
+      await Promise.all([
+        dispatch(getFpointByUserData({ userId: user?.userid })),
+
+      ]);
+    }
+    void fetchAllData();
+  }, [user]);
+
+
+
   const hiddenFileInput = useRef(null)
   const handleClick = (event) => {
     hiddenFileInput.current.click()
   }
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     if (event.target.files && event.target.files[0]) {
       const file = hiddenFileInput.current.files[0]
-      console.log('Upload Image', file)
       const formData = new FormData()
       formData.append('file', file)
+      const apiHost = await getConfigUrl();
 
       axiosInstance
-        .post('upload/saveImage/avatar', formData, {
+        .post('api/upload/saveImage/avatar', formData, {
           headers: {
             Authorization: `Bearer ${user.access_token}`,
             'Content-Type': 'multipart/form-data',
@@ -46,10 +68,10 @@ export default function LayoutUserPage() {
           const str = response.data
           axiosInstance
             .put(
-              'appUser/updateavatar',
+              'api/appUser/updateavatar',
               {
                 Id: user.userid,
-                Avatar: 'https://api-demowebsite.cdktcnqn.edu.vn/' + str,
+                Avatar: apiHost + str,
               },
               {
                 headers: {
@@ -79,15 +101,15 @@ export default function LayoutUserPage() {
   const handleChangeImgCoverClick = (event) => {
     hiddenFileImageCoverInput.current.click()
   }
-  const handleImageCoverChange = (event) => {
+  const handleImageCoverChange = async (event) => {
     if (event.target.files && event.target.files[0]) {
       const file = hiddenFileImageCoverInput.current.files[0]
-      console.log('Upload Image', file)
       const formData = new FormData()
       formData.append('file', file)
+      const apiHost = await getConfigUrl();
 
       axiosInstance
-        .post('upload/saveImage/imagecover', formData, {
+        .post('api/upload/saveImage/imagecover', formData, {
           headers: {
             Authorization: `Bearer ${user.access_token}`,
             'Content-Type': 'multipart/form-data',
@@ -99,10 +121,10 @@ export default function LayoutUserPage() {
           const str = response.data
           axiosInstance
             .put(
-              'appUser/updateimagecover',
+              'api/appUser/updateimagecover',
               {
                 Id: user.userid,
-                Imagecover: 'https://api-demowebsite.cdktcnqn.edu.vn/' + str,
+                Imagecover: apiHost + str,
               },
               {
                 headers: {
@@ -128,8 +150,11 @@ export default function LayoutUserPage() {
     }
   }
   const goToPage = (route) => {
-    window.location.href = `/hoi-vien/${route}`
+    router.push(`/hoi-vien/${route}.html`)
   }
+
+  const bannerDefault = '/images/default-banner.svg';
+  const bannerAvatar = '/images/default-avatar.svg';
   return (
     <>
       <input
@@ -147,7 +172,7 @@ export default function LayoutUserPage() {
       <Box className="layoutAppUser parent">
         <Box className="layoutAppUser--avatar">
           <Image
-            src={user.imagecover}
+            src={user.imagecover || bannerDefault}
             alt={user.imagecover}
             width={446}
             height={251}
@@ -179,7 +204,7 @@ export default function LayoutUserPage() {
 
         <Box className="child">
           <Image
-            src={user.avatar}
+            src={user.avatar || bannerAvatar}
             alt={user.avatar}
             width={226}
             height={226}
@@ -191,39 +216,41 @@ export default function LayoutUserPage() {
           <Typography gutterBottom className="layoutAppUser--username">
             {user.username}
           </Typography>
-
+          <Typography gutterBottom className="layoutAppUser--fpoint" mt={2} mb={2}>
+            Điểm của bạn: <span className='cl-red'>{userPoint?.FpointValue} </span> Fpoint
+          </Typography>
           <Box className="button__avatar__group">
             <Button
               variant="contained"
-              className="btn_fill ml-6 m-mb-0 w-158px"
-              onClick={() => goToPage('ui/infoUser')}
+              className="btn_fill ml-6 m-mb-0 w-158px custom__btnfill"
+              onClick={() => goToPage('infoUser')}
             >
               <PersonIcon />
-              <Typography className="btn_fill--text">THÔNG TIN</Typography>
+              <Typography className="btn_fill--text ">THÔNG TIN</Typography>
             </Button>
             <Button
               variant="contained"
-              className="btn_fill ml-6"
+              className="btn_fill ml-6 custom__btnfill"
               onClick={() => goToPage('activity')}
             >
               <BoltIcon />
-              <Typography className="btn_fill--text">HOẠT ĐỘNG</Typography>
+              <Typography className="btn_fill--text ">HOẠT ĐỘNG</Typography>
             </Button>
             <Button
               variant="contained"
-              className="btn_fill ml-6"
+              className="btn_fill ml-6 custom__btnfill"
               onClick={() => goToPage('bag')}
             >
               <CardGiftcardIcon />
-              <Typography className="btn_fill--text">TÚI ĐỒ</Typography>
+              <Typography className="btn_fill--text ">TÚI ĐỒ</Typography>
             </Button>
             <Button
               variant="contained"
-              className="btn_fill ml-6"
+              className="btn_fill ml-6 custom__btnfill"
               onClick={() => goToPage('friend')}
             >
               <GroupIcon />
-              <Typography className="btn_fill--text">BẠN BÈ</Typography>
+              <Typography className="btn_fill--text ">BẠN BÈ</Typography>
             </Button>
           </Box>
         </Box>

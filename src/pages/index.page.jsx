@@ -7,7 +7,6 @@ import  Videos  from './home/ui/video';
 import  SliderBanner  from './home/ui/slide';
 import { getSlideAndMissionData, getVideoAndMiniGameData, getMatchDataThunkAction } from './home/logic/reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import TopRank from '@/components/topRank/topRank';
 import Loader from '@/components/loading';
 
 export default function Home() {
@@ -30,7 +29,6 @@ export default function Home() {
       <Box className="bg-main">
         <SliderBanner></SliderBanner>
         <Container>
-          <TopRank></TopRank>
           <Mission></Mission>
           <Tournaments></Tournaments>
         </Container>

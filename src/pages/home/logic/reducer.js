@@ -1,6 +1,6 @@
 
 import {axiosGet} from '@/utils/api';
-import { getMatch, getVideo, getMiniGame, getMission, getMatchCategory, getSlider } from './action';
+import { getMatch, getVideo, getMiniGame, getMission, getMatchCategory, getSlider, getConfigMission } from './action';
 import { startLoading, stopLoading  } from '../../action';
 
 const initialState = {
@@ -9,7 +9,8 @@ const initialState = {
   miniGame: [],
   mission: [],
   matchCategory: [],
-  slider: []
+  slider: [],
+  configMission: []
 }
 
 export const home = (state = initialState, action) => {
@@ -44,6 +45,11 @@ export const home = (state = initialState, action) => {
         ...state,
         slider: action.payload,
       };
+    case 'GET_CONFIG_MISSION':
+      return {
+        ...state,
+        configMission: action.payload,
+      };
     default:
       return state
   }
@@ -54,16 +60,18 @@ export const getSlideAndMissionData = () => async (dispatch, getState) => {
   try {
     dispatch(startLoading());
     const urls = [
-      'Campaign/getallclient',
-      'Slider/getallclient'
+      'api/Campaign/getallclient',
+      'api/Slider/getallclient',
+      'api/config',
     ];
 
-    const [mission, slider] = await Promise.all(
-      urls.map(url => axiosGet(url))
+    const [mission, slider, configMission] = await Promise.all(
+      urls.map(url => axiosGet(url, dispatch))
     );
 
     await dispatch(getMission(mission));
     await dispatch(getSlider(slider));
+    await dispatch(getConfigMission(configMission));
   } catch (error) {
     console.log(error);
   } finally {
@@ -74,12 +82,12 @@ export const getSlideAndMissionData = () => async (dispatch, getState) => {
 export const getVideoAndMiniGameData = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'Media/getallclient',
-      'MiniGame/getallclient',
+      'api/Media/getallclient',
+      'api/MiniGame/getallclient',
     ];
 
     const [videoRes, miniGameRes ] = await Promise.all(
-      urls.map(url => axiosGet(url))
+      urls.map(url => axiosGet(url, dispatch))
     );
 
     await dispatch(getVideo(videoRes));
@@ -93,12 +101,12 @@ export const getVideoAndMiniGameData = () => async (dispatch, getState) => {
 export const getMatchDataThunkAction = () => async (dispatch, getState) => {
   try {
     const urls = [
-      'Match/getallclient',
-      'CategoriesMatch/getallclient',
+      'api/Match/getallclient',
+      'api/CategoriesMatch/getallclient',
     ];
 
     const [ matchRes, matchCategory ] = await Promise.all(
-      urls.map(url => axiosGet(url))
+      urls.map(url => axiosGet(url, dispatch))
     );
 
     await dispatch(getMatch(matchRes));

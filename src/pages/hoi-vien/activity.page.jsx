@@ -13,6 +13,7 @@ import {
   getFriendsData,
   getActivitiesHistoryData,
   getGivePointsHistorysData,
+  getReceivePointsHistorysData,
   getUserGiftData,
   getSpinsHistorysData,
 } from "./logic/reducer";
@@ -31,8 +32,9 @@ export default function Activity() {
         dispatch(getFriendsData({ userId: user?.userid })),
         dispatch(getActivitiesHistoryData({ userId: user?.userid })),
         dispatch(getGivePointsHistorysData({ userId: user?.userid })),
+        dispatch(getReceivePointsHistorysData({ userId: user?.userid })),
         dispatch(getUserGiftData({ userId: user?.userid })),
-        dispatch(getSpinsHistorysData({ userId: user?.userid }))
+        dispatch(getSpinsHistorysData({ userId: user?.userid })),
       ]);
     }
     void fetchAllData();

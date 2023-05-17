@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect, Fragment } from "react";
 import {
   Box,
   Typography,
@@ -8,10 +8,13 @@ import {
   ButtonGroup
 } from '@mui/material'
 import Image from 'next/image'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import GiftTransactionModal from '../modal/giftTransaction'
+import { getUserGiftData } from "../logic/reducer";
 import ActiveMailModal from '../modal/activeMail';
+import Pagination from './pagination.jsx'
+import moment from "moment/moment";
 
 const Bag = () => {
   const [open, setOpen] = React.useState(false)
@@ -20,14 +23,14 @@ const Bag = () => {
   const [activeEmail, setActiveEmail] = useState(false)
   const { user } = useSelector((state) => state?.authReducer);
 
-  
   const ITEMS_PER_PAGE = 4
   const { userGift, userGiftHistory, userDetail } = useSelector((state) => state?.userDetail)
+
   const EmailConfirmed = userDetail && userDetail?.EmailConfirmed;
-  console.log('userGift', userGift, userDetail, EmailConfirmed)
+  userGift.filter(gift => gift.Acitce === true);
   userGift.sort((a, b) => b.Id - a.Id)
   const [currentPage, setCurrentPage] = useState(1)
-  const maxPage = Math.ceil(userGift.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(userGift.length / ITEMS_PER_PAGE)
   const displayData = userGift.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
@@ -35,10 +38,6 @@ const Bag = () => {
   const handleClick = (page) => {
     setCurrentPage(page)
   }
-
-
-
-
   // const hotItems = userGift.filter((item) => item.isHot === true)
   const distributeClick = () => {
     setOpen(!open)
@@ -53,6 +52,7 @@ const Bag = () => {
     setGift(giftFilterById)
     setGiftModal(true)
   }
+
   const closeGiftTransactionModal = () => {
     setGiftModal(false)
     setGift('')
@@ -68,8 +68,6 @@ const Bag = () => {
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
-          {/* phâm loại */}
-
           <Grid container spacing={3}>
             {displayData &&
               displayData.map((item, index) => {
@@ -132,13 +130,14 @@ const Bag = () => {
               variant="contained"
               aria-label="button group"
             >
-              {[...Array(maxPage)].map((_, index) => (
-                <Button key={index} onClick={() => handleClick(index + 1)}>
-                  {index + 1}
-                </Button>
-              ))}
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
             </ButtonGroup>
           </Box>
+          <hr style={{ margin: '4% 0 4% 0' }} />
         </Grid>
         <Grid item xs={12} md={4} mb={4} mt={{ xs: 2 }} className='bag__history'>
           <Box className='bag__history--item'>
@@ -156,10 +155,12 @@ const Bag = () => {
                           style={{ color: '#fff' }}
                         >
                           <Typography variant="body1" className="hot_item__title">
-                            {item.Title}
+                            {item.GiftTitle}
                           </Typography>
                           <Typography variant="body2" className="hot_item__value">
-                            {item.FpointValue} Fponit
+                            {moment(item.UpdateDate).format(
+                              "M/D/YYYY h:mm:ss A"
+                            )}
                           </Typography>
                         </div>
                       </li>
@@ -175,7 +176,7 @@ const Bag = () => {
         <GiftTransactionModal gift={gift} onClose={closeGiftTransactionModal} />
       ) : null}
       {activeEmail ? (
-        <ActiveMailModal userDetail={user}  onClose={closeActiveMailModal} />
+        <ActiveMailModal userDetail={user} onClose={closeActiveMailModal} />
       ) : null}
     </Container>
   )

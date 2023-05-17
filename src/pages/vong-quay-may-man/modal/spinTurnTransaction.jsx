@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { Modal, Backdrop, Box, Typography, Button } from '@mui/material'
 import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
-import axiosInstance from '@/utils/api'
+import {axiosInstance} from '@/utils/api'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import Toast from '@/components/toast'
 import { getAllDataThunkAction } from '../logic/reducer'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const SpinTurnTransactionModal = ({ onClose }) => {
+  const {spinTurnValue} = useSelector((state) => state.spinGiftItem)
+
   const dispatch = useDispatch()
   const style = {
     position: 'absolute',
@@ -45,7 +48,7 @@ const SpinTurnTransactionModal = ({ onClose }) => {
   const spinTurnTransaction = () => {
     axiosInstance
       .post(
-        'UserSpinGame/create',
+        'api/UserSpinGame/create',
         {
           Active: true,
           CreateDate: currentTime,
@@ -61,9 +64,15 @@ const SpinTurnTransactionModal = ({ onClose }) => {
       )
       .then((response) => {
         setStatusCode({ isShow: true, status: 'success' })
+         setTimeout(() => {
+      onClose()
+    }, 3000)
       })
       .catch((error) => {
         setStatusCode({ isShow: true, status: 'error' })
+        setTimeout(() => {
+          onClose()
+        }, 3000)
       })
     dispatch(getAllDataThunkAction())
   }
@@ -102,7 +111,7 @@ const SpinTurnTransactionModal = ({ onClose }) => {
             top: '-13px',
             right: '-30px',
           }}
-          className="modal__youtube--btn-close"
+          className="modal__youtube--btn-close btn__close"
         />
         <NotificationsActiveOutlinedIcon
           sx={{
@@ -122,7 +131,7 @@ const SpinTurnTransactionModal = ({ onClose }) => {
           variant="h6"
           component="p"
         >
-          100 Fpoint = 1 lượt quay
+          {spinTurnValue.Value} Fpoint = 1 lượt quay
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button

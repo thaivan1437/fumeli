@@ -11,7 +11,7 @@ const RulesModal = ({ onClose }) => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '475px',
+    width: '1098px',
     minHeight: '420px',
     bgcolor: 'background.paper',
     border: '2px solid #000',
@@ -34,8 +34,9 @@ const RulesModal = ({ onClose }) => {
         timeout: 500,
       }}
       disableScrollLock={true}
+      className='custom__modal__rules__spingame'
     >
-      <Box className="modal__rules__spingame" sx={style}>
+      <Box sx={style}>
         <Image
           src="/images/close.svg"
           alt="btn close"
@@ -46,7 +47,7 @@ const RulesModal = ({ onClose }) => {
             top: '-13px',
             right: '-30px',
           }}
-          className="modal__youtube--btn-close"
+          className="modal__youtube--btn-close btn__close"
         />
         <Box className="modal__rules__titleBox">
           <Typography mb={3} className="modal__rules__titleBox--title">
@@ -55,7 +56,7 @@ const RulesModal = ({ onClose }) => {
         </Box>
         <Container>
           <Typography
-            className="modal__giftTransaction--description"
+            className="modal__giftTransaction--description text-left"
             variant="h6"
             component="p"
             dangerouslySetInnerHTML={{
