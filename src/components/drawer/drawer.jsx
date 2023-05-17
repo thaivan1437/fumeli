@@ -2,19 +2,36 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Button, Drawer, IconButton, Typography } from "@mui/material";
+import { useRouter } from "next/router";
+import { Button, Drawer, IconButton, Box, Menu, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 function ResponsiveDrawer(props) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { userName, handleOpenModalLogin } = props;
   const [active, setActive] = useState(false);
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const openPageUser = () => {
+    handleClose();
+    router.push("/hoi-vien");
+  };
+  const openbag = () => {
+    handleClose();
+    router.push("/hoi-vien/bag");
+  };
 
-  const { userName, handleOpenModalLogin } = props;
   const pageLinks = [
     {
       id: 1,
@@ -91,24 +108,81 @@ function ResponsiveDrawer(props) {
             isResize={false}
           />
         </Link>
-        {
-          // show user when logged
-          userName ? (
-            <Typography
-              variant="body1"
-              sx={{ color: "#fff", fontWeight: "bold" }}
-            >
-              {userName}
-            </Typography>
-          ) : (
-            <button
-              className="drawer__login__btn"
-              onClick={handleOpenModalLogin}
-            >
-              Login
-            </button>
-          )
-        }
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          {
+            // show user when logged
+            userName ? (
+              <>
+                <span className="header__text--mobile" onClick={handleClick}>
+                  {userName}
+                </span>
+
+                <Menu
+                  anchorEl={anchorEl}
+                  id="account-menu"
+                  open={open}
+                  onClose={handleClose}
+                  onClick={handleClose}
+                  PaperProps={{
+                    elevation: 0,
+                    sx: {
+                      overflow: "visible",
+                      filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                      mt: 1.5,
+                      "& .MuiAvatar-root": {
+                        width: 32,
+                        height: 32,
+                        ml: -0.5,
+                        mr: 1,
+                      },
+                      "&:before": {
+                        content: '""',
+                        display: "block",
+                        position: "absolute",
+                        top: 0,
+                        right: 14,
+                        width: 10,
+                        height: 10,
+                        bgcolor: "background.paper",
+                        transform: "translateY(-50%) rotate(45deg)",
+                        zIndex: 0,
+                      },
+                    },
+                  }}
+                  transformOrigin={{ horizontal: "right", vertical: "top" }}
+                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  className="menu--header"
+                >
+                  <MenuItem className="menu--item" onClick={openPageUser}>
+                    Trang cá nhân
+                  </MenuItem>
+                  <MenuItem className="menu--item" onClick={openbag}>
+                    Túi đồ
+                  </MenuItem>
+                  <MenuItem className="menu--item" onClick={handleClose}>
+                    Đăng xuất
+                  </MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <Button
+                // variant="contained"
+                sx={{
+                  backgroundColor: "#FF2423",
+                  borderRadius: "40px",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#d6221d",
+                  },
+                }}
+                className="p-7 "
+                onClick={handleOpenModalLogin}
+              >
+                Login
+              </Button>
+            )
+          }
+        </Box>
       </div>
       <Drawer
         open={openDrawer}
@@ -142,7 +216,7 @@ function ResponsiveDrawer(props) {
                   >
                     <div>
                       <p className="w-fit p-0 m-0">{item.title}</p>
-                        <KeyboardArrowDownIcon />
+                      <KeyboardArrowDownIcon />
                     </div>
                   </Link>
 
@@ -150,7 +224,7 @@ function ResponsiveDrawer(props) {
                     <ul className="drawler__menu__lists">
                       {item.menuItems.map((menuItem) => (
                         <Link
-                        onClick={() => setOpenDrawer(!openDrawer)}
+                          onClick={() => setOpenDrawer(!openDrawer)}
                           href={menuItem.link}
                           className={`drawer__link ${
                             pathname === menuItem.link ? "active" : ""
