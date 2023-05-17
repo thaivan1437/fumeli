@@ -7,7 +7,61 @@ import Link from "next/link";
 import moment from "moment/moment";
 
 export default function InfoUser() {
-  const userDetail = useSelector((state) => state.userDetail);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state?.authReducer);
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    async function fetchAllData() {
+      await Promise.all([dispatch(getUserGiftData({ userId: user?.userid }))]);
+    }
+    void fetchAllData();
+  }, [user]);
+  
+  const { userDetail } = useSelector((state) => state?.userDetail);
+  const userDetailInfo = [
+    {
+      id: 1,
+      title: "Họ tên",
+      value: userDetail?.UserName,
+    },
+    {
+      id: 2,
+      title: "Ngày sinh",
+      value: moment(userDetail?.DateOfBirth).format("DD/MM/YYYY"),
+    },
+    {
+      id: 3,
+      title: "Giới tính",
+      value: userDetail?.Gender,
+    },
+    {
+      id: 4,
+      title: "Số điện thoại",
+      value: userDetail?.PhoneNumber,
+    },
+    {
+      id: 5,
+      title: "Email",
+      value: userDetail?.Email,
+    },
+    {
+      id: 6,
+      title: "Tỉnh thành",
+      value: userDetail?.City,
+    },
+    {
+      id: 7,
+      title: "Tham gia",
+      value: moment(userDetail?.Created).format("DD/MM/YYYY"),
+    },
+    {
+      id: 8,
+      title: "Giới thiệu",
+      value: userDetail?.Introduction,
+    },
+  ];
 
   return (
     <>
@@ -18,11 +72,7 @@ export default function InfoUser() {
           <div className="userDetail__description">
             <p className="fs-20">GIỚI THIỆU</p>
             <small className="fs-16">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-              obcaecati odit magnam rerum nobis mollitia iure in amet, eligendi
-              placeat, assumenda facere voluptas, repellat reiciendis eius iste.
-              Facilis, eligendi facere.
-              {/* {userDetail.userData.Introduction}*/}
+              {userDetail?.Introduction}
             </small>
           </div>
 

@@ -240,10 +240,10 @@ export const getAllDataThunkAction = () => async (dispatch, getState) => {
   try {
     const [userDataResponse, allUserResponse, userFriendResponse, historyUserRedeemGift] =
       await Promise.all([
-        axiosGet(`api/${USER_DETAIL_API_ENDPOINT}${data.userid}`),
-        axiosGet("api/appUser/getallclientbyuserrole?role=user"),
-        axiosGet(`api/UserFriend/getallclientbyuserid/${data.userid}`),
-        axiosGet(`api/UserGiftSpin/getallclientbyuserid/${data.userid}`),
+        axiosGet(`api/${USER_DETAIL_API_ENDPOINT}${data.userid}`, dispatch),
+        axiosGet("api/appUser/getallclientbyuserrole?role=user", dispatch),
+        axiosGet(`api/UserFriend/getallclientbyuserid/${data.userid}`, dispatch),
+        axiosGet(`api/UserGiftSpin/getallclientbyuserid/${data.userid}`, dispatch),
       ]);
 
     await dispatch(getDataUser(userDataResponse));
