@@ -61,9 +61,8 @@ const Header = ({ setHeaderHeight }) => {
     if (headerRef.current) {
       const headerHeight = headerRef.current.offsetHeight;
       setHeaderHeight(headerHeight);
-      console.log(headerHeight);
     }
-  }, [setHeaderHeight]);
+  }, []);
 
 
   useEffect(() => {
@@ -141,14 +140,6 @@ const Header = ({ setHeaderHeight }) => {
     await signOut();
     window.location = '/';
   }
-
-  useEffect(() => {
-    const headerElement = headerRef.current;
-    if (headerElement) {
-      const height = headerElement.offsetHeight;
-      setHeaderHeight(height);
-    }
-  }, []);
 
   return (
     <React.StrictMode>
