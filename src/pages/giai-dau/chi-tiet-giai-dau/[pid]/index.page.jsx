@@ -91,20 +91,22 @@ const DetailTournament = () => {
 							</Box>
 							<Box className='bag__history'>
 								<Box className='video__slider--item custom'>
-									<AutoSizeImage isResize={false} src={`/images/match.png`} alt={detail.Title} width={777} height={440}/>
+									<AutoSizeImage isResize={false} src={detail[0].ImagePath} alt={detail.Title} width={777} height={440}/>
 									<Box className='video__slider--info'>
 										<Typography
 											component="div"
 											className={`video__slider--title`}
+											color='#fff'
+								
 										>
-											{detail.Title}
+											{detail[0].Title}
 										</Typography>
 										<Typography
 											component="div"
 											className={`video__slider--desc`}
 											color='#fff'
 										>
-											Giải thưởng $1.6M
+												{detail[0].Prize}
 										</Typography>
 									</Box>
 								</Box>
@@ -120,7 +122,7 @@ const DetailTournament = () => {
 														<li key={item.Id} className="hot_item__li custom">
 															<Link href={`/giai-dau/chi-tiet-giai-dau/${item.Id}.html`} >
 																<Box className='d-flex'>
-																	<img src="/images/avatar.png" alt={item.Title} />
+																	<img src={item.ImagePath} alt={item.Title} width={68} height={68}/>
 																	<Typography variant="body1" className="hot_item__title custom">
 																		{item.Title}
 																	</Typography>

@@ -90,6 +90,8 @@ const HightLight = () => {
     }
   }
 
+  console.log(matchCategory);
+
   return (
     <React.Fragment>
       <Container>
@@ -110,7 +112,7 @@ const HightLight = () => {
                 key={item.CreateDate}
                 onClick={() => openLink(`giai-dau/chi-tiet-giai-dau/${item.Id}.html`)}
               >
-                <AutoSizeImage isResize={false} src={`/images/match.png`} alt={item.Title} width={777} height={440}/>
+                <AutoSizeImage isResize={false} src={matchCategory.ImagePath} alt={item.Title} width={777} height={440}/>
                 <Box className='video__slider--info'>
                   <Typography
                     component="div"
@@ -124,7 +126,7 @@ const HightLight = () => {
                     className={`video__slider--desc`}
                     color={'#fff'}
                   >
-                    Giải thưởng $1.6M
+                    {item.Prize}
                   </Typography>
                 </Box>
               </Box>
