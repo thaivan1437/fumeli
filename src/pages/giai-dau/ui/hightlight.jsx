@@ -112,7 +112,7 @@ const HightLight = () => {
                 key={item.CreateDate}
                 onClick={() => openLink(`giai-dau/chi-tiet-giai-dau/${item.Id}.html`)}
               >
-                <AutoSizeImage isResize={false} src={matchCategory.ImagePath} alt={item.Title} width={777} height={440}/>
+                <AutoSizeImage isResize={false} src={item.ImagePath} alt={item.Title} width={777} height={440}/>
                 <Box className='video__slider--info'>
                   <Typography
                     component="div"

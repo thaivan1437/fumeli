@@ -11,9 +11,7 @@ const Daily = () => {
 
 	const today = new Date();
 	daily.filter(event => event.StartTime <= today && today <= event.EndTime);
-	daily.filter(event => event.CategoriesCampaignId <= 0);
 
-	console.log(daily);
 
 	useEffect(() => {
 		if(daily?.length == 0 && missionCategory?.length) {
