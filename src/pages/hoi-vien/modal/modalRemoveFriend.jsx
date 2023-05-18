@@ -46,7 +46,7 @@ const RemoveFriendModal = ({ friend, onClose }) => {
   const giftTransactionAction = () => {
     axiosInstance
       .put(
-        `api/UserFriend/update/${friend.FriendId}`,
+        `api/UserFriend/update/${friend.Id}`,
         {
           UpdateUser: user.username,
           UpdateDate: currentTime,
