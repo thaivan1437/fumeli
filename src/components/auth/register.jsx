@@ -4,11 +4,14 @@ import InputField from '@/components/input';
 import {
   closeRegisterModal,
   signDataAction,
+  loginAction
 } from "./logic/action";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosPost } from '@/utils/api';
 import Loader from '@/components/loading';
 import Image from 'next/image'
+import { getConfigUrl } from '@/utils/getConfig';
+import axios from 'axios';
 
 const SignUpModal = () => {
   const dispatch = useDispatch();
@@ -53,7 +56,7 @@ const SignUpModal = () => {
       setStatusCode({ isShow: true, status: 'error', msg: 'Bạn cần đồng ý với các điều lệ trước!' })
       return
     }
-    if (signUp.Password !== signUp.ConfirmPassword) {
+    if (formData.Password !== formData.ConfirmPassword) {
       setStatusCode({ isShow: true, status: 'error', msg: 'Mật khẩu không giống nhau!' })
       return
     }
@@ -68,14 +71,10 @@ const SignUpModal = () => {
     await axiosPost('api/appUser/add', data)
       .then((response) => {
         console.log('Submit response', response)
-        setFormData({
-          Email: '',
-          Password: '',
-          InviteCode: '',
-          ConfirmPassword: ''
-        })
+        
         if (response && response.UserName) {
           setStatusCode({ isShow: true, status: 'success', msg: 'Đăng ký thành công! Một email đã được gửi về cho bạn.' })
+          handleLogin()
         } else {
           setStatusCode({ isShow: true, status: 'error', msg: response?.data?.Message })
         }
@@ -90,6 +89,28 @@ const SignUpModal = () => {
       });
     
     setIsLoading(false);
+  };
+
+  const handleLogin = async() => {
+    event.preventDefault();
+    const apiHost = await getConfigUrl();
+    const params = new URLSearchParams();
+    params.append('Username', formData.Email);
+    params.append('Password', formData.Password);
+    params.append('grant_type', 'password');
+    axios.post(`${apiHost}api/oauth/token`, params)
+      .then(response => {
+        if(response.data.roles=='["user"]'){
+          localStorage.setItem("user", JSON.stringify(response.data));
+          dispatch(loginAction(response.data));
+          setTimeout(() => {
+            window.location = "/";
+          }, 500)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      });
   };
 
   const fields = [

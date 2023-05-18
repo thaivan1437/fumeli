@@ -231,7 +231,7 @@ const USER_DETAIL_API_ENDPOINT = "appUser/detail/";
 let data = [];
 if (typeof window !== "undefined") {
   const userData = localStorage.getItem("user");
-  if (userData) {
+  if (userData !== 'undefined') {
     data = JSON.parse(userData);
   }
 }
