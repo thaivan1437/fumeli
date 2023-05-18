@@ -27,8 +27,18 @@ import {
 import ResponsiveDrawer from "@/components/drawer/drawer";
 import { useRouter } from "next/router";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useSession, signOut } from "next-auth/react";
 
 const Header = ({ setHeaderHeight }) => {
+  const { data } = useSession();
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    if (data && data !== 'undefined' && data?.user && !userData) {
+      localStorage.setItem("user", JSON.stringify(data?.user?.newData || ''));
+      dispatch(loginAction(data?.user?.newData));
+      window.location = "/";
+    }
+  }, [data && data !== 'undefined'])
   const router = useRouter();
   const { code } = router.query;
   const { registerModalOpen, loginModalOpen, forgetPasswordModalOpen, user } =
@@ -125,12 +135,20 @@ const Header = ({ setHeaderHeight }) => {
     handleClose();
     router.push('/hoi-vien/bag.html')
   }
-  const handleLogout = () => {
+  const handleLogout = async() => {
     localStorage.setItem("user", JSON.stringify(''));
     handleClose();
-    window.location = "/";
+    await signOut();
+    window.location = '/';
   }
 
+  useEffect(() => {
+    const headerElement = headerRef.current;
+    if (headerElement) {
+      const height = headerElement.offsetHeight;
+      setHeaderHeight(height);
+    }
+  }, []);
 
   return (
     <React.StrictMode>
@@ -236,6 +254,22 @@ const Header = ({ setHeaderHeight }) => {
                     Login
                   </Button>
                 )
+                
+                // <Button
+                  //   variant="contained"
+                  //   sx={{
+                  //     backgroundColor: "#FF2423",
+                  //     borderRadius: "40px",
+                  //     color: "white",
+                  //     "&:hover": {
+                  //       backgroundColor: "#d6221d",
+                  //     },
+                  //   }}
+                  //   onClick={handleOpenModalLogin}
+                  // >
+                  //   Login
+                  // </Button>
+                
               }
             </Box>
             <Link href="/">

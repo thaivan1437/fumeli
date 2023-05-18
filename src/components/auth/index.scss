@@ -83,9 +83,10 @@
     background: #F0F0F0;
     color: #000;
     &:hover {
-      background: #F0F0F0;
+      background: #F0F0F0 !important;
       font-weight: bold;
       box-shadow: none;
+      color: #fff !important;
     }
   }
   .btn-login {

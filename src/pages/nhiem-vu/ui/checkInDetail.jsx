@@ -99,6 +99,7 @@ const CheckInDetail = ({
     // }
   
     await dispatch(createMissionComplete({ idCamp: id, createDate: newItem }));
+    await dispatch(getMissionComplete(id));
     handleModal('THÀNH CÔNG', 'Bạn đã điểm danh thành công ngày hôm nay!', <CheckCircleOutlinedIcon className='text-color' fontSize='large' sx={{width: 85, height: 85}}/>, 0);
   };
   
@@ -135,8 +136,9 @@ const CheckInDetail = ({
     const active = isChecked && user ? 'active' : '';
     const daysOfWeek = ['Chủ nhật','Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
     const dayOfWeekString = daysOfWeek[dayOfWeek];
+    const isBlocked = today > newItem && !active && user;
     return (
-      <Box p={2} key={item} className={`check__in--item ${active}`} onClick={() => handleCreateCheckIn({active, newItem})}>
+      <Box p={2} key={item} className={`check__in--item ${active} ${isBlocked ? 'block': ''}`} onClick={() => isBlocked ? null : handleCreateCheckIn({active, newItem})}>
         <Typography py={2} variant="p" component="p" color={'#fff'} sx={{textAlign: 'center'}} className='fs-20 fw-b'>
           {dayOfWeekString}
         </Typography>

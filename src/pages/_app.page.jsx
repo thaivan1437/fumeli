@@ -9,8 +9,9 @@ import Loader from "@/components/loading";
 import "@/styles/globals.css";
 import "@/styles/styles.scss";
 import TopRank from '@/components/topRank/topRank';
+import { SessionProvider } from "next-auth/react"
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: {session, ...pageProps} }) {
   const [isLoading, setIsLoading] = useState(false);
   // handle loading when router changes state
   useEffect(() => {
@@ -45,22 +46,25 @@ export default function App({ Component, pageProps }) {
   };
 
   return (
-    <Provider store={store}>
-      <Header setHeaderHeight={setHeaderHeight} />
-      <div
-        className="main"
-        style={{
-          background: "#19181c !important",
-          marginTop: `${headerHeight ? headerHeight + 5 : 85}px`,
-        }}
-      >
-        <TopRank></TopRank>
-        {isLoading ? <Loader /> : <Component {...pageProps} />}
-      </div>
-      <div onClick={scrollToTop} className="scroll-top">
-        <img src="/images/scroll-top.svg" alt="scroll to top" />
-      </div>
-      <Footer />
-    </Provider>
+    <SessionProvider  session={session}>
+      <Provider store={store}>
+        <Header setHeaderHeight={setHeaderHeight} />
+        <div
+          className="main"
+          style={{
+            background: "#19181c !important",
+            marginTop: `${headerHeight ? headerHeight + 5 : 85}px`,
+          }}
+        >
+          <TopRank></TopRank>
+          {isLoading ? <Loader /> : <Component {...pageProps} />}
+        </div>
+        <div onClick={scrollToTop} className="scroll-top">
+          <img src="/images/scroll-top.svg" alt="scroll to top" />
+        </div>
+        <Footer />
+      </Provider>
+    </SessionProvider>
+
   );
 }
