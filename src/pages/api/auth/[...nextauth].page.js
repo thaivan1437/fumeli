@@ -1,11 +1,9 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import {axiosPost} from '@/utils/api'
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import axios from 'axios';
+import Cookies from "js-cookie";
 
-// For more information on each option (and a full list of options) go to
-// https://next-auth.js.org/configuration/options
-export const authOptions = {
-  // https://next-auth.js.org/configuration/providers/oauth
+const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -13,35 +11,36 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn(user, account, profile) {
-      console.log('data1', user, account, profile, axiosPost);
-      // Gửi yêu cầu POST để lấy thông tin người dùng từ API khác trên backend
+    async signIn({ user, account, profile }) {
+      const apiHost = process.env.apiHost;
       try {
-        const response = await axiosPost("get-access-token", {
-          code: user.account.id_token,
-          client_id: process.env.GOOGLE_CLIENT_ID,
-          client_secret: process.env.GOOGLE_CLIENT_SECRET,
-          redirect_uri: process.env.NEXTAUTH_URL,
-          grant_type: "authorization_code"
+        const response = await axios.post(`${apiHost}/api/login/google`, {
+          access_token: account?.access_token,
         });
+        const newData = response.data.Payload
+        newData.access_token = response.data.RawData
         // Xử lý dữ liệu người dùng từ phản hồi
-        const userData = response.data;
-        user.userData = userData;
-        console.log('data2',user, account, profile, response);
+        // Lưu dữ liệu vào cookie
+        Cookies.set("user", newData, { expires: 7 }); // expires: số ngày tồn tại của cookie (7 ngày trong ví dụ này)
 
-
-
-
-        
-        return true; // Trả về true để cho phép đăng nhập
+        // if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+        //   // Sử dụng localStorage ở đây
+        //   localStorage.setItem("user", JSON.stringify(newData));
+        //   const storedValue = localStorage.getItem('key');
+        // } else {
+        //   // Xử lý khi không có localStorage
+        //   console.log('localStorage is not available');
+        // }
+        console.log('data2', response, apiHost, newData);
+        return Promise.resolve(true); // Cho phép đăng nhập thành công
       } catch (error) {
         console.error("Lỗi khi gửi yêu cầu POST:", error);
-        return false; // Trả về false để từ chối đăng nhập
+        return Promise.reject(new Error("Đăng nhập không thành công")); // Từ chối đăng nhập
       }
     },
     // Các callback khác...
   },
   secret: "94d25574656a8ee61f1adb9d18435c36",
-}
+};
 
-export default (req, res) => NextAuth(req, res, authOptions)
+export default (req, res) => NextAuth(req, res, authOptions);

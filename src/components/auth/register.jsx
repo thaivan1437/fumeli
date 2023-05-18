@@ -53,13 +53,14 @@ const SignUpModal = () => {
       setStatusCode({ isShow: true, status: 'error', msg: 'Bạn cần đồng ý với các điều lệ trước!' })
       return
     }
+    if (signUp.Password !== signUp.ConfirmPassword) {
+      setStatusCode({ isShow: true, status: 'error', msg: 'Mật khẩu không giống nhau!' })
+      return
+    }
     setIsLoading(true);
     const signUp = formData;
     const data = {
-      FullName: signUp.FullName,
-      UserName: signUp.UserName,
       Email: signUp.Email,
-      PhoneNumber: signUp.PhoneNumber,
       Password: signUp.Password,
       InviteCode: signUp.InviteCode,
     };
@@ -68,10 +69,7 @@ const SignUpModal = () => {
       .then((response) => {
         console.log('Submit response', response)
         setFormData({
-          FullName: '',
-          UserName: '',
           Email: '',
-          PhoneNumber: '',
           Password: '',
           InviteCode: '',
           ConfirmPassword: ''
@@ -95,20 +93,12 @@ const SignUpModal = () => {
   };
 
   const fields = [
-    { name: "UserName", label: "Tên tài khoản", required: true },
+    { name: "Email", label: "Email", type: "email", required: true },
     { name: "Password", label: "Mật khẩu", type: "password", required: true },
     {
       name: "ConfirmPassword",
       label: "Xác nhận mật khẩu",
       type: "password",
-      required: true,
-    },
-    { name: "FullName", label: "Họ và tên", required: true },
-    { name: "Email", label: "Email", type: "email", required: true },
-    {
-      name: "PhoneNumber",
-      label: "Số điện thoại",
-      type: "tel",
       required: true,
     },
     { name: "InviteCode", label: "Mã giới thiệu", type: "text" },
