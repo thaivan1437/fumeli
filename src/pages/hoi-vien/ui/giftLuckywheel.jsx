@@ -25,19 +25,19 @@ const Bag = () => {
 
   const { user } = useSelector((state) => state?.authReducer);
 
-  useEffect(() => {
-    if (!user) {
-      return;
-    }
-    async function fetchAllData() {
-      await Promise.all([dispatch(getSpinsHistorysData({ userId: user?.userid }))]);
-    }
-    void fetchAllData();
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     return;
+  //   }
+  //   async function fetchAllData() {
+  //     await Promise.all([dispatch(getSpinsHistorysData({ userId: user?.userid }))]);
+  //   }
+  //   void fetchAllData();
+  // }, [user]);
 
   const ITEMS_PER_PAGE = 4
   const { userGift, userGiftHistory, userDetail, spinsHistory } = useSelector((state) => state?.userDetail)
-
+  
   const lstspinsHistory = spinsHistory.filter(history => history.Active === true);
 
   const EmailConfirmed = userDetail && userDetail?.EmailConfirmed;
