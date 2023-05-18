@@ -9,7 +9,7 @@
     "lint": "next lint",
     "lint-fix": "next lint --fix",
     "build": "rimraf -r out .next && NODE_ENV=production next build && next export",
-    "build-win": "set NODE_ENV=production && next build",
+    "build-win": "set NODE_ENV=production && next build && next export",
     "prepare": "husky install"
   },
   "husky": {

@@ -166,7 +166,16 @@ const LoginModal = () => {
               <Button type="submit" variant="contained" color="error" onClick={handleLogin} sx={{ width: '100%' , margin: 'auto'}} className='btn-login fs-20 custom'>Đăng nhập</Button>
             </Box>
             <Box my={2}>
-              <Button variant="contained" onClick={() => signIn("google")} className='btn-register fs-20 custom'>LOGIN GOOGLE</Button>
+              <Button variant="contained" onClick={() => signIn("google")} className='btn-register fs-20 custom'>
+                <Image
+                  src="/images/google.svg"
+                  alt="btn close"
+                  width={40}
+                  height={40}
+                  className="d-inline-block pr-1"
+                />
+                ĐĂNG NHẬP BẰNG GOOGLE
+              </Button>
             </Box>
             <Box my={2}>
               <Button variant="contained" onClick={handleOpenRegister} className='btn-register fs-20 custom'>ĐĂNG KÝ TÀI KHOẢN</Button>
