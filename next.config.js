@@ -4,7 +4,7 @@ const path = require('path');
 const nextConfig = {
   // trailingSlash: true,
   reactStrictMode: false,
-  pageExtensions: ["page.jsx"],
+  pageExtensions: ["page.jsx", "page.js"],
   images: {
     remotePatterns: [
       {
@@ -82,8 +82,10 @@ const nextConfig = {
   },
   staticPageGenerationTimeout: 300000,
   env: {
-    apiHost: 'https://api-demowebsite.cdktcnqn.edu.vn/',
-    // apiHost: 'https://api.fumeli.net/'
+    GOOGLE_CLIENT_ID: '586486200042-n2gsukec90iep47p3erp515l30m5ar68.apps.googleusercontent.com',
+    GOOGLE_CLIENT_SECRET: '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',
+    NEXTAUTH_URL: "http://localhost:3000",
+    apiHost: 'https://api.fumeli.net/'
   }
 }
 

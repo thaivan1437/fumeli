@@ -51,6 +51,11 @@
         filter: grayscale(1);
       }
     }
+    &.block {
+      img.image {
+        filter: grayscale(1);
+      }
+    }
     .upCheckIn {
       position: absolute;
       bottom: 0;

@@ -38,7 +38,7 @@ export const spinGiftItem = (state = initialState, action) => {
 let data = []
 if (typeof window !== 'undefined') {
   const userData = localStorage.getItem('user')
-  if (userData) {
+  if (userData !== 'undefined') {
     data = JSON.parse(userData)
   }
 }

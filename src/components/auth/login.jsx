@@ -12,6 +12,7 @@ import axios from 'axios';
 import Toast from '@/components/toast';
 import Image from 'next/image'
 import { getConfigUrl } from '@/utils/getConfig';
+import { signIn } from "next-auth/react"
 
 const LoginModal = () => {
   const [rememberMe, setRememberMe] = useState(false);
@@ -163,6 +164,18 @@ const LoginModal = () => {
             </Box>
             <Box mt={5} mb={2}>
               <Button type="submit" variant="contained" color="error" onClick={handleLogin} sx={{ width: '100%' , margin: 'auto'}} className='btn-login fs-20 custom'>Đăng nhập</Button>
+            </Box>
+            <Box my={2}>
+              <Button variant="contained" onClick={() => signIn("google")} className='btn-register fs-20 custom'>
+                <Image
+                  src="/images/google.svg"
+                  alt="btn close"
+                  width={40}
+                  height={40}
+                  className="d-inline-block pr-1"
+                />
+                ĐĂNG NHẬP BẰNG GOOGLE
+              </Button>
             </Box>
             <Box my={2}>
               <Button variant="contained" onClick={handleOpenRegister} className='btn-register fs-20 custom'>ĐĂNG KÝ TÀI KHOẢN</Button>
