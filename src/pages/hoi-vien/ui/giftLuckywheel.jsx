@@ -78,7 +78,6 @@ const Bag = () => {
   }
 
   const hotItems = spinsHistory.filter(item => item.Active === false)
-console.log(spinsHistory)
   return (
     <Container>
       <Grid container spacing={3}>
