@@ -37,7 +37,7 @@ const Bag = () => {
 
   const ITEMS_PER_PAGE = 4
   const { userGift, userGiftHistory, userDetail, spinsHistory } = useSelector((state) => state?.userDetail)
-
+  
   const lstspinsHistory = spinsHistory.filter(history => history.Active === true);
 
   const EmailConfirmed = userDetail && userDetail?.EmailConfirmed;
@@ -78,7 +78,6 @@ const Bag = () => {
   }
 
   const hotItems = spinsHistory.filter(item => item.Active === false)
-
   return (
     <Container>
       <Grid container spacing={3}>

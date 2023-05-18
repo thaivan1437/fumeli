@@ -108,7 +108,7 @@ export const getUserGiftData = (props) => async (dispatch, getState) => {
   // console.log("props", props);
   const { userId } = props;
   const gift = await axiosGet(
-    `api/UserGift/getallclientbyuserid/${userId}`,
+    `api/UserGift/getalladminbyuserid/${userId}`,
     dispatch
   );
   const userDetail = await axiosGet(`api/appUser/detail/${userId}`, dispatch);
@@ -215,7 +215,7 @@ export const getSpinsHistorysData = (props) => async (dispatch, getState) => {
   // console.log("props", props);
   const { userId } = props;
   const gift = await axiosGet(
-    `api/UserGiftSpin/getallclientbyuserid/${userId}`,
+    `api/UserGiftSpin/getalladminbyuserid/${userId}`,
     dispatch
   );
 
