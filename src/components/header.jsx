@@ -128,6 +128,15 @@ const Header = ({ setHeaderHeight }) => {
     window.location = '/';
   }
 
+  useEffect(() => {
+    const headerElement = headerRef.current;
+    if (headerElement) {
+      const height = headerElement.offsetHeight;
+      console.log(height);
+      setHeaderHeight(height);
+    }
+  }, []);
+
   return (
     <React.StrictMode>
       {mobileView ? (
