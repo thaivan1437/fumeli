@@ -16,7 +16,7 @@ const DetailTournament = () => {
 	const matchOther = matchCategory.filter(item => item.Id != pid);
 	const matchs = matchCategory && matchCategory.find(item => item.Id == pid)
 
-	const [newMtach, setnewMtach] = useState(matchs);
+	const [newMtach, setnewMtach] = useState(matchs.Matchs);
 	const [isActive, setIsActive] = useState();
 
 	const dispatch = useDispatch();
@@ -67,30 +67,27 @@ const DetailTournament = () => {
 		const id = e.currentTarget.getAttribute('data-id');
 		
 		if (id == 1) {
-			setnewMtach(matchs);
+			setnewMtach(matchs.Matchs);
 		} else if (id == 2) {
 			setnewMtach(matchs.Matchs.filter(item => {
 				const startTime = new Date(item.StartTime);
 				const endTime = new Date(item.EndTime);
 				return startTime > today && today < endTime;
 			}));
-			console.log(id);
 		} else if (id == 3) {
 			setnewMtach(matchs.Matchs.filter(item => {
 				const startTime = new Date(item.StartTime);
 				return today < startTime;
-			}));
-			console.log(id);
+			}));			
 		} else {
 			setnewMtach(matchs.Matchs.filter(item => {
 				const endTime = new Date(item.EndTime);
 				return today > endTime;
 			}));
-			console.log(id);
 		}
-
 		setIsActive(id);
 	};
+
 
 	return (
 		<React.Fragment>
@@ -121,7 +118,7 @@ const DetailTournament = () => {
 						<Box className="tournament__grid">
 							<Box className="tournament__box">
 								{
-									newMtach && newMtach.Matchs && newMtach.Matchs.map((item, _) => {
+									newMtach && newMtach.map((item, _) => {
 										return (
 											<Box key={`${item.CreateDate}_${item.Id}`} className="tournament__item custom" p={2} sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} onClick={() => openVideoModal(item.VideoPath)}>
 												<Box className="tournament__item--images" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
