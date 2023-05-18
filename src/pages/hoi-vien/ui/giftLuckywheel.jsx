@@ -25,15 +25,15 @@ const Bag = () => {
 
   const { user } = useSelector((state) => state?.authReducer);
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     return;
-  //   }
-  //   async function fetchAllData() {
-  //     await Promise.all([dispatch(getSpinsHistorysData({ userId: user?.userid }))]);
-  //   }
-  //   void fetchAllData();
-  // }, [user]);
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    async function fetchAllData() {
+      await Promise.all([dispatch(getSpinsHistorysData({ userId: user?.userid }))]);
+    }
+    void fetchAllData();
+  }, [user]);
 
   const ITEMS_PER_PAGE = 4
   const { userGift, userGiftHistory, userDetail, spinsHistory } = useSelector((state) => state?.userDetail)
@@ -78,7 +78,7 @@ const Bag = () => {
   }
 
   const hotItems = spinsHistory.filter(item => item.Active === false)
-
+console.log(spinsHistory)
   return (
     <Container>
       <Grid container spacing={3}>
