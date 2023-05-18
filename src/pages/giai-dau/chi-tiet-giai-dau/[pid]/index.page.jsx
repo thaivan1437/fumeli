@@ -14,7 +14,10 @@ const DetailTournament = () => {
 	const { matchCategory } = useSelector((state) => state?.match);
 	const detail = matchCategory.filter(item => item.Id == pid);
 	const matchOther = matchCategory.filter(item => item.Id != pid);
-	const newMtach = matchCategory && matchCategory.find(item => item.Id == pid)
+	const matchs = matchCategory && matchCategory.find(item => item.Id == pid)
+
+	const [newMtach, setnewMtach] = useState(matchs);
+	const [isActive, setIsActive] = useState();
 
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -40,6 +43,55 @@ const DetailTournament = () => {
 		setVideoId("");
 	};
 
+	const matchCategory123 = [
+		{
+			id: 1,
+			title: "Toàn bộ",
+		},
+		{
+			id: 2,
+			title: "Đang diễn ra",
+		},
+		{
+			id: 3,
+			title: "Sắp diễn ra",
+		},
+		{
+			id: 4,
+			title: "Đã diễn ra",
+		},
+	];
+
+	const today = new Date();
+	const handleShowMatchByCategory = (e) => {
+		const id = e.currentTarget.getAttribute('data-id');
+		
+		if (id == 1) {
+			setnewMtach(matchs);
+		} else if (id == 2) {
+			setnewMtach(matchs.Matchs.filter(item => {
+				const startTime = new Date(item.StartTime);
+				const endTime = new Date(item.EndTime);
+				return startTime > today && today < endTime;
+			}));
+			console.log(id);
+		} else if (id == 3) {
+			setnewMtach(matchs.Matchs.filter(item => {
+				const startTime = new Date(item.StartTime);
+				return today < startTime;
+			}));
+			console.log(id);
+		} else {
+			setnewMtach(matchs.Matchs.filter(item => {
+				const endTime = new Date(item.EndTime);
+				return today > endTime;
+			}));
+			console.log(id);
+		}
+
+		setIsActive(id);
+	};
+
 	return (
 		<React.Fragment>
 			<Box className='tournament'>
@@ -48,6 +100,24 @@ const DetailTournament = () => {
 						<Typography py={4} variant="h4" component="h2" color={'#fff'} className='tournament__title fw-b'>
 							CHI TIẾT GIẢI ĐẤU
 						</Typography>
+						<Typography py={4} variant="h4" component="h2" color={'#fff'} className='tournament__title fw-b m-0 p-0'>
+							{detail[0].Title}
+						</Typography>
+						<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'left', alignItems: 'center', color: '#fff' }} className='category__match'>
+							<Stack
+								direction="row"
+								divider={<Divider orientation="vertical" flexItem className='divider' />}
+								spacing={1}
+							>
+								{
+									matchCategory123 && matchCategory123.map((item) => {
+										return (
+											<Typography component="span" sx={{ cursor: 'pointer' }} className={`tabCategory ${isActive == item.id ? 'active' : ''}`} key={item.id} data-id={item.id} onClick={(e) => handleShowMatchByCategory(e)}>{item.title}</Typography>
+										)
+									})
+								}
+							</Stack>
+						</Box>
 						<Box className="tournament__grid">
 							<Box className="tournament__box">
 								{
@@ -58,7 +128,7 @@ const DetailTournament = () => {
 													<Box p={2} className="tournament__item--logo">
 														<AutoSizeImage src={item.LogoTeamOnePath} alt="tournament" />
 														<Typography variant="h6" color="white" sx={{ textAlign: 'center', display: 'flex', alignItems: 'end' }}>
-															G2
+															{/* G2 */}
 														</Typography>
 													</Box>
 													<Box px={2} sx={{}} className="tournament__item--center">
@@ -67,7 +137,7 @@ const DetailTournament = () => {
 													<Box p={2} className="tournament__item--logo">
 														<AutoSizeImage src={item.LogoTeamTwoPath} alt="nvm" />
 														<Typography variant="h6" color="white" sx={{ textAlign: 'center', display: 'flex', alignItems: 'end' }}>
-															Navi
+															{/* Navi */}
 														</Typography>
 													</Box>
 												</Box>
