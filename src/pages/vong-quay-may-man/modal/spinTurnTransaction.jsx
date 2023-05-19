@@ -83,9 +83,6 @@ const SpinTurnTransactionModal = ({ onClose }) => {
     } else if (statusCode.isShow && statusCode.status === 'success') {
       return <Toast message="Đổi lượt quay thành công" type="success" />
     }
-    // setTimeout(() => {
-    //   onClose()
-    // }, 10000)
   }
 
   return (
