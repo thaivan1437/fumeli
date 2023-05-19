@@ -22,6 +22,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import InputField from "@/components/input";
 import NotiModal from "../modal/noti";
+import NotiNullModal from "../modal/notiNull";
 import { getUserGiftData } from "../logic/reducer";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Toast from "@/components/toast";
@@ -84,6 +85,7 @@ export default function InfoUser() {
     }
   };
   const [showNotiModal, setNotiModal] = useState(false);
+  const [showNotiNullModal, setNotiNullModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [city, setCity] = useState(getInfoUser().city || "");
   const [introduction, setIntroduction] = useState(
@@ -114,7 +116,7 @@ export default function InfoUser() {
   }, [userDetail.userDetail]);
 
   const handleChange = (event) => {
-    setCity(event.target.value);
+    setCity(event.target.value) || "";
   };
 
   const handleDateClick = () => {
@@ -128,34 +130,44 @@ export default function InfoUser() {
   const closeNotiModal = () => {
     setNotiModal(false);
   };
+
+  const closeNotiNullModal = () => {
+    setNotiNullModal(false);
+  };
+
   const updateUserDetail = () => {
-    const currentTime = new Date().toLocaleTimeString();
-    axiosInstance
-      .put(
-        "api/appUser/update",
-        {
-          Id: user.userid,
-          Introduction: introduction,
-          FullName: fullname,
-          DateOfBirth: dateOfBirth,
-          Gender: gender,
-          Email: email,
-          PhoneNumber: phoneNumber,
-          CreateDate: currentTime,
-          City: city,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${user.access_token}`,
+    if (fullname.trim() == '' || dateOfBirth.trim() == '' || email.trim() == '' || phoneNumber.trim() == '') {
+      setNotiNullModal(true)
+    }
+    else {
+      const currentTime = new Date().toLocaleTimeString();
+      axiosInstance
+        .put(
+          "api/appUser/update",
+          {
+            Id: user.userid,
+            Introduction: introduction,
+            FullName: fullname,
+            DateOfBirth: dateOfBirth,
+            Gender: gender,
+            Email: email,
+            PhoneNumber: phoneNumber,
+            CreateDate: currentTime,
+            City: city,
           },
-        }
-      )
-      .then((response) => {
-        setNotiModal(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+            },
+          }
+        )
+        .then((response) => {
+          setNotiModal(true);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   const updatePassWord = () => {
     axiosInstance
@@ -254,7 +266,7 @@ export default function InfoUser() {
                           className="input__userDetail"
                           defaultValue={introduction}
                           onChange={(event) =>
-                            setIntroduction(event.target.value)
+                            setIntroduction(event.target.value) || ""
                           }
                           id="introductionTxt"
                         />
@@ -278,7 +290,7 @@ export default function InfoUser() {
                           required
                           multiline
                           defaultValue={userDetail?.userDetail?.FullName || ""}
-                          onChange={(event) => setFullName(event.target.value)}
+                          onChange={(event) => setFullName(event.target.value) || ""}
                           id="fullnameTxt"
                         />
                       </Grid>
@@ -359,7 +371,7 @@ export default function InfoUser() {
                             required
                             multiline
                             value={email}
-                            onChange={(event) => setEmail(event.target.value)}
+                            onChange={(event) => setEmail(event.target.value) || ""}
                             id="emailTxt"
                             disabled
                           />
@@ -369,7 +381,7 @@ export default function InfoUser() {
                             required
                             multiline
                             defaultValue={email}
-                            onChange={(event) => setEmail(event.target.value)}
+                            onChange={(event) => setEmail(event.target.value) || ""}
                             id="emailTxt"
                           />
                         )}
@@ -408,7 +420,7 @@ export default function InfoUser() {
                           multiline
                           defaultValue={phoneNumber}
                           onChange={(event) =>
-                            setPhoneNumber(event.target.value)
+                            setPhoneNumber(event.target.value) || ""
                           }
                           id="phoneNumberTxt"
                         />
@@ -573,6 +585,7 @@ export default function InfoUser() {
         </Button>
       </Container>
       {showNotiModal ? <NotiModal onClose={closeNotiModal} /> : null}
+      {showNotiNullModal ? <NotiNullModal onClose={closeNotiNullModal} /> : null}
     </>
   );
 }
