@@ -46,6 +46,6 @@ export const getFpointByUserData = (props) => async (dispatch, getState) => {
   if (typeof userPoint !== "undefined") {
     dispatch(getFpointByUser(userPoint));
   } else {
-    console.log('get fpoint failed');
+    console.log("get fpoint failed");
   }
 };
