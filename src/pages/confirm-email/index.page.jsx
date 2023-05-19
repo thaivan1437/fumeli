@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { axiosInstance } from '@/utils/api'
 import {
   Box,
@@ -33,45 +33,25 @@ const ContactPage = () => {
   const { userid, token } = router.query;
 
   const rltoken = token ? token.replace(/ /g, '+') : '';
-  
-  const handleSubmit = (event) => {
-    event.preventDefault()
 
-    if (fullName != email) {
-      setStatusCode({ isShow: true, status: 'error1' })
-    }
-    else {
-      axiosInstance
-        .put(`api/appuser/resetpassword/${userid}`, {
-          Id: userid,
-          Token: rltoken,
-          Password: fullName,
-        })
-        .then((response) => {
-          setOpen(true);
-          setFullName("");
-          setEmail("");
-          setPhoneNumber("");
-          setContent("");
-        })
-        .catch((error) => {
-          setStatusCode({ isShow: true, status: 'error' })
-        });
-    };
-  }
+  useEffect(() => {
+    axiosInstance
+      .put(`api/appuser/activeemail/${userid}`, {
+        Id: userid,
+        Token: rltoken,
+        Status: false
+      })
+      .then((response) => {
+        setOpen(true);
+      })
+      .catch((error) => {
+        setStatusCode({ isShow: true, status: 'error' })
+      });
+  }, [userid && token])
 
-  const showToast = () => {
-    if (statusCode.isShow && statusCode.status === 'error') {
-      return <Toast message="Oops! Đã có lỗi xảy ra" type="error" />
-    }
-    if (statusCode.isShow && statusCode.status === 'error1') {
-      return <Toast message="Mật khẩu không trùng nhau" type="error" />
-    }
-  }
 
   return (
     <Box mb={2}>
-      {showToast()}
       <Container maxWidth="lg" sx={{ pt: 8 }} className="colorWhite">
         <Grid container spacing={2}>
           <Grid item xs={12} md={7}>
@@ -151,48 +131,16 @@ const ContactPage = () => {
             </Grid>
           </Grid>
           <Grid item xs={12} md={5} sx={{ mt: 1 }}>
-            <Typography variant="h3" sx={{ mb: 4 }} className="headerContact">
-              ĐẶT LẠI MẬT KHẨU
-            </Typography>
-            <form >
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    type='password'
-                    id="fullName"
-                    label="Mật khẩu mới"
-                    variant="outlined"
-                    fullWidth
-                    value={fullName}
-                    onChange={(event) => setFullName(event.target.value)}
-                    className="label.Mui-focused .MuiOutlinedInput-root"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required 
-                    type='password'
-                    id="email"
-                    label="Xác nhận mật khẩu"
-                    variant="outlined"
-                    fullWidth
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Button variant="contained" className="btnSend" onClick={handleSubmit}>
-                    Đặt lại mật khẩu
-                  </Button>
-                  <ContactModal setOpen={setOpen} open={open} />
-                </Grid>
-              </Grid>
-            </form>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1996262.0016024602!2d106.7287124!3d12.2517156!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752582a618a451%3A0x5a94e3eb399b1acc!2zNTIgU-G7kSAxMCwgVMOibiBUaHXhuq1uIMSQw7RuZywgUXXhuq1uIDcsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1684140716301!5m2!1svi!2s"
+              height="100%"
+              width="100%"
+              title="Google Maps"
+            />
           </Grid>
         </Grid>
       </Container>
+      <ContactModal setOpen={setOpen} open={open} />
     </Box>
   );
 };
