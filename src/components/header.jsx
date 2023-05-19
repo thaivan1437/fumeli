@@ -45,6 +45,7 @@ const Header = ({ setHeaderHeight }) => {
     useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const headerRef = useRef(null);
+
   const [userName, setUserName] = useState("");
   const [mobileView, setMobileView] = useState(true);
 
@@ -52,6 +53,18 @@ const Header = ({ setHeaderHeight }) => {
   const isActive = (href) => {
     return pathname.indexOf(href) > -1 ? "active" : "";
   };
+
+  setHeaderHeight(headerRef?.current?.offsetHeight);
+
+
+  useEffect(() => {
+    if (headerRef.current) {
+      const headerHeight = headerRef.current.offsetHeight;
+      setHeaderHeight(headerHeight);
+    }
+  }, []);
+
+
   useEffect(() => {
     isActive(pathname);
   }, [pathname]);
@@ -128,15 +141,6 @@ const Header = ({ setHeaderHeight }) => {
     window.location = '/';
   }
 
-  useEffect(() => {
-    const headerElement = headerRef.current;
-    if (headerElement) {
-      const height = headerElement.offsetHeight;
-      console.log(height);
-      setHeaderHeight(height);
-    }
-  }, []);
-
   return (
     <React.StrictMode>
       {mobileView ? (
@@ -175,7 +179,7 @@ const Header = ({ setHeaderHeight }) => {
                 userName ? (
                   <>
                     <span className="header__text fs-20 fw-b text-color" onClick={handleClick}>{userName} <ExpandMoreIcon className='text-color' sx={{ marginLeft: '5px' }} /></span>
-                    
+
                     <Menu
                       anchorEl={anchorEl}
                       id="account-menu"

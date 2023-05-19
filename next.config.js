@@ -85,8 +85,8 @@ const nextConfig = {
   staticPageGenerationTimeout: 300000,
   env: {
     GOOGLE_CLIENT_ID:
-      "586486200042-n2gsukec90iep47p3erp515l30m5ar68.apps.googleusercontent.com",
-    GOOGLE_CLIENT_SECRET: "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",
+      "222976448496-cb46irpvt50119r1fkh20pff16a3oen3.apps.googleusercontent.com",
+    GOOGLE_CLIENT_SECRET: "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",
     NEXTAUTH_URL: "http://localhost:3000",
     apiHost: "https://api.fumeli.net/",
   },
