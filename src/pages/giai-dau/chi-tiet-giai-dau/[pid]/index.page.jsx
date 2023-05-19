@@ -8,18 +8,21 @@ import AutoSizeImage from '@/components/image';
 import YoutubeModal from '@/components/modal/video';
 import { useRouter } from 'next/router';
 
+
 const DetailTournament = () => {
+	const dispatch = useDispatch();
+	
 	const router = useRouter()
 	const { pid } = router.query;
 	const { matchCategory } = useSelector((state) => state?.match);
-	const detail = matchCategory.filter(item => item.Id == pid);
+	
+	const [detail, setdetail] = useState(matchCategory.filter(item => item.Id == pid));
 	const matchOther = matchCategory.filter(item => item.Id != pid);
 	const matchs = matchCategory && matchCategory.find(item => item.Id == pid)
 
-	const [newMtach, setnewMtach] = useState(matchs.Matchs);
+	const [newMtach, setnewMtach] = useState(matchs?.Matchs);
 	const [isActive, setIsActive] = useState();
 
-	const dispatch = useDispatch();
 	useEffect(() => {
 		if (matchCategory && matchCategory.length == 0) {
 			async function fetchData3() {
@@ -65,7 +68,7 @@ const DetailTournament = () => {
 	const today = new Date();
 	const handleShowMatchByCategory = (e) => {
 		const id = e.currentTarget.getAttribute('data-id');
-		
+
 		if (id == 1) {
 			setnewMtach(matchs.Matchs);
 		} else if (id == 2) {
@@ -78,7 +81,7 @@ const DetailTournament = () => {
 			setnewMtach(matchs.Matchs.filter(item => {
 				const startTime = new Date(item.StartTime);
 				return today < startTime;
-			}));			
+			}));
 		} else {
 			setnewMtach(matchs.Matchs.filter(item => {
 				const endTime = new Date(item.EndTime);
@@ -98,7 +101,9 @@ const DetailTournament = () => {
 							CHI TIẾT GIẢI ĐẤU
 						</Typography>
 						<Typography py={4} variant="h4" component="h2" color={'#fff'} className='tournament__title fw-b m-0 p-0'>
-							{detail[0].Title}
+						{/* {detail?.[0]?.Title ?? null} */}
+						{detail && detail[0] && detail[0].Title ? detail[0].Title : ""}
+
 						</Typography>
 						<Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'left', alignItems: 'center', color: '#fff' }} className='category__match'>
 							<Stack
@@ -157,22 +162,24 @@ const DetailTournament = () => {
 								}
 							</Box>
 							<Box className='bag__history'>
+
+
 								<Box className='video__slider--item custom'>
-									<AutoSizeImage isResize={false} src={detail[0].ImagePath} alt={detail.Title} width={777} height={440} />
+									<AutoSizeImage isResize={false} src={detail && detail[0] ? detail[0].ImagePath : `/images/match.png`} alt={detail.Title} width={777} height={440} />
 									<Box className='video__slider--info'>
 										<Typography
 											component="div"
 											className={`video__slider--title`}
 											color='#fff'
 										>
-											{detail[0].Title}
+										{detail && detail[0] ? detail[0].Title : ""}
 										</Typography>
 										<Typography
 											component="div"
 											className={`video__slider--desc`}
 											color='#fff'
 										>
-											{detail[0].Prize}
+										{detail && detail[0] ? detail[0].Prize : ""}
 										</Typography>
 									</Box>
 								</Box>
