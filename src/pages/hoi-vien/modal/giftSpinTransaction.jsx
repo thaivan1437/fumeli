@@ -76,7 +76,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
       .catch((error) => {
         $('.modal__giftTransaction--title').text('THẤT BẠI')
         $('.modal__giftTransaction--img').remove()
-        $('.modal__giftTransaction--description').empty().text(error.response.data.Message)
+        $('.modal__giftTransaction--description').empty().text(error?.response?.data?.Message)
         $('.button--confirm').remove()
         $('.button--back').css({ marginTop: '41%' })
       })

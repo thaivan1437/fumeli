@@ -98,12 +98,11 @@ const LoginModal = () => {
 
   const showToast = () => {
     if (statusCode.isShow && statusCode.status === 'error') {
-      return <Toast message="Error message" type="error" />
+      return <Toast message="Sai tài khoản hoặc mật khẩu" type="error" />
     }
     if (statusCode.isShow && statusCode.status === 'success') {
       return <Toast message="Login thành công" type="success" />
     }
-    
   }
 
   return (

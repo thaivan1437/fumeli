@@ -135,6 +135,8 @@ const SpinGame = () => {
           activeImage.classList.remove('spingame__item--img-active')
           images[prizeIndex].classList.add('spingame__item--img-active')
 
+console.log(spinGiftItem[prizeIndex]);
+
           axiosInstance
             .post(
               'api/UserGiftSpin/create',
@@ -143,7 +145,7 @@ const SpinGame = () => {
                 CreateDate: currentTime,
                 CreateUser: user.username,
                 UserId: user.userid,
-                GiftId: spinGiftItem[prizeIndex].Id,
+                GiftId: spinGiftItem[prizeIndex].GiftId,
               },
               {
                 headers: {

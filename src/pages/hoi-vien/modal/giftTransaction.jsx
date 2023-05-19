@@ -11,11 +11,12 @@ import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import AutoSizeImage from '@/components/image'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import {axiosInstance} from '@/utils/api'
+import { axiosInstance } from '@/utils/api'
+import { getUserGiftData } from "../logic/reducer";
 import $ from 'jquery'
 
 const GiftTransactionModal = ({ gift, onClose }) => {
-  console.log(gift)
+  const dispatch = useDispatch();
   const style = {
     position: 'absolute',
     top: '50%',
@@ -48,8 +49,8 @@ const GiftTransactionModal = ({ gift, onClose }) => {
   const currentTime = new Date().toLocaleTimeString()
   const giftTransactionAction = () => {
     axiosInstance
-      .post(
-        'api/UserGiftSpin/create',
+      .put(
+        `api/UserGift/update/${gift[0].Id}`,
         {
           Active: false,
           UpdateDate: currentTime,
@@ -63,6 +64,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
         }
       )
       .then((response) => {
+        dispatch(getUserGiftData({ userId: user?.userid }))
         $('.modal__giftTransaction--title').text('THÀNH CÔNG')
         $('.modal__giftTransaction--description')
           .empty()
@@ -73,7 +75,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
       .catch((error) => {
         $('.modal__giftTransaction--title').text('THẤT BẠI')
         $('.modal__giftTransaction--img').remove()
-        $('.modal__giftTransaction--description').empty().text(error.response.data.Message)
+        $('.modal__giftTransaction--description').empty().text(error?.response?.data?.Message)
         $('.button--confirm').remove()
         $('.button--back').css({ marginTop: '41%' })
       })

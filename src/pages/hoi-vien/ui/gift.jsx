@@ -25,7 +25,6 @@ const Bag = () => {
 
   const ITEMS_PER_PAGE = 4
   const { userGift, userGiftHistory, userDetail } = useSelector((state) => state?.userDetail)
-
   const EmailConfirmed = userDetail && userDetail?.EmailConfirmed;
   userGift.filter(gift => gift.Acitce === true);
   userGift.sort((a, b) => b.Id - a.Id)
@@ -63,7 +62,8 @@ const Bag = () => {
   }
 
   const hotItems = userGift.filter(item => item.Active === false)
-
+  hotItems.sort((a, b) => b.Id - a.Id)
+  
   return (
     <Container>
       <Grid container spacing={3}>
