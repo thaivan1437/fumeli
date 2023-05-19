@@ -9,6 +9,10 @@ const Daily = () => {
 	const [daily, setDaily] = useState([]);
 	const {missionCategory, configMission} = useSelector((state) => state?.mission);
 
+	const today = new Date();
+	daily.filter(event => event.StartTime <= today && today <= event.EndTime);
+
+
 	useEffect(() => {
 		if(daily?.length == 0 && missionCategory?.length) {
 			const dailyList = missionCategory && missionCategory.filter(item => item.IsDaily);
