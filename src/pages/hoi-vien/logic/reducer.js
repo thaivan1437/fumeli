@@ -28,7 +28,6 @@ const initialState = {
   userFriend: [],
   userPoint: [],
   historyUserRedeemGift: [],
-
 };
 
 export const userDetail = (state = initialState, action) => {
@@ -231,25 +230,31 @@ const USER_DETAIL_API_ENDPOINT = "appUser/detail/";
 let data = [];
 if (typeof window !== "undefined") {
   const userData = localStorage.getItem("user");
-  if (userData !== 'undefined') {
+  if (userData !== "undefined") {
     data = JSON.parse(userData);
   }
 }
 
 export const getAllDataThunkAction = () => async (dispatch, getState) => {
   try {
-    const [userDataResponse, allUserResponse, userFriendResponse, historyUserRedeemGift] =
-      await Promise.all([
-        axiosGet(`api/${USER_DETAIL_API_ENDPOINT}${data.userid}`, dispatch),
-        axiosGet("api/appUser/getallclientbyuserrole?role=user", dispatch),
-        axiosGet(`api/UserFriend/getallclientbyuserid/${data.userid}`, dispatch),
-        axiosGet(`api/UserGiftSpin/getallclientbyuserid/${data.userid}`, dispatch),
-      ]);
+    const [
+      userDataResponse,
+      allUserResponse,
+      userFriendResponse,
+      historyUserRedeemGift,
+    ] = await Promise.all([
+      axiosGet(`api/${USER_DETAIL_API_ENDPOINT}${data.userid}`, dispatch),
+      axiosGet("api/appUser/getallclientbyuserrole?role=user", dispatch),
+      axiosGet(`api/UserFriend/getallclientbyuserid/${data.userid}`, dispatch),
+      axiosGet(
+        `api/UserGiftSpin/getallclientbyuserid/${data.userid}`,
+        dispatch
+      ),
+    ]);
 
     await dispatch(getDataUser(userDataResponse));
     await dispatch(getAllUser(allUserResponse));
     await dispatch(getAllFriendByUserId(userFriendResponse));
-
   } catch (error) {
     console.log(error);
   }
