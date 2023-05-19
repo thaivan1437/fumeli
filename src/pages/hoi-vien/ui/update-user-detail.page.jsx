@@ -180,7 +180,10 @@ export default function InfoUser() {
       });
   };
 
+  const [disabled, setDisabled] = useState(false);
+
   const activeEmail = () => {
+    setDisabled(true);
     axiosInstance
       .post(
         "api/appUser/sendactiveemail",
@@ -194,12 +197,13 @@ export default function InfoUser() {
         }
       )
       .then((response) => {
-        console.log(response);
+        setDisabled(false);
         if (response) {
           setStatusCode({ isShow: true, status: "success" });
         }
       })
       .catch((error) => {
+        setDisabled(false);
         console.log(error);
       });
   };
@@ -378,8 +382,9 @@ export default function InfoUser() {
                             variant="contained"
                             className="btn__confirm"
                             onClick={activeEmail}
+                            disabled={disabled}
                           >
-                            XÁC MINH
+                            {disabled ? "ĐANG XÁC MINH" : "XÁC MINH"}
                           </Button>
                         )}
                       </Grid>
