@@ -43,7 +43,7 @@ const Mission = () => {
 							NHIỆM VỤ MỚI
 						</Typography>
 						<Typography variant="p" component="p" sx={{ margin: '15px 0' }}>
-							Nâng trình săn nhiệm vụ "pro" bằng cách hoàn tất các nhiệm vụ nâng cao với phần thưởng "xịn xò" hơn những nhiệm vụ thông thường. Đừng bỏ lỡ, let's go!
+							Nâng trình săn nhiệm vụ &quot;pro&quot; bằng cách hoàn tất các nhiệm vụ nâng cao với phần thưởng &quot;xịn xò&quot; hơn những nhiệm vụ thông thường. Đừng bỏ lỡ, let&apos;s go!
 						</Typography>
 						<div className="wrap__btn--more css__btn">
 							<Link href="/nhiem-vu.html" color='white'>
@@ -76,7 +76,7 @@ const Mission = () => {
 							NHIỆM VỤ NỔI BẬT
 						</Typography>
 						<Typography variant="p" component="p" className='text-right'>
-							Trở thành một trong những người đầu tiên hoàn thành các nhiệm vụ "nóng hổi mới ra lò" để tích lũy thêm FPOINT hấp dẫn. Tham gia ngay !
+							Trở thành một trong những người đầu tiên hoàn thành các nhiệm vụ &quot;nóng hổi mới ra lò&quot; để tích lũy thêm FPOINT hấp dẫn. Tham gia ngay !
 						</Typography>
 						<Box className="wrap__btn--more css__btn text-right">
 							<Link href="/nhiem-vu.html" color='white'>
