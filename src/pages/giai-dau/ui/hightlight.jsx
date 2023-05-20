@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 
 const HightLight = () => {
   const router = useRouter()
-	const {matchCategory} = useSelector((state) => state?.match);
+  const { matchCategory } = useSelector((state) => state?.match);
 
   // Khởi tạo ref
   const sliderRef = useRef(null);
@@ -98,21 +98,21 @@ const HightLight = () => {
         <Typography variant="h4" component="h2" color={'#fff'} className='fw-b tournament__title1 fs-48'>
           GIẢI ĐẤU NỔI BẬT
         </Typography>
-        <Typography variant="p" my={2} color={'white'} className="mw-440" sx={{ fontSize: '14px', display: 'block'}}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <Typography variant="p" my={2} color={'white'}  sx={{ fontSize: '14px', display: 'block' }}>
+          Tổng hợp thông tin, lịch thi đấu, clip trận đấu của toàn bộ các giải đấu game lớn trong và ngoài lãnh thổ Việt Nam. Bạn có thể tùy chọn xem các trận đấu, tham gia bình chọn, trao đổi và tìm kiếm Fpoint từ việc tham gia bình chọn này. Nhanh chóng tham gia cùng Fumeli ngay để hòa mình vào các trận đấu game đỉnh cao.
         </Typography>
       </Container>
 
       <Slider className="video__slider center" {...settings} ref={sliderRef}>
-        { matchCategory && (
+        {matchCategory && (
           matchCategory.map((item) => {
-            return(
+            return (
               <Box
                 className='video__slider--item cursor-pointer'
                 key={item.CreateDate}
                 onClick={() => openLink(`giai-dau/chi-tiet-giai-dau/${item.Id}.html`)}
               >
-                <AutoSizeImage isResize={false} src={item.ImagePath} alt={item.Title} width={777} height={440}/>
+                <AutoSizeImage isResize={false} src={item.ImagePath} alt={item.Title} width={777} height={440} />
                 <Box className='video__slider--info'>
                   <Typography
                     component="div"

@@ -33,4 +33,3 @@ RewriteRule ^tham-gia/daily/vong-quay-may-man/([^/]+)/?$ /vong-quay-may-man [L]
 # Redirect "/tham-gia/other/:name/:pid.html" to "/nhiem-vu/:pid"
 RewriteRule ^tham-gia/other/([^/]+)/([^/]+)\.html$ /nhiem-vu/$2 [L]
 
-RewriteRule ^api/auth/(.*)$ /api/auth [L]

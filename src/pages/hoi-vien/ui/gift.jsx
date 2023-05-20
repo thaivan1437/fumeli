@@ -17,6 +17,7 @@ import Pagination from './pagination.jsx'
 import moment from "moment/moment";
 
 const Bag = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false)
   const [showGiftTranscationModal, setGiftModal] = useState(false)
   const [gift, setGift] = useState('')
@@ -26,11 +27,11 @@ const Bag = () => {
   const ITEMS_PER_PAGE = 4
   const { userGift, userGiftHistory, userDetail } = useSelector((state) => state?.userDetail)
   const EmailConfirmed = userDetail && userDetail?.EmailConfirmed;
-  userGift.filter(gift => gift.Acitce === true);
-  userGift.sort((a, b) => b.Id - a.Id)
+  const dtuserGift = userGift.filter(item => item.Active == true).sort((a, b) => b.Id - a.Id);
+
   const [currentPage, setCurrentPage] = useState(1)
-  const totalPages = Math.ceil(userGift.length / ITEMS_PER_PAGE)
-  const displayData = userGift.slice(
+  const totalPages = Math.ceil(dtuserGift.length / ITEMS_PER_PAGE)
+  const displayData = dtuserGift.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   )
@@ -62,8 +63,9 @@ const Bag = () => {
   }
 
   const hotItems = userGift.filter(item => item.Active === false)
-  hotItems.sort((a, b) => b.Id - a.Id)
-  
+  hotItems.sort((a, b) => new Date(b.UpdateDate) - new Date(a.UpdateDate));
+
+
   return (
     <Container>
       <Grid container spacing={3}>
