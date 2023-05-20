@@ -1,25 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Button, Checkbox, FormControlLabel, Modal, Typography, Grid } from '@mui/material';
-import InputField from '@/components/input';
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Modal,
+  Typography,
+  Grid,
+} from "@mui/material";
+import InputField from "@/components/input";
 import { useDispatch, useSelector } from "react-redux";
 import {
   closeLoginModal,
   openForgetPasswordModal,
   openRegisterModal,
-  loginAction
+  loginAction,
 } from "./logic/action";
-import axios from 'axios';
-import Toast from '@/components/toast';
-import Image from 'next/image'
-import { getConfigUrl } from '@/utils/getConfig';
-import { signIn } from "next-auth/react"
+import axios from "axios";
+import Toast from "@/components/toast";
+import Image from "next/image";
+import { getConfigUrl } from "@/utils/getConfig";
+import { signIn } from "next-auth/react";
 
 const LoginModal = () => {
   const [rememberMe, setRememberMe] = useState(false);
-  const [statusCode, setStatusCode] = useState({ isShow: false, status: '' });
+  const [statusCode, setStatusCode] = useState({ isShow: false, status: "" });
   const [formData, setFormData] = useState({
-    Username: '',
-    Password: '',
+    Username: "",
+    Password: "",
   });
   useEffect(() => {
     // check open modal has data in localStore
@@ -27,19 +35,19 @@ const LoginModal = () => {
     if (user && user.Username) {
       setFormData(user);
     }
-  },[]);
+  }, []);
 
   useEffect(() => {
     if (statusCode && statusCode.isShow) {
       setTimeout(() => {
-        setStatusCode({ isShow: false, status: '' })
-      }, 2000)
+        setStatusCode({ isShow: false, status: "" });
+      }, 2000);
     }
-  },[statusCode.isShow]);
+  }, [statusCode.isShow]);
 
   const fields = [
-    { name: 'Username', label: 'Tên tài khoản', type: 'text' },
-    { name: 'Password', label: 'Mật khẩu', type: 'password' },
+    { name: "Username", label: "Tên tài khoản", type: "text" },
+    { name: "Password", label: "Mật khẩu", type: "password" },
   ];
 
   const handleRememberMe = (event) => {
@@ -53,7 +61,7 @@ const LoginModal = () => {
   };
 
   const dispatch = useDispatch();
-  const {loginModalOpen, user} = useSelector((state) => state.authReducer);
+  const { loginModalOpen, user } = useSelector((state) => state.authReducer);
 
   const handleClose = () => {
     dispatch(closeLoginModal());
@@ -69,30 +77,31 @@ const LoginModal = () => {
     dispatch(openRegisterModal());
   };
 
-  const handleLogin = async() => {
+  const handleLogin = async () => {
     event.preventDefault();
     const apiHost = await getConfigUrl();
     const params = new URLSearchParams();
-    params.append('Username', formData.Username);
-    params.append('Password', formData.Password);
-    params.append('grant_type', 'password');
-    axios.post(`${apiHost}api/oauth/token`, params)
-      .then(response => {
-        if(response.data.roles=='["user"]'){
-        setStatusCode({ isShow: true, status: 'success' })
-        localStorage.setItem("user", JSON.stringify(response.data));
-        dispatch(loginAction(response.data));
-        setTimeout(() => {
-          // wait toast end
-          handleClose();
-          window.location = "/";
-        }, 2500)}
-        else{
-          setStatusCode({ isShow: true, status: 'error' })
+    params.append("Username", formData.Username);
+    params.append("Password", formData.Password);
+    params.append("grant_type", "password");
+    axios
+      .post(`${apiHost}api/oauth/token`, params)
+      .then((response) => {
+        if (response.data.roles == '["user"]') {
+          setStatusCode({ isShow: true, status: "success" });
+          localStorage.setItem("user", JSON.stringify(response.data));
+          dispatch(loginAction(response.data));
+          setTimeout(() => {
+            // wait toast end
+            handleClose();
+            window.location = "/";
+          }, 2500);
+        } else {
+          setStatusCode({ isShow: true, status: "error" });
         }
       })
-      .catch(error => {
-        setStatusCode({ isShow: true, status: 'error' })
+      .catch((error) => {
+        setStatusCode({ isShow: true, status: "error" });
       });
   };
 
@@ -100,18 +109,21 @@ const LoginModal = () => {
     if (statusCode.isShow && statusCode.status === 'error') {
       return <Toast message="Sai tài khoản hoặc mật khẩu" type="error" />
     }
-    if (statusCode.isShow && statusCode.status === 'success') {
-      return <Toast message="Login thành công" type="success" />
+    if (statusCode.isShow && statusCode.status === "success") {
+      return <Toast message="Login thành công" type="success" />;
     }
   }
 
   return (
     <React.StrictMode>
       {showToast()}
-      <Modal disableScrollLock={true} open={loginModalOpen} onClose={handleClose} className='modal__common'>
-        <Box
-          className='modal__common--box'
-        >
+      <Modal
+        disableScrollLock={true}
+        open={loginModalOpen}
+        onClose={handleClose}
+        className="modal__common"
+      >
+        <Box className="modal__common--box">
           <Image
             src="/images/close.svg"
             alt="btn close"
@@ -120,8 +132,16 @@ const LoginModal = () => {
             height={27}
             className="btn__modal--close"
           />
-          <Typography variant="h6" component="h2" sx={{textAlign: 'center', textTransform: 'uppercase'}} className='fw-b fs-40'>
-            Đăng nhập <Typography variant="span" className='text-color'>Fumeli</Typography>
+          <Typography
+            variant="h6"
+            component="h2"
+            sx={{ textAlign: "center", textTransform: "uppercase" }}
+            className="fw-b fs-40"
+          >
+            Đăng nhập{" "}
+            <Typography variant="span" className="text-color">
+              Fumeli
+            </Typography>
           </Typography>
           <form>
             <Box my={2}>
@@ -144,12 +164,18 @@ const LoginModal = () => {
                   />
                 </Box>
               ))}
-              <Box className='forget--btn'>
-                <Button variant='text' color='error' onClick={handleForgetPassword}>Quên mật khẩu?</Button>
+              <Box className="forget--btn">
+                <Button
+                  variant="text"
+                  color="error"
+                  onClick={handleForgetPassword}
+                >
+                  Quên mật khẩu?
+                </Button>
               </Box>
-              <Box className='text-left'>
+              <Box className="text-left">
                 <FormControlLabel
-                  className='ftcolor1'
+                  className="ftcolor1"
                   control={
                     <Checkbox
                       checked={rememberMe}
@@ -162,10 +188,23 @@ const LoginModal = () => {
               </Box>
             </Box>
             <Box mt={5} mb={2}>
-              <Button type="submit" variant="contained" color="error" onClick={handleLogin} sx={{ width: '100%' , margin: 'auto'}} className='btn-login fs-20 custom'>Đăng nhập</Button>
+              <Button
+                type="submit"
+                variant="contained"
+                color="error"
+                onClick={handleLogin}
+                sx={{ width: "100%", margin: "auto" }}
+                className="btn-login fs-20 custom"
+              >
+                Đăng nhập
+              </Button>
             </Box>
             <Box my={2}>
-              <Button variant="contained" onClick={() => signIn("google")} className='btn-register fs-20 custom'>
+              <Button
+                variant="contained"
+                onClick={() => signIn("google")}
+                className="btn-register fs-20 custom"
+              >
                 <Image
                   src="/images/google.svg"
                   alt="btn close"
@@ -177,7 +216,13 @@ const LoginModal = () => {
               </Button>
             </Box>
             <Box my={2}>
-              <Button variant="contained" onClick={handleOpenRegister} className='btn-register fs-20 custom'>ĐĂNG KÝ TÀI KHOẢN</Button>
+              <Button
+                variant="contained"
+                onClick={handleOpenRegister}
+                className="btn-register fs-20 custom"
+              >
+                ĐĂNG KÝ TÀI KHOẢN
+              </Button>
             </Box>
           </form>
         </Box>

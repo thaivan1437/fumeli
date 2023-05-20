@@ -1,69 +1,66 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Typography, Container, Grid, Button } from '@mui/material'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableRow from '@mui/material/TableRow'
-import TextField from '@mui/material/TextField'
-import Radio from '@mui/material/Radio'
-import RadioGroup from '@mui/material/RadioGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-import LayoutUserPage from './avatar'
-import {axiosInstance} from '@/utils/api'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import dayjs from 'dayjs'
-import InputField from '@/components/input'
-import NotiModal from '../modal/noti'
-import {
-  getUserGiftData,
-} from "../logic/reducer";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Box, Typography, Container, Grid, Button } from "@mui/material";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import TextField from "@mui/material/TextField";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import LayoutUserPage from "./avatar";
+import { axiosInstance } from "@/utils/api";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import dayjs from "dayjs";
+import InputField from "@/components/input";
+import NotiModal from "../modal/noti";
+import NotiNullModal from "../modal/notiNull";
+import { getUserGiftData } from "../logic/reducer";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Toast from "@/components/toast";
 
 export default function InfoUser() {
   const dispatch = useDispatch();
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState("");
   useEffect(() => {
     // check login has data in localStore
-    const userData = JSON.parse(localStorage.getItem('user'))
+    const userData = JSON.parse(localStorage.getItem("user"));
     if (userData && userData.username) {
-      setUser(userData)
+      setUser(userData);
     }
-  }, [])
+  }, []);
   useEffect(() => {
     if (!user) {
       return;
     }
     async function fetchAllData() {
-      await Promise.all([
-        dispatch(getUserGiftData({ userId: user?.userid }))
-      ]);
+      await Promise.all([dispatch(getUserGiftData({ userId: user?.userid }))]);
     }
     void fetchAllData();
   }, [user]);
 
+  const userDetail = useSelector((state) => state.userDetail);
 
-  const userDetail = useSelector((state) => state.userDetail)
-
-  const [currentPass, setCurrentPass] = useState('')
-  const [pass, setPass] = useState('')
+  const [currentPass, setCurrentPass] = useState("");
+  const [pass, setPass] = useState("");
 
   const fields = [
-    { name: 'currentPassword', label: 'Mật khẩu hiện tại', type: 'password' },
-    { name: 'newPassword', label: 'Mật khẩu mới', type: 'password' },
+    { name: "currentPassword", label: "Mật khẩu hiện tại", type: "password" },
+    { name: "newPassword", label: "Mật khẩu mới", type: "password" },
     {
-      name: 'confirmPassword',
-      label: 'Nhập lại mật khẩu mới',
-      type: 'password',
+      name: "confirmPassword",
+      label: "Nhập lại mật khẩu mới",
+      type: "password",
     },
-  ]
+  ];
 
   const getInfoUser = () => {
     const value = {
@@ -71,98 +68,111 @@ export default function InfoUser() {
       introduction: userDetail.userDetail.Introduction,
       fullname: userDetail.userDetail.FullName,
       dateOfBirth: userDetail.userDetail.DateOfBirth,
+      gender: userDetail.userDetail.Gender,
       email: userDetail.userDetail.Email,
       phoneNumber: userDetail.userDetail.PhoneNumber,
-    }
-    return value
-  }
+    };
+    return value;
+  };
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
-    if (name === 'currentPassword') {
-      setCurrentPass(value)
-    } else if (name === 'newPassword') {
-      setPass(value)
+    if (name === "currentPassword") {
+      setCurrentPass(value);
+    } else if (name === "newPassword") {
+      setPass(value);
     }
-  }
-  const [showNotiModal, setNotiModal] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [city, setCity] = useState(getInfoUser().city || '')
+  };
+  const [showNotiModal, setNotiModal] = useState(false);
+  const [showNotiNullModal, setNotiNullModal] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [city, setCity] = useState(getInfoUser().city || "");
   const [introduction, setIntroduction] = useState(
-    getInfoUser().introduction || ''
-  )
-  const [fullname, setFullName] = useState(getInfoUser().fullname || '')
+    getInfoUser().introduction || ""
+  );
+  const [fullname, setFullName] = useState(getInfoUser().fullname || "");
   const [dateOfBirth, setDateOfBirth] = useState(
-    getInfoUser().dateOfBirth || ''
-  )
-  const [email, setEmail] = useState(getInfoUser().email || '')
+    getInfoUser().dateOfBirth || ""
+  );
+  const [gender, setGender] = useState(getInfoUser().gender || "");
+  const [email, setEmail] = useState(getInfoUser().email || "");
   const [phoneNumber, setPhoneNumber] = useState(
-    getInfoUser().phoneNumber || ''
-  )
-
+    getInfoUser().phoneNumber || ""
+  );
+  const [statusCode, setStatusCode] = useState({ isShow: false, status: "" });
 
   useEffect(() => {
     if (!user) {
       return;
     }
-    setCity(getInfoUser().city || '')
-    setIntroduction(getInfoUser().introduction || '')
-    setFullName(getInfoUser().fullname || '')
-    setDateOfBirth(getInfoUser().dateOfBirth || '')
-    setEmail(getInfoUser().email || '')
-    setPhoneNumber(
-      getInfoUser().phoneNumber || ''
-    )
+    setCity(getInfoUser().city || "");
+    setIntroduction(getInfoUser().introduction || "");
+    setFullName(getInfoUser().fullname || "");
+    setDateOfBirth(getInfoUser().dateOfBirth || "");
+    setGender(getInfoUser().gender || "");
+    setEmail(getInfoUser().email || "");
+    setPhoneNumber(getInfoUser().phoneNumber || "");
   }, [userDetail.userDetail]);
 
   const handleChange = (event) => {
-    setCity(event.target.value)
-  }
+    setCity(event.target.value) || "";
+  };
 
   const handleDateClick = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const handleDateClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const closeNotiModal = () => {
-    setNotiModal(false)
-  }
+    setNotiModal(false);
+  };
+
+  const closeNotiNullModal = () => {
+    setNotiNullModal(false);
+  };
+
   const updateUserDetail = () => {
-    const currentTime = new Date().toLocaleTimeString()
-    axiosInstance
-      .put(
-        'api/appUser/update',
-        {
-          Id: user.userid,
-          Introduction: introduction,
-          FullName: fullname,
-          DateOfBirth: dateOfBirth,
-          Email: email,
-          PhoneNumber: phoneNumber,
-          CreateDate: currentTime,
-          City: city,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${user.access_token}`,
+    if (fullname.trim() == '' || dateOfBirth.trim() == '' || email.trim() == '' || phoneNumber.trim() == '') {
+      setNotiNullModal(true)
+    }
+    else {
+      const currentTime = new Date().toLocaleTimeString();
+      axiosInstance
+        .put(
+          "api/appUser/update",
+          {
+            Id: user.userid,
+            Introduction: introduction,
+            FullName: fullname,
+            DateOfBirth: dateOfBirth,
+            Gender: gender,
+            Email: email,
+            PhoneNumber: phoneNumber,
+            CreateDate: currentTime,
+            City: city,
           },
-        }
-      )
-      .then((response) => {
-        setNotiModal(true)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+            },
+          }
+        )
+        .then((response) => {
+          setNotiModal(true);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   const updatePassWord = () => {
     axiosInstance
       .put(
-        'api/appUser/updatepassword',
+        "api/appUser/updatepassword",
         {
           Id: user.userid,
           CurrentPassword: currentPass,
@@ -175,19 +185,22 @@ export default function InfoUser() {
         }
       )
       .then((response) => {
-        setNotiModal(true)
+        setNotiModal(true);
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
+
+  const [disabled, setDisabled] = useState(false);
 
   const activeEmail = () => {
+    setDisabled(true);
     axiosInstance
       .post(
-        '/appUser/sendactiveemail',
+        "api/appUser/sendactiveemail",
         {
-          Id: user.userid
+          Id: user.userid,
         },
         {
           headers: {
@@ -196,19 +209,31 @@ export default function InfoUser() {
         }
       )
       .then((response) => {
-        setNotiModal(true)
+        setDisabled(false);
+        if (response) {
+          setStatusCode({ isShow: true, status: "success" });
+        }
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        setDisabled(false);
+        console.log(error);
+      });
+  };
 
+  const xs_email = userDetail.userDetail.EmailConfirmed ? 10 : 12;
+  const xs1_email = userDetail.userDetail.EmailConfirmed ? 2 : 12;
 
-  const xs_email = userDetail.userDetail.EmailConfirmed ? 10 : 12
-  const xs1_email = userDetail.userDetail.EmailConfirmed ? 2 : 12
+  const showToast = () => {
+    if (statusCode.isShow && statusCode.status === "success") {
+      return (
+        <Toast message="Vui lòng kiểm tra email của bạn!" type="success" />
+      );
+    }
+  };
 
   return (
     <>
+      {showToast()}
       <LayoutUserPage />
       <Container>
         <Typography
@@ -225,7 +250,7 @@ export default function InfoUser() {
               <TableBody>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 'none' },
+                    "&:last-child td, &:last-child th": { border: "none" },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -241,7 +266,7 @@ export default function InfoUser() {
                           className="input__userDetail"
                           defaultValue={introduction}
                           onChange={(event) =>
-                            setIntroduction(event.target.value)
+                            setIntroduction(event.target.value) || ""
                           }
                           id="introductionTxt"
                         />
@@ -251,7 +276,7 @@ export default function InfoUser() {
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -264,8 +289,8 @@ export default function InfoUser() {
                           className="input__userDetail"
                           required
                           multiline
-                          defaultValue={userDetail?.userDetail?.FullName || ''}
-                          onChange={(event) => setFullName(event.target.value)}
+                          defaultValue={userDetail?.userDetail?.FullName || ""}
+                          onChange={(event) => setFullName(event.target.value) || ""}
                           id="fullnameTxt"
                         />
                       </Grid>
@@ -274,7 +299,7 @@ export default function InfoUser() {
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -287,9 +312,7 @@ export default function InfoUser() {
                           <DatePicker
                             className="input__userDetail date__input"
                             color="white"
-                            defaultValue={dayjs(
-                              dateOfBirth
-                            )}
+                            defaultValue={dayjs(dateOfBirth)}
                             onChange={(value) => setDateOfBirth(value)}
                             id="dateOfBirthTxt"
                           />
@@ -300,7 +323,7 @@ export default function InfoUser() {
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -313,7 +336,8 @@ export default function InfoUser() {
                           row
                           aria-labelledby="demo-row-radio-buttons-group-label"
                           name="row-radio-buttons-group"
-                          defaultValue="false"
+                          value={gender}
+                          onChange={(e) => setGender(e.target.value)}
                         >
                           <FormControlLabel
                             value="false"
@@ -332,7 +356,7 @@ export default function InfoUser() {
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -341,36 +365,47 @@ export default function InfoUser() {
                         EMAIL<span className="cl-red">*</span>
                       </Grid>
                       <Grid item xs={xs_email} md={8}>
-                        {userDetail.userDetail.EmailConfirmed ? <TextField
-                          className="input__userDetail"
-                          required
-                          multiline
-                          value={email}
-                          onChange={(event) => setEmail(event.target.value)}
-                          id="emailTxt"
-                          disabled
-                        /> : <TextField
-                          className="input__userDetail"
-                          required
-                          multiline
-                          defaultValue={email}
-                          onChange={(event) => setEmail(event.target.value)}
-                          id="emailTxt"
-
-                        />}
+                        {userDetail.userDetail.EmailConfirmed ? (
+                          <TextField
+                            className="input__userDetail"
+                            required
+                            multiline
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value) || ""}
+                            id="emailTxt"
+                            disabled
+                          />
+                        ) : (
+                          <TextField
+                            className="input__userDetail"
+                            required
+                            multiline
+                            defaultValue={email}
+                            onChange={(event) => setEmail(event.target.value) || ""}
+                            id="emailTxt"
+                          />
+                        )}
                       </Grid>
                       <Grid item xs={xs1_email} md={2}>
-                        {userDetail.userDetail.EmailConfirmed ? <CheckCircleIcon className='table__userDetail--confirmTick' /> : <Button variant="contained" className="btn__confirm" onClick={activeEmail}>
-                          XÁC MINH
-                        </Button>}
-
+                        {userDetail.userDetail.EmailConfirmed ? (
+                          <CheckCircleIcon className="table__userDetail--confirmTick" />
+                        ) : (
+                          <Button
+                            variant="contained"
+                            className="btn__confirm"
+                            onClick={activeEmail}
+                            disabled={disabled}
+                          >
+                            {disabled ? "ĐANG XÁC MINH" : "XÁC MINH"}
+                          </Button>
+                        )}
                       </Grid>
                     </Grid>
                   </TableCell>
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -385,7 +420,7 @@ export default function InfoUser() {
                           multiline
                           defaultValue={phoneNumber}
                           onChange={(event) =>
-                            setPhoneNumber(event.target.value)
+                            setPhoneNumber(event.target.value) || ""
                           }
                           id="phoneNumberTxt"
                         />
@@ -400,7 +435,7 @@ export default function InfoUser() {
                 </TableRow>
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -502,7 +537,7 @@ export default function InfoUser() {
 
                 <TableRow
                   sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell className="table__userDetail--text__left bd-none p-lr-0">
@@ -543,12 +578,14 @@ export default function InfoUser() {
         <Button
           variant="contained"
           className="btn_outline w-100"
+          type="submit"
           onClick={() => updateUserDetail()}
         >
           CẬP NHẬT NGAY
         </Button>
       </Container>
       {showNotiModal ? <NotiModal onClose={closeNotiModal} /> : null}
+      {showNotiNullModal ? <NotiNullModal onClose={closeNotiNullModal} /> : null}
     </>
-  )
+  );
 }
