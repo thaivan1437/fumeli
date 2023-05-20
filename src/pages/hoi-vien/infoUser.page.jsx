@@ -18,8 +18,9 @@ export default function InfoUser() {
     }
     void fetchAllData();
   }, [user]);
-  
+
   const { userDetail } = useSelector((state) => state?.userDetail);
+  console.log("=>> userDetail", userDetail);
   const userDetailInfo = [
     {
       id: 1,
@@ -29,12 +30,19 @@ export default function InfoUser() {
     {
       id: 2,
       title: "Ngày sinh",
-      value: moment(userDetail?.DateOfBirth).format("DD/MM/YYYY"),
+      value: userDetail?.DateOfBirth
+        ? moment(userDetail?.DateOfBirth).format("DD/MM/YYYY")
+        : null,
     },
     {
       id: 3,
       title: "Giới tính",
-      value: userDetail?.Gender,
+      value:
+        userDetail?.Gender == true
+          ? "Nam"
+          : userDetail?.Gender == false
+          ? "Nữ"
+          : null,
     },
     {
       id: 4,
@@ -56,11 +64,6 @@ export default function InfoUser() {
       title: "Tham gia",
       value: moment(userDetail?.Created).format("DD/MM/YYYY"),
     },
-    {
-      id: 8,
-      title: "Giới thiệu",
-      value: userDetail?.Introduction,
-    },
   ];
 
   return (
@@ -71,9 +74,7 @@ export default function InfoUser() {
           <h1>THÔNG TIN CÁ NHÂN</h1>
           <div className="userDetail__description">
             <p className="fs-20">GIỚI THIỆU</p>
-            <small className="fs-16">
-              {userDetail?.Introduction}
-            </small>
+            <small className="fs-16">{userDetail?.Introduction}</small>
           </div>
 
           <div className="info__box">
