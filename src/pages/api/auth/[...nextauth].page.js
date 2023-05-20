@@ -43,7 +43,6 @@ const authOptions = {
     },
     // Các callback khác...
   },
-  secret: "94d25574656a8ee61f1adb9d18435c36",
 };
 
 export default (req, res) => NextAuth(req, res, authOptions);

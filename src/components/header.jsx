@@ -137,7 +137,10 @@ const Header = ({ setHeaderHeight }) => {
   const handleLogout = async() => {
     localStorage.setItem("user", JSON.stringify(''));
     handleClose();
-    await signOut();
+    if (typeof signOut() === 'function') {
+      await signOut();
+    }
+    
     window.location = '/';
   }
 

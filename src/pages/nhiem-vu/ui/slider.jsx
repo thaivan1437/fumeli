@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import AutoSizeImage from '@/components/image';
-import { getSlideAndMissionData} from '../../home/logic/reducer';
+import { getSlideAndMissionData } from '../../home/logic/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 
 const SliderMission = () => {
@@ -30,21 +30,24 @@ const SliderMission = () => {
     arrows: false,
   }
 
+
   return (
     <React.Fragment>
-      { 
+      {
         // loading when load api
-        newSlider && newSlider?.length > 0 ? 
+        newSlider && newSlider?.length > 0 ?
           <Box className='mission__custom'>
             <Slider
               className="banner__sliderM mission__slider"
               {...setting2}
               ref={sliderAction}
             >
-              { newSlider && (
+              {newSlider && (
                 newSlider.map((item) => {
                   return <div className='banner__slider--main' key={item.CreateDate}>
-                    <AutoSizeImage isResize={false} src={item.UrlImage} alt={item.link} width={1368} height={525} />
+                    <a href={item.Link}>
+                      <AutoSizeImage isResize={false} src={item.UrlImage} alt={item.link} width={1368} height={525} />
+                    </a>
                   </div>
                 })
               )}
@@ -53,17 +56,17 @@ const SliderMission = () => {
               <Container>
                 <Box className="d-flex just-content-right hide-xs">
                   <Box pr={1} className='previous_caro cursor' onClick={() => sliderAction?.current?.slickPrev()}>
-                    <img src="/images/prev.svg"/>
+                    <img src="/images/prev.svg" />
                   </Box>
                   <Box pl={1} className='next_caro cursor' onClick={() => sliderAction?.current?.slickNext()}>
-                    <img src="/images/next.svg"/>
+                    <img src="/images/next.svg" />
                   </Box>
                 </Box>
               </Container>
             </Box>
           </Box>
-        :
-          <Skeleton variant="rounded" sx={{width: '100%' ,height: '600px', bgcolor: 'grey.900', margin: '20px auto'}} /> 
+          :
+          <Skeleton variant="rounded" sx={{ width: '100%', height: '600px', bgcolor: 'grey.900', margin: '20px auto' }} />
       }
     </React.Fragment>
   );

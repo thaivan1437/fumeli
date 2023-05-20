@@ -70,10 +70,9 @@ const SendFpointModal = ({ friend, onClose }) => {
         $('.button--confirm').remove()
       })
       .catch((error) => {
-        console.log(error)
         $('.modal__giftTransaction--title').text('THẤT BẠI')
         $('.modal__giftTransaction--img').remove()
-        $('.modal__giftTransaction--description').empty().text(error.message)
+        $('.modal__giftTransaction--description').empty().text(error?.response?.data?.Message)
         $('.button--confirm').remove()
       })
   }

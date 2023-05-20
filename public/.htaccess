@@ -1,0 +1,36 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+# Redirect "/:path.html" to "/:path"
+RewriteRule ^([^/]+)\.html$ /$1 [L]
+
+# Redirect "/tham-gia/daily/:name/:pid*" to "/nhiem-vu/[pid]"
+RewriteRule ^tham-gia/daily/([^/]+)/([^/]+)/?$ /nhiem-vu/$2 [L]
+
+# Redirect "/nhiem-vu/:pid*" to "/nhiem-vu/[pid]"
+RewriteRule ^nhiem-vu/([^/]+)/?$ /nhiem-vu/$1 [L]
+
+# Redirect "/giai-dau/chi-tiet-giai-dau/:pid*" to "/giai-dau/chi-tiet-giai-dau/[pid]"
+RewriteRule ^giai-dau/chi-tiet-giai-dau/([^/]+)/?$ /giai-dau/chi-tiet-giai-dau/$1 [L]
+
+# Redirect "/hoi-vien/activity.html" to "/hoi-vien/activity"
+RewriteRule ^hoi-vien/activity\.html$ /hoi-vien/activity [L]
+
+# Redirect "/hoi-vien/bag.html" to "/hoi-vien/bag"
+RewriteRule ^hoi-vien/bag\.html$ /hoi-vien/bag [L]
+
+# Redirect "/hoi-vien/friend.html" to "/hoi-vien/friend"
+RewriteRule ^hoi-vien/friend\.html$ /hoi-vien/friend [L]
+
+# Redirect "/hoi-vien/infoUser.html" to "/hoi-vien/infoUser"
+RewriteRule ^hoi-vien/infoUser\.html$ /hoi-vien/infoUser [L]
+
+# Redirect "/tham-gia/daily/vong-quay-may-man/:pid*" to "/vong-quay-may-man"
+RewriteRule ^tham-gia/daily/vong-quay-may-man/([^/]+)/?$ /vong-quay-may-man [L]
+
+# Redirect "/tham-gia/other/:name/:pid.html" to "/nhiem-vu/:pid"
+RewriteRule ^tham-gia/other/([^/]+)/([^/]+)\.html$ /nhiem-vu/$2 [L]

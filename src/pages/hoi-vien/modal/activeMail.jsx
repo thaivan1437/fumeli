@@ -10,11 +10,12 @@ import {
 import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import {axiosInstance} from '@/utils/api'
+import { axiosInstance } from '@/utils/api'
 import $ from 'jquery'
-import InputField from '@/components/input';
+import InputField from '@/components/input'; 
+import { usePathname } from "next/navigation";
 
-const ActiveMailModal = ({userDetail,  onClose }) => {
+const ActiveMailModal = ({ userDetail, onClose }) => {
 
   const style = {
     position: 'absolute',
@@ -40,7 +41,7 @@ const ActiveMailModal = ({userDetail,  onClose }) => {
     setOpen(false)
     onClose()
   }
-  
+
   useEffect(() => {
     axiosInstance
       .post(
@@ -94,8 +95,11 @@ const ActiveMailModal = ({userDetail,  onClose }) => {
         $('.modal__giftTransaction--img').remove()
         $('.modal__giftTransaction--description').empty().text(error.message)
       })
-  }
+  }  
+  const pathname = usePathname();
 
+  console.log(pathname);
+  
   return (
     <Modal
       open={open}
@@ -136,20 +140,26 @@ const ActiveMailModal = ({userDetail,  onClose }) => {
           variant="h6"
           component="p"
         >
-          Bạn cần xác nhận email trước khi có thể đổi quà. Một email có mã code đã được gửi về email của bạn vui lòng kiểm tra và nhập code ở đây.
+          Bạn cần xác nhận email trước khi có thể đổi quà!
+
         </Typography>
 
+        <a href='/hoi-vien/ui/update-user-detail'>
+          <Typography
+            // className="modal__giftTransaction--description"
+            variant="h6"
+            component="p"
+            color="red"
+          >
+
+            Xác minh<span> email!</span>
+          </Typography>
+        </a>
+
+
         <Box mb={4}>
-          <InputField
-            name='codeConfirm'
-            type='text'
-            value={codeConfirm}
-            onChange={(e) => setCodeConfirm(e.target.value)}
-            fullWidth
-            required
-          />
         </Box>
-      
+
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
@@ -159,13 +169,6 @@ const ActiveMailModal = ({userDetail,  onClose }) => {
             style={{ marginRight: '4%' }}
           >
             <ArrowCircleLeftRoundedIcon /> QUAY LẠI
-          </Button>
-          <Button
-            variant="contained"
-            className="button--confirm"
-            onClick={() => ActiveEmail()}
-          >
-            XÁC NHẬN
           </Button>
         </Box>
       </Box>
