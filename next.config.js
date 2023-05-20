@@ -36,10 +36,6 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/:path.html",
-        destination: "/:path",
-      },
-      {
         source: "/giai-dau/chi-tiet-giai-dau/:pid.html",
         destination: "/giai-dau/chi-tiet-giai-dau/:pid",
       },
@@ -74,7 +70,7 @@ const nextConfig = {
       {
         source: "/tham-gia/other/:name/:pid.html",
         destination: "/nhiem-vu/:pid",
-      }
+      },
     ];
   },
   serverRuntimeConfig: {
