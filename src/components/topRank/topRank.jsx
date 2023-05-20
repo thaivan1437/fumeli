@@ -16,13 +16,17 @@ import Image from "next/image";
 export default function TopRank() {
   const dispatch = useDispatch();
   const { topRank } = useSelector((state) => state?.topRank);
-  const { userPoint } = useSelector((state) => state?.topRank);
-  const [isShowRank, setIsShowRank] = useState(false);
   const { user } = useSelector((state) => state?.authReducer);
+  const { userPoint } = useSelector((state) => state?.topRank);
+
+  useEffect(() => {
+    dispatch(getFpointByUserData({ userId: user?.userid }));
+  }, [user]);
+
+  const [isShowRank, setIsShowRank] = useState(false);
   useEffect(() => {
     async function fetchAllData() {
       await dispatch(getTopRankDataThunkAction());
-      await dispatch(getFpointByUserData({ userId: user?.userid }));
     }
     void fetchAllData();
   }, []);
@@ -135,17 +139,19 @@ export default function TopRank() {
             BẢNG XẾP HẠNG
           </Typography>
         </ListItemText>
-        {
-          newTopRank && newTopRank.map((item, index) =>{
-            if (index > 9) return
-            return renderItem(item, index)
-          })
-        }
-        <div className={`total__fpoint ${isShowRank ? "active" : ""}`}>
-          <p className="fs-20">
-            Điểm tích lũy của bạn: <span>{userPoint?.FpointValue} Fpoint</span>
-          </p>
-        </div>
+        {newTopRank &&
+          newTopRank.map((item, index) => {
+            if (index > 9) return;
+            return renderItem(item, index);
+          })}
+        {userPoint && (
+          <div className={`total__fpoint ${isShowRank ? "active" : ""}`}>
+            <p className="fs-20">
+              Điểm tích lũy của bạn:{" "}
+              <span>{userPoint?.FpointValue} Fpoint</span>
+            </p>
+          </div>
+        )}
       </List>
     </React.StrictMode>
   );
