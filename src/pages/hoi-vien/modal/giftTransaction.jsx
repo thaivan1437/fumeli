@@ -7,6 +7,7 @@ import {
   Typography,
   Button,
 } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import AutoSizeImage from '@/components/image'
@@ -75,7 +76,7 @@ const GiftTransactionModal = ({ gift, onClose }) => {
       .catch((error) => {
         $('.modal__giftTransaction--title').text('THẤT BẠI')
         $('.modal__giftTransaction--img').remove()
-        $('.modal__giftTransaction--description').empty().text(error?.response?.data?.Message)
+        $('.modal__giftTransaction--description').empty().text(error?.response?.data)
         $('.button--confirm').remove()
         $('.button--back').css({ marginTop: '41%' })
       })

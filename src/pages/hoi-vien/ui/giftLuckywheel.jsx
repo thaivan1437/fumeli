@@ -78,6 +78,8 @@ const Bag = () => {
   }
 
   const hotItems = spinsHistory.filter(item => item.Active === false)
+  hotItems.sort((a, b) => new Date(b.UpdateDate) - new Date(a.UpdateDate));
+
   return (
     <Container>
       <Grid container spacing={3}>
