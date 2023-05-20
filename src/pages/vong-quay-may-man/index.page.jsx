@@ -7,6 +7,7 @@ import RulesSpinGame from './ui/rules'
 
 export default function LuckyWheel() {
   const dispatch = useDispatch()
+
   useEffect(() => {
     async function fetchAllData() {
       await dispatch(getAllDataThunkAction())

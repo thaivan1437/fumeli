@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Modal, Backdrop, Box, Typography, Button } from '@mui/material'
 import Image from 'next/image'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
-import {axiosInstance} from '@/utils/api'
+import { axiosInstance } from '@/utils/api'
 import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import Toast from '@/components/toast'
 import { getAllDataThunkAction } from '../logic/reducer'
@@ -10,9 +10,9 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 
 const SpinTurnTransactionModal = ({ onClose }) => {
-  const {spinTurnValue} = useSelector((state) => state.spinGiftItem)
-
   const dispatch = useDispatch()
+  const { spinTurnValue } = useSelector((state) => state.spinGiftItem)
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -64,9 +64,10 @@ const SpinTurnTransactionModal = ({ onClose }) => {
       )
       .then((response) => {
         setStatusCode({ isShow: true, status: 'success' })
-         setTimeout(() => {
-      onClose()
-    }, 3000)
+        setTimeout(() => {
+          onClose()
+        }, 3000)
+        dispatch(getAllDataThunkAction())
       })
       .catch((error) => {
         setStatusCode({ isShow: true, status: 'error' })
@@ -74,7 +75,6 @@ const SpinTurnTransactionModal = ({ onClose }) => {
           onClose()
         }, 3000)
       })
-    dispatch(getAllDataThunkAction())
   }
 
   const showToast = () => {

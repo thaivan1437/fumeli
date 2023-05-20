@@ -9,16 +9,17 @@ import {
 } from '@mui/material'
 import { useSelector } from 'react-redux'
 import Image from 'next/image'
-import {axiosInstance} from '@/utils/api'
+import { axiosInstance } from '@/utils/api'
 import NotiModal from '../modal/notiModal'
 import SpinTurnTransactionModal from '../modal/spinTurnTransaction'
 import { getAllDataThunkAction } from '../logic/reducer'
 import { useDispatch } from 'react-redux'
+import { format, isToday } from 'date-fns';
 
 const SpinGame = () => {
   const dispatch = useDispatch()
   const spinGiftItemData = useSelector((state) => state.spinGiftItem)
- 
+
   const spinGiftItem = spinGiftItemData.spinGiftItem.sort(
     (a, b) => a.Percentage - b.Percentage
   )
@@ -64,17 +65,62 @@ const SpinGame = () => {
     }
   }, [])
 
+
   const userSpinTurnData = useSelector(
     (state) => state.spinGiftItem.spinturn || []
   )
+  useEffect(() => {
+    axiosInstance
+      .get(
+        `api/UserSpinGame/getallclientbyuserid/${user.userid}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+          },
+        }
+      )
+      .then((response) => {
+        const createdToday = response.data.filter((item) => item.isFree == true).some((item) => {
+          const createDate = new Date(item.CreateDate);
+          return isToday(createDate);
+        });
+        if (!createdToday) {
+          axiosInstance
+            .post(
+              'api/UserSpinGame/create',
+              {
+                Active: true,
+                CreateDate: currentTime,
+                CreateUser: user.username,
+                UserId: user.userid,
+                isFree: true,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${user.access_token}`,
+                },
+              }
+            )
+            .then((response) => {
+              dispatch(getAllDataThunkAction())
+            })
+            .catch((error) => {
+            })
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, [user])
 
-  const userSpinTurn = userSpinTurnData.length || 0
 
-  const [spinTurn, setSpinTurn] = useState(userSpinTurn)
+  const [spinTurn, setSpinTurn] = useState(userSpinTurnData.length || 0)
 
   useEffect(() => {
+
+    const userSpinTurn = userSpinTurnData.length || 0;
     setSpinTurn(userSpinTurn)
-  }, [userSpinTurn])
+  }, [userSpinTurnData])
 
   const currentTime = new Date().toLocaleTimeString()
 
@@ -135,8 +181,6 @@ const SpinGame = () => {
           activeImage.classList.remove('spingame__item--img-active')
           images[prizeIndex].classList.add('spingame__item--img-active')
 
-console.log(spinGiftItem[prizeIndex]);
-
           axiosInstance
             .post(
               'api/UserGiftSpin/create',
@@ -164,7 +208,7 @@ console.log(spinGiftItem[prizeIndex]);
       }, 4000)
     }
   }
-  
+
   return (
     <>
       <Container mt={8}>

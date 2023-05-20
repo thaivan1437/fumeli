@@ -19,7 +19,6 @@ export const getSpinTurn = (res) => {
   }
 }
 
-
 export const getSpinTurnValue = (res) => {
   return {
     type: 'GET_SPINTURNVALUE',

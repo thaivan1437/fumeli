@@ -42,6 +42,9 @@ if (typeof window !== 'undefined') {
     data = JSON.parse(userData)
   }
 }
+
+
+
 export const getAllDataThunkAction = () => async (dispatch, getState) => {
   try {
     const urls = [
