@@ -5,8 +5,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
 
-# Redirect "/:path.html" to "/:path"
-RewriteRule ^([^/]+)\.html$ /$1 [L]
 
 # Redirect "/tham-gia/daily/:name/:pid*" to "/nhiem-vu/[pid]"
 RewriteRule ^tham-gia/daily/([^/]+)/([^/]+)/?$ /nhiem-vu/$2 [L]
