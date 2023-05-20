@@ -28,8 +28,6 @@ const Bag = () => {
   const { userGift, userGiftHistory, userDetail } = useSelector((state) => state?.userDetail)
   const EmailConfirmed = userDetail && userDetail?.EmailConfirmed;
   const dtuserGift = userGift.filter(item => item.Active == true).sort((a, b) => b.Id - a.Id);
-  console.log(dtuserGift);
-
 
   const [currentPage, setCurrentPage] = useState(1)
   const totalPages = Math.ceil(dtuserGift.length / ITEMS_PER_PAGE)
