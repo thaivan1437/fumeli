@@ -1,7 +1,7 @@
 .modal__register {
-  display: 'flex';
+  display: "flex";
   align-items: center;
-  justify-content: 'center',
+  justify-content: "center";
 }
 // over write button
 .MuiButton-root {
@@ -45,7 +45,8 @@
     min-height: 420px;
     background-color: #fff;
     border: 0;
-    box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2), 0px 24px 38px 3px rgba(0,0,0,0.14), 0px 9px 46px 8px rgba(0,0,0,0.12);
+    box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14),
+      0px 9px 46px 8px rgba(0, 0, 0, 0.12);
     padding: 32px;
     border-radius: 10px;
     text-align: center;
@@ -69,21 +70,30 @@
       margin: 0 0 15px !important;
     }
   }
-  .modal__register--paper {
-
+  &--error__message {
+    padding: 0;
+    margin: 0 2px;
+    color: #ff2423;
+    text-align: left;
+  }
+  &--success__message {
+    padding: 0;
+    margin: 0 2px;
+    color: green;
+    text-align: left;
   }
   .note-term {
     text-align: left;
-    color: #8B8B8B;
+    color: #8b8b8b;
     font-size: 12px;
   }
   .btn-register {
     width: 100%;
     margin: auto;
-    background: #F0F0F0;
+    background: #f0f0f0;
     color: #000;
     &:hover {
-      background: #F0F0F0;
+      background: #f0f0f0;
       font-weight: bold;
       box-shadow: none;
       color: #fff !important;
