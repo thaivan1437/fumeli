@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Typography, Box } from '@mui/material';
 import { Container } from '@mui/system';
 import { useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import YoutubeModal from '@/components/modal/video';
 
 
 const Videos = () => {
-	const {video} = useSelector((state) => state?.home);
+  const { video } = useSelector((state) => state?.home);
   const slider = useRef(null);
   const isDraggingRef = useRef(false);
   const isClickEnabledRef = useRef(true);
@@ -73,7 +73,7 @@ const Videos = () => {
   const openVideoModal = (id) => {
     if (!isDraggingRef.current && isClickEnabledRef.current) {
       setShowVideoModal(true);
-     setVideoId(id);
+      setVideoId(id);
     }
   }
 
@@ -104,31 +104,30 @@ const Videos = () => {
           VIDEO HOT
         </Typography>
         <Box className="d-flex justify-content-between">
-          <Typography variant="p" my={2} color={'white'} className="mw-440" sx={{ fontSize: '14px', display: 'block'}}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </Typography>
+          <Typography variant="p" my={2} color={'white'} className="mw-440" sx={{ fontSize: '14px', display: 'block' }}>
+            Nơi tổng hợp danh sách các clip HOT, vui nhộn, các drama hàng ngày trên nền tảng internet tại Việt Nam và tổng hợp các clip do thành viên chia sẻ qua fumeli.</Typography>
           <Box className="d-flex hide-xs">
             <Box pr={1} className='previous_caro cursor' onClick={() => slider?.current?.slickPrev()}>
-              <img src="/images/prev.png"/>
+              <img src="/images/prev.png" />
             </Box>
             <Box pl={1} className='next_caro cursor' onClick={() => slider?.current?.slickNext()}>
-              <img src="/images/next.png"/>
+              <img src="/images/next.png" />
             </Box>
           </Box>
         </Box>
       </Container>
       <Slider ref={slider} className="video__slider center" {...settings}>
-        { video && (
+        {video && (
           video.map((item) => {
             return <div className='video__slider--item cursor-pointer' key={item.CreateDate} onClick={() => openVideoModal(item.VideoPath)}>
-              <AutoSizeImage isResize={false} src={item.ThumbnailPath} alt={item.Title} width={777} height={440}/>
+              <AutoSizeImage isResize={false} src={item.ThumbnailPath} alt={item.Title} width={777} height={440} />
             </div>
           })
         )}
       </Slider>
       {showVideoModal ? (
-				<YoutubeModal videoId={videoId} onClose={closeVideoModal} />
-			) : null}
+        <YoutubeModal videoId={videoId} onClose={closeVideoModal} />
+      ) : null}
     </React.Fragment>
   );
 }
