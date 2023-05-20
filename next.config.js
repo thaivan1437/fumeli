@@ -75,6 +75,11 @@ const nextConfig = {
         source: "/tham-gia/other/:name/:pid.html",
         destination: "/nhiem-vu/:pid",
       },
+      {
+        source: "/api/auth/(.*)",
+        destination: "/api/auth"
+      }
+      
     ];
   },
   serverRuntimeConfig: {
