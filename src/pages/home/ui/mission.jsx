@@ -76,12 +76,13 @@ const Mission = () => {
 							NHIỆM VỤ NỔI BẬT
 						</Typography>
 						<Typography variant="p" component="p" className='text-right'>
-							Trở thành một trong những người đầu tiên hoàn thành các nhiệm vụ "nóng hổi mới ra lò" để tích lũy thêm FPOINT hấp dẫn. Tham gia ngay!
+							Trở thành một trong những người đầu tiên hoàn thành các nhiệm vụ "nóng hổi mới ra lò" để tích lũy thêm FPOINT hấp dẫn. Tham gia ngay !
 						</Typography>
 						<Box className="wrap__btn--more css__btn text-right">
 							<Link href="/nhiem-vu.html" color='white'>
 								<Button variant="contained" className="w206">
-									Xem thêm
+									Xem thêm 
+
 								</Button>
 							</Link>
 						</Box>
