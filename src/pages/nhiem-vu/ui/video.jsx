@@ -15,9 +15,11 @@ const Video = () => {
   const isDraggingRef = useRef(false);
   const isClickEnabledRef = useRef(true);
 
-	const { missionCategory } = useSelector((state) => state?.mission);
-  let video = missionCategory && missionCategory.filter(item => item.IsVideo);
-  video = video && video.length && video[0].Campaigns
+  const { missionCategory, mission } = useSelector((state) => state?.mission);
+  let video = mission && mission.filter(item => item.CategoriesCampaignId == 4);
+
+  // video = video && video.length && video[0].Campaigns
+  console.log(video);
 
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [videoId, setVideoId] = useState("");
@@ -106,22 +108,23 @@ const Video = () => {
     }
   }, []);
 
+
   return (
     <React.Fragment>
       <Container>
         <Typography variant="h4" component="h2" color={'#fff'} className='fs-48 fw-b bd-t mb-28'>
           XEM VIDEO NHẬN QUÀ
         </Typography>
-        <Typography variant="p" my={2} color={'#fff'} className="mw-440 fs-16" sx={{ display: 'block'}}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <Typography variant="p" my={2} color={'#fff'} className=" fs-16" sx={{ display: 'block' }}>
+          Là mô hình nhiệm vụ giải trí cực đơn giản khi bạn chỉ cần click chọn một video mình yêu thích với số điểm Fpoint tương ứng. Tiếp theo bạn chỉ cần xem hết clip đến giây cuối cùng và nhận điểm Fpoint vào tài khoản và làm gia tăng số Fpoint của mình để có cơ hội đổi ngay các phần quà hấp dẫn tại chợ trời. Ngại gì mà ko xem ngay đi nào?
         </Typography>
       </Container>
 
       <Slider className="video__slider center" {...settings} ref={sliderRef}>
-        { video && (
+        {video && (
           video.map((item) => {
             return <div className='video__slider--item cursor-pointer' key={item.CreateDate} onClick={() => openLinkVideo(item.TitleLink)}>
-              <AutoSizeImage isResize={false} src={item.ImagePath} alt={item.Title} width={777} height={440}/>
+              <AutoSizeImage isResize={false} src={item.ImagePath} alt={item.Title} width={777} height={440} />
             </div>
           })
         )}
